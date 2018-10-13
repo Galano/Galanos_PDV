@@ -1,0 +1,368 @@
+object FrmConsProduto: TFrmConsProduto
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Estoque Master - Consulta de Produtos'
+  ClientHeight = 480
+  ClientWidth = 658
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Rectangle1: TRectangle
+    Align = Top
+    Size.Width = 658.000000000000000000
+    Size.Height = 97.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFF8D8D8D
+    object GroupBox1: TGroupBox
+      Position.X = 8.000000000000000000
+      Position.Y = 2.000000000000000000
+      Size.Width = 643.000000000000000000
+      Size.Height = 57.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'groupboxstyle'
+      Text = 'Digite o nome do produto'
+      TabOrder = 0
+      object EdtCons: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 16.000000000000000000
+        Position.Y = 22.000000000000000000
+        Size.Width = 611.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = EdtConsChange
+        OnChangeTracking = EdtConsChangeTracking
+        OnKeyDown = EdtConsKeyDown
+      end
+      object Rectangle2: TRectangle
+        Position.X = 217.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 423.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        XRadius = 5.000000000000000000
+        YRadius = 5.000000000000000000
+        object RdgAtivo: TRadioButton
+          GroupName = 'Ativos'
+          IsChecked = True
+          Position.X = 16.000000000000000000
+          Position.Y = 6.000000000000000000
+          TabOrder = 0
+          Text = 'Ativos'
+        end
+        object RdgInativo: TRadioButton
+          GroupName = 'Ativos'
+          Position.X = 144.000000000000000000
+          Position.Y = 6.000000000000000000
+          TabOrder = 1
+          Text = 'Desativados'
+        end
+        object RdgTodos: TRadioButton
+          GroupName = 'Ativos'
+          Position.X = 296.000000000000000000
+          Position.Y = 6.000000000000000000
+          TabOrder = 2
+          Text = 'Todos'
+        end
+      end
+      object Rectangle3: TRectangle
+        Position.X = 3.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 209.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        XRadius = 5.000000000000000000
+        YRadius = 5.000000000000000000
+        object RdgDecresc: TRadioButton
+          GroupName = 'RdOrdem'
+          IsChecked = True
+          Position.X = 107.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 97.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Decrescente'
+        end
+        object RdgCresc: TRadioButton
+          GroupName = 'RdOrdem'
+          Position.X = 11.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 97.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Crescente'
+        end
+      end
+    end
+  end
+  object StringGrid1: TStringGrid
+    Align = Client
+    Size.Width = 658.000000000000000000
+    Size.Height = 383.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    OnDblClick = StringGrid1DblClick
+    Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+    RowCount = 100
+    RowHeight = 21.000000000000000000
+    OnKeyDown = StringGrid1KeyDown
+    Viewport.Width = 638.000000000000000000
+    Viewport.Height = 342.000000000000000000
+  end
+  object QProd: TIBQuery
+    Database = DmDados.conexao
+    Transaction = DmDados.IBTransaction1
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT '
+      '  P.*,'
+      '  S.NOME_SEC,'
+      '  SG.DESCRICAO,'
+      '  SGS.DESCRICAO,'
+      '  UE.DESCRICAO AS UND_ENTRADA,'
+      '  US.DESCRICAO AS UND_SAIDA,'
+      '  MARCAS.DESCRICAO'
+      'FROM'
+      '  PRODUTO P'
+      '  INNER JOIN SECAO S ON (P.COD_SEC = S.COD_SEC)'
+      '  INNER JOIN UNIDADE_MEDIDA UE ON (P.COD_UNI_ENT = UE.CODIGO)'
+      '  INNER JOIN UNIDADE_MEDIDA US ON (P.COD_UNI_SAI = US.CODIGO)'
+      '  LEFT OUTER JOIN SECAO_GRUPO SG ON (P.COD_SEC = SG.COD_SEC)'
+      '  AND (P.COD_GRUP = SG.COD_GRUPO)'
+      
+        '  LEFT OUTER JOIN SECAO_GRUPO_SUBGRUPO SGS ON (P.COD_SEC = SGS.C' +
+        'OD_SEC)'
+      '  AND (P.COD_GRUP = SGS.COD_GRUPO)'
+      '  AND (P.COD_SGRUP = SGS.COD_SUBGRUPO)'
+      '  INNER JOIN MARCAS ON (P.COD_MARC = MARCAS.CODIGO)')
+    Left = 512
+    Top = 232
+    object QProdCOD_PRO: TIntegerField
+      FieldName = 'COD_PRO'
+      Origin = '"PRODUTO"."COD_PRO"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QProdCODIGO_BARRA_PRO: TIBStringField
+      FieldName = 'CODIGO_BARRA_PRO'
+      Origin = '"PRODUTO"."CODIGO_BARRA_PRO"'
+      Required = True
+      Size = 14
+    end
+    object QProdTP_PRODUTO: TIBStringField
+      FieldName = 'TP_PRODUTO'
+      Origin = '"PRODUTO"."TP_PRODUTO"'
+      Required = True
+      Size = 80
+    end
+    object QProdTP_PRODUCAO: TIBStringField
+      FieldName = 'TP_PRODUCAO'
+      Origin = '"PRODUTO"."TP_PRODUCAO"'
+      Size = 80
+    end
+    object QProdESTOQUE_MINIMO: TIBBCDField
+      FieldName = 'ESTOQUE_MINIMO'
+      Origin = '"PRODUTO"."ESTOQUE_MINIMO"'
+      DisplayFormat = ',#0.000'
+      Precision = 18
+      Size = 3
+    end
+    object QProdNOME_PRO: TIBStringField
+      FieldName = 'NOME_PRO'
+      Origin = '"PRODUTO"."NOME_PRO"'
+      Required = True
+      Size = 80
+    end
+    object QProdDESC_CUPOM: TIBStringField
+      FieldName = 'DESC_CUPOM'
+      Origin = '"PRODUTO"."DESC_CUPOM"'
+      Required = True
+      Size = 80
+    end
+    object QProdCOD_MARC: TIntegerField
+      FieldName = 'COD_MARC'
+      Origin = '"PRODUTO"."COD_MARC"'
+      Required = True
+    end
+    object QProdCOD_SEC: TIntegerField
+      FieldName = 'COD_SEC'
+      Origin = '"PRODUTO"."COD_SEC"'
+      Required = True
+    end
+    object QProdCOD_GRUP: TIntegerField
+      FieldName = 'COD_GRUP'
+      Origin = '"PRODUTO"."COD_GRUP"'
+      Required = True
+    end
+    object QProdCOD_SGRUP: TIntegerField
+      FieldName = 'COD_SGRUP'
+      Origin = '"PRODUTO"."COD_SGRUP"'
+      Required = True
+    end
+    object QProdCOD_UNI_ENT: TIntegerField
+      FieldName = 'COD_UNI_ENT'
+      Origin = '"PRODUTO"."COD_UNI_ENT"'
+      Required = True
+    end
+    object QProdCOD_UNI_SAI: TIntegerField
+      FieldName = 'COD_UNI_SAI'
+      Origin = '"PRODUTO"."COD_UNI_SAI"'
+      Required = True
+    end
+    object QProdPRECO_VAREJO: TIBBCDField
+      FieldName = 'PRECO_VAREJO'
+      Origin = '"PRODUTO"."PRECO_VAREJO"'
+      DisplayFormat = ',#0.00'
+      Precision = 18
+      Size = 2
+    end
+    object QProdPRECO_PROMOCAO: TIBBCDField
+      FieldName = 'PRECO_PROMOCAO'
+      Origin = '"PRODUTO"."PRECO_PROMOCAO"'
+      DisplayFormat = ',#0.00'
+      Precision = 18
+      Size = 4
+    end
+    object QProdPRECO_PRAZO: TIBBCDField
+      FieldName = 'PRECO_PRAZO'
+      Origin = '"PRODUTO"."PRECO_PRAZO"'
+      DisplayFormat = ',#0.00'
+      Precision = 18
+      Size = 4
+    end
+    object QProdMARGEM_LUCRO: TIBBCDField
+      FieldName = 'MARGEM_LUCRO'
+      Origin = '"PRODUTO"."MARGEM_LUCRO"'
+      DisplayFormat = ',#0.00'
+      Precision = 18
+      Size = 4
+    end
+    object QProdQUANT_ESTOQ: TIBBCDField
+      FieldName = 'QUANT_ESTOQ'
+      Origin = '"PRODUTO"."QUANT_ESTOQ"'
+      DisplayFormat = ',#0.000'
+      Precision = 18
+      Size = 3
+    end
+    object QProdDATA_VALIDADE: TDateField
+      FieldName = 'DATA_VALIDADE'
+      Origin = '"PRODUTO"."DATA_VALIDADE"'
+    end
+    object QProdDIAS_VALIDADE_PRO: TIntegerField
+      FieldName = 'DIAS_VALIDADE_PRO'
+      Origin = '"PRODUTO"."DIAS_VALIDADE_PRO"'
+    end
+    object QProdCONTROLA_ESTOQUE_PRO: TIBStringField
+      FieldName = 'CONTROLA_ESTOQUE_PRO'
+      Origin = '"PRODUTO"."CONTROLA_ESTOQUE_PRO"'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object QProdATIVO_PRO: TIBStringField
+      FieldName = 'ATIVO_PRO'
+      Origin = '"PRODUTO"."ATIVO_PRO"'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object QProdCAMINHO_FOTO_PRO: TBlobField
+      FieldName = 'CAMINHO_FOTO_PRO'
+      Origin = '"PRODUTO"."CAMINHO_FOTO_PRO"'
+      ProviderFlags = [pfInUpdate]
+      Size = 8
+    end
+    object QProdNOME_SEC: TIBStringField
+      FieldName = 'NOME_SEC'
+      Origin = '"SECAO"."NOME_SEC"'
+      Required = True
+      Size = 50
+    end
+    object QProdDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Origin = '"SECAO_GRUPO"."DESCRICAO"'
+      Size = 80
+    end
+    object QProdDESCRICAO1: TIBStringField
+      FieldName = 'DESCRICAO1'
+      Origin = '"SECAO_GRUPO_SUBGRUPO"."DESCRICAO"'
+      Size = 80
+    end
+    object QProdUND_ENTRADA: TIBStringField
+      FieldName = 'UND_ENTRADA'
+      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+      Required = True
+      Size = 10
+    end
+    object QProdUND_SAIDA: TIBStringField
+      FieldName = 'UND_SAIDA'
+      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+      Required = True
+      Size = 10
+    end
+    object QProdDESCRICAO2: TIBStringField
+      FieldName = 'DESCRICAO2'
+      Origin = '"MARCAS"."DESCRICAO"'
+      Required = True
+      Size = 70
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = QProd
+    ScopeMappings = <>
+    Left = 312
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = StringGrid1
+      Columns = <
+        item
+          MemberName = 'COD_PRO'
+          Header = 'C'#243'dgo'
+          Width = 50
+        end
+        item
+          MemberName = 'CODIGO_BARRA_PRO'
+          Header = 'C'#243'd. Barras'
+          Width = 140
+        end
+        item
+          MemberName = 'QUANT_ESTOQ'
+          Header = 'Qtd.'
+        end
+        item
+          MemberName = 'DATA_VALIDADE'
+          Header = 'Validade'
+          Width = 90
+        end
+        item
+          MemberName = 'NOME_PRO'
+          Header = 'Nome do Produto'
+          Width = 300
+        end
+        item
+          MemberName = 'PRECO_VAREJO'
+          Header = 'Pre'#231'o Varejo'
+        end
+        item
+          MemberName = 'PRECO_PROMOCAO'
+          Header = 'Pre'#231'o Promo'#231#227'o'
+        end>
+    end
+  end
+end

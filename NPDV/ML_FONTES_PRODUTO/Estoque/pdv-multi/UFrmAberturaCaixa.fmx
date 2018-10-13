@@ -1,0 +1,243 @@
+object FrmAbreCaixa: TFrmAbreCaixa
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Abertura de Caixa'
+  ClientHeight = 224
+  ClientWidth = 399
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  DesignerMasterStyle = 0
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = claWhite
+    Margins.Left = 6.000000000000000000
+    Margins.Top = 6.000000000000000000
+    Margins.Right = 6.000000000000000000
+    Margins.Bottom = 6.000000000000000000
+    Position.X = 6.000000000000000000
+    Position.Y = 6.000000000000000000
+    Size.Width = 387.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFF2561AB
+    XRadius = 5.000000000000000000
+    YRadius = 5.000000000000000000
+  end
+  object Label1: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 24.000000000000000000
+    Position.Y = 14.000000000000000000
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Caixa'
+  end
+  object Label2: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 286.000000000000000000
+    Position.Y = 38.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'C'#243'digo:'
+  end
+  object lbcodigo: TLabel
+    StyledSettings = [Family]
+    Position.X = 333.000000000000000000
+    Position.Y = 34.000000000000000000
+    Size.Width = 41.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 22.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = xFF14358A
+    TextSettings.HorzAlign = Center
+    Text = '01'
+  end
+  object lbnome: TLabel
+    StyledSettings = [Family]
+    Position.X = 56.000000000000000000
+    Position.Y = 34.000000000000000000
+    Size.Width = 217.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 22.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = xFF14358A
+    Text = 'Alessandro'
+  end
+  object Rectangle2: TRectangle
+    Align = Top
+    Fill.Color = claWhite
+    Margins.Left = 6.000000000000000000
+    Margins.Top = 6.000000000000000000
+    Margins.Right = 6.000000000000000000
+    Margins.Bottom = 6.000000000000000000
+    Position.X = 6.000000000000000000
+    Position.Y = 75.000000000000000000
+    Size.Width = 387.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFF2561AB
+    XRadius = 5.000000000000000000
+    YRadius = 5.000000000000000000
+  end
+  object Label5: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 32.000000000000000000
+    Position.Y = 83.000000000000000000
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Data da Abertura'
+  end
+  object Label6: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 248.000000000000000000
+    Position.Y = 83.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Hora da Abertura'
+  end
+  object lbdata: TLabel
+    StyledSettings = [Family]
+    Position.X = 26.000000000000000000
+    Position.Y = 103.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 22.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = xFF14358A
+    Text = '02/10/2015'
+  end
+  object lbhora: TLabel
+    StyledSettings = [Family]
+    Position.X = 257.000000000000000000
+    Position.Y = 102.000000000000000000
+    Size.Width = 104.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 22.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = xFF14358A
+    Text = '00:00:00'
+  end
+  object Label9: TLabel
+    StyledSettings = [Family]
+    Position.X = 11.000000000000000000
+    Position.Y = 150.000000000000000000
+    Size.Width = 182.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 22.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = xFF14358A
+    Text = 'Valor da abertura'
+  end
+  object EdtTotal: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 0
+    Text = '0,00'
+    TextSettings.Font.Size = 26.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.HorzAlign = Center
+    Position.X = 13.000000000000000000
+    Position.Y = 176.000000000000000000
+    Size.Width = 177.000000000000000000
+    Size.Height = 36.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = '0,00'
+    StyledSettings = [FontColor]
+    OnEnter = EdtTotalEnter
+    OnExit = EdtTotalExit
+  end
+  object btn_entrar: TRectangle
+    Fill.Color = xFF3C5A98
+    Margins.Left = 30.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 30.000000000000000000
+    Position.X = 206.000000000000000000
+    Position.Y = 165.000000000000000000
+    Size.Width = 181.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 10.000000000000000000
+    YRadius = 10.000000000000000000
+    OnClick = btn_entrarClick
+    object ColorAnimation1: TColorAnimation
+      AnimationType = InOut
+      Duration = 0.000009999999747379
+      Interpolation = Exponential
+      Inverse = True
+      PropertyName = 'Fill.Color'
+      StartValue = xFF3C5A98
+      StopValue = xFF0B3C6B
+      Trigger = 'IsMouseOver=true'
+      TriggerInverse = 'IsMouseOver=false'
+    end
+    object Label10: TLabel
+      Align = Center
+      StyledSettings = []
+      Size.Width = 138.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semibold'
+      TextSettings.Font.Size = 24.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Abrir Caixa'
+    end
+  end
+  object AbreCaixa: TIBQuery
+    Database = DmDados.conexao
+    Transaction = DmDados.IBTransaction1
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      
+        'INSERT INTO CAIXA(COD_USU,DATA_ABERTURA,HORA_ABERTURA,VL_ABERTUR' +
+        'A,SALDO,STATUS)'
+      'VALUES(:cod,:dt,:hr,:vl,:sd,:st)')
+    Left = 192
+    Top = 32
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cod'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dt'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'hr'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'vl'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'sd'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'st'
+        ParamType = ptUnknown
+      end>
+  end
+end

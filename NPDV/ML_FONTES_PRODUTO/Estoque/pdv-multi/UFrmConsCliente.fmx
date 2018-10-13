@@ -1,0 +1,307 @@
+object FrmConsCliente: TFrmConsCliente
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'Consulta de clientes'
+  ClientHeight = 480
+  ClientWidth = 662
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Rectangle1: TRectangle
+    Align = Top
+    Size.Width = 662.000000000000000000
+    Size.Height = 97.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFF8D8D8D
+    object GroupBox1: TGroupBox
+      Position.X = 8.000000000000000000
+      Position.Y = 2.000000000000000000
+      Size.Width = 643.000000000000000000
+      Size.Height = 57.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'groupboxstyle'
+      Text = 'Digite o nome do cliente'
+      TabOrder = 0
+      object EdtCons: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 16.000000000000000000
+        Position.Y = 22.000000000000000000
+        Size.Width = 611.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChangeTracking = EdtConsChangeTracking
+      end
+      object Rectangle2: TRectangle
+        Position.X = 217.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 423.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        XRadius = 5.000000000000000000
+        YRadius = 5.000000000000000000
+        object RdgAtivo: TRadioButton
+          GroupName = 'Ativos'
+          IsChecked = True
+          Position.X = 16.000000000000000000
+          Position.Y = 6.000000000000000000
+          TabOrder = 0
+          Text = 'Ativos'
+        end
+        object RdgInativo: TRadioButton
+          GroupName = 'Ativos'
+          Position.X = 144.000000000000000000
+          Position.Y = 6.000000000000000000
+          TabOrder = 1
+          Text = 'Desativados'
+        end
+        object RdgTodos: TRadioButton
+          GroupName = 'Ativos'
+          Position.X = 296.000000000000000000
+          Position.Y = 6.000000000000000000
+          TabOrder = 2
+          Text = 'Todos'
+        end
+      end
+      object Rectangle3: TRectangle
+        Position.X = 3.000000000000000000
+        Position.Y = 59.000000000000000000
+        Size.Width = 209.000000000000000000
+        Size.Height = 31.000000000000000000
+        Size.PlatformDefault = False
+        XRadius = 5.000000000000000000
+        YRadius = 5.000000000000000000
+        object RdgDecresc: TRadioButton
+          GroupName = 'RdOrdem'
+          IsChecked = True
+          Position.X = 107.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 97.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Decrescente'
+        end
+        object RdgCresc: TRadioButton
+          GroupName = 'RdOrdem'
+          Position.X = 11.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 97.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Crescente'
+        end
+      end
+    end
+  end
+  object StringGrid1: TStringGrid
+    Align = Client
+    Size.Width = 662.000000000000000000
+    Size.Height = 383.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    OnDblClick = StringGrid1DblClick
+    Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick]
+    RowCount = 100
+    RowHeight = 21.000000000000000000
+    Viewport.Width = 642.000000000000000000
+    Viewport.Height = 358.000000000000000000
+  end
+  object QConsCliente: TIBQuery
+    Database = DmDados.conexao
+    Transaction = DmDados.IBTransaction1
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT C.*, S.NOME_CLA'
+      'FROM CLIENTE C'
+      'INNER JOIN CLASSIF_CLIENTE S'
+      'ON (C.COD_CLA = S.COD_CLA)')
+    Left = 432
+    Top = 216
+    object QConsClienteCOD_CLI: TIntegerField
+      FieldName = 'COD_CLI'
+      Origin = '"CLIENTE"."COD_CLI"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QConsClienteNOME_CLI: TIBStringField
+      FieldName = 'NOME_CLI'
+      Origin = '"CLIENTE"."NOME_CLI"'
+      Required = True
+      Size = 60
+    end
+    object QConsClienteCOD_CLA: TIntegerField
+      FieldName = 'COD_CLA'
+      Origin = '"CLIENTE"."COD_CLA"'
+      Required = True
+    end
+    object QConsClienteENDRES_CLI: TIBStringField
+      FieldName = 'ENDRES_CLI'
+      Origin = '"CLIENTE"."ENDRES_CLI"'
+      Size = 50
+    end
+    object QConsClienteBAIRES_CLI: TIBStringField
+      FieldName = 'BAIRES_CLI'
+      Origin = '"CLIENTE"."BAIRES_CLI"'
+      Size = 30
+    end
+    object QConsClienteCIDRES_CLI: TIBStringField
+      FieldName = 'CIDRES_CLI'
+      Origin = '"CLIENTE"."CIDRES_CLI"'
+      Size = 30
+    end
+    object QConsClienteESTRES_CLI: TIBStringField
+      FieldName = 'ESTRES_CLI'
+      Origin = '"CLIENTE"."ESTRES_CLI"'
+      FixedChar = True
+      Size = 2
+    end
+    object QConsClienteCEPRES_CLI: TIBStringField
+      FieldName = 'CEPRES_CLI'
+      Origin = '"CLIENTE"."CEPRES_CLI"'
+      FixedChar = True
+      Size = 9
+    end
+    object QConsClienteTELRES_CLI: TIBStringField
+      FieldName = 'TELRES_CLI'
+      Origin = '"CLIENTE"."TELRES_CLI"'
+      FixedChar = True
+      Size = 13
+    end
+    object QConsClienteCPF_CLI: TIBStringField
+      FieldName = 'CPF_CLI'
+      Origin = '"CLIENTE"."CPF_CLI"'
+      Size = 18
+    end
+    object QConsClienteRG_CLI: TIBStringField
+      FieldName = 'RG_CLI'
+      Origin = '"CLIENTE"."RG_CLI"'
+    end
+    object QConsClienteAPELIDO_CLI: TIBStringField
+      FieldName = 'APELIDO_CLI'
+      Origin = '"CLIENTE"."APELIDO_CLI"'
+      Size = 50
+    end
+    object QConsClienteLIMITE_CLI: TIBBCDField
+      FieldName = 'LIMITE_CLI'
+      Origin = '"CLIENTE"."LIMITE_CLI"'
+      Precision = 18
+      Size = 2
+    end
+    object QConsClienteATIVO_CLI: TIBStringField
+      FieldName = 'ATIVO_CLI'
+      Origin = '"CLIENTE"."ATIVO_CLI"'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object QConsClienteOBS_CLI: TIBStringField
+      FieldName = 'OBS_CLI'
+      Origin = '"CLIENTE"."OBS_CLI"'
+      Size = 500
+    end
+    object QConsClienteNASCIMENTO_CLI: TDateField
+      FieldName = 'NASCIMENTO_CLI'
+      Origin = '"CLIENTE"."NASCIMENTO_CLI"'
+    end
+    object QConsClienteDATACADASTRO_CLI: TDateField
+      FieldName = 'DATACADASTRO_CLI'
+      Origin = '"CLIENTE"."DATACADASTRO_CLI"'
+      Required = True
+    end
+    object QConsClienteATRAZO_MAXIMO_CLI: TIntegerField
+      FieldName = 'ATRAZO_MAXIMO_CLI'
+      Origin = '"CLIENTE"."ATRAZO_MAXIMO_CLI"'
+    end
+    object QConsClienteCELULAR_CLI: TIBStringField
+      FieldName = 'CELULAR_CLI'
+      Origin = '"CLIENTE"."CELULAR_CLI"'
+      Size = 13
+    end
+    object QConsClienteIMP_SALDO_PENDENTE_CLI: TIBStringField
+      FieldName = 'IMP_SALDO_PENDENTE_CLI'
+      Origin = '"CLIENTE"."IMP_SALDO_PENDENTE_CLI"'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object QConsClienteLIMITE_CHEQUE: TIBBCDField
+      FieldName = 'LIMITE_CHEQUE'
+      Origin = '"CLIENTE"."LIMITE_CHEQUE"'
+      Precision = 18
+      Size = 2
+    end
+    object QConsClienteCONTATO_CLI: TIBStringField
+      FieldName = 'CONTATO_CLI'
+      Origin = '"CLIENTE"."CONTATO_CLI"'
+      Size = 70
+    end
+    object QConsClienteCONTROLAR_LIMITE: TIBStringField
+      FieldName = 'CONTROLAR_LIMITE'
+      Origin = '"CLIENTE"."CONTROLAR_LIMITE"'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object QConsClienteEMAIL_CLI: TIBStringField
+      FieldName = 'EMAIL_CLI'
+      Origin = '"CLIENTE"."EMAIL_CLI"'
+      Size = 100
+    end
+    object QConsClienteNOME_CLA: TIBStringField
+      FieldName = 'NOME_CLA'
+      Origin = '"CLASSIF_CLIENTE"."NOME_CLA"'
+      Required = True
+      Size = 30
+    end
+  end
+  object DSQConsCliente: TDataSource
+    AutoEdit = False
+    DataSet = QConsCliente
+    Left = 432
+    Top = 272
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = QConsCliente
+    ScopeMappings = <>
+    Left = 320
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 156
+    Top = 173
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = StringGrid1
+      Columns = <
+        item
+          MemberName = 'COD_CLI'
+          Header = 'C'#211'DIGO'
+        end
+        item
+          MemberName = 'NOME_CLI'
+          Header = 'CLIENTE'
+          Width = 350
+        end
+        item
+          MemberName = 'ATIVO_CLI'
+          Header = 'ATIVO'
+        end
+        item
+          MemberName = 'TELRES_CLI'
+          Header = 'TELEFONE'
+          Width = 100
+        end>
+    end
+  end
+end
