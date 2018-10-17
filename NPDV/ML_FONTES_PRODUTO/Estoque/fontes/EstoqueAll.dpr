@@ -81,7 +81,7 @@ begin
   Application.CreateForm(TFrmQRelEstoque, FrmQRelEstoque);
   Application.CreateForm(TQRelVendedores, QRelVendedores);
   Application.CreateForm(TFrmQRelCadClassif, FrmQRelCadClassif);
-  Application.CreateForm(TFrmQRelSec, FrmQRelSec);
+{  Application.CreateForm(TFrmQRelSec, FrmQRelSec);
   Application.CreateForm(TFrmQRelMarcas, FrmQRelMarcas);
   Application.CreateForm(TFrmConsClientes01, FrmConsClientes01);
   Application.CreateForm(TFrmOutrasSaidas, FrmOutrasSaidas);
@@ -99,5 +99,6 @@ begin
   Application.CreateForm(TFrmListaOutrasSaidas, FrmListaOutrasSaidas);
   Application.CreateForm(TFrmQRelEstoqueMinimo2, FrmQRelEstoqueMinimo2);
   Application.CreateForm(TFrmQrVendasDia, FrmQrVendasDia);
+  }
   Application.Run;
 end.

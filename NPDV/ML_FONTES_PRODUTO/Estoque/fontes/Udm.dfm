@@ -3,533 +3,468 @@ object DmDados: TDmDados
   OnCreate = DataModuleCreate
   Height = 563
   Width = 1237
-  object IBTransaction1: TIBTransaction
-    Active = True
-    DefaultDatabase = Conexao
-    Params.Strings = (
-      'read_committed'
-      'rec_version'
-      'nowait')
+  object IBTransaction1: TFDTransaction
+    Connection = Conexao
     Left = 128
     Top = 32
   end
-  object tb_empresa: TIBTable
-    Database = Conexao
+  object Conexao: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Fontes\Sistema Frente De Caixa Pdv\NPDV\ML_FONTES_PR' +
+        'ODUTO\Estoque\database\ESTOQUE.FDB'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'DriverID=fB')
+    Connected = True
+    LoginPrompt = False
+    Left = 48
+    Top = 40
+  end
+  object tb_empresa: TFDTable
+    IndexFieldNames = 'COD_EMP'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'EMPRESA'
     TableName = 'EMPRESA'
-    UniDirectional = False
     Left = 56
     Top = 112
     object tb_empresaCOD_EMP: TIntegerField
       FieldName = 'COD_EMP'
+      Origin = 'COD_EMP'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_empresaRAZAO_EMP: TIBStringField
+    object tb_empresaRAZAO_EMP: TStringField
       FieldName = 'RAZAO_EMP'
+      Origin = 'RAZAO_EMP'
       Required = True
       Size = 50
     end
-    object tb_empresaEND_EMP: TIBStringField
+    object tb_empresaEND_EMP: TStringField
       FieldName = 'END_EMP'
+      Origin = 'END_EMP'
       Size = 50
     end
-    object tb_empresaBAI_EMP: TIBStringField
+    object tb_empresaBAI_EMP: TStringField
       FieldName = 'BAI_EMP'
+      Origin = 'BAI_EMP'
       Size = 30
     end
-    object tb_empresaCID_EMP: TIBStringField
+    object tb_empresaCID_EMP: TStringField
       FieldName = 'CID_EMP'
+      Origin = 'CID_EMP'
       Size = 30
     end
-    object tb_empresaCEP_EMP: TIBStringField
+    object tb_empresaCEP_EMP: TStringField
       FieldName = 'CEP_EMP'
+      Origin = 'CEP_EMP'
+      FixedChar = True
       Size = 9
     end
-    object tb_empresaEST_EMP: TIBStringField
+    object tb_empresaEST_EMP: TStringField
       FieldName = 'EST_EMP'
+      Origin = 'EST_EMP'
+      FixedChar = True
       Size = 2
     end
-    object tb_empresaINSC_EMP: TIBStringField
+    object tb_empresaINSC_EMP: TStringField
       FieldName = 'INSC_EMP'
+      Origin = 'INSC_EMP'
     end
-    object tb_empresaTEL_EMP: TIBStringField
+    object tb_empresaTEL_EMP: TStringField
       FieldName = 'TEL_EMP'
+      Origin = 'TEL_EMP'
       Size = 13
     end
-    object tb_empresaFAX_EMP: TIBStringField
+    object tb_empresaFAX_EMP: TStringField
       FieldName = 'FAX_EMP'
+      Origin = 'FAX_EMP'
       Size = 13
     end
-    object tb_empresaNUMERO_EMP: TIBStringField
+    object tb_empresaNUMERO_EMP: TStringField
       FieldName = 'NUMERO_EMP'
+      Origin = 'NUMERO_EMP'
       Size = 10
     end
-    object tb_empresaRESP_EMP: TIBStringField
+    object tb_empresaRESP_EMP: TStringField
       FieldName = 'RESP_EMP'
+      Origin = 'RESP_EMP'
       Size = 50
     end
-    object tb_empresaCAMINHO_FOTO_EMP: TIBStringField
+    object tb_empresaCAMINHO_FOTO_EMP: TStringField
       FieldName = 'CAMINHO_FOTO_EMP'
+      Origin = 'CAMINHO_FOTO_EMP'
       Size = 150
     end
-    object tb_empresaFANTASIA_EMP: TIBStringField
+    object tb_empresaFANTASIA_EMP: TStringField
       FieldName = 'FANTASIA_EMP'
+      Origin = 'FANTASIA_EMP'
       Size = 50
     end
-    object tb_empresaCNPJ_EMP: TIBStringField
+    object tb_empresaCNPJ_EMP: TStringField
       FieldName = 'CNPJ_EMP'
+      Origin = 'CNPJ_EMP'
       Size = 14
     end
-    object tb_empresaCAMINHO_VALIDADOR_SINTEGRA: TIBStringField
+    object tb_empresaCAMINHO_VALIDADOR_SINTEGRA: TStringField
       FieldName = 'CAMINHO_VALIDADOR_SINTEGRA'
+      Origin = 'CAMINHO_VALIDADOR_SINTEGRA'
       Size = 80
     end
-    object tb_empresaINSCRICAO_MUNICIPAL: TIBStringField
+    object tb_empresaINSCRICAO_MUNICIPAL: TStringField
       FieldName = 'INSCRICAO_MUNICIPAL'
+      Origin = 'INSCRICAO_MUNICIPAL'
     end
   end
-  object tb_vendedor: TIBTable
-    Database = Conexao
+  object tb_vendedor: TFDTable
+    IndexFieldNames = 'COD_VEND'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'VENDEDOR'
     TableName = 'VENDEDOR'
-    UniDirectional = False
     Left = 56
     Top = 176
     object tb_vendedorCOD_VEND: TIntegerField
       FieldName = 'COD_VEND'
+      Origin = 'COD_VEND'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_vendedorNOME_VEND: TIBStringField
+    object tb_vendedorNOME_VEND: TStringField
       FieldName = 'NOME_VEND'
+      Origin = 'NOME_VEND'
       Required = True
       Size = 50
     end
-    object tb_vendedorATIVO_VEND: TIBStringField
+    object tb_vendedorATIVO_VEND: TStringField
       FieldName = 'ATIVO_VEND'
+      Origin = 'ATIVO_VEND'
       Required = True
+      FixedChar = True
       Size = 1
     end
-    object tb_vendedorCOMISSAO_VEND: TIBBCDField
+    object tb_vendedorCOMISSAO_VEND: TBCDField
       FieldName = 'COMISSAO_VEND'
+      Origin = 'COMISSAO_VEND'
       Precision = 18
       Size = 2
     end
   end
-  object Conexao: TIBDatabase
-    Connected = True
-    DatabaseName = 
-      'E:\Alessandro\Delphi\Sistemas\Estoque AllSoftware\database\estoq' +
-      'ue.fdb'
-    Params.Strings = (
-      'user_name=sysdba'
-      'password=masterkey')
-    LoginPrompt = False
-    DefaultTransaction = IBTransaction1
-    ServerType = 'IBServer'
-    AllowStreamedConnected = False
-    Left = 40
-    Top = 32
-  end
-  object tb_classifica_cliente: TIBTable
-    Database = Conexao
+  object tb_classifica_cliente: TFDTable
+    IndexFieldNames = 'COD_CLA'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    FieldDefs = <
-      item
-        Name = 'COD_CLA'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NOME_CLA'
-        Attributes = [faRequired]
-        DataType = ftWideString
-        Size = 30
-      end>
-    IndexDefs = <
-      item
-        Name = 'RDB$PRIMARY19'
-        Fields = 'COD_CLA'
-        Options = [ixPrimary, ixUnique]
-      end>
-    StoreDefs = True
+    UpdateOptions.UpdateTableName = 'CLASSIF_CLIENTE'
     TableName = 'CLASSIF_CLIENTE'
-    UniDirectional = False
     Left = 55
     Top = 240
     object tb_classifica_clienteCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
-      Origin = '"CLASSIF_CLIENTE"."COD_CLA"'
+      Origin = 'COD_CLA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_classifica_clienteNOME_CLA: TIBStringField
+    object tb_classifica_clienteNOME_CLA: TStringField
       FieldName = 'NOME_CLA'
-      Origin = '"CLASSIF_CLIENTE"."NOME_CLA"'
+      Origin = 'NOME_CLA'
       Required = True
       Size = 30
     end
   end
-  object tb_fornecedor: TIBTable
-    Database = Conexao
+  object tb_fornecedor: TFDTable
+    IndexFieldNames = 'COD_FOR'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    FieldDefs = <
-      item
-        Name = 'COD_FOR'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'FJ_FOR'
-        Attributes = [faRequired, faFixed]
-        DataType = ftWideString
-        Size = 1
-      end
-      item
-        Name = 'RAZAO_FOR'
-        Attributes = [faRequired]
-        DataType = ftWideString
-        Size = 60
-      end
-      item
-        Name = 'END_FOR'
-        DataType = ftWideString
-        Size = 50
-      end
-      item
-        Name = 'BAI_FOR'
-        DataType = ftWideString
-        Size = 30
-      end
-      item
-        Name = 'CID_FOR'
-        DataType = ftWideString
-        Size = 30
-      end
-      item
-        Name = 'CEP_FOR'
-        Attributes = [faFixed]
-        DataType = ftWideString
-        Size = 9
-      end
-      item
-        Name = 'EST_FOR'
-        Attributes = [faFixed]
-        DataType = ftWideString
-        Size = 2
-      end
-      item
-        Name = 'CNPJ_FOR'
-        DataType = ftWideString
-        Size = 18
-      end
-      item
-        Name = 'INSC_FOR'
-        DataType = ftWideString
-        Size = 20
-      end
-      item
-        Name = 'TEL_FOR'
-        DataType = ftWideString
-        Size = 13
-      end
-      item
-        Name = 'FAX_FOR'
-        DataType = ftWideString
-        Size = 13
-      end
-      item
-        Name = 'CONTATO_FOR'
-        DataType = ftWideString
-        Size = 50
-      end
-      item
-        Name = 'NUM_FOR'
-        DataType = ftWideString
-        Size = 10
-      end
-      item
-        Name = 'CODIGO_IBGE'
-        DataType = ftInteger
-      end
-      item
-        Name = 'EMAIL_FOR'
-        DataType = ftWideString
-        Size = 100
-      end>
-    IndexDefs = <
-      item
-        Name = 'RDB$PRIMARY9'
-        Fields = 'COD_FOR'
-        Options = [ixPrimary, ixUnique]
-      end>
-    StoreDefs = True
+    UpdateOptions.UpdateTableName = 'FORNECEDOR'
     TableName = 'FORNECEDOR'
-    UniDirectional = False
     Left = 472
     Top = 32
     object tb_fornecedorCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
-      Origin = '"FORNECEDOR"."COD_FOR"'
+      Origin = 'COD_FOR'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_fornecedorFJ_FOR: TIBStringField
+    object tb_fornecedorFJ_FOR: TStringField
       FieldName = 'FJ_FOR'
-      Origin = '"FORNECEDOR"."FJ_FOR"'
+      Origin = 'FJ_FOR'
       Required = True
+      FixedChar = True
       Size = 1
     end
-    object tb_fornecedorRAZAO_FOR: TIBStringField
+    object tb_fornecedorRAZAO_FOR: TStringField
       FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
+      Origin = 'RAZAO_FOR'
       Required = True
       Size = 60
     end
-    object tb_fornecedorEND_FOR: TIBStringField
+    object tb_fornecedorEND_FOR: TStringField
       FieldName = 'END_FOR'
-      Origin = '"FORNECEDOR"."END_FOR"'
+      Origin = 'END_FOR'
       Size = 50
     end
-    object tb_fornecedorBAI_FOR: TIBStringField
+    object tb_fornecedorBAI_FOR: TStringField
       FieldName = 'BAI_FOR'
-      Origin = '"FORNECEDOR"."BAI_FOR"'
+      Origin = 'BAI_FOR'
       Size = 30
     end
-    object tb_fornecedorCID_FOR: TIBStringField
+    object tb_fornecedorCID_FOR: TStringField
       FieldName = 'CID_FOR'
-      Origin = '"FORNECEDOR"."CID_FOR"'
+      Origin = 'CID_FOR'
       Size = 30
     end
-    object tb_fornecedorCEP_FOR: TIBStringField
+    object tb_fornecedorCEP_FOR: TStringField
       FieldName = 'CEP_FOR'
-      Origin = '"FORNECEDOR"."CEP_FOR"'
+      Origin = 'CEP_FOR'
+      FixedChar = True
       Size = 9
     end
-    object tb_fornecedorEST_FOR: TIBStringField
+    object tb_fornecedorEST_FOR: TStringField
       FieldName = 'EST_FOR'
-      Origin = '"FORNECEDOR"."EST_FOR"'
+      Origin = 'EST_FOR'
+      FixedChar = True
       Size = 2
     end
-    object tb_fornecedorCNPJ_FOR: TIBStringField
+    object tb_fornecedorCNPJ_FOR: TStringField
       FieldName = 'CNPJ_FOR'
-      Origin = '"FORNECEDOR"."CNPJ_FOR"'
+      Origin = 'CNPJ_FOR'
       Size = 18
     end
-    object tb_fornecedorINSC_FOR: TIBStringField
+    object tb_fornecedorINSC_FOR: TStringField
       FieldName = 'INSC_FOR'
-      Origin = '"FORNECEDOR"."INSC_FOR"'
+      Origin = 'INSC_FOR'
     end
-    object tb_fornecedorTEL_FOR: TIBStringField
+    object tb_fornecedorTEL_FOR: TStringField
       FieldName = 'TEL_FOR'
-      Origin = '"FORNECEDOR"."TEL_FOR"'
+      Origin = 'TEL_FOR'
       Size = 13
     end
-    object tb_fornecedorFAX_FOR: TIBStringField
+    object tb_fornecedorFAX_FOR: TStringField
       FieldName = 'FAX_FOR'
-      Origin = '"FORNECEDOR"."FAX_FOR"'
+      Origin = 'FAX_FOR'
       Size = 13
     end
-    object tb_fornecedorCONTATO_FOR: TIBStringField
+    object tb_fornecedorCONTATO_FOR: TStringField
       FieldName = 'CONTATO_FOR'
-      Origin = '"FORNECEDOR"."CONTATO_FOR"'
+      Origin = 'CONTATO_FOR'
       Size = 50
     end
-    object tb_fornecedorNUM_FOR: TIBStringField
+    object tb_fornecedorNUM_FOR: TStringField
       FieldName = 'NUM_FOR'
-      Origin = '"FORNECEDOR"."NUM_FOR"'
+      Origin = 'NUM_FOR'
       Size = 10
     end
     object tb_fornecedorCODIGO_IBGE: TIntegerField
       FieldName = 'CODIGO_IBGE'
-      Origin = '"FORNECEDOR"."CODIGO_IBGE"'
+      Origin = 'CODIGO_IBGE'
     end
-    object tb_fornecedorEMAIL_FOR: TIBStringField
+    object tb_fornecedorEMAIL_FOR: TStringField
       FieldName = 'EMAIL_FOR'
-      Origin = '"FORNECEDOR"."EMAIL_FOR"'
+      Origin = 'EMAIL_FOR'
       Size = 100
     end
   end
-  object tb_fpagamentos: TIBTable
-    Database = Conexao
+  object tb_fpagamentos: TFDTable
+    IndexFieldNames = 'CODIGO'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'FORMAS_PAGAMENTO'
     TableName = 'FORMAS_PAGAMENTO'
-    UniDirectional = False
     Left = 320
     Top = 216
     object tb_fpagamentosCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_fpagamentosDESCRICAO: TIBStringField
+    object tb_fpagamentosDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
       Required = True
     end
   end
-  object tb_clientes: TIBTable
-    Database = Conexao
+  object tb_clientes: TFDTable
+    IndexFieldNames = 'COD_CLI'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'CLIENTE'
     TableName = 'CLIENTE'
-    UniDirectional = False
     Left = 48
     Top = 296
     object tb_clientesCOD_CLI: TIntegerField
       FieldName = 'COD_CLI'
+      Origin = 'COD_CLI'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_clientesNOME_CLI: TIBStringField
+    object tb_clientesNOME_CLI: TStringField
       FieldName = 'NOME_CLI'
+      Origin = 'NOME_CLI'
       Required = True
       Size = 60
     end
     object tb_clientesCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
+      Origin = 'COD_CLA'
       Required = True
     end
-    object tb_clientesENDRES_CLI: TIBStringField
+    object tb_clientesENDRES_CLI: TStringField
       FieldName = 'ENDRES_CLI'
+      Origin = 'ENDRES_CLI'
       Size = 50
     end
-    object tb_clientesBAIRES_CLI: TIBStringField
+    object tb_clientesBAIRES_CLI: TStringField
       FieldName = 'BAIRES_CLI'
+      Origin = 'BAIRES_CLI'
       Size = 30
     end
-    object tb_clientesCIDRES_CLI: TIBStringField
+    object tb_clientesCIDRES_CLI: TStringField
       FieldName = 'CIDRES_CLI'
+      Origin = 'CIDRES_CLI'
       Size = 30
     end
-    object tb_clientesESTRES_CLI: TIBStringField
+    object tb_clientesESTRES_CLI: TStringField
       FieldName = 'ESTRES_CLI'
+      Origin = 'ESTRES_CLI'
+      FixedChar = True
       Size = 2
     end
-    object tb_clientesCEPRES_CLI: TIBStringField
+    object tb_clientesCEPRES_CLI: TStringField
       FieldName = 'CEPRES_CLI'
+      Origin = 'CEPRES_CLI'
+      FixedChar = True
       Size = 9
     end
-    object tb_clientesTELRES_CLI: TIBStringField
+    object tb_clientesTELRES_CLI: TStringField
       FieldName = 'TELRES_CLI'
+      Origin = 'TELRES_CLI'
+      FixedChar = True
       Size = 13
     end
-    object tb_clientesCPF_CLI: TIBStringField
+    object tb_clientesCPF_CLI: TStringField
       FieldName = 'CPF_CLI'
+      Origin = 'CPF_CLI'
       Size = 18
     end
-    object tb_clientesRG_CLI: TIBStringField
+    object tb_clientesRG_CLI: TStringField
       FieldName = 'RG_CLI'
+      Origin = 'RG_CLI'
     end
-    object tb_clientesAPELIDO_CLI: TIBStringField
+    object tb_clientesAPELIDO_CLI: TStringField
       FieldName = 'APELIDO_CLI'
+      Origin = 'APELIDO_CLI'
       Size = 50
     end
-    object tb_clientesLIMITE_CLI: TIBBCDField
+    object tb_clientesLIMITE_CLI: TBCDField
       FieldName = 'LIMITE_CLI'
+      Origin = 'LIMITE_CLI'
       Precision = 18
       Size = 2
     end
-    object tb_clientesATIVO_CLI: TIBStringField
+    object tb_clientesATIVO_CLI: TStringField
       FieldName = 'ATIVO_CLI'
+      Origin = 'ATIVO_CLI'
       Required = True
+      FixedChar = True
       Size = 1
     end
-    object tb_clientesOBS_CLI: TIBStringField
+    object tb_clientesOBS_CLI: TStringField
       FieldName = 'OBS_CLI'
+      Origin = 'OBS_CLI'
       Size = 500
     end
     object tb_clientesNASCIMENTO_CLI: TDateField
       FieldName = 'NASCIMENTO_CLI'
+      Origin = 'NASCIMENTO_CLI'
     end
     object tb_clientesDATACADASTRO_CLI: TDateField
       FieldName = 'DATACADASTRO_CLI'
+      Origin = 'DATACADASTRO_CLI'
       Required = True
     end
     object tb_clientesATRAZO_MAXIMO_CLI: TIntegerField
       FieldName = 'ATRAZO_MAXIMO_CLI'
+      Origin = 'ATRAZO_MAXIMO_CLI'
     end
-    object tb_clientesCELULAR_CLI: TIBStringField
+    object tb_clientesCELULAR_CLI: TStringField
       FieldName = 'CELULAR_CLI'
+      Origin = 'CELULAR_CLI'
       Size = 13
     end
-    object tb_clientesIMP_SALDO_PENDENTE_CLI: TIBStringField
+    object tb_clientesIMP_SALDO_PENDENTE_CLI: TStringField
       FieldName = 'IMP_SALDO_PENDENTE_CLI'
+      Origin = 'IMP_SALDO_PENDENTE_CLI'
       Required = True
+      FixedChar = True
       Size = 1
     end
-    object tb_clientesLIMITE_CHEQUE: TIBBCDField
+    object tb_clientesLIMITE_CHEQUE: TBCDField
       FieldName = 'LIMITE_CHEQUE'
+      Origin = 'LIMITE_CHEQUE'
       Precision = 18
       Size = 2
     end
-    object tb_clientesCONTATO_CLI: TIBStringField
+    object tb_clientesCONTATO_CLI: TStringField
       FieldName = 'CONTATO_CLI'
+      Origin = 'CONTATO_CLI'
       Size = 70
     end
-    object tb_clientesCONTROLAR_LIMITE: TIBStringField
+    object tb_clientesCONTROLAR_LIMITE: TStringField
       FieldName = 'CONTROLAR_LIMITE'
+      Origin = 'CONTROLAR_LIMITE'
       Required = True
+      FixedChar = True
       Size = 1
     end
-    object tb_clientesEMAIL_CLI: TIBStringField
+    object tb_clientesEMAIL_CLI: TStringField
       FieldName = 'EMAIL_CLI'
+      Origin = 'EMAIL_CLI'
       Size = 100
     end
   end
-  object tb_secao: TIBTable
-    Database = Conexao
+  object tb_secao: TFDTable
+    IndexFieldNames = 'COD_SEC'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'SECAO'
     TableName = 'SECAO'
-    UniDirectional = False
     Left = 320
     Top = 144
     object tb_secaoCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
+      Origin = 'COD_SEC'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_secaoNOME_SEC: TIBStringField
+    object tb_secaoNOME_SEC: TStringField
       FieldName = 'NOME_SEC'
+      Origin = 'NOME_SEC'
       Required = True
       Size = 50
     end
   end
-  object tb_UnidadesMedidas: TIBTable
-    Database = Conexao
+  object tb_UnidadesMedidas: TFDTable
+    IndexFieldNames = 'CODIGO'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'UNIDADE_MEDIDA'
     TableName = 'UNIDADE_MEDIDA'
-    UniDirectional = False
     Left = 320
     Top = 288
     object tb_UnidadesMedidasCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_UnidadesMedidasDESCRICAO: TIBStringField
+    object tb_UnidadesMedidasDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 10
     end
-  end
-  object Q_Consulta: TIBQuery
-    Database = Conexao
-    Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    Left = 288
-    Top = 88
   end
   object Dts_empresa: TDataSource
     DataSet = tb_empresa
@@ -576,133 +511,164 @@ object DmDados: TDmDados
     Left = 672
     Top = 128
   end
-  object tb_marcas: TIBTable
-    Database = Conexao
+  object Q_Consulta: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    Left = 288
+    Top = 88
+  end
+  object tb_marcas: TFDTable
+    IndexFieldNames = 'CODIGO'
+    Connection = Conexao
+    Transaction = IBTransaction1
+    UpdateOptions.UpdateTableName = 'MARCAS'
     TableName = 'MARCAS'
-    UniDirectional = False
     Left = 600
     Top = 128
     object tb_marcasCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_marcasDESCRICAO: TIBStringField
+    object tb_marcasDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 70
     end
   end
-  object tb_produtos: TIBTable
-    Database = Conexao
+  object tb_produtos: TFDTable
+    IndexFieldNames = 'COD_PRO'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'PRODUTO'
     TableName = 'PRODUTO'
-    UniDirectional = False
     Left = 608
     Top = 200
     object tb_produtosCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
+      Origin = 'COD_PRO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_produtosCODIGO_BARRA_PRO: TIBStringField
+    object tb_produtosCODIGO_BARRA_PRO: TStringField
       FieldName = 'CODIGO_BARRA_PRO'
+      Origin = 'CODIGO_BARRA_PRO'
       Required = True
       Size = 14
     end
-    object tb_produtosTP_PRODUTO: TIBStringField
+    object tb_produtosTP_PRODUTO: TStringField
       FieldName = 'TP_PRODUTO'
+      Origin = 'TP_PRODUTO'
       Required = True
       Size = 80
     end
-    object tb_produtosTP_PRODUCAO: TIBStringField
+    object tb_produtosTP_PRODUCAO: TStringField
       FieldName = 'TP_PRODUCAO'
+      Origin = 'TP_PRODUCAO'
       Size = 80
     end
-    object tb_produtosESTOQUE_MINIMO: TIBBCDField
+    object tb_produtosESTOQUE_MINIMO: TBCDField
       FieldName = 'ESTOQUE_MINIMO'
+      Origin = 'ESTOQUE_MINIMO'
       Precision = 18
       Size = 3
     end
-    object tb_produtosNOME_PRO: TIBStringField
+    object tb_produtosNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object tb_produtosDESC_CUPOM: TIBStringField
+    object tb_produtosDESC_CUPOM: TStringField
       FieldName = 'DESC_CUPOM'
+      Origin = 'DESC_CUPOM'
       Required = True
       Size = 80
     end
     object tb_produtosCOD_MARC: TIntegerField
       FieldName = 'COD_MARC'
+      Origin = 'COD_MARC'
       Required = True
     end
     object tb_produtosCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
+      Origin = 'COD_SEC'
       Required = True
     end
     object tb_produtosCOD_GRUP: TIntegerField
       FieldName = 'COD_GRUP'
+      Origin = 'COD_GRUP'
       Required = True
     end
     object tb_produtosCOD_SGRUP: TIntegerField
       FieldName = 'COD_SGRUP'
+      Origin = 'COD_SGRUP'
       Required = True
     end
     object tb_produtosCOD_UNI_ENT: TIntegerField
       FieldName = 'COD_UNI_ENT'
+      Origin = 'COD_UNI_ENT'
       Required = True
     end
     object tb_produtosCOD_UNI_SAI: TIntegerField
       FieldName = 'COD_UNI_SAI'
+      Origin = 'COD_UNI_SAI'
       Required = True
     end
-    object tb_produtosPRECO_VAREJO: TIBBCDField
+    object tb_produtosPRECO_VAREJO: TBCDField
       FieldName = 'PRECO_VAREJO'
+      Origin = 'PRECO_VAREJO'
       Precision = 18
       Size = 2
     end
-    object tb_produtosPRECO_PROMOCAO: TIBBCDField
+    object tb_produtosPRECO_PROMOCAO: TBCDField
       FieldName = 'PRECO_PROMOCAO'
+      Origin = 'PRECO_PROMOCAO'
       Precision = 18
-      Size = 4
     end
-    object tb_produtosPRECO_PRAZO: TIBBCDField
+    object tb_produtosPRECO_PRAZO: TBCDField
       FieldName = 'PRECO_PRAZO'
+      Origin = 'PRECO_PRAZO'
       Precision = 18
-      Size = 4
     end
-    object tb_produtosMARGEM_LUCRO: TIBBCDField
+    object tb_produtosMARGEM_LUCRO: TBCDField
       FieldName = 'MARGEM_LUCRO'
+      Origin = 'MARGEM_LUCRO'
       Precision = 18
-      Size = 4
     end
-    object tb_produtosQUANT_ESTOQ: TIBBCDField
+    object tb_produtosQUANT_ESTOQ: TBCDField
       FieldName = 'QUANT_ESTOQ'
+      Origin = 'QUANT_ESTOQ'
       Precision = 18
       Size = 3
     end
     object tb_produtosDATA_VALIDADE: TDateField
       FieldName = 'DATA_VALIDADE'
+      Origin = 'DATA_VALIDADE'
     end
     object tb_produtosDIAS_VALIDADE_PRO: TIntegerField
       FieldName = 'DIAS_VALIDADE_PRO'
+      Origin = 'DIAS_VALIDADE_PRO'
     end
-    object tb_produtosCONTROLA_ESTOQUE_PRO: TIBStringField
+    object tb_produtosCONTROLA_ESTOQUE_PRO: TStringField
       FieldName = 'CONTROLA_ESTOQUE_PRO'
+      Origin = 'CONTROLA_ESTOQUE_PRO'
+      Required = True
+      FixedChar = True
       Size = 1
     end
-    object tb_produtosATIVO_PRO: TIBStringField
+    object tb_produtosATIVO_PRO: TStringField
       FieldName = 'ATIVO_PRO'
+      Origin = 'ATIVO_PRO'
       Required = True
+      FixedChar = True
       Size = 1
     end
     object tb_produtosCAMINHO_FOTO_PRO: TBlobField
       FieldName = 'CAMINHO_FOTO_PRO'
+      Origin = 'CAMINHO_FOTO_PRO'
     end
   end
   object Dts_produtos: TDataSource
@@ -710,12 +676,9 @@ object DmDados: TDmDados
     Left = 680
     Top = 200
   end
-  object Q_Fornecedor: TIBQuery
-    Database = Conexao
+  object Q_Fornecedor: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       
         'SELECT COD_FOR, RAZAO_FOR, TEL_FOR, FAX_FOR, CONTATO_FOR FROM FO' +
@@ -724,29 +687,29 @@ object DmDados: TDmDados
     Top = 16
     object Q_FornecedorCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
-      Origin = '"FORNECEDOR"."COD_FOR"'
+      Origin = 'COD_FOR'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_FornecedorRAZAO_FOR: TIBStringField
+    object Q_FornecedorRAZAO_FOR: TStringField
       FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
+      Origin = 'RAZAO_FOR'
       Required = True
       Size = 60
     end
-    object Q_FornecedorTEL_FOR: TIBStringField
+    object Q_FornecedorTEL_FOR: TStringField
       FieldName = 'TEL_FOR'
-      Origin = '"FORNECEDOR"."TEL_FOR"'
+      Origin = 'TEL_FOR'
       Size = 13
     end
-    object Q_FornecedorFAX_FOR: TIBStringField
+    object Q_FornecedorFAX_FOR: TStringField
       FieldName = 'FAX_FOR'
-      Origin = '"FORNECEDOR"."FAX_FOR"'
+      Origin = 'FAX_FOR'
       Size = 13
     end
-    object Q_FornecedorCONTATO_FOR: TIBStringField
+    object Q_FornecedorCONTATO_FOR: TStringField
       FieldName = 'CONTATO_FOR'
-      Origin = '"FORNECEDOR"."CONTATO_FOR"'
+      Origin = 'CONTATO_FOR'
       Size = 50
     end
   end
@@ -755,12 +718,9 @@ object DmDados: TDmDados
     Left = 1128
     Top = 16
   end
-  object Q_Produtos: TIBQuery
-    Database = Conexao
+  object Q_Produtos: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -796,83 +756,77 @@ object DmDados: TDmDados
     Top = 88
     object Q_ProdutosCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"PRODUTO"."COD_PRO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Origin = 'COD_PRO'
       Required = True
     end
-    object Q_ProdutosCODIGO_BARRA_PRO: TIBStringField
+    object Q_ProdutosCODIGO_BARRA_PRO: TStringField
       FieldName = 'CODIGO_BARRA_PRO'
-      Origin = '"PRODUTO"."CODIGO_BARRA_PRO"'
+      Origin = 'CODIGO_BARRA_PRO'
       Required = True
       Size = 14
     end
-    object Q_ProdutosESTOQUE_MINIMO: TIBBCDField
+    object Q_ProdutosESTOQUE_MINIMO: TBCDField
       FieldName = 'ESTOQUE_MINIMO'
-      Origin = '"PRODUTO"."ESTOQUE_MINIMO"'
-      DisplayFormat = ' ,0.00;- ,0.00'
+      Origin = 'ESTOQUE_MINIMO'
       Precision = 18
       Size = 3
     end
-    object Q_ProdutosNOME_PRO: TIBStringField
+    object Q_ProdutosQUANT_ESTOQ: TBCDField
+      FieldName = 'QUANT_ESTOQ'
+      Origin = 'QUANT_ESTOQ'
+      Precision = 18
+      Size = 3
+    end
+    object Q_ProdutosNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object Q_ProdutosPRECO_VAREJO: TIBBCDField
+    object Q_ProdutosPRECO_VAREJO: TBCDField
       FieldName = 'PRECO_VAREJO'
-      Origin = '"PRODUTO"."PRECO_VAREJO"'
-      DisplayFormat = 'R$ ,0.00;-R$ ,0.00'
+      Origin = 'PRECO_VAREJO'
       Precision = 18
       Size = 2
     end
-    object Q_ProdutosPRECO_PROMOCAO: TIBBCDField
+    object Q_ProdutosPRECO_PROMOCAO: TBCDField
       FieldName = 'PRECO_PROMOCAO'
-      Origin = '"PRODUTO"."PRECO_PROMOCAO"'
-      DisplayFormat = ' ,0.00;- ,0.00'
+      Origin = 'PRECO_PROMOCAO'
       Precision = 18
-      Size = 4
     end
     object Q_ProdutosDATA_VALIDADE: TDateField
       FieldName = 'DATA_VALIDADE'
-      Origin = '"PRODUTO"."DATA_VALIDADE"'
+      Origin = 'DATA_VALIDADE'
     end
-    object Q_ProdutosDESCRICAO: TIBStringField
+    object Q_ProdutosDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"MARCAS"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 70
     end
-    object Q_ProdutosNOME_SEC: TIBStringField
+    object Q_ProdutosNOME_SEC: TStringField
       FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
+      Origin = 'NOME_SEC'
       Required = True
       Size = 50
     end
-    object Q_ProdutosDESCRICAO1: TIBStringField
-      FieldName = 'DESCRICAO1'
-      Origin = '"SECAO_GRUPO"."DESCRICAO"'
+    object Q_ProdutosDESCRICAO_1: TStringField
+      FieldName = 'DESCRICAO_1'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 80
     end
-    object Q_ProdutosDESCRICAO2: TIBStringField
-      FieldName = 'DESCRICAO2'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."DESCRICAO"'
+    object Q_ProdutosDESCRICAO_2: TStringField
+      FieldName = 'DESCRICAO_2'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 80
     end
-    object Q_ProdutosDESCRICAO3: TIBStringField
-      FieldName = 'DESCRICAO3'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+    object Q_ProdutosDESCRICAO_3: TStringField
+      FieldName = 'DESCRICAO_3'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 10
-    end
-    object Q_ProdutosQUANT_ESTOQ: TIBBCDField
-      FieldName = 'QUANT_ESTOQ'
-      Origin = '"PRODUTO"."QUANT_ESTOQ"'
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
     end
   end
   object DS_Q_Produtos: TDataSource
@@ -880,21 +834,15 @@ object DmDados: TDmDados
     Left = 1136
     Top = 88
   end
-  object Q_executa: TIBQuery
-    Database = Conexao
+  object Q_executa: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     Left = 360
     Top = 96
   end
-  object Q_Clientes: TIBQuery
-    Database = Conexao
+  object Q_Clientes: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT C.COD_CLI, C.NOME_CLI, C.NASCIMENTO_CLI, C.TELRES_CLI'
       'FROM CLIENTE C')
@@ -902,23 +850,23 @@ object DmDados: TDmDados
     Top = 160
     object Q_ClientesCOD_CLI: TIntegerField
       FieldName = 'COD_CLI'
-      Origin = '"CLIENTE"."COD_CLI"'
+      Origin = 'COD_CLI'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ClientesNOME_CLI: TIBStringField
+    object Q_ClientesNOME_CLI: TStringField
       FieldName = 'NOME_CLI'
-      Origin = '"CLIENTE"."NOME_CLI"'
+      Origin = 'NOME_CLI'
       Required = True
       Size = 60
     end
     object Q_ClientesNASCIMENTO_CLI: TDateField
       FieldName = 'NASCIMENTO_CLI'
-      Origin = '"CLIENTE"."NASCIMENTO_CLI"'
+      Origin = 'NASCIMENTO_CLI'
     end
-    object Q_ClientesTELRES_CLI: TIBStringField
+    object Q_ClientesTELRES_CLI: TStringField
       FieldName = 'TELRES_CLI'
-      Origin = '"CLIENTE"."TELRES_CLI"'
+      Origin = 'TELRES_CLI'
       FixedChar = True
       Size = 13
     end
@@ -928,38 +876,35 @@ object DmDados: TDmDados
     Left = 1136
     Top = 160
   end
-  object Q_Vendedores: TIBQuery
-    Database = Conexao
+  object Q_Vendedores: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT * FROM VENDEDOR ORDER BY COD_VEND')
     Left = 1056
     Top = 240
     object Q_VendedoresCOD_VEND: TIntegerField
       FieldName = 'COD_VEND'
-      Origin = '"VENDEDOR"."COD_VEND"'
+      Origin = 'COD_VEND'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_VendedoresNOME_VEND: TIBStringField
+    object Q_VendedoresNOME_VEND: TStringField
       FieldName = 'NOME_VEND'
-      Origin = '"VENDEDOR"."NOME_VEND"'
+      Origin = 'NOME_VEND'
       Required = True
       Size = 50
     end
-    object Q_VendedoresATIVO_VEND: TIBStringField
+    object Q_VendedoresATIVO_VEND: TStringField
       FieldName = 'ATIVO_VEND'
-      Origin = '"VENDEDOR"."ATIVO_VEND"'
+      Origin = 'ATIVO_VEND'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object Q_VendedoresCOMISSAO_VEND: TIBBCDField
+    object Q_VendedoresCOMISSAO_VEND: TBCDField
       FieldName = 'COMISSAO_VEND'
-      Origin = '"VENDEDOR"."COMISSAO_VEND"'
+      Origin = 'COMISSAO_VEND'
       Precision = 18
       Size = 2
     end
@@ -969,12 +914,9 @@ object DmDados: TDmDados
     Left = 1144
     Top = 240
   end
-  object Q_Classifica: TIBQuery
-    Database = Conexao
+  object Q_Classifica: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT *'
       'FROM CLASSIF_CLIENTE')
@@ -982,13 +924,13 @@ object DmDados: TDmDados
     Top = 320
     object Q_ClassificaCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
-      Origin = '"CLASSIF_CLIENTE"."COD_CLA"'
+      Origin = 'COD_CLA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ClassificaNOME_CLA: TIBStringField
+    object Q_ClassificaNOME_CLA: TStringField
       FieldName = 'NOME_CLA'
-      Origin = '"CLASSIF_CLIENTE"."NOME_CLA"'
+      Origin = 'NOME_CLA'
       Required = True
       Size = 30
     end
@@ -998,12 +940,9 @@ object DmDados: TDmDados
     Left = 1144
     Top = 320
   end
-  object Q_Secao_Grupo: TIBQuery
-    Database = Conexao
+  object Q_Secao_Grupo: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       
         'SELECT S.COD_SEC, S.NOME_SEC, G.COD_GRUPO, G.DESCRICAO NOME_GRUP' +
@@ -1016,6 +955,48 @@ object DmDados: TDmDados
       'ON (G.COD_SEC = SUB.COD_SEC AND G.COD_GRUPO = SUB.COD_GRUPO)')
     Left = 1063
     Top = 384
+    object Q_Secao_GrupoCOD_SEC: TIntegerField
+      FieldName = 'COD_SEC'
+      Origin = 'COD_SEC'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Secao_GrupoNOME_SEC: TStringField
+      FieldName = 'NOME_SEC'
+      Origin = 'NOME_SEC'
+      Required = True
+      Size = 50
+    end
+    object Q_Secao_GrupoCOD_GRUPO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'COD_GRUPO'
+      Origin = 'COD_GRUPO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object Q_Secao_GrupoNOME_GRUPO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME_GRUPO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object Q_Secao_GrupoCOD_SUBGRUPO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'COD_SUBGRUPO'
+      Origin = 'COD_SUBGRUPO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object Q_Secao_GrupoNOME_SUBGRUPO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME_SUBGRUPO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
   end
   object DS_Q_Secao_Grupo: TDataSource
     DataSet = Q_Secao_Grupo
@@ -1027,72 +1008,79 @@ object DmDados: TDmDados
     Left = 928
     Top = 392
   end
-  object Q_Marcas: TIBQuery
-    Database = Conexao
+  object Q_Marcas: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'select *  from MARCAS')
     Left = 840
     Top = 392
     object Q_MarcasCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"MARCAS"."CODIGO"'
+      Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_MarcasDESCRICAO: TIBStringField
+    object Q_MarcasDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"MARCAS"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 70
     end
   end
-  object tb_entradas: TIBTable
-    Database = Conexao
+  object tb_entradas: TFDTable
+    IndexFieldNames = 'COD_OUTRA'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'ENTRADAS'
     TableName = 'ENTRADAS'
-    UniDirectional = False
     Left = 600
     Top = 264
     object tb_entradasCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
+      Origin = 'COD_OUTRA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object tb_entradasDATA_OUTRA: TDateField
       FieldName = 'DATA_OUTRA'
+      Origin = 'DATA_OUTRA'
       Required = True
     end
     object tb_entradasCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
+      Origin = 'COD_FOR'
       Required = True
     end
     object tb_entradasCOD_EMP: TIntegerField
       FieldName = 'COD_EMP'
+      Origin = 'COD_EMP'
       Required = True
     end
-    object tb_entradasTOTAL_OUTRA: TIBBCDField
+    object tb_entradasTOTAL_OUTRA: TBCDField
       FieldName = 'TOTAL_OUTRA'
+      Origin = 'TOTAL_OUTRA'
       Precision = 18
       Size = 2
     end
     object tb_entradasNUMERO_NOTA_FISCAL: TIntegerField
       FieldName = 'NUMERO_NOTA_FISCAL'
+      Origin = 'NUMERO_NOTA_FISCAL'
+      Required = True
     end
-    object tb_entradasSERIE_NOTA_FISCAL: TIBStringField
+    object tb_entradasSERIE_NOTA_FISCAL: TStringField
       FieldName = 'SERIE_NOTA_FISCAL'
+      Origin = 'SERIE_NOTA_FISCAL'
       Size = 3
     end
     object tb_entradasCANCELADA: TIntegerField
       FieldName = 'CANCELADA'
+      Origin = 'CANCELADA'
       Required = True
     end
     object tb_entradasDATA_VENCTO: TDateField
       FieldName = 'DATA_VENCTO'
+      Origin = 'DATA_VENCTO'
     end
   end
   object Dts_entradas: TDataSource
@@ -1105,51 +1093,55 @@ object DmDados: TDmDados
     Left = 680
     Top = 320
   end
-  object tb_Outras_Saidas: TIBTable
-    Database = Conexao
+  object tb_Outras_Saidas: TFDTable
+    IndexFieldNames = 'COD_OUTRA'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'OUTRAS_SAIDAS'
     TableName = 'OUTRAS_SAIDAS'
-    UniDirectional = False
     Left = 584
     Top = 328
     object tb_Outras_SaidasCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
+      Origin = 'COD_OUTRA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object tb_Outras_SaidasDATA_OUTRA: TDateField
       FieldName = 'DATA_OUTRA'
+      Origin = 'DATA_OUTRA'
       Required = True
     end
     object tb_Outras_SaidasCOD_TIPO: TIntegerField
       FieldName = 'COD_TIPO'
+      Origin = 'COD_TIPO'
       Required = True
     end
     object tb_Outras_SaidasCOD_CLI: TIntegerField
       FieldName = 'COD_CLI'
+      Origin = 'COD_CLI'
       Required = True
     end
     object tb_Outras_SaidasCOD_EMP: TIntegerField
       FieldName = 'COD_EMP'
+      Origin = 'COD_EMP'
       Required = True
     end
-    object tb_Outras_SaidasTOTAL_OUTRA: TIBBCDField
+    object tb_Outras_SaidasTOTAL_OUTRA: TBCDField
       FieldName = 'TOTAL_OUTRA'
+      Origin = 'TOTAL_OUTRA'
       Precision = 18
       Size = 2
     end
     object tb_Outras_SaidasCANCELADA: TIntegerField
       FieldName = 'CANCELADA'
+      Origin = 'CANCELADA'
       Required = True
     end
   end
-  object Q_Produtos_inventario: TIBQuery
-    Database = Conexao
+  object Q_Produtos_inventario: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -1188,88 +1180,81 @@ object DmDados: TDmDados
     Top = 40
     object Q_Produtos_inventarioCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"PRODUTO"."COD_PRO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Origin = 'COD_PRO'
       Required = True
     end
-    object Q_Produtos_inventarioCODIGO_BARRA_PRO: TIBStringField
+    object Q_Produtos_inventarioCODIGO_BARRA_PRO: TStringField
       FieldName = 'CODIGO_BARRA_PRO'
-      Origin = '"PRODUTO"."CODIGO_BARRA_PRO"'
+      Origin = 'CODIGO_BARRA_PRO'
       Required = True
       Size = 14
     end
-    object Q_Produtos_inventarioESTOQUE_MINIMO: TIBBCDField
+    object Q_Produtos_inventarioESTOQUE_MINIMO: TBCDField
       FieldName = 'ESTOQUE_MINIMO'
-      Origin = '"PRODUTO"."ESTOQUE_MINIMO"'
-      DisplayFormat = ' ,0.00;- ,0.00'
+      Origin = 'ESTOQUE_MINIMO'
       Precision = 18
       Size = 3
     end
-    object Q_Produtos_inventarioNOME_PRO: TIBStringField
+    object Q_Produtos_inventarioQUANT_ESTOQ: TBCDField
+      FieldName = 'QUANT_ESTOQ'
+      Origin = 'QUANT_ESTOQ'
+      Precision = 18
+      Size = 3
+    end
+    object Q_Produtos_inventarioNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object Q_Produtos_inventarioPRECO_VAREJO: TIBBCDField
+    object Q_Produtos_inventarioPRECO_VAREJO: TBCDField
       FieldName = 'PRECO_VAREJO'
-      Origin = '"PRODUTO"."PRECO_VAREJO"'
-      DisplayFormat = ' ,0.00;- ,0.00'
+      Origin = 'PRECO_VAREJO'
       Precision = 18
       Size = 2
     end
-    object Q_Produtos_inventarioPRECO_PROMOCAO: TIBBCDField
+    object Q_Produtos_inventarioPRECO_PROMOCAO: TBCDField
       FieldName = 'PRECO_PROMOCAO'
-      Origin = '"PRODUTO"."PRECO_PROMOCAO"'
-      DisplayFormat = ' ,0.00;- ,0.00'
+      Origin = 'PRECO_PROMOCAO'
       Precision = 18
-      Size = 4
     end
     object Q_Produtos_inventarioDATA_VALIDADE: TDateField
       FieldName = 'DATA_VALIDADE'
-      Origin = '"PRODUTO"."DATA_VALIDADE"'
+      Origin = 'DATA_VALIDADE'
     end
-    object Q_Produtos_inventarioDESCRICAO: TIBStringField
+    object Q_Produtos_inventarioDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"MARCAS"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 70
     end
-    object Q_Produtos_inventarioNOME_SEC: TIBStringField
+    object Q_Produtos_inventarioNOME_SEC: TStringField
       FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
+      Origin = 'NOME_SEC'
       Required = True
       Size = 50
     end
-    object Q_Produtos_inventarioDESCRICAO1: TIBStringField
-      FieldName = 'DESCRICAO1'
-      Origin = '"SECAO_GRUPO"."DESCRICAO"'
+    object Q_Produtos_inventarioDESCRICAO_1: TStringField
+      FieldName = 'DESCRICAO_1'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 80
     end
-    object Q_Produtos_inventarioDESCRICAO2: TIBStringField
-      FieldName = 'DESCRICAO2'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."DESCRICAO"'
+    object Q_Produtos_inventarioDESCRICAO_2: TStringField
+      FieldName = 'DESCRICAO_2'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 80
     end
-    object Q_Produtos_inventarioDESCRICAO3: TIBStringField
-      FieldName = 'DESCRICAO3'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+    object Q_Produtos_inventarioDESCRICAO_3: TStringField
+      FieldName = 'DESCRICAO_3'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 10
     end
-    object Q_Produtos_inventarioQUANT_ESTOQ: TIBBCDField
-      FieldName = 'QUANT_ESTOQ'
-      Origin = '"PRODUTO"."QUANT_ESTOQ"'
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
-    end
     object Q_Produtos_inventarioVL_TOTAL_EM_PROD: TFMTBCDField
       FieldName = 'VL_TOTAL_EM_PROD'
-      ProviderFlags = []
-      DisplayFormat = ' ,0.00;- ,0.00'
+      Origin = 'VL_TOTAL_EM_PROD'
       Precision = 18
       Size = 5
     end
@@ -1279,12 +1264,9 @@ object DmDados: TDmDados
     Left = 899
     Top = 40
   end
-  object QRelVendas: TIBQuery
-    Database = Conexao
+  object QRelVendas: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  VENDAS.COD_VENDAS,'
@@ -1306,59 +1288,52 @@ object DmDados: TDmDados
     Top = 120
     object QRelVendasCOD_VENDAS: TIntegerField
       FieldName = 'COD_VENDAS'
-      Origin = '"VENDAS"."COD_VENDAS"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Origin = 'COD_VENDAS'
       Required = True
     end
     object QRelVendasCOD_CLIENTE: TIntegerField
       FieldName = 'COD_CLIENTE'
-      Origin = '"VENDAS"."COD_CLIENTE"'
+      Origin = 'COD_CLIENTE'
       Required = True
     end
-    object QRelVendasNOME_CLI: TIBStringField
+    object QRelVendasNOME_CLI: TStringField
       FieldName = 'NOME_CLI'
-      Origin = '"CLIENTE"."NOME_CLI"'
+      Origin = 'NOME_CLI'
       Required = True
       Size = 60
     end
     object QRelVendasCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"FORMAS_PAGAMENTO"."CODIGO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Origin = 'CODIGO'
       Required = True
     end
-    object QRelVendasDESCRICAO: TIBStringField
+    object QRelVendasDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"FORMAS_PAGAMENTO"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
     end
-    object QRelVendasTOTAL: TIBBCDField
+    object QRelVendasTOTAL: TBCDField
       FieldName = 'TOTAL'
-      Origin = '"VENDAS"."TOTAL"'
-      DisplayFormat = ',#0.00'
+      Origin = 'TOTAL'
       Precision = 18
       Size = 3
     end
     object QRelVendasDATA: TDateField
       FieldName = 'DATA'
-      Origin = '"VENDAS"."DATA"'
+      Origin = '"DATA"'
     end
     object QRelVendasHORA: TTimeField
       FieldName = 'HORA'
-      Origin = '"VENDAS"."HORA"'
+      Origin = 'HORA'
     end
-    object QRelVendasOBS: TWideMemoField
+    object QRelVendasOBS: TMemoField
       FieldName = 'OBS'
-      Origin = '"VENDAS"."OBS"'
-      ProviderFlags = [pfInUpdate]
-      BlobType = ftWideMemo
-      Size = 8
+      Origin = 'OBS'
+      BlobType = ftMemo
     end
   end
-  object QRelOE: TIBQuery
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object QRelOE: TFDQuery
+    Connection = Conexao
     SQL.Strings = (
       
         'SELECT SUM(QUANT_ITEM) QUANT, O.COD_ES, I.COD_PRO, P.NOME_PRO,  ' +
@@ -1373,37 +1348,10 @@ object DmDados: TDmDados
       'GROUP BY O.COD_ES, I.COD_PRO, P.NOME_PRO, T.NOME_ES')
     Left = 896
     Top = 120
-    object QRelOEQUANT: TIBBCDField
-      FieldName = 'QUANT'
-      DisplayFormat = ',#0.000'
-      Precision = 18
-      Size = 3
-    end
-    object QRelOECOD_ES: TIntegerField
-      FieldName = 'COD_ES'
-      Required = True
-    end
-    object QRelOECOD_PRO: TIntegerField
-      FieldName = 'COD_PRO'
-      Required = True
-    end
-    object QRelOENOME_PRO: TIBStringField
-      FieldName = 'NOME_PRO'
-      Required = True
-      Size = 80
-    end
-    object QRelOENOME_ES: TIBStringField
-      FieldName = 'NOME_ES'
-      Required = True
-      Size = 50
-    end
   end
-  object Q_RelEntradas: TIBQuery
-    Database = Conexao
+  object Q_RelEntradas: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  ENTRADAS.COD_OUTRA,'
@@ -1423,88 +1371,93 @@ object DmDados: TDmDados
     Top = 192
     object Q_RelEntradasCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
-      Origin = '"ENTRADAS"."COD_OUTRA"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Origin = 'COD_OUTRA'
       Required = True
     end
     object Q_RelEntradasDATA_OUTRA: TDateField
       FieldName = 'DATA_OUTRA'
-      Origin = '"ENTRADAS"."DATA_OUTRA"'
+      Origin = 'DATA_OUTRA'
       Required = True
     end
     object Q_RelEntradasCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
-      Origin = '"ENTRADAS"."COD_FOR"'
+      Origin = 'COD_FOR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object Q_RelEntradasCOD_EMP: TIntegerField
       FieldName = 'COD_EMP'
-      Origin = '"ENTRADAS"."COD_EMP"'
+      Origin = 'COD_EMP'
       Required = True
     end
-    object Q_RelEntradasTOTAL_OUTRA: TIBBCDField
+    object Q_RelEntradasTOTAL_OUTRA: TBCDField
       FieldName = 'TOTAL_OUTRA'
-      Origin = '"ENTRADAS"."TOTAL_OUTRA"'
-      DisplayFormat = ',#0.00'
+      Origin = 'TOTAL_OUTRA'
       Precision = 18
       Size = 2
     end
     object Q_RelEntradasNUMERO_NOTA_FISCAL: TIntegerField
       FieldName = 'NUMERO_NOTA_FISCAL'
-      Origin = '"ENTRADAS"."NUMERO_NOTA_FISCAL"'
+      Origin = 'NUMERO_NOTA_FISCAL'
       Required = True
     end
-    object Q_RelEntradasSERIE_NOTA_FISCAL: TIBStringField
+    object Q_RelEntradasSERIE_NOTA_FISCAL: TStringField
       FieldName = 'SERIE_NOTA_FISCAL'
-      Origin = '"ENTRADAS"."SERIE_NOTA_FISCAL"'
+      Origin = 'SERIE_NOTA_FISCAL'
       Size = 3
     end
     object Q_RelEntradasCANCELADA: TIntegerField
       FieldName = 'CANCELADA'
-      Origin = '"ENTRADAS"."CANCELADA"'
+      Origin = 'CANCELADA'
       Required = True
     end
     object Q_RelEntradasDATA_VENCTO: TDateField
       FieldName = 'DATA_VENCTO'
-      Origin = '"ENTRADAS"."DATA_VENCTO"'
+      Origin = 'DATA_VENCTO'
     end
-    object Q_RelEntradasRAZAO_FOR: TIBStringField
+    object Q_RelEntradasRAZAO_FOR: TStringField
       FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
+      Origin = 'RAZAO_FOR'
       Required = True
       Size = 60
     end
   end
-  object tb_usuarios: TIBTable
-    Database = Conexao
+  object tb_usuarios: TFDTable
+    IndexFieldNames = 'COD_USU'
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
+    UpdateOptions.UpdateTableName = 'USUARIO'
     TableName = 'USUARIO'
-    UniDirectional = False
     Left = 48
     Top = 352
     object tb_usuariosCOD_USU: TIntegerField
       FieldName = 'COD_USU'
+      Origin = 'COD_USU'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object tb_usuariosNOME_USU: TIBStringField
+    object tb_usuariosNOME_USU: TStringField
       FieldName = 'NOME_USU'
+      Origin = 'NOME_USU'
       Required = True
       Size = 10
     end
-    object tb_usuariosSENHA_USU: TIBStringField
+    object tb_usuariosSENHA_USU: TStringField
       FieldName = 'SENHA_USU'
+      Origin = 'SENHA_USU'
       Required = True
       Size = 6
     end
     object tb_usuariosCOD_EMPR: TIntegerField
       FieldName = 'COD_EMPR'
+      Origin = 'COD_EMPR'
       Required = True
     end
-    object tb_usuariosOPERADOR_CAIXA: TIBStringField
+    object tb_usuariosOPERADOR_CAIXA: TStringField
       FieldName = 'OPERADOR_CAIXA'
+      Origin = 'OPERADOR_CAIXA'
       Required = True
+      FixedChar = True
       Size = 1
     end
   end
@@ -1513,114 +1466,105 @@ object DmDados: TDmDados
     Left = 136
     Top = 352
   end
-  object QLogin: TIBQuery
-    Database = Conexao
+  object QLogin: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'select *  from USUARIO')
     Left = 312
     Top = 352
     object QLoginCOD_USU: TIntegerField
       FieldName = 'COD_USU'
-      Origin = '"USUARIO"."COD_USU"'
+      Origin = 'COD_USU'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QLoginNOME_USU: TIBStringField
+    object QLoginNOME_USU: TStringField
       FieldName = 'NOME_USU'
-      Origin = '"USUARIO"."NOME_USU"'
+      Origin = 'NOME_USU'
       Required = True
       Size = 10
     end
-    object QLoginSENHA_USU: TIBStringField
+    object QLoginSENHA_USU: TStringField
       FieldName = 'SENHA_USU'
-      Origin = '"USUARIO"."SENHA_USU"'
+      Origin = 'SENHA_USU'
       Required = True
       Size = 6
     end
     object QLoginCOD_EMPR: TIntegerField
       FieldName = 'COD_EMPR'
-      Origin = '"USUARIO"."COD_EMPR"'
+      Origin = 'COD_EMPR'
       Required = True
     end
-    object QLoginOPERADOR_CAIXA: TIBStringField
+    object QLoginOPERADOR_CAIXA: TStringField
       FieldName = 'OPERADOR_CAIXA'
-      Origin = '"USUARIO"."OPERADOR_CAIXA"'
+      Origin = 'OPERADOR_CAIXA'
       Required = True
       FixedChar = True
       Size = 1
     end
   end
-  object QRelOS: TIBQuery
-    Database = Conexao
+  object QRelOS: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       
         'select c.cod_cli, c.nome_cli, O.* from OUTRAS_SAIDAS O, cliente ' +
         'c where c.cod_cli = o.cod_cli')
     Left = 896
     Top = 184
+    object QRelOSCOD_CLI: TIntegerField
+      FieldName = 'COD_CLI'
+      Origin = 'COD_CLI'
+      Required = True
+    end
+    object QRelOSNOME_CLI: TStringField
+      FieldName = 'NOME_CLI'
+      Origin = 'NOME_CLI'
+      Required = True
+      Size = 60
+    end
     object QRelOSCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
-      Origin = '"OUTRAS_SAIDAS"."COD_OUTRA"'
+      Origin = 'COD_OUTRA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object QRelOSDATA_OUTRA: TDateField
       FieldName = 'DATA_OUTRA'
-      Origin = '"OUTRAS_SAIDAS"."DATA_OUTRA"'
+      Origin = 'DATA_OUTRA'
       Required = True
     end
     object QRelOSCOD_TIPO: TIntegerField
       FieldName = 'COD_TIPO'
-      Origin = '"OUTRAS_SAIDAS"."COD_TIPO"'
+      Origin = 'COD_TIPO'
       Required = True
     end
-    object QRelOSCOD_CLI: TIntegerField
-      FieldName = 'COD_CLI'
-      Origin = '"OUTRAS_SAIDAS"."COD_CLI"'
+    object QRelOSCOD_CLI_1: TIntegerField
+      FieldName = 'COD_CLI_1'
+      Origin = 'COD_CLI'
       Required = True
     end
     object QRelOSCOD_EMP: TIntegerField
       FieldName = 'COD_EMP'
-      Origin = '"OUTRAS_SAIDAS"."COD_EMP"'
+      Origin = 'COD_EMP'
       Required = True
     end
-    object QRelOSTOTAL_OUTRA: TIBBCDField
+    object QRelOSTOTAL_OUTRA: TBCDField
       FieldName = 'TOTAL_OUTRA'
-      Origin = '"OUTRAS_SAIDAS"."TOTAL_OUTRA"'
+      Origin = 'TOTAL_OUTRA'
       Precision = 18
       Size = 2
     end
     object QRelOSCANCELADA: TIntegerField
       FieldName = 'CANCELADA'
-      Origin = '"OUTRAS_SAIDAS"."CANCELADA"'
-      Required = True
-    end
-    object QRelOSNOME_CLI: TIBStringField
-      FieldName = 'NOME_CLI'
-      Origin = '"CLIENTE"."NOME_CLI"'
-      Required = True
-      Size = 60
-    end
-    object QRelOSCOD_CLI1: TIntegerField
-      FieldName = 'COD_CLI1'
-      Origin = '"OUTRAS_SAIDAS"."COD_CLI"'
+      Origin = 'CANCELADA'
       Required = True
     end
   end
-  object Q_RelVencidos: TIBQuery
-    Database = Conexao
+  object Q_RelVencidos: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  ITENS_ENTRADAS.COD_OUTRA,'
@@ -1641,50 +1585,37 @@ object DmDados: TDmDados
       'ORDER BY PRODUTO.NOME_PRO,ITENS_ENTRADAS.DATA_VENCTO')
     Left = 800
     Top = 256
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'hj'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'hj2'
-        ParamType = ptUnknown
-      end>
     object Q_RelVencidosCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
-      Origin = '"ITENS_ENTRADAS"."COD_OUTRA"'
+      Origin = 'COD_OUTRA'
       Required = True
     end
     object Q_RelVencidosCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"ITENS_ENTRADAS"."COD_PRO"'
+      Origin = 'COD_PRO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_RelVencidosNOME_PRO: TIBStringField
+    object Q_RelVencidosNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
     object Q_RelVencidosDATA_VENCTO: TDateField
       FieldName = 'DATA_VENCTO'
-      Origin = '"ITENS_ENTRADAS"."DATA_VENCTO"'
+      Origin = 'DATA_VENCTO'
     end
-    object Q_RelVencidosDESCRICAO: TIBStringField
+    object Q_RelVencidosDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 10
     end
   end
-  object Q_Qtd_vendida: TIBQuery
-    Database = Conexao
+  object Q_Qtd_vendida: TFDQuery
+    Connection = Conexao
     Transaction = IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'select '
       '    itens_venda.cod_pro,'
@@ -1706,38 +1637,26 @@ object DmDados: TDmDados
       'order by produto.nome_pro')
     Left = 400
     Top = 392
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'dt1'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'dt2'
-        ParamType = ptUnknown
-      end>
     object Q_Qtd_vendidaCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"ITENS_VENDA"."COD_PRO"'
+      Origin = 'COD_PRO'
       Required = True
-    end
-    object Q_Qtd_vendidaTOTAL_VENDIDO: TIBBCDField
-      FieldName = 'TOTAL_VENDIDO'
-      ProviderFlags = []
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
-    end
-    object Q_Qtd_vendidaNOME_PRO: TIBStringField
-      FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
-      Required = True
-      Size = 80
     end
     object Q_Qtd_vendidaDATA: TDateField
       FieldName = 'DATA'
-      Origin = '"VENDAS"."DATA"'
+      Origin = '"DATA"'
+    end
+    object Q_Qtd_vendidaTOTAL_VENDIDO: TBCDField
+      FieldName = 'TOTAL_VENDIDO'
+      Origin = 'TOTAL_VENDIDO'
+      Precision = 18
+      Size = 3
+    end
+    object Q_Qtd_vendidaNOME_PRO: TStringField
+      FieldName = 'NOME_PRO'
+      Origin = 'NOME_PRO'
+      Required = True
+      Size = 80
     end
   end
 end

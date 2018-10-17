@@ -10,7 +10,10 @@ uses
   RxCurrEdit, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Buttons, Data.DB,
   IBX.IBCustomDataSet, IBX.IBQuery, System.Rtti, System.Bindings.Outputs,
   Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
-  Data.Bind.DBScope, System.Math, IBX.IBDatabase;
+  Data.Bind.DBScope, System.Math, IBX.IBDatabase, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmProdutos = class(TForm)
@@ -96,30 +99,7 @@ type
     edtCodUniSai: TEdit;
     edtCod: TEdit;
     btFiltro: TButton;
-    Q_Consulta_filtro: TIBQuery;
-    Q_Consulta_filtroCOD_PRO: TIntegerField;
-    Q_Consulta_filtroCODIGO_BARRA_PRO: TIBStringField;
-    Q_Consulta_filtroTP_PRODUTO: TIBStringField;
-    Q_Consulta_filtroTP_PRODUCAO: TIBStringField;
-    Q_Consulta_filtroESTOQUE_MINIMO: TIBBCDField;
-    Q_Consulta_filtroNOME_PRO: TIBStringField;
-    Q_Consulta_filtroDESC_CUPOM: TIBStringField;
-    Q_Consulta_filtroCOD_MARC: TIntegerField;
-    Q_Consulta_filtroCOD_SEC: TIntegerField;
-    Q_Consulta_filtroCOD_GRUP: TIntegerField;
-    Q_Consulta_filtroCOD_SGRUP: TIntegerField;
-    Q_Consulta_filtroCOD_UNI_ENT: TIntegerField;
-    Q_Consulta_filtroCOD_UNI_SAI: TIntegerField;
-    Q_Consulta_filtroPRECO_VAREJO: TIBBCDField;
-    Q_Consulta_filtroPRECO_PROMOCAO: TIBBCDField;
-    Q_Consulta_filtroPRECO_PRAZO: TIBBCDField;
-    Q_Consulta_filtroMARGEM_LUCRO: TIBBCDField;
-    Q_Consulta_filtroQUANT_ESTOQ: TIBBCDField;
-    Q_Consulta_filtroDATA_VALIDADE: TDateField;
-    Q_Consulta_filtroDIAS_VALIDADE_PRO: TIntegerField;
-    Q_Consulta_filtroCONTROLA_ESTOQUE_PRO: TIBStringField;
-    Q_Consulta_filtroATIVO_PRO: TIBStringField;
-    Q_Consulta_filtroCAMINHO_FOTO_PRO: TBlobField;
+    Q_Consulta_filtro: TFDQuery;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkControlToField1: TLinkControlToField;
@@ -138,60 +118,83 @@ type
     LinkPropertyToFieldValue4: TLinkPropertyToField;
     LinkPropertyToFieldValue5: TLinkPropertyToField;
     LinkPropertyToFieldValue6: TLinkPropertyToField;
-    Q_Marcas: TIBQuery;
-    Q_MarcasCODIGO: TIntegerField;
-    Q_MarcasDESCRICAO: TIBStringField;
-    Q_Grupos: TIBQuery;
-    Q_secao: TIBQuery;
-    Q_SubGrupos: TIBQuery;
-    Q_UnidEnt: TIBQuery;
-    Q_UnidSai: TIBQuery;
-    Q_secaoCOD_SEC: TIntegerField;
-    Q_secaoNOME_SEC: TIBStringField;
+    Q_Marcas: TFDQuery;
+    Q_Grupos: TFDQuery;
+    Q_secao: TFDQuery;
+    Q_SubGrupos: TFDQuery;
+    Q_UnidEnt: TFDQuery;
+    Q_UnidSai: TFDQuery;
+    QConsultaCod: TFDQuery;
+    Image2: TImage;
+    QCodBarras: TFDQuery;
+    edtCodrecuperado: TEdit;
+    EdtDataValidade: TDateEdit;
+    LinkPropertyToFieldDate: TLinkPropertyToField;
+    Bevel1: TBevel;
+    BitBtn1: TBitBtn;
+    QPrecoCusto: TFDQuery;
+    QPrecoCustoPRECO_CUSTO: TIBBCDField;
+    Q_Consulta_filtroCOD_PRO: TIntegerField;
+    Q_Consulta_filtroCODIGO_BARRA_PRO: TStringField;
+    Q_Consulta_filtroTP_PRODUTO: TStringField;
+    Q_Consulta_filtroTP_PRODUCAO: TStringField;
+    Q_Consulta_filtroESTOQUE_MINIMO: TBCDField;
+    Q_Consulta_filtroNOME_PRO: TStringField;
+    Q_Consulta_filtroDESC_CUPOM: TStringField;
+    Q_Consulta_filtroCOD_MARC: TIntegerField;
+    Q_Consulta_filtroCOD_SEC: TIntegerField;
+    Q_Consulta_filtroCOD_GRUP: TIntegerField;
+    Q_Consulta_filtroCOD_SGRUP: TIntegerField;
+    Q_Consulta_filtroCOD_UNI_ENT: TIntegerField;
+    Q_Consulta_filtroCOD_UNI_SAI: TIntegerField;
+    Q_Consulta_filtroPRECO_VAREJO: TBCDField;
+    Q_Consulta_filtroPRECO_PROMOCAO: TBCDField;
+    Q_Consulta_filtroPRECO_PRAZO: TBCDField;
+    Q_Consulta_filtroMARGEM_LUCRO: TBCDField;
+    Q_Consulta_filtroQUANT_ESTOQ: TBCDField;
+    Q_Consulta_filtroDATA_VALIDADE: TDateField;
+    Q_Consulta_filtroDIAS_VALIDADE_PRO: TIntegerField;
+    Q_Consulta_filtroCONTROLA_ESTOQUE_PRO: TStringField;
+    Q_Consulta_filtroATIVO_PRO: TStringField;
+    Q_Consulta_filtroCAMINHO_FOTO_PRO: TBlobField;
     Q_GruposCOD_SEC: TIntegerField;
     Q_GruposCOD_GRUPO: TIntegerField;
-    Q_GruposDESCRICAO: TIBStringField;
+    Q_GruposDESCRICAO: TStringField;
+    Q_MarcasCODIGO: TIntegerField;
+    Q_MarcasDESCRICAO: TStringField;
+    Q_secaoCOD_SEC: TIntegerField;
+    Q_secaoNOME_SEC: TStringField;
     Q_SubGruposCOD_SEC: TIntegerField;
     Q_SubGruposCOD_GRUPO: TIntegerField;
     Q_SubGruposCOD_SUBGRUPO: TIntegerField;
-    Q_SubGruposDESCRICAO: TIBStringField;
+    Q_SubGruposDESCRICAO: TStringField;
     Q_UnidEntCODIGO: TIntegerField;
-    Q_UnidEntDESCRICAO: TIBStringField;
+    Q_UnidEntDESCRICAO: TStringField;
     Q_UnidSaiCODIGO: TIntegerField;
-    Q_UnidSaiDESCRICAO: TIBStringField;
-    QConsultaCod: TIBQuery;
+    Q_UnidSaiDESCRICAO: TStringField;
     QConsultaCodCOD_PRO: TIntegerField;
-    QConsultaCodCODIGO_BARRA_PRO: TIBStringField;
-    QConsultaCodTP_PRODUTO: TIBStringField;
-    QConsultaCodTP_PRODUCAO: TIBStringField;
-    QConsultaCodESTOQUE_MINIMO: TIBBCDField;
-    QConsultaCodNOME_PRO: TIBStringField;
-    QConsultaCodDESC_CUPOM: TIBStringField;
+    QConsultaCodCODIGO_BARRA_PRO: TStringField;
+    QConsultaCodTP_PRODUTO: TStringField;
+    QConsultaCodTP_PRODUCAO: TStringField;
+    QConsultaCodESTOQUE_MINIMO: TBCDField;
+    QConsultaCodNOME_PRO: TStringField;
+    QConsultaCodDESC_CUPOM: TStringField;
     QConsultaCodCOD_MARC: TIntegerField;
     QConsultaCodCOD_SEC: TIntegerField;
     QConsultaCodCOD_GRUP: TIntegerField;
     QConsultaCodCOD_SGRUP: TIntegerField;
     QConsultaCodCOD_UNI_ENT: TIntegerField;
     QConsultaCodCOD_UNI_SAI: TIntegerField;
-    QConsultaCodPRECO_VAREJO: TIBBCDField;
-    QConsultaCodPRECO_PROMOCAO: TIBBCDField;
-    QConsultaCodPRECO_PRAZO: TIBBCDField;
-    QConsultaCodMARGEM_LUCRO: TIBBCDField;
-    QConsultaCodQUANT_ESTOQ: TIBBCDField;
+    QConsultaCodPRECO_VAREJO: TBCDField;
+    QConsultaCodPRECO_PROMOCAO: TBCDField;
+    QConsultaCodPRECO_PRAZO: TBCDField;
+    QConsultaCodMARGEM_LUCRO: TBCDField;
+    QConsultaCodQUANT_ESTOQ: TBCDField;
     QConsultaCodDATA_VALIDADE: TDateField;
     QConsultaCodDIAS_VALIDADE_PRO: TIntegerField;
-    QConsultaCodCONTROLA_ESTOQUE_PRO: TIBStringField;
-    QConsultaCodATIVO_PRO: TIBStringField;
+    QConsultaCodCONTROLA_ESTOQUE_PRO: TStringField;
+    QConsultaCodATIVO_PRO: TStringField;
     QConsultaCodCAMINHO_FOTO_PRO: TBlobField;
-    Image2: TImage;
-    QCodBarras: TIBQuery;
-    edtCodrecuperado: TEdit;
-    EdtDataValidade: TDateEdit;
-    LinkPropertyToFieldDate: TLinkPropertyToField;
-    Bevel1: TBevel;
-    BitBtn1: TBitBtn;
-    QPrecoCusto: TIBQuery;
-    QPrecoCustoPRECO_CUSTO: TIBBCDField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botoes(acao: string);
@@ -239,7 +242,7 @@ type
     { Public declarations }
     function RoundCurrency(const Value: Currency; const nk: Integer): Currency;
     function ValidaGTIN(AGTIN: string): boolean;
-    function GeneratorID(aName: string; Connection: TIBDatabase; Incrementa: Boolean): integer;
+    function GeneratorID(aName: string; Connection: TFDConnection; Incrementa: Boolean): integer;
 
 
   end;
@@ -973,14 +976,14 @@ begin
   EdtPrecoPrazoChange(Self);
 end;
 
-function TFrmProdutos.GeneratorID(aName: string; Connection: TIBDatabase;
+function TFrmProdutos.GeneratorID(aName: string; Connection: TFDConnection;
   Incrementa: Boolean): integer;
 var
-    Qry: TIBQuery;
+    Qry: TFDQuery;
 begin
-    Qry := TIBQuery.Create(nil);
+    Qry := TFDQuery.Create(nil);
     try
-        Qry.Database := Connection;
+        Qry.Connection := Connection;
         if Incrementa then
             Qry.SQL.Add(
                 'SELECT GEN_ID(' + aName + ', 1) FROM RDB$DATABASE')

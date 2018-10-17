@@ -163,7 +163,7 @@ begin
 
     FrmRelCodBarras := TFrmRelCodBarras.Create(application);
     //FrmRelCodBarras.rlltitulorel.Caption := 'Relatório de Alunos Ativos';
-    FrmRelCodBarras.RLReport1.preview();
+    //FrmRelCodBarras.RLReport1.preview();
 end;
 
 procedure TFrmRelProdutos.BtnConsClick(Sender: TObject);

@@ -27,7 +27,6 @@ object FrrmLogin: TFrrmLogin
     Color = clActiveCaption
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 439
     object Label3: TLabel
       Left = 5
       Top = -2
@@ -53,7 +52,6 @@ object FrrmLogin: TFrrmLogin
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 20
     object Image1: TImage
       Left = 5
       Top = 6
@@ -377,16 +375,18 @@ object FrrmLogin: TFrrmLogin
       CharCase = ecUpperCase
       Color = clSilver
       TabOrder = 0
+      Text = 'ADMIN'
       OnKeyPress = EdtusuKeyPress
     end
     object Edtsenha: TEdit
       Left = 124
-      Top = 67
+      Top = 70
       Width = 160
       Height = 21
       Color = clSilver
       PasswordChar = '*'
       TabOrder = 1
+      Text = 'ADMIN'
       OnKeyPress = EdtsenhaKeyPress
     end
     object BtnCancelar1: TButton
@@ -418,8 +418,6 @@ object FrrmLogin: TFrrmLogin
     Color = clActiveCaption
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 30
-    ExplicitWidth = 439
     object Label4: TLabel
       Left = 265
       Top = 4

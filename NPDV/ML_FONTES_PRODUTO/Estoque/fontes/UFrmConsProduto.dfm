@@ -296,12 +296,14 @@ object FrmConsProduto: TFrmConsProduto
     Left = 400
     Top = 288
   end
-  object QProd: TIBQuery
-    Database = DmDados.Conexao
+  object DSProd: TDataSource
+    AutoEdit = False
+    Left = 512
+    Top = 280
+  end
+  object QProd: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  P.*,'
@@ -328,178 +330,175 @@ object FrmConsProduto: TFrmConsProduto
     Top = 232
     object QProdCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"PRODUTO"."COD_PRO"'
+      Origin = 'COD_PRO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QProdCODIGO_BARRA_PRO: TIBStringField
+    object QProdCODIGO_BARRA_PRO: TStringField
       FieldName = 'CODIGO_BARRA_PRO'
-      Origin = '"PRODUTO"."CODIGO_BARRA_PRO"'
+      Origin = 'CODIGO_BARRA_PRO'
       Required = True
       Size = 14
     end
-    object QProdTP_PRODUTO: TIBStringField
+    object QProdTP_PRODUTO: TStringField
       FieldName = 'TP_PRODUTO'
-      Origin = '"PRODUTO"."TP_PRODUTO"'
+      Origin = 'TP_PRODUTO'
       Required = True
       Size = 80
     end
-    object QProdTP_PRODUCAO: TIBStringField
+    object QProdTP_PRODUCAO: TStringField
       FieldName = 'TP_PRODUCAO'
-      Origin = '"PRODUTO"."TP_PRODUCAO"'
+      Origin = 'TP_PRODUCAO'
       Size = 80
     end
-    object QProdESTOQUE_MINIMO: TIBBCDField
+    object QProdESTOQUE_MINIMO: TBCDField
       FieldName = 'ESTOQUE_MINIMO'
-      Origin = '"PRODUTO"."ESTOQUE_MINIMO"'
-      DisplayFormat = ',#0.000'
+      Origin = 'ESTOQUE_MINIMO'
       Precision = 18
       Size = 3
     end
-    object QProdNOME_PRO: TIBStringField
+    object QProdNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object QProdDESC_CUPOM: TIBStringField
+    object QProdDESC_CUPOM: TStringField
       FieldName = 'DESC_CUPOM'
-      Origin = '"PRODUTO"."DESC_CUPOM"'
+      Origin = 'DESC_CUPOM'
       Required = True
       Size = 80
     end
     object QProdCOD_MARC: TIntegerField
       FieldName = 'COD_MARC'
-      Origin = '"PRODUTO"."COD_MARC"'
+      Origin = 'COD_MARC'
       Required = True
     end
     object QProdCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
-      Origin = '"PRODUTO"."COD_SEC"'
+      Origin = 'COD_SEC'
       Required = True
     end
     object QProdCOD_GRUP: TIntegerField
       FieldName = 'COD_GRUP'
-      Origin = '"PRODUTO"."COD_GRUP"'
+      Origin = 'COD_GRUP'
       Required = True
     end
     object QProdCOD_SGRUP: TIntegerField
       FieldName = 'COD_SGRUP'
-      Origin = '"PRODUTO"."COD_SGRUP"'
+      Origin = 'COD_SGRUP'
       Required = True
     end
     object QProdCOD_UNI_ENT: TIntegerField
       FieldName = 'COD_UNI_ENT'
-      Origin = '"PRODUTO"."COD_UNI_ENT"'
+      Origin = 'COD_UNI_ENT'
       Required = True
     end
     object QProdCOD_UNI_SAI: TIntegerField
       FieldName = 'COD_UNI_SAI'
-      Origin = '"PRODUTO"."COD_UNI_SAI"'
+      Origin = 'COD_UNI_SAI'
       Required = True
     end
-    object QProdPRECO_VAREJO: TIBBCDField
+    object QProdPRECO_VAREJO: TBCDField
       FieldName = 'PRECO_VAREJO'
-      Origin = '"PRODUTO"."PRECO_VAREJO"'
-      DisplayFormat = ',#0.00'
+      Origin = 'PRECO_VAREJO'
       Precision = 18
       Size = 2
     end
-    object QProdPRECO_PROMOCAO: TIBBCDField
+    object QProdPRECO_PROMOCAO: TBCDField
       FieldName = 'PRECO_PROMOCAO'
-      Origin = '"PRODUTO"."PRECO_PROMOCAO"'
-      DisplayFormat = ',#0.00'
+      Origin = 'PRECO_PROMOCAO'
       Precision = 18
-      Size = 4
     end
-    object QProdPRECO_PRAZO: TIBBCDField
+    object QProdPRECO_PRAZO: TBCDField
       FieldName = 'PRECO_PRAZO'
-      Origin = '"PRODUTO"."PRECO_PRAZO"'
-      DisplayFormat = ',#0.00'
+      Origin = 'PRECO_PRAZO'
       Precision = 18
-      Size = 4
     end
-    object QProdMARGEM_LUCRO: TIBBCDField
+    object QProdMARGEM_LUCRO: TBCDField
       FieldName = 'MARGEM_LUCRO'
-      Origin = '"PRODUTO"."MARGEM_LUCRO"'
-      DisplayFormat = ',#0.00'
+      Origin = 'MARGEM_LUCRO'
       Precision = 18
-      Size = 4
     end
-    object QProdQUANT_ESTOQ: TIBBCDField
+    object QProdQUANT_ESTOQ: TBCDField
       FieldName = 'QUANT_ESTOQ'
-      Origin = '"PRODUTO"."QUANT_ESTOQ"'
-      DisplayFormat = ',#0.000'
+      Origin = 'QUANT_ESTOQ'
       Precision = 18
       Size = 3
     end
     object QProdDATA_VALIDADE: TDateField
       FieldName = 'DATA_VALIDADE'
-      Origin = '"PRODUTO"."DATA_VALIDADE"'
+      Origin = 'DATA_VALIDADE'
     end
     object QProdDIAS_VALIDADE_PRO: TIntegerField
       FieldName = 'DIAS_VALIDADE_PRO'
-      Origin = '"PRODUTO"."DIAS_VALIDADE_PRO"'
+      Origin = 'DIAS_VALIDADE_PRO'
     end
-    object QProdCONTROLA_ESTOQUE_PRO: TIBStringField
+    object QProdCONTROLA_ESTOQUE_PRO: TStringField
       FieldName = 'CONTROLA_ESTOQUE_PRO'
-      Origin = '"PRODUTO"."CONTROLA_ESTOQUE_PRO"'
+      Origin = 'CONTROLA_ESTOQUE_PRO'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object QProdATIVO_PRO: TIBStringField
+    object QProdATIVO_PRO: TStringField
       FieldName = 'ATIVO_PRO'
-      Origin = '"PRODUTO"."ATIVO_PRO"'
+      Origin = 'ATIVO_PRO'
       Required = True
       FixedChar = True
       Size = 1
     end
     object QProdCAMINHO_FOTO_PRO: TBlobField
       FieldName = 'CAMINHO_FOTO_PRO'
-      Origin = '"PRODUTO"."CAMINHO_FOTO_PRO"'
-      ProviderFlags = [pfInUpdate]
-      Size = 8
+      Origin = 'CAMINHO_FOTO_PRO'
     end
-    object QProdNOME_SEC: TIBStringField
+    object QProdNOME_SEC: TStringField
+      AutoGenerateValue = arDefault
       FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
-      Required = True
+      Origin = 'NOME_SEC'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 50
     end
-    object QProdDESCRICAO: TIBStringField
+    object QProdDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
       FieldName = 'DESCRICAO'
-      Origin = '"SECAO_GRUPO"."DESCRICAO"'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 80
     end
-    object QProdDESCRICAO1: TIBStringField
-      FieldName = 'DESCRICAO1'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."DESCRICAO"'
+    object QProdDESCRICAO_1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO_1'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 80
     end
-    object QProdUND_ENTRADA: TIBStringField
+    object QProdUND_ENTRADA: TStringField
+      AutoGenerateValue = arDefault
       FieldName = 'UND_ENTRADA'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
-      Required = True
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 10
     end
-    object QProdUND_SAIDA: TIBStringField
+    object QProdUND_SAIDA: TStringField
+      AutoGenerateValue = arDefault
       FieldName = 'UND_SAIDA'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
-      Required = True
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 10
     end
-    object QProdDESCRICAO2: TIBStringField
-      FieldName = 'DESCRICAO2'
-      Origin = '"MARCAS"."DESCRICAO"'
-      Required = True
+    object QProdDESCRICAO_2: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO_2'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 70
     end
-  end
-  object DSProd: TDataSource
-    AutoEdit = False
-    DataSet = QProd
-    Left = 512
-    Top = 280
   end
 end

@@ -9,7 +9,10 @@ uses
   IBX.IBQuery, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls, Vcl.ExtCtrls,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, System.Rtti, System.Bindings.Outputs,
   Vcl.Bind.Editors, Data.Bind.Components, Data.Bind.DBScope, Vcl.Grids,
-  Vcl.DBGrids, Vcl.Menus, Vcl.Mask, RxToolEdit, RxCurrEdit;
+  Vcl.DBGrids, Vcl.Menus, Vcl.Mask, RxToolEdit, RxCurrEdit, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmRelVendas = class(TForm)
@@ -41,21 +44,11 @@ type
     DBGrid1: TDBGrid;
     PopupMenu1: TPopupMenu;
     ExcluirVenda1: TMenuItem;
-    Q_Itens_Venda: TIBQuery;
+    Q_Itens_Venda: TFDQuery;
     Dts_Itens_Vendas: TDataSource;
     DBGrid2: TDBGrid;
-    Q_Itens_VendaCOD_ITEM: TIntegerField;
-    Q_Itens_VendaCOD_VENDA: TIntegerField;
-    Q_Itens_VendaCOD_PRO: TIntegerField;
-    Q_Itens_VendaORDEM: TIntegerField;
-    Q_Itens_VendaQUANT_ITEM: TIBBCDField;
-    Q_Itens_VendaVALOR_ITEM: TIBBCDField;
-    Q_Itens_VendaNOME_PRO: TIBStringField;
-    QPesqEstoque: TIBQuery;
-    QPesqEstoqueCOD_PRO: TIntegerField;
-    QPesqEstoqueNOME_PRO: TIBStringField;
-    QPesqEstoqueQUANT_ESTOQ: TIBBCDField;
-    Q_ESTOQUE: TIBQuery;
+    QPesqEstoque: TFDQuery;
+    Q_ESTOQUE: TFDQuery;
     PopupMenu2: TPopupMenu;
     Excluirprodutodavenda1: TMenuItem;
     Label3: TLabel;
@@ -64,31 +57,41 @@ type
     CurrencyEdit1: TCurrencyEdit;
     CurrencyEdit2: TCurrencyEdit;
     CurrencyEdit3: TCurrencyEdit;
-    Q_Caixa_Aberto: TIBQuery;
+    Q_Caixa_Aberto: TFDQuery;
+    Q_Total_Vendas: TFDQuery;
+    N2VIADECUPOM1: TMenuItem;
+    N1: TMenuItem;
+    Button2: TButton;
+    Q_Qtd_vendida: TFDQuery;
     Q_Caixa_AbertoCOD_CAIXA: TIntegerField;
     Q_Caixa_AbertoCOD_USU: TIntegerField;
     Q_Caixa_AbertoDATA_ABERTURA: TDateField;
     Q_Caixa_AbertoHORA_ABERTURA: TTimeField;
-    Q_Caixa_AbertoVL_ABERTURA: TIBBCDField;
-    Q_Caixa_AbertoVL_FECHAMENTO: TIBBCDField;
-    Q_Caixa_AbertoVL_VENDAS: TIBBCDField;
-    Q_Caixa_AbertoRETIRADAS: TIBBCDField;
-    Q_Caixa_AbertoSALDO: TIBBCDField;
+    Q_Caixa_AbertoVL_ABERTURA: TBCDField;
+    Q_Caixa_AbertoVL_FECHAMENTO: TBCDField;
+    Q_Caixa_AbertoVL_VENDAS: TBCDField;
+    Q_Caixa_AbertoRETIRADAS: TBCDField;
+    Q_Caixa_AbertoSALDO: TBCDField;
     Q_Caixa_AbertoDATA_FECHAMENTO: TDateField;
     Q_Caixa_AbertoHORA_FECHAMENTO: TTimeField;
-    Q_Caixa_AbertoSTATUS: TIBStringField;
-    Q_Total_Vendas: TIBQuery;
-    Q_Total_VendasSUM: TIBBCDField;
-    N2VIADECUPOM1: TMenuItem;
-    N1: TMenuItem;
-    Q_Itens_VendaPRECO_VAREJO: TIBBCDField;
-    Q_Itens_VendaPRECO_PROMOCAO: TIBBCDField;
-    Button2: TButton;
-    Q_Qtd_vendida: TIBQuery;
+    Q_Caixa_AbertoSTATUS: TStringField;
+    Q_Itens_VendaCOD_ITEM: TIntegerField;
+    Q_Itens_VendaCOD_VENDA: TIntegerField;
+    Q_Itens_VendaCOD_PRO: TIntegerField;
+    Q_Itens_VendaORDEM: TIntegerField;
+    Q_Itens_VendaQUANT_ITEM: TBCDField;
+    Q_Itens_VendaVALOR_ITEM: TBCDField;
+    Q_Itens_VendaNOME_PRO: TStringField;
+    Q_Itens_VendaPRECO_VAREJO: TBCDField;
+    Q_Itens_VendaPRECO_PROMOCAO: TBCDField;
     Q_Qtd_vendidaCOD_PRO: TIntegerField;
-    Q_Qtd_vendidaTOTAL_VENDIDO: TIBBCDField;
-    Q_Qtd_vendidaNOME_PRO: TIBStringField;
     Q_Qtd_vendidaDATA: TDateField;
+    Q_Qtd_vendidaTOTAL_VENDIDO: TBCDField;
+    Q_Qtd_vendidaNOME_PRO: TStringField;
+    Q_Total_VendasSUM: TBCDField;
+    QPesqEstoqueCOD_PRO: TIntegerField;
+    QPesqEstoqueNOME_PRO: TStringField;
+    QPesqEstoqueQUANT_ESTOQ: TBCDField;
     procedure BtnSairClick(Sender: TObject);
     procedure BtnConsCliClick(Sender: TObject);
     procedure CheckCliClick(Sender: TObject);

@@ -161,7 +161,7 @@ object FrmRelProdutos: TFrmRelProdutos
         object Label30: TLabel
           Left = 2
           Top = 2
-          Width = 427
+          Width = 139
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -174,7 +174,6 @@ object FrmRelProdutos: TFrmRelProdutos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitWidth = 139
         end
         object CheckSecao: TCheckBox
           Left = 8
@@ -274,7 +273,7 @@ object FrmRelProdutos: TFrmRelProdutos
         object LabelTitulo: TLabel
           Left = 2
           Top = 2
-          Width = 427
+          Width = 102
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -287,7 +286,6 @@ object FrmRelProdutos: TFrmRelProdutos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitWidth = 102
         end
         object BtnCons: TSpeedButton
           Left = 61

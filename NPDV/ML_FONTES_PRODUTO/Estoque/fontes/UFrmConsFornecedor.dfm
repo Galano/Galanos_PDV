@@ -171,104 +171,99 @@ object FrmConsFornecedor: TFrmConsFornecedor
     Height = 19
     Panels = <>
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSConsulta: TDataSource
+    Left = 289
+    Top = 137
+  end
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT * FROM FORNECEDOR')
     Left = 224
     Top = 136
     object Q_ConsultaCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
-      Origin = '"FORNECEDOR"."COD_FOR"'
+      Origin = 'COD_FOR'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaFJ_FOR: TIBStringField
+    object Q_ConsultaFJ_FOR: TStringField
       FieldName = 'FJ_FOR'
-      Origin = '"FORNECEDOR"."FJ_FOR"'
+      Origin = 'FJ_FOR'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object Q_ConsultaRAZAO_FOR: TIBStringField
+    object Q_ConsultaRAZAO_FOR: TStringField
       FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
+      Origin = 'RAZAO_FOR'
       Required = True
       Size = 60
     end
-    object Q_ConsultaEND_FOR: TIBStringField
+    object Q_ConsultaEND_FOR: TStringField
       FieldName = 'END_FOR'
-      Origin = '"FORNECEDOR"."END_FOR"'
+      Origin = 'END_FOR'
       Size = 50
     end
-    object Q_ConsultaBAI_FOR: TIBStringField
+    object Q_ConsultaBAI_FOR: TStringField
       FieldName = 'BAI_FOR'
-      Origin = '"FORNECEDOR"."BAI_FOR"'
+      Origin = 'BAI_FOR'
       Size = 30
     end
-    object Q_ConsultaCID_FOR: TIBStringField
+    object Q_ConsultaCID_FOR: TStringField
       FieldName = 'CID_FOR'
-      Origin = '"FORNECEDOR"."CID_FOR"'
+      Origin = 'CID_FOR'
       Size = 30
     end
-    object Q_ConsultaCEP_FOR: TIBStringField
+    object Q_ConsultaCEP_FOR: TStringField
       FieldName = 'CEP_FOR'
-      Origin = '"FORNECEDOR"."CEP_FOR"'
+      Origin = 'CEP_FOR'
       FixedChar = True
       Size = 9
     end
-    object Q_ConsultaEST_FOR: TIBStringField
+    object Q_ConsultaEST_FOR: TStringField
       FieldName = 'EST_FOR'
-      Origin = '"FORNECEDOR"."EST_FOR"'
+      Origin = 'EST_FOR'
       FixedChar = True
       Size = 2
     end
-    object Q_ConsultaCNPJ_FOR: TIBStringField
+    object Q_ConsultaCNPJ_FOR: TStringField
       FieldName = 'CNPJ_FOR'
-      Origin = '"FORNECEDOR"."CNPJ_FOR"'
+      Origin = 'CNPJ_FOR'
       Size = 18
     end
-    object Q_ConsultaINSC_FOR: TIBStringField
+    object Q_ConsultaINSC_FOR: TStringField
       FieldName = 'INSC_FOR'
-      Origin = '"FORNECEDOR"."INSC_FOR"'
+      Origin = 'INSC_FOR'
     end
-    object Q_ConsultaTEL_FOR: TIBStringField
+    object Q_ConsultaTEL_FOR: TStringField
       FieldName = 'TEL_FOR'
-      Origin = '"FORNECEDOR"."TEL_FOR"'
+      Origin = 'TEL_FOR'
       Size = 13
     end
-    object Q_ConsultaFAX_FOR: TIBStringField
+    object Q_ConsultaFAX_FOR: TStringField
       FieldName = 'FAX_FOR'
-      Origin = '"FORNECEDOR"."FAX_FOR"'
+      Origin = 'FAX_FOR'
       Size = 13
     end
-    object Q_ConsultaCONTATO_FOR: TIBStringField
+    object Q_ConsultaCONTATO_FOR: TStringField
       FieldName = 'CONTATO_FOR'
-      Origin = '"FORNECEDOR"."CONTATO_FOR"'
+      Origin = 'CONTATO_FOR'
       Size = 50
     end
-    object Q_ConsultaNUM_FOR: TIBStringField
+    object Q_ConsultaNUM_FOR: TStringField
       FieldName = 'NUM_FOR'
-      Origin = '"FORNECEDOR"."NUM_FOR"'
+      Origin = 'NUM_FOR'
       Size = 10
     end
     object Q_ConsultaCODIGO_IBGE: TIntegerField
       FieldName = 'CODIGO_IBGE'
-      Origin = '"FORNECEDOR"."CODIGO_IBGE"'
+      Origin = 'CODIGO_IBGE'
     end
-    object Q_ConsultaEMAIL_FOR: TIBStringField
+    object Q_ConsultaEMAIL_FOR: TStringField
       FieldName = 'EMAIL_FOR'
-      Origin = '"FORNECEDOR"."EMAIL_FOR"'
+      Origin = 'EMAIL_FOR'
       Size = 100
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 289
-    Top = 137
   end
 end

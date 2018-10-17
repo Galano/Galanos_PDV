@@ -6,7 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, RxPlacemnt, Vcl.Grids,
   Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls,
-  IBX.IBCustomDataSet, IBX.IBQuery;
+  IBX.IBCustomDataSet, IBX.IBQuery, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmConsProduto = class(TForm)
@@ -24,38 +27,39 @@ type
     DBGrid: TDBGrid;
     BtnPromocao: TButton;
     FormStorage1: TFormStorage;
-    QProd: TIBQuery;
     DSProd: TDataSource;
+
+    RdOrdem: TRadioGroup;
+    QProd: TFDQuery;
     QProdCOD_PRO: TIntegerField;
-    QProdCODIGO_BARRA_PRO: TIBStringField;
-    QProdTP_PRODUTO: TIBStringField;
-    QProdTP_PRODUCAO: TIBStringField;
-    QProdESTOQUE_MINIMO: TIBBCDField;
-    QProdNOME_PRO: TIBStringField;
-    QProdDESC_CUPOM: TIBStringField;
+    QProdCODIGO_BARRA_PRO: TStringField;
+    QProdTP_PRODUTO: TStringField;
+    QProdTP_PRODUCAO: TStringField;
+    QProdESTOQUE_MINIMO: TBCDField;
+    QProdNOME_PRO: TStringField;
+    QProdDESC_CUPOM: TStringField;
     QProdCOD_MARC: TIntegerField;
     QProdCOD_SEC: TIntegerField;
     QProdCOD_GRUP: TIntegerField;
     QProdCOD_SGRUP: TIntegerField;
     QProdCOD_UNI_ENT: TIntegerField;
     QProdCOD_UNI_SAI: TIntegerField;
-    QProdPRECO_VAREJO: TIBBCDField;
-    QProdPRECO_PROMOCAO: TIBBCDField;
-    QProdPRECO_PRAZO: TIBBCDField;
-    QProdMARGEM_LUCRO: TIBBCDField;
-    QProdQUANT_ESTOQ: TIBBCDField;
+    QProdPRECO_VAREJO: TBCDField;
+    QProdPRECO_PROMOCAO: TBCDField;
+    QProdPRECO_PRAZO: TBCDField;
+    QProdMARGEM_LUCRO: TBCDField;
+    QProdQUANT_ESTOQ: TBCDField;
     QProdDATA_VALIDADE: TDateField;
     QProdDIAS_VALIDADE_PRO: TIntegerField;
-    QProdCONTROLA_ESTOQUE_PRO: TIBStringField;
-    QProdATIVO_PRO: TIBStringField;
+    QProdCONTROLA_ESTOQUE_PRO: TStringField;
+    QProdATIVO_PRO: TStringField;
     QProdCAMINHO_FOTO_PRO: TBlobField;
-    QProdNOME_SEC: TIBStringField;
-    QProdDESCRICAO: TIBStringField;
-    QProdDESCRICAO1: TIBStringField;
-    QProdUND_ENTRADA: TIBStringField;
-    QProdUND_SAIDA: TIBStringField;
-    QProdDESCRICAO2: TIBStringField;
-    RdOrdem: TRadioGroup;
+    QProdNOME_SEC: TStringField;
+    QProdDESCRICAO: TStringField;
+    QProdDESCRICAO_1: TStringField;
+    QProdUND_ENTRADA: TStringField;
+    QProdUND_SAIDA: TStringField;
+    QProdDESCRICAO_2: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);

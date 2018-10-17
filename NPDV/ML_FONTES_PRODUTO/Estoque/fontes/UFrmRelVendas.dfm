@@ -513,12 +513,9 @@ object FrmRelVendas: TFrmRelVendas
       OnClick = N2VIADECUPOM1Click
     end
   end
-  object Q_Itens_Venda: TIBQuery
-    Database = DmDados.Conexao
+  object Q_Itens_Venda: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT '
       '  ITENS_VENDA.COD_ITEM,'
@@ -542,61 +539,60 @@ object FrmRelVendas: TFrmRelVendas
     Top = 272
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'cod'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        ParamType = ptInput
       end>
     object Q_Itens_VendaCOD_ITEM: TIntegerField
       FieldName = 'COD_ITEM'
-      Origin = '"ITENS_VENDA"."COD_ITEM"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Origin = 'COD_ITEM'
       Required = True
     end
     object Q_Itens_VendaCOD_VENDA: TIntegerField
       FieldName = 'COD_VENDA'
-      Origin = '"ITENS_VENDA"."COD_VENDA"'
+      Origin = 'COD_VENDA'
       Required = True
     end
     object Q_Itens_VendaCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"ITENS_VENDA"."COD_PRO"'
+      Origin = 'COD_PRO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object Q_Itens_VendaORDEM: TIntegerField
       FieldName = 'ORDEM'
-      Origin = '"ITENS_VENDA"."ORDEM"'
+      Origin = 'ORDEM'
       Required = True
     end
-    object Q_Itens_VendaQUANT_ITEM: TIBBCDField
+    object Q_Itens_VendaQUANT_ITEM: TBCDField
       FieldName = 'QUANT_ITEM'
-      Origin = '"ITENS_VENDA"."QUANT_ITEM"'
+      Origin = 'QUANT_ITEM'
       Precision = 18
       Size = 3
     end
-    object Q_Itens_VendaVALOR_ITEM: TIBBCDField
+    object Q_Itens_VendaVALOR_ITEM: TBCDField
       FieldName = 'VALOR_ITEM'
-      Origin = '"ITENS_VENDA"."VALOR_ITEM"'
+      Origin = 'VALOR_ITEM'
       Required = True
       Precision = 18
       Size = 3
     end
-    object Q_Itens_VendaNOME_PRO: TIBStringField
+    object Q_Itens_VendaNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object Q_Itens_VendaPRECO_VAREJO: TIBBCDField
+    object Q_Itens_VendaPRECO_VAREJO: TBCDField
       FieldName = 'PRECO_VAREJO'
-      Origin = '"PRODUTO"."PRECO_VAREJO"'
+      Origin = 'PRECO_VAREJO'
       Precision = 18
       Size = 2
     end
-    object Q_Itens_VendaPRECO_PROMOCAO: TIBBCDField
+    object Q_Itens_VendaPRECO_PROMOCAO: TBCDField
       FieldName = 'PRECO_PROMOCAO'
-      Origin = '"PRODUTO"."PRECO_PROMOCAO"'
+      Origin = 'PRECO_PROMOCAO'
       Precision = 18
-      Size = 4
     end
   end
   object Dts_Itens_Vendas: TDataSource
@@ -604,12 +600,9 @@ object FrmRelVendas: TFrmRelVendas
     Left = 280
     Top = 336
   end
-  object QPesqEstoque: TIBQuery
-    Database = DmDados.Conexao
+  object QPesqEstoque: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT'
       ' PRODUTO.COD_PRO, '
@@ -623,35 +616,32 @@ object FrmRelVendas: TFrmRelVendas
     Top = 328
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'cod'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        ParamType = ptInput
       end>
     object QPesqEstoqueCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"PRODUTO"."COD_PRO"'
+      Origin = 'COD_PRO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QPesqEstoqueNOME_PRO: TIBStringField
+    object QPesqEstoqueNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object QPesqEstoqueQUANT_ESTOQ: TIBBCDField
+    object QPesqEstoqueQUANT_ESTOQ: TBCDField
       FieldName = 'QUANT_ESTOQ'
-      Origin = '"PRODUTO"."QUANT_ESTOQ"'
+      Origin = 'QUANT_ESTOQ'
       Precision = 18
       Size = 3
     end
   end
-  object Q_ESTOQUE: TIBQuery
-    Database = DmDados.Conexao
+  object Q_ESTOQUE: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'UPDATE'
       '  PRODUTO'
@@ -663,14 +653,16 @@ object FrmRelVendas: TFrmRelVendas
     Top = 280
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'QTD'
-        ParamType = ptUnknown
+        DataType = ftBCD
+        Precision = 18
+        NumericScale = 3
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'COD'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        ParamType = ptInput
       end>
   end
   object PopupMenu2: TPopupMenu
@@ -681,90 +673,84 @@ object FrmRelVendas: TFrmRelVendas
       OnClick = Excluirprodutodavenda1Click
     end
   end
-  object Q_Caixa_Aberto: TIBQuery
-    Database = DmDados.Conexao
+  object Q_Caixa_Aberto: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'select *  from CAIXA where DATA_ABERTURA = :dt')
     Left = 136
     Top = 400
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'dt'
-        ParamType = ptUnknown
+        DataType = ftDate
+        ParamType = ptInput
       end>
     object Q_Caixa_AbertoCOD_CAIXA: TIntegerField
       FieldName = 'COD_CAIXA'
-      Origin = '"CAIXA"."COD_CAIXA"'
+      Origin = 'COD_CAIXA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object Q_Caixa_AbertoCOD_USU: TIntegerField
       FieldName = 'COD_USU'
-      Origin = '"CAIXA"."COD_USU"'
+      Origin = 'COD_USU'
     end
     object Q_Caixa_AbertoDATA_ABERTURA: TDateField
       FieldName = 'DATA_ABERTURA'
-      Origin = '"CAIXA"."DATA_ABERTURA"'
+      Origin = 'DATA_ABERTURA'
     end
     object Q_Caixa_AbertoHORA_ABERTURA: TTimeField
       FieldName = 'HORA_ABERTURA'
-      Origin = '"CAIXA"."HORA_ABERTURA"'
+      Origin = 'HORA_ABERTURA'
     end
-    object Q_Caixa_AbertoVL_ABERTURA: TIBBCDField
+    object Q_Caixa_AbertoVL_ABERTURA: TBCDField
       FieldName = 'VL_ABERTURA'
-      Origin = '"CAIXA"."VL_ABERTURA"'
+      Origin = 'VL_ABERTURA'
       Precision = 18
       Size = 2
     end
-    object Q_Caixa_AbertoVL_FECHAMENTO: TIBBCDField
+    object Q_Caixa_AbertoVL_FECHAMENTO: TBCDField
       FieldName = 'VL_FECHAMENTO'
-      Origin = '"CAIXA"."VL_FECHAMENTO"'
+      Origin = 'VL_FECHAMENTO'
       Precision = 18
       Size = 2
     end
-    object Q_Caixa_AbertoVL_VENDAS: TIBBCDField
+    object Q_Caixa_AbertoVL_VENDAS: TBCDField
       FieldName = 'VL_VENDAS'
-      Origin = '"CAIXA"."VL_VENDAS"'
+      Origin = 'VL_VENDAS'
       Precision = 18
       Size = 2
     end
-    object Q_Caixa_AbertoRETIRADAS: TIBBCDField
+    object Q_Caixa_AbertoRETIRADAS: TBCDField
       FieldName = 'RETIRADAS'
-      Origin = '"CAIXA"."RETIRADAS"'
+      Origin = 'RETIRADAS'
       Precision = 18
       Size = 2
     end
-    object Q_Caixa_AbertoSALDO: TIBBCDField
+    object Q_Caixa_AbertoSALDO: TBCDField
       FieldName = 'SALDO'
-      Origin = '"CAIXA"."SALDO"'
+      Origin = 'SALDO'
       Precision = 18
       Size = 2
     end
     object Q_Caixa_AbertoDATA_FECHAMENTO: TDateField
       FieldName = 'DATA_FECHAMENTO'
-      Origin = '"CAIXA"."DATA_FECHAMENTO"'
+      Origin = 'DATA_FECHAMENTO'
     end
     object Q_Caixa_AbertoHORA_FECHAMENTO: TTimeField
       FieldName = 'HORA_FECHAMENTO'
-      Origin = '"CAIXA"."HORA_FECHAMENTO"'
+      Origin = 'HORA_FECHAMENTO'
     end
-    object Q_Caixa_AbertoSTATUS: TIBStringField
+    object Q_Caixa_AbertoSTATUS: TStringField
       FieldName = 'STATUS'
-      Origin = '"CAIXA"."STATUS"'
+      Origin = 'STATUS'
       Size = 1
     end
   end
-  object Q_Total_Vendas: TIBQuery
-    Database = DmDados.Conexao
+  object Q_Total_Vendas: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'SELECT'
       '  SUM(VENDAS.TOTAL)'
@@ -779,29 +765,28 @@ object FrmRelVendas: TFrmRelVendas
     Top = 400
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'dt'
-        ParamType = ptUnknown
+        DataType = ftDate
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'dt2'
-        ParamType = ptUnknown
+        DataType = ftDate
+        ParamType = ptInput
       end>
-    object Q_Total_VendasSUM: TIBBCDField
+    object Q_Total_VendasSUM: TBCDField
+      AutoGenerateValue = arDefault
       FieldName = 'SUM'
+      Origin = '"SUM"'
       ProviderFlags = []
       ReadOnly = True
       Precision = 18
       Size = 3
     end
   end
-  object Q_Qtd_vendida: TIBQuery
-    Database = DmDados.Conexao
+  object Q_Qtd_vendida: TFDQuery
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
     SQL.Strings = (
       'select '
       '    itens_venda.cod_pro,'
@@ -825,36 +810,35 @@ object FrmRelVendas: TFrmRelVendas
     Top = 392
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'dt1'
-        ParamType = ptUnknown
+        DataType = ftDate
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'dt2'
-        ParamType = ptUnknown
+        DataType = ftDate
+        ParamType = ptInput
       end>
     object Q_Qtd_vendidaCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"ITENS_VENDA"."COD_PRO"'
+      Origin = 'COD_PRO'
       Required = True
-    end
-    object Q_Qtd_vendidaTOTAL_VENDIDO: TIBBCDField
-      FieldName = 'TOTAL_VENDIDO'
-      ProviderFlags = []
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
-    end
-    object Q_Qtd_vendidaNOME_PRO: TIBStringField
-      FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
-      Required = True
-      Size = 80
     end
     object Q_Qtd_vendidaDATA: TDateField
       FieldName = 'DATA'
-      Origin = '"VENDAS"."DATA"'
+      Origin = '"DATA"'
+    end
+    object Q_Qtd_vendidaTOTAL_VENDIDO: TBCDField
+      FieldName = 'TOTAL_VENDIDO'
+      Origin = 'TOTAL_VENDIDO'
+      Precision = 18
+      Size = 3
+    end
+    object Q_Qtd_vendidaNOME_PRO: TStringField
+      FieldName = 'NOME_PRO'
+      Origin = 'NOME_PRO'
+      Required = True
+      Size = 80
     end
   end
 end

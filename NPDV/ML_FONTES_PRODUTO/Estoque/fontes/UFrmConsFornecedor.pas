@@ -5,7 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, IBX.IBCustomDataSet, IBX.IBQuery;
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, IBX.IBCustomDataSet, IBX.IBQuery,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsFornecedor = class(TForm)
@@ -19,24 +22,26 @@ type
     BtnSair: TButton;
     DBGrid: TDBGrid;
     StatusBar1: TStatusBar;
-    Q_Consulta: TIBQuery;
+
     DSConsulta: TDataSource;
+    Q_Consulta: TFDQuery;
     Q_ConsultaCOD_FOR: TIntegerField;
-    Q_ConsultaFJ_FOR: TIBStringField;
-    Q_ConsultaRAZAO_FOR: TIBStringField;
-    Q_ConsultaEND_FOR: TIBStringField;
-    Q_ConsultaBAI_FOR: TIBStringField;
-    Q_ConsultaCID_FOR: TIBStringField;
-    Q_ConsultaCEP_FOR: TIBStringField;
-    Q_ConsultaEST_FOR: TIBStringField;
-    Q_ConsultaCNPJ_FOR: TIBStringField;
-    Q_ConsultaINSC_FOR: TIBStringField;
-    Q_ConsultaTEL_FOR: TIBStringField;
-    Q_ConsultaFAX_FOR: TIBStringField;
-    Q_ConsultaCONTATO_FOR: TIBStringField;
-    Q_ConsultaNUM_FOR: TIBStringField;
+    Q_ConsultaFJ_FOR: TStringField;
+    Q_ConsultaRAZAO_FOR: TStringField;
+    Q_ConsultaEND_FOR: TStringField;
+    Q_ConsultaBAI_FOR: TStringField;
+    Q_ConsultaCID_FOR: TStringField;
+    Q_ConsultaCEP_FOR: TStringField;
+    Q_ConsultaEST_FOR: TStringField;
+    Q_ConsultaCNPJ_FOR: TStringField;
+    Q_ConsultaINSC_FOR: TStringField;
+    Q_ConsultaTEL_FOR: TStringField;
+    Q_ConsultaFAX_FOR: TStringField;
+    Q_ConsultaCONTATO_FOR: TStringField;
+    Q_ConsultaNUM_FOR: TStringField;
     Q_ConsultaCODIGO_IBGE: TIntegerField;
-    Q_ConsultaEMAIL_FOR: TIBStringField;
+    Q_ConsultaEMAIL_FOR: TStringField;
+
     procedure BtnSairClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);

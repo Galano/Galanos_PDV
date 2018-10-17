@@ -6,19 +6,11 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, QRCtrls, QuickRpt,
-  qrpctrls, RLBarcode, RLReport;
+  qrpctrls;
 
 type
   TFrmRelCodBarras = class(TForm)
-    RLReport1: TRLReport;
-    RLDetailGrid1: TRLDetailGrid;
-    RLDraw1: TRLDraw;
-    RLDBText1: TRLDBText;
-    RLLabel1: TRLLabel;
-    RLDBText2: TRLDBText;
-    RLLabel2: TRLLabel;
-    RLDBBarcode1: TRLDBBarcode;
-    RLDBText3: TRLDBText;
+   
     procedure DetailBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
     procedure QuickRep1BeforePrint(Sender: TCustomQuickRep;
