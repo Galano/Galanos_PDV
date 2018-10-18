@@ -169,32 +169,27 @@ object FrmConsUnidMedidas: TFrmConsUnidMedidas
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSConsulta: TDataSource
+    Left = 304
+    Top = 209
+  end
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT * FROM UNIDADE_MEDIDA')
     Left = 232
     Top = 208
     object Q_ConsultaCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"UNIDADE_MEDIDA"."CODIGO"'
+      Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaDESCRICAO: TIBStringField
+    object Q_ConsultaDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 10
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 304
-    Top = 209
   end
 end

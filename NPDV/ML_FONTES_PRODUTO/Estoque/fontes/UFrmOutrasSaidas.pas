@@ -9,7 +9,10 @@ uses
   Vcl.ToolWin, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, RxToolEdit,
   RxCurrEdit, Vcl.Mask, Vcl.ExtCtrls, System.Rtti, System.Bindings.Outputs,
   Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
-  Data.Bind.DBScope, Vcl.Samples.Spin;
+  Data.Bind.DBScope, Vcl.Samples.Spin, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmOutrasSaidas = class(TForm)
@@ -63,10 +66,7 @@ type
     ToolButton1: TToolButton;
     BtnFinaliza: TToolButton;
     ImageList: TImageList;
-    QBuscaItens: TIBQuery;
     DSQBuscaItens: TDataSource;
-    QOrdem: TIBQuery;
-    QOrdemORDEM: TIntegerField;
     EdtCodBarraPro: TEdit;
     EdtCodigo: TEdit;
     EdtCodcLI: TEdit;
@@ -75,44 +75,48 @@ type
     tagn: TEdit;
     edtCodGrp: TEdit;
     CurrencyEdit1: TCurrencyEdit;
-    Q_TOTAL: TIBQuery;
-    QBuscaItensCOD_ITENS_OUTRA: TIntegerField;
-    QBuscaItensCOD_OUTRA: TIntegerField;
-    QBuscaItensCOD_PRO: TIntegerField;
-    QBuscaItensCOD_EMP: TIntegerField;
-    QBuscaItensQUANT_ITEM: TIBBCDField;
-    QBuscaItensVALOR_CUSTO: TIBBCDField;
-    QBuscaItensORDEM: TIntegerField;
-    QBuscaItensCANCELADO: TIntegerField;
-    QBuscaItensVALOR_ITEM: TIBBCDField;
-    QBuscaItensCOD_GRP: TIntegerField;
-    QBuscaItensNOME_PRO: TIBStringField;
-    QBuscaItensDESCRICAO: TIBStringField;
-    QProd: TIBQuery;
-    QProdCOD_PRO: TIntegerField;
-    QProdNOME_PRO: TIBStringField;
-    QProdQUANT_ESTOQ: TIBBCDField;
-    QProdCOD_GRUP: TIntegerField;
-    Q_TOTALTOTAL: TIBBCDField;
-    QCli: TIBQuery;
-    QCliCOD_CLI: TIntegerField;
-    QCliNOME_CLI: TIBStringField;
-    QProdPRECO_VAREJO: TIBBCDField;
-    Q_Consulta_cod: TIBQuery;
-    Q_Consulta_codCODIGO: TIntegerField;
-    Q_ESTOQUE: TIBQuery;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkControlToField1: TLinkControlToField;
     LinkControlToField2: TLinkControlToField;
     LinkControlToField3: TLinkControlToField;
     LinkPropertyToFieldValue: TLinkPropertyToField;
-    QPesqEstoque: TIBQuery;
-    QPesqEstoqueCOD_PRO: TIntegerField;
-    QPesqEstoqueNOME_PRO: TIBStringField;
-    QPesqEstoqueQUANT_ESTOQ: TIBBCDField;
-    QBuscaItensVALOR_TOTAL_ITEM: TIBBCDField;
     EdtCodPro: TSpinEdit;
+    QBuscaItens: TFDQuery;
+    QBuscaItensCOD_ITENS_OUTRA: TIntegerField;
+    QBuscaItensCOD_OUTRA: TIntegerField;
+    QBuscaItensCOD_PRO: TIntegerField;
+    QBuscaItensCOD_EMP: TIntegerField;
+    QBuscaItensQUANT_ITEM: TBCDField;
+    QBuscaItensVALOR_CUSTO: TBCDField;
+    QBuscaItensORDEM: TIntegerField;
+    QBuscaItensCANCELADO: TIntegerField;
+    QBuscaItensVALOR_ITEM: TBCDField;
+    QBuscaItensCOD_GRP: TIntegerField;
+    QBuscaItensVALOR_TOTAL_ITEM: TBCDField;
+    QBuscaItensNOME_PRO: TStringField;
+    QBuscaItensDESCRICAO: TStringField;
+    Q_TOTAL: TFDQuery;
+    Q_TOTALTOTAL: TBCDField;
+    QProd: TFDQuery;
+    QProdCOD_PRO: TIntegerField;
+    QProdNOME_PRO: TStringField;
+    QProdPRECO_VAREJO: TBCDField;
+    QProdQUANT_ESTOQ: TBCDField;
+    QProdCOD_GRUP: TIntegerField;
+    QProdCODIGO_BARRA_PRO: TStringField;
+    QCli: TFDQuery;
+    QCliCOD_CLI: TIntegerField;
+    QCliNOME_CLI: TStringField;
+    Q_Consulta_cod: TFDQuery;
+    Q_Consulta_codCODIGO: TIntegerField;
+    Q_ESTOQUE: TFDQuery;
+    QPesqEstoque: TFDQuery;
+    QPesqEstoqueCOD_PRO: TIntegerField;
+    QPesqEstoqueNOME_PRO: TStringField;
+    QPesqEstoqueQUANT_ESTOQ: TBCDField;
+    QOrdem: TFDQuery;
+    QOrdemORDEM: TIntegerField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

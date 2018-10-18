@@ -168,32 +168,27 @@ object FrmConsMarcas: TFrmConsMarcas
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSConsulta: TDataSource
+    Left = 384
+    Top = 201
+  end
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT * FROM MARCAS')
     Left = 312
     Top = 200
     object Q_ConsultaCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"MARCAS"."CODIGO"'
+      Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaDESCRICAO: TIBStringField
+    object Q_ConsultaDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"MARCAS"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 70
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 384
-    Top = 201
   end
 end

@@ -8,7 +8,10 @@ uses
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.ExtCtrls, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, Data.DB,
-  IBX.IBCustomDataSet, IBX.IBQuery;
+  IBX.IBCustomDataSet, IBX.IBQuery, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmFPagamentos = class(TForm)
@@ -37,12 +40,12 @@ type
     LinkControlToField2: TLinkControlToField;
     edtCod: TEdit;
     btnFiltro: TButton;
-    Q_Consulta_cod: TIBQuery;
-    Q_Consulta_filtro: TIBQuery;
-    Q_Consulta_filtroCOD_SEC: TIntegerField;
-    Q_Consulta_filtroNOME_SEC: TIBStringField;
+    Q_Consulta_cod: TFDQuery;
     Q_Consulta_codCODIGO: TIntegerField;
-    Q_Consulta_codDESCRICAO: TIBStringField;
+    Q_Consulta_codDESCRICAO: TStringField;
+    Q_Consulta_filtro: TFDQuery;
+    Q_Consulta_filtroCOD_SEC: TIntegerField;
+    Q_Consulta_filtroNOME_SEC: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botoes(acao : string);

@@ -168,42 +168,37 @@ object FrmConsSubGrupo: TFrmConsSubGrupo
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSConsulta: TDataSource
+    Left = 304
+    Top = 209
+  end
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT * FROM SECAO_GRUPO_SUBGRUPO')
     Left = 232
     Top = 208
     object Q_ConsultaCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."COD_SEC"'
+      Origin = 'COD_SEC'
       Required = True
     end
     object Q_ConsultaCOD_GRUPO: TIntegerField
       FieldName = 'COD_GRUPO'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."COD_GRUPO"'
+      Origin = 'COD_GRUPO'
       Required = True
     end
     object Q_ConsultaCOD_SUBGRUPO: TIntegerField
       FieldName = 'COD_SUBGRUPO'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."COD_SUBGRUPO"'
+      Origin = 'COD_SUBGRUPO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaDESCRICAO: TIBStringField
+    object Q_ConsultaDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"SECAO_GRUPO_SUBGRUPO"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 80
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 304
-    Top = 209
   end
 end

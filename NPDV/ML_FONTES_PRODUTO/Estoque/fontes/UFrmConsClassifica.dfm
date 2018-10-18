@@ -171,11 +171,9 @@ object FrmConsClassifica: TFrmConsClassifica
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    Left = 208
-    Top = 8
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
+    Left = 408
+    Top = 144
   end
 end

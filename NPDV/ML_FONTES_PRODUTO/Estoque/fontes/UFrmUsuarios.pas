@@ -6,7 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.ImageList,
   Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ExtCtrls, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, IBX.IBCustomDataSet, IBX.IBQuery;
+  Vcl.DBGrids, IBX.IBCustomDataSet, IBX.IBQuery, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmUsuarios = class(TForm)
@@ -33,12 +36,12 @@ type
     DBGrid1: TDBGrid;
     edtCod: TEdit;
     btnFiltro: TButton;
-    Q_Consulta_cod: TIBQuery;
+    Q_Consulta_cod: TFDQuery;
     Q_Consulta_codCOD_USU: TIntegerField;
-    Q_Consulta_codNOME_USU: TIBStringField;
-    Q_Consulta_codSENHA_USU: TIBStringField;
+    Q_Consulta_codNOME_USU: TStringField;
+    Q_Consulta_codSENHA_USU: TStringField;
     Q_Consulta_codCOD_EMPR: TIntegerField;
-    Q_Consulta_codOPERADOR_CAIXA: TIBStringField;
+    Q_Consulta_codOPERADOR_CAIXA: TStringField;
     procedure Botoes(acao: string);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnGravarClick(Sender: TObject);

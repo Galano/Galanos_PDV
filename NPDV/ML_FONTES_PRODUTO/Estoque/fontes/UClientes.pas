@@ -11,7 +11,9 @@ uses
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
   Data.Bind.Controls, Vcl.Bind.Navigator, Data.DB, IBX.IBCustomDataSet,
-  IBX.IBQuery;
+  IBX.IBQuery, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TMeuComponente = class(TControl)
@@ -114,12 +116,12 @@ type
     LinkControlToField15: TLinkControlToField;
     LinkControlToField16: TLinkControlToField;
     LinkControlToField17: TLinkControlToField;
-    Q_Consulta_classif: TIBQuery;
-    Q_Consulta_classifNOME_CLA: TIBStringField;
-    Q_Consulta_classifCOD_CLA: TIntegerField;
     btnFiltro: TButton;
     EdtNasc: TDateEdit;
     LinkPropertyToFieldDate: TLinkPropertyToField;
+    Q_Consulta_classif: TFDQuery;
+    Q_Consulta_classifNOME_CLA: TStringField;
+    Q_Consulta_classifCOD_CLA: TIntegerField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FocoAlterado(Sender: TObject);

@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.StdCtrls, Vcl.ComCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.ExtCtrls, IBX.IBCustomDataSet,
-  IBX.IBQuery;
+  IBX.IBQuery, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsGrupo = class(TForm)
@@ -22,11 +24,11 @@ type
     Label1: TLabel;
     GroupBox1: TGroupBox;
     ComboCons: TComboBox;
-    Q_Consulta: TIBQuery;
     DSConsulta: TDataSource;
+    Q_Consulta: TFDQuery;
     Q_ConsultaCOD_SEC: TIntegerField;
     Q_ConsultaCOD_GRUPO: TIntegerField;
-    Q_ConsultaDESCRICAO: TIBStringField;
+    Q_ConsultaDESCRICAO: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure BtnOKClick(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);

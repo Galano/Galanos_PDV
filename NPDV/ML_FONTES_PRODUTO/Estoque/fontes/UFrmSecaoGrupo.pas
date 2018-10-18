@@ -8,7 +8,10 @@ uses
   Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids, IBX.IBCustomDataSet, IBX.IBQuery,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
-  Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+  Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmSecaoGrupo = class(TForm)
@@ -46,30 +49,29 @@ type
     ToolButton6: TToolButton;
     BtnConsultar: TToolButton;
     BtnSair: TToolButton;
-    Q_Consulta_cod: TIBQuery;
-    Q_Consulta_filtro: TIBQuery;
-    Q_Consulta_filtroCOD_SEC: TIntegerField;
-    Q_Consulta_filtroNOME_SEC: TIBStringField;
-    Q_Consulta_codCOD_SEC: TIntegerField;
-    Q_Consulta_codNOME_SEC: TIBStringField;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkControlToField1: TLinkControlToField;
     LinkControlToField2: TLinkControlToField;
     edtCod: TEdit;
     BtnFiltro: TButton;
-    QOrdem: TIBQuery;
-    QGrupo: TIBQuery;
+    DSSub: TDataSource;
+    Q_Consulta_cod: TFDQuery;
+    Q_Consulta_codCOD_SEC: TIntegerField;
+    Q_Consulta_codNOME_SEC: TStringField;
+    Q_Consulta_filtro: TFDQuery;
+    Q_Consulta_filtroCOD_SEC: TIntegerField;
+    Q_Consulta_filtroNOME_SEC: TStringField;
+    QOrdem: TFDQuery;
+    QSub: TFDQuery;
+    QGrupo: TFDQuery;
     QGrupoCOD_SEC: TIntegerField;
     QGrupoCOD_GRUPO: TIntegerField;
-    QGrupoDESCRICAO: TIBStringField;
-    DSGrupo: TDataSource;
-    QSub: TIBQuery;
+    QGrupoDESCRICAO: TStringField;
     QSubCOD_SEC: TIntegerField;
     QSubCOD_GRUPO: TIntegerField;
     QSubCOD_SUBGRUPO: TIntegerField;
-    QSubDESCRICAO: TIBStringField;
-    DSSub: TDataSource;
+    QSubDESCRICAO: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botoes(acao : string);

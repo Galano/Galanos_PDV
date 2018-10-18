@@ -831,7 +831,7 @@ object FrmOutrasSaidas: TFrmOutrasSaidas
     Left = 392
     Top = 8
     Bitmap = {
-      494C010110002000200019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010110002000240019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000640000007D000000010020000000000050C3
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2463,302 +2463,16 @@ object FrmOutrasSaidas: TFrmOutrasSaidas
       FFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000000000000000000
       000000000000}
   end
-  object QBuscaItens: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '  I.*,'
-      '  P.NOME_PRO,'
-      '  U.DESCRICAO'
-      'FROM'
-      '  ITENS_OUTRAS_SAIDAS I'
-      '  INNER JOIN PRODUTO P ON (I.COD_PRO = P.COD_PRO)'
-      '  INNER JOIN UNIDADE_MEDIDA U ON (P.COD_UNI_SAI = U.CODIGO)'
-      '  AND (P.COD_UNI_SAI = U.CODIGO)'
-      'WHERE'
-      '  I.COD_OUTRA = :COD'
-      'ORDER BY'
-      '  I.ORDEM')
-    Left = 224
-    Top = 352
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'COD'
-        ParamType = ptUnknown
-      end>
-    object QBuscaItensCOD_ITENS_OUTRA: TIntegerField
-      FieldName = 'COD_ITENS_OUTRA'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."COD_ITENS_OUTRA"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object QBuscaItensCOD_OUTRA: TIntegerField
-      FieldName = 'COD_OUTRA'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."COD_OUTRA"'
-      Required = True
-    end
-    object QBuscaItensCOD_PRO: TIntegerField
-      FieldName = 'COD_PRO'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."COD_PRO"'
-      Required = True
-    end
-    object QBuscaItensCOD_EMP: TIntegerField
-      FieldName = 'COD_EMP'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."COD_EMP"'
-      Required = True
-    end
-    object QBuscaItensQUANT_ITEM: TIBBCDField
-      FieldName = 'QUANT_ITEM'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."QUANT_ITEM"'
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
-    end
-    object QBuscaItensVALOR_CUSTO: TIBBCDField
-      FieldName = 'VALOR_CUSTO'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."VALOR_CUSTO"'
-      Precision = 18
-      Size = 2
-    end
-    object QBuscaItensORDEM: TIntegerField
-      FieldName = 'ORDEM'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."ORDEM"'
-      Required = True
-    end
-    object QBuscaItensCANCELADO: TIntegerField
-      FieldName = 'CANCELADO'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."CANCELADO"'
-      Required = True
-    end
-    object QBuscaItensVALOR_ITEM: TIBBCDField
-      FieldName = 'VALOR_ITEM'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."VALOR_ITEM"'
-      Required = True
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
-    end
-    object QBuscaItensCOD_GRP: TIntegerField
-      FieldName = 'COD_GRP'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."COD_GRP"'
-      Required = True
-    end
-    object QBuscaItensNOME_PRO: TIBStringField
-      FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
-      Required = True
-      Size = 80
-    end
-    object QBuscaItensDESCRICAO: TIBStringField
-      FieldName = 'DESCRICAO'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
-      Required = True
-      Size = 10
-    end
-    object QBuscaItensVALOR_TOTAL_ITEM: TIBBCDField
-      FieldName = 'VALOR_TOTAL_ITEM'
-      Origin = '"ITENS_OUTRAS_SAIDAS"."VALOR_TOTAL_ITEM"'
-      DisplayFormat = ' ,0.00;- ,0.00'
-      Precision = 18
-      Size = 3
-    end
-  end
   object DSQBuscaItens: TDataSource
     AutoEdit = False
-    DataSet = QBuscaItens
-    Left = 224
-    Top = 408
-  end
-  object QOrdem: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT MAX(ORDEM) AS ORDEM'
-      'FROM ITENS_OUTRAS_SAIDAS'
-      'WHERE COD_OUTRA = :CODIGO')
-    Left = 296
-    Top = 408
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CODIGO'
-        ParamType = ptUnknown
-      end>
-    object QOrdemORDEM: TIntegerField
-      FieldName = 'ORDEM'
-    end
-  end
-  object Q_TOTAL: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT SUM(VALOR_TOTAL_ITEM) AS TOTAL'
-      'FROM ITENS_OUTRAS_SAIDAS'
-      'WHERE COD_OUTRA = :CODIGO')
-    Left = 520
-    Top = 56
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CODIGO'
-        ParamType = ptUnknown
-      end>
-    object Q_TOTALTOTAL: TIBBCDField
-      FieldName = 'TOTAL'
-      ProviderFlags = []
-      Precision = 18
-      Size = 3
-    end
-  end
-  object QProd: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT'
-      ' PRODUTO.COD_PRO, '
-      '  PRODUTO.NOME_PRO,'
-      '  PRODUTO.PRECO_VAREJO,'
-      '  PRODUTO.QUANT_ESTOQ,'
-      ' PRODUTO.COD_GRUP,'
-      'PRODUTO.CODIGO_BARRA_PRO'
-      'FROM'
-      '  PRODUTO'
-      'WHERE'
-      '  PRODUTO.CODIGO_BARRA_PRO = :cod')
-    Left = 168
-    Top = 168
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object QProdCOD_PRO: TIntegerField
-      FieldName = 'COD_PRO'
-      Origin = '"PRODUTO"."COD_PRO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object QProdNOME_PRO: TIBStringField
-      FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
-      Required = True
-      Size = 80
-    end
-    object QProdQUANT_ESTOQ: TIBBCDField
-      FieldName = 'QUANT_ESTOQ'
-      Origin = '"PRODUTO"."QUANT_ESTOQ"'
-      Precision = 18
-      Size = 3
-    end
-    object QProdCOD_GRUP: TIntegerField
-      FieldName = 'COD_GRUP'
-      Origin = '"PRODUTO"."COD_GRUP"'
-      Required = True
-    end
-    object QProdPRECO_VAREJO: TIBBCDField
-      FieldName = 'PRECO_VAREJO'
-      Origin = '"PRODUTO"."PRECO_VAREJO"'
-      Precision = 18
-      Size = 2
-    end
-  end
-  object QCli: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '  CLIENTE.COD_CLI,'
-      '  CLIENTE.NOME_CLI'
-      'FROM'
-      '  CLIENTE'
-      'WHERE'
-      '  CLIENTE.COD_CLI = :cod')
-    Left = 136
-    Top = 104
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object QCliCOD_CLI: TIntegerField
-      FieldName = 'COD_CLI'
-      Origin = '"CLIENTE"."COD_CLI"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object QCliNOME_CLI: TIBStringField
-      FieldName = 'NOME_CLI'
-      Origin = '"CLIENTE"."NOME_CLI"'
-      Required = True
-      Size = 60
-    end
-  end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT MAX(COD_OUTRA) CODIGO FROM OUTRAS_SAIDAS ')
-    Left = 264
-    Top = 56
-    object Q_Consulta_codCODIGO: TIntegerField
-      FieldName = 'CODIGO'
-      ProviderFlags = []
-    end
-  end
-  object Q_ESTOQUE: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'UPDATE'
-      '  PRODUTO'
-      'SET'
-      '  QUANT_ESTOQ = :QTD'
-      'WHERE'
-      '  PRODUTO.COD_PRO = :COD')
-    Left = 224
-    Top = 288
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'QTD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'COD'
-        ParamType = ptUnknown
-      end>
+    Left = 16
+    Top = 393
   end
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_Outras_Saidas
     ScopeMappings = <>
-    Left = 368
-    Top = 256
+    Left = 96
+    Top = 394
   end
   object BindingsList1: TBindingsList
     Methods = <>
@@ -2794,12 +2508,226 @@ object FrmOutrasSaidas: TFrmOutrasSaidas
       ComponentProperty = 'Value'
     end
   end
-  object QPesqEstoque: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object QBuscaItens: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  I.*,'
+      '  P.NOME_PRO,'
+      '  U.DESCRICAO'
+      'FROM'
+      '  ITENS_OUTRAS_SAIDAS I'
+      '  INNER JOIN PRODUTO P ON (I.COD_PRO = P.COD_PRO)'
+      '  INNER JOIN UNIDADE_MEDIDA U ON (P.COD_UNI_SAI = U.CODIGO)'
+      '  AND (P.COD_UNI_SAI = U.CODIGO)'
+      'WHERE'
+      '  I.COD_OUTRA = :COD'
+      'ORDER BY'
+      '  I.ORDEM')
+    Left = 16
+    Top = 448
+    object QBuscaItensCOD_ITENS_OUTRA: TIntegerField
+      FieldName = 'COD_ITENS_OUTRA'
+      Origin = 'COD_ITENS_OUTRA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QBuscaItensCOD_OUTRA: TIntegerField
+      FieldName = 'COD_OUTRA'
+      Origin = 'COD_OUTRA'
+      Required = True
+    end
+    object QBuscaItensCOD_PRO: TIntegerField
+      FieldName = 'COD_PRO'
+      Origin = 'COD_PRO'
+      Required = True
+    end
+    object QBuscaItensCOD_EMP: TIntegerField
+      FieldName = 'COD_EMP'
+      Origin = 'COD_EMP'
+      Required = True
+    end
+    object QBuscaItensQUANT_ITEM: TBCDField
+      FieldName = 'QUANT_ITEM'
+      Origin = 'QUANT_ITEM'
+      Precision = 18
+      Size = 3
+    end
+    object QBuscaItensVALOR_CUSTO: TBCDField
+      FieldName = 'VALOR_CUSTO'
+      Origin = 'VALOR_CUSTO'
+      Precision = 18
+      Size = 2
+    end
+    object QBuscaItensORDEM: TIntegerField
+      FieldName = 'ORDEM'
+      Origin = 'ORDEM'
+      Required = True
+    end
+    object QBuscaItensCANCELADO: TIntegerField
+      FieldName = 'CANCELADO'
+      Origin = 'CANCELADO'
+      Required = True
+    end
+    object QBuscaItensVALOR_ITEM: TBCDField
+      FieldName = 'VALOR_ITEM'
+      Origin = 'VALOR_ITEM'
+      Required = True
+      Precision = 18
+      Size = 3
+    end
+    object QBuscaItensCOD_GRP: TIntegerField
+      FieldName = 'COD_GRP'
+      Origin = 'COD_GRP'
+      Required = True
+    end
+    object QBuscaItensVALOR_TOTAL_ITEM: TBCDField
+      FieldName = 'VALOR_TOTAL_ITEM'
+      Origin = 'VALOR_TOTAL_ITEM'
+      Precision = 18
+      Size = 3
+    end
+    object QBuscaItensNOME_PRO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME_PRO'
+      Origin = 'NOME_PRO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object QBuscaItensDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+  end
+  object Q_TOTAL: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT SUM(VALOR_TOTAL_ITEM) AS TOTAL'
+      'FROM ITENS_OUTRAS_SAIDAS'
+      'WHERE COD_OUTRA = :CODIGO')
+    Left = 149
+    Top = 448
+    object Q_TOTALTOTAL: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL'
+      Origin = 'TOTAL'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 18
+      Size = 3
+    end
+  end
+  object QProd: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT'
+      ' PRODUTO.COD_PRO, '
+      '  PRODUTO.NOME_PRO,'
+      '  PRODUTO.PRECO_VAREJO,'
+      '  PRODUTO.QUANT_ESTOQ,'
+      ' PRODUTO.COD_GRUP,'
+      'PRODUTO.CODIGO_BARRA_PRO'
+      'FROM'
+      '  PRODUTO'
+      'WHERE'
+      '  PRODUTO.CODIGO_BARRA_PRO = :cod')
+    Left = 220
+    Top = 448
+    object QProdCOD_PRO: TIntegerField
+      FieldName = 'COD_PRO'
+      Origin = 'COD_PRO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QProdNOME_PRO: TStringField
+      FieldName = 'NOME_PRO'
+      Origin = 'NOME_PRO'
+      Required = True
+      Size = 80
+    end
+    object QProdPRECO_VAREJO: TBCDField
+      FieldName = 'PRECO_VAREJO'
+      Origin = 'PRECO_VAREJO'
+      Precision = 18
+      Size = 2
+    end
+    object QProdQUANT_ESTOQ: TBCDField
+      FieldName = 'QUANT_ESTOQ'
+      Origin = 'QUANT_ESTOQ'
+      Precision = 18
+      Size = 3
+    end
+    object QProdCOD_GRUP: TIntegerField
+      FieldName = 'COD_GRUP'
+      Origin = 'COD_GRUP'
+      Required = True
+    end
+    object QProdCODIGO_BARRA_PRO: TStringField
+      FieldName = 'CODIGO_BARRA_PRO'
+      Origin = 'CODIGO_BARRA_PRO'
+      Required = True
+      Size = 14
+    end
+  end
+  object QCli: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  CLIENTE.COD_CLI,'
+      '  CLIENTE.NOME_CLI'
+      'FROM'
+      '  CLIENTE'
+      'WHERE'
+      '  CLIENTE.COD_CLI = :cod')
+    Left = 290
+    Top = 449
+    object QCliCOD_CLI: TIntegerField
+      FieldName = 'COD_CLI'
+      Origin = 'COD_CLI'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QCliNOME_CLI: TStringField
+      FieldName = 'NOME_CLI'
+      Origin = 'NOME_CLI'
+      Required = True
+      Size = 60
+    end
+  end
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT MAX(COD_OUTRA) CODIGO FROM OUTRAS_SAIDAS ')
+    Left = 356
+    Top = 449
+    object Q_Consulta_codCODIGO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+  end
+  object Q_ESTOQUE: TFDQuery
+    CachedUpdates = True
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'UPDATE'
+      '  PRODUTO'
+      'SET'
+      '  QUANT_ESTOQ = :QTD'
+      'WHERE'
+      '  PRODUTO.COD_PRO = :COD')
+    Left = 438
+    Top = 448
+  end
+  object QPesqEstoque: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT'
       ' PRODUTO.COD_PRO, '
@@ -2809,31 +2737,41 @@ object FrmOutrasSaidas: TFrmOutrasSaidas
       '  PRODUTO'
       'WHERE'
       '  PRODUTO.COD_PRO = :cod')
-    Left = 416
-    Top = 336
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
+    Left = 512
+    Top = 448
     object QPesqEstoqueCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
-      Origin = '"PRODUTO"."COD_PRO"'
+      Origin = 'COD_PRO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QPesqEstoqueNOME_PRO: TIBStringField
+    object QPesqEstoqueNOME_PRO: TStringField
       FieldName = 'NOME_PRO'
-      Origin = '"PRODUTO"."NOME_PRO"'
+      Origin = 'NOME_PRO'
       Required = True
       Size = 80
     end
-    object QPesqEstoqueQUANT_ESTOQ: TIBBCDField
+    object QPesqEstoqueQUANT_ESTOQ: TBCDField
       FieldName = 'QUANT_ESTOQ'
-      Origin = '"PRODUTO"."QUANT_ESTOQ"'
+      Origin = 'QUANT_ESTOQ'
       Precision = 18
       Size = 3
+    end
+  end
+  object QOrdem: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT MAX(ORDEM) AS ORDEM'
+      'FROM ITENS_OUTRAS_SAIDAS'
+      'WHERE COD_OUTRA = :CODIGO')
+    Left = 82
+    Top = 448
+    object QOrdemORDEM: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ORDEM'
+      Origin = 'ORDEM'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
 end

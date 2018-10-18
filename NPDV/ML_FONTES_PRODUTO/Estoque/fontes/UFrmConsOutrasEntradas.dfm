@@ -265,80 +265,13 @@ object FrmConsOutrasEntradas: TFrmConsOutrasEntradas
     Height = 19
     Panels = <>
   end
-  object QConsOE: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT OE.*, F.RAZAO_FOR'
-      'FROM ENTRADAS OE'
-      'INNER JOIN FORNECEDOR F'
-      'ON (OE.COD_FOR = F.COD_FOR)')
-    Left = 384
-    Top = 200
-    object QConsOECOD_OUTRA: TIntegerField
-      FieldName = 'COD_OUTRA'
-      Origin = '"ENTRADAS"."COD_OUTRA"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object QConsOEDATA_OUTRA: TDateField
-      FieldName = 'DATA_OUTRA'
-      Origin = '"ENTRADAS"."DATA_OUTRA"'
-      Required = True
-    end
-    object QConsOECOD_FOR: TIntegerField
-      FieldName = 'COD_FOR'
-      Origin = '"ENTRADAS"."COD_FOR"'
-      Required = True
-    end
-    object QConsOECOD_EMP: TIntegerField
-      FieldName = 'COD_EMP'
-      Origin = '"ENTRADAS"."COD_EMP"'
-      Required = True
-    end
-    object QConsOETOTAL_OUTRA: TIBBCDField
-      FieldName = 'TOTAL_OUTRA'
-      Origin = '"ENTRADAS"."TOTAL_OUTRA"'
-      Precision = 18
-      Size = 2
-    end
-    object QConsOENUMERO_NOTA_FISCAL: TIntegerField
-      FieldName = 'NUMERO_NOTA_FISCAL'
-      Origin = '"ENTRADAS"."NUMERO_NOTA_FISCAL"'
-      Required = True
-    end
-    object QConsOESERIE_NOTA_FISCAL: TIBStringField
-      FieldName = 'SERIE_NOTA_FISCAL'
-      Origin = '"ENTRADAS"."SERIE_NOTA_FISCAL"'
-      Size = 3
-    end
-    object QConsOECANCELADA: TIntegerField
-      FieldName = 'CANCELADA'
-      Origin = '"ENTRADAS"."CANCELADA"'
-      Required = True
-    end
-    object QConsOERAZAO_FOR: TIBStringField
-      FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
-      Required = True
-      Size = 60
-    end
-  end
   object DSQConsOE: TDataSource
     AutoEdit = False
-    DataSet = QConsOE
-    Left = 384
-    Top = 256
+    Left = 120
+    Top = 176
   end
-  object QFor: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object QFor: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '  FORNECEDOR.COD_FOR,'
@@ -347,24 +280,82 @@ object FrmConsOutrasEntradas: TFrmConsOutrasEntradas
       '  FORNECEDOR'
       'WHERE'
       '  FORNECEDOR.COD_FOR = :cod')
-    Left = 88
+    Left = 64
     Top = 176
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
     object QForCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
-      Origin = '"FORNECEDOR"."COD_FOR"'
+      Origin = 'COD_FOR'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QForRAZAO_FOR: TIBStringField
+    object QForRAZAO_FOR: TStringField
       FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
+      Origin = 'RAZAO_FOR'
       Required = True
+      Size = 60
+    end
+  end
+  object QConsOE: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT OE.*, F.RAZAO_FOR'
+      'FROM ENTRADAS OE'
+      'INNER JOIN FORNECEDOR F'
+      'ON (OE.COD_FOR = F.COD_FOR)')
+    Left = 17
+    Top = 177
+    object QConsOECOD_OUTRA: TIntegerField
+      FieldName = 'COD_OUTRA'
+      Origin = 'COD_OUTRA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QConsOEDATA_OUTRA: TDateField
+      FieldName = 'DATA_OUTRA'
+      Origin = 'DATA_OUTRA'
+      Required = True
+    end
+    object QConsOECOD_FOR: TIntegerField
+      FieldName = 'COD_FOR'
+      Origin = 'COD_FOR'
+      Required = True
+    end
+    object QConsOECOD_EMP: TIntegerField
+      FieldName = 'COD_EMP'
+      Origin = 'COD_EMP'
+      Required = True
+    end
+    object QConsOETOTAL_OUTRA: TBCDField
+      FieldName = 'TOTAL_OUTRA'
+      Origin = 'TOTAL_OUTRA'
+      Precision = 18
+      Size = 2
+    end
+    object QConsOENUMERO_NOTA_FISCAL: TIntegerField
+      FieldName = 'NUMERO_NOTA_FISCAL'
+      Origin = 'NUMERO_NOTA_FISCAL'
+      Required = True
+    end
+    object QConsOESERIE_NOTA_FISCAL: TStringField
+      FieldName = 'SERIE_NOTA_FISCAL'
+      Origin = 'SERIE_NOTA_FISCAL'
+      Size = 3
+    end
+    object QConsOECANCELADA: TIntegerField
+      FieldName = 'CANCELADA'
+      Origin = 'CANCELADA'
+      Required = True
+    end
+    object QConsOEDATA_VENCTO: TDateField
+      FieldName = 'DATA_VENCTO'
+      Origin = 'DATA_VENCTO'
+    end
+    object QConsOERAZAO_FOR: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RAZAO_FOR'
+      Origin = 'RAZAO_FOR'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 60
     end
   end

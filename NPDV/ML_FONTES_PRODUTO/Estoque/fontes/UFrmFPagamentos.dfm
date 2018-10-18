@@ -198,10 +198,10 @@ object FrmFPagamentos: TFrmFPagamentos
   object ImageList: TImageList
     Height = 25
     Width = 25
-    Left = 336
+    Left = 424
     Top = 40
     Bitmap = {
-      494C01010D001000100019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D001000140019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1511,8 +1511,8 @@ object FrmFPagamentos: TFrmFPagamentos
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_fpagamentos
     ScopeMappings = <>
-    Left = 224
-    Top = 96
+    Left = 360
+    Top = 41
   end
   object BindingsList1: TBindingsList
     Methods = <>
@@ -1534,12 +1534,8 @@ object FrmFPagamentos: TFrmFPagamentos
       Track = True
     end
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '  *'
@@ -1547,32 +1543,22 @@ object FrmFPagamentos: TFrmFPagamentos
       '  FORMAS_PAGAMENTO'
       'WHERE'
       '  DESCRICAO = :nm')
-    Left = 192
-    Top = 56
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
+    Left = 280
+    Top = 40
     object Q_Consulta_codCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"FORMAS_PAGAMENTO"."CODIGO"'
+      Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_Consulta_codDESCRICAO: TIBStringField
+    object Q_Consulta_codDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"FORMAS_PAGAMENTO"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
     end
   end
-  object Q_Consulta_filtro: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_filtro: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '  SECAO.COD_SEC,'
@@ -1581,23 +1567,17 @@ object FrmFPagamentos: TFrmFPagamentos
       '  SECAO'
       'WHERE'
       '  SECAO.COD_SEC = :cod')
-    Left = 368
-    Top = 104
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
+    Left = 192
+    Top = 41
     object Q_Consulta_filtroCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
-      Origin = '"SECAO"."COD_SEC"'
+      Origin = 'COD_SEC'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_Consulta_filtroNOME_SEC: TIBStringField
+    object Q_Consulta_filtroNOME_SEC: TStringField
       FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
+      Origin = 'NOME_SEC'
       Required = True
       Size = 50
     end

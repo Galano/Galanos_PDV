@@ -218,188 +218,167 @@ object FrmConsClientes: TFrmConsClientes
         end>
     end
   end
-  object QDias: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT MIN(VENCTO_CTR) VENC'
-      'FROM CONTAS_RECEBER R'
-      'WHERE R.COD_CLI = :CODCLI AND'
-      'R.DTPAGTO_CTR IS NULL')
-    Left = 216
-    Top = 200
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'CODCLI'
-        ParamType = ptUnknown
-      end>
-    object QDiasVENC: TDateField
-      FieldName = 'VENC'
-    end
-    object QDiasDIAS: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'DIAS'
-      Calculated = True
-    end
+  object DSQConsCliente: TDataSource
+    AutoEdit = False
+    Left = 432
+    Top = 160
   end
-  object QConsCliente: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object QConsCliente: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT C.*, S.NOME_CLA'
       'FROM CLIENTE C'
       'INNER JOIN CLASSIF_CLIENTE S'
       'ON (C.COD_CLA = S.COD_CLA)')
-    Left = 144
-    Top = 200
+    Left = 520
+    Top = 160
     object QConsClienteCOD_CLI: TIntegerField
       FieldName = 'COD_CLI'
-      Origin = '"CLIENTE"."COD_CLI"'
+      Origin = 'COD_CLI'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QConsClienteNOME_CLI: TIBStringField
+    object QConsClienteNOME_CLI: TStringField
       FieldName = 'NOME_CLI'
-      Origin = '"CLIENTE"."NOME_CLI"'
+      Origin = 'NOME_CLI'
       Required = True
       Size = 60
     end
     object QConsClienteCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
-      Origin = '"CLIENTE"."COD_CLA"'
+      Origin = 'COD_CLA'
       Required = True
     end
-    object QConsClienteENDRES_CLI: TIBStringField
+    object QConsClienteENDRES_CLI: TStringField
       FieldName = 'ENDRES_CLI'
-      Origin = '"CLIENTE"."ENDRES_CLI"'
+      Origin = 'ENDRES_CLI'
       Size = 50
     end
-    object QConsClienteBAIRES_CLI: TIBStringField
+    object QConsClienteBAIRES_CLI: TStringField
       FieldName = 'BAIRES_CLI'
-      Origin = '"CLIENTE"."BAIRES_CLI"'
+      Origin = 'BAIRES_CLI'
       Size = 30
     end
-    object QConsClienteCIDRES_CLI: TIBStringField
+    object QConsClienteCIDRES_CLI: TStringField
       FieldName = 'CIDRES_CLI'
-      Origin = '"CLIENTE"."CIDRES_CLI"'
+      Origin = 'CIDRES_CLI'
       Size = 30
     end
-    object QConsClienteESTRES_CLI: TIBStringField
+    object QConsClienteESTRES_CLI: TStringField
       FieldName = 'ESTRES_CLI'
-      Origin = '"CLIENTE"."ESTRES_CLI"'
+      Origin = 'ESTRES_CLI'
       FixedChar = True
       Size = 2
     end
-    object QConsClienteCEPRES_CLI: TIBStringField
+    object QConsClienteCEPRES_CLI: TStringField
       FieldName = 'CEPRES_CLI'
-      Origin = '"CLIENTE"."CEPRES_CLI"'
+      Origin = 'CEPRES_CLI'
       FixedChar = True
       Size = 9
     end
-    object QConsClienteTELRES_CLI: TIBStringField
+    object QConsClienteTELRES_CLI: TStringField
       FieldName = 'TELRES_CLI'
-      Origin = '"CLIENTE"."TELRES_CLI"'
+      Origin = 'TELRES_CLI'
       FixedChar = True
       Size = 13
     end
-    object QConsClienteCPF_CLI: TIBStringField
+    object QConsClienteCPF_CLI: TStringField
       FieldName = 'CPF_CLI'
-      Origin = '"CLIENTE"."CPF_CLI"'
+      Origin = 'CPF_CLI'
       Size = 18
     end
-    object QConsClienteRG_CLI: TIBStringField
+    object QConsClienteRG_CLI: TStringField
       FieldName = 'RG_CLI'
-      Origin = '"CLIENTE"."RG_CLI"'
+      Origin = 'RG_CLI'
     end
-    object QConsClienteAPELIDO_CLI: TIBStringField
+    object QConsClienteAPELIDO_CLI: TStringField
       FieldName = 'APELIDO_CLI'
-      Origin = '"CLIENTE"."APELIDO_CLI"'
+      Origin = 'APELIDO_CLI'
       Size = 50
     end
-    object QConsClienteLIMITE_CLI: TIBBCDField
+    object QConsClienteLIMITE_CLI: TBCDField
       FieldName = 'LIMITE_CLI'
-      Origin = '"CLIENTE"."LIMITE_CLI"'
+      Origin = 'LIMITE_CLI'
       Precision = 18
       Size = 2
     end
-    object QConsClienteATIVO_CLI: TIBStringField
+    object QConsClienteATIVO_CLI: TStringField
       FieldName = 'ATIVO_CLI'
-      Origin = '"CLIENTE"."ATIVO_CLI"'
+      Origin = 'ATIVO_CLI'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object QConsClienteOBS_CLI: TIBStringField
+    object QConsClienteOBS_CLI: TStringField
       FieldName = 'OBS_CLI'
-      Origin = '"CLIENTE"."OBS_CLI"'
+      Origin = 'OBS_CLI'
       Size = 500
     end
     object QConsClienteNASCIMENTO_CLI: TDateField
       FieldName = 'NASCIMENTO_CLI'
-      Origin = '"CLIENTE"."NASCIMENTO_CLI"'
+      Origin = 'NASCIMENTO_CLI'
     end
     object QConsClienteDATACADASTRO_CLI: TDateField
       FieldName = 'DATACADASTRO_CLI'
-      Origin = '"CLIENTE"."DATACADASTRO_CLI"'
+      Origin = 'DATACADASTRO_CLI'
       Required = True
     end
     object QConsClienteATRAZO_MAXIMO_CLI: TIntegerField
       FieldName = 'ATRAZO_MAXIMO_CLI'
-      Origin = '"CLIENTE"."ATRAZO_MAXIMO_CLI"'
+      Origin = 'ATRAZO_MAXIMO_CLI'
     end
-    object QConsClienteCELULAR_CLI: TIBStringField
+    object QConsClienteCELULAR_CLI: TStringField
       FieldName = 'CELULAR_CLI'
-      Origin = '"CLIENTE"."CELULAR_CLI"'
+      Origin = 'CELULAR_CLI'
       Size = 13
     end
-    object QConsClienteIMP_SALDO_PENDENTE_CLI: TIBStringField
+    object QConsClienteIMP_SALDO_PENDENTE_CLI: TStringField
       FieldName = 'IMP_SALDO_PENDENTE_CLI'
-      Origin = '"CLIENTE"."IMP_SALDO_PENDENTE_CLI"'
+      Origin = 'IMP_SALDO_PENDENTE_CLI'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object QConsClienteLIMITE_CHEQUE: TIBBCDField
+    object QConsClienteLIMITE_CHEQUE: TBCDField
       FieldName = 'LIMITE_CHEQUE'
-      Origin = '"CLIENTE"."LIMITE_CHEQUE"'
+      Origin = 'LIMITE_CHEQUE'
       Precision = 18
       Size = 2
     end
-    object QConsClienteCONTATO_CLI: TIBStringField
+    object QConsClienteCONTATO_CLI: TStringField
       FieldName = 'CONTATO_CLI'
-      Origin = '"CLIENTE"."CONTATO_CLI"'
+      Origin = 'CONTATO_CLI'
       Size = 70
     end
-    object QConsClienteCONTROLAR_LIMITE: TIBStringField
+    object QConsClienteCONTROLAR_LIMITE: TStringField
       FieldName = 'CONTROLAR_LIMITE'
-      Origin = '"CLIENTE"."CONTROLAR_LIMITE"'
+      Origin = 'CONTROLAR_LIMITE'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object QConsClienteEMAIL_CLI: TIBStringField
+    object QConsClienteEMAIL_CLI: TStringField
       FieldName = 'EMAIL_CLI'
-      Origin = '"CLIENTE"."EMAIL_CLI"'
+      Origin = 'EMAIL_CLI'
       Size = 100
     end
-    object QConsClienteNOME_CLA: TIBStringField
+    object QConsClienteNOME_CLA: TStringField
+      AutoGenerateValue = arDefault
       FieldName = 'NOME_CLA'
-      Origin = '"CLASSIF_CLIENTE"."NOME_CLA"'
-      Required = True
+      Origin = 'NOME_CLA'
+      ProviderFlags = []
+      ReadOnly = True
       Size = 30
     end
   end
-  object DSQConsCliente: TDataSource
-    AutoEdit = False
-    DataSet = QConsCliente
-    Left = 144
-    Top = 256
+  object QDias: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT MIN(VENCTO_CTR) VENC'
+      'FROM CONTAS_RECEBER R'
+      'WHERE R.COD_CLI = :CODCLI AND'
+      'R.DTPAGTO_CTR IS NULL')
+    Left = 600
+    Top = 160
   end
 end

@@ -1068,7 +1068,7 @@ object FrmFornecedor: TFrmFornecedor
     Left = 224
     Top = 56
     Bitmap = {
-      494C01010D002000200019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D002000240019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2375,218 +2375,6 @@ object FrmFornecedor: TFrmFornecedor
       FFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000000000000000000
       000000000000}
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '  *'
-      'FROM'
-      '  FORNECEDOR'
-      'WHERE'
-      '  RAZAO_FOR = :nm')
-    Left = 304
-    Top = 48
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_codCOD_FOR: TIntegerField
-      FieldName = 'COD_FOR'
-      Origin = '"FORNECEDOR"."COD_FOR"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_codFJ_FOR: TIBStringField
-      FieldName = 'FJ_FOR'
-      Origin = '"FORNECEDOR"."FJ_FOR"'
-      Required = True
-      FixedChar = True
-      Size = 1
-    end
-    object Q_Consulta_codRAZAO_FOR: TIBStringField
-      FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
-      Required = True
-      Size = 60
-    end
-    object Q_Consulta_codEND_FOR: TIBStringField
-      FieldName = 'END_FOR'
-      Origin = '"FORNECEDOR"."END_FOR"'
-      Size = 50
-    end
-    object Q_Consulta_codBAI_FOR: TIBStringField
-      FieldName = 'BAI_FOR'
-      Origin = '"FORNECEDOR"."BAI_FOR"'
-      Size = 30
-    end
-    object Q_Consulta_codCID_FOR: TIBStringField
-      FieldName = 'CID_FOR'
-      Origin = '"FORNECEDOR"."CID_FOR"'
-      Size = 30
-    end
-    object Q_Consulta_codCEP_FOR: TIBStringField
-      FieldName = 'CEP_FOR'
-      Origin = '"FORNECEDOR"."CEP_FOR"'
-      FixedChar = True
-      Size = 9
-    end
-    object Q_Consulta_codEST_FOR: TIBStringField
-      FieldName = 'EST_FOR'
-      Origin = '"FORNECEDOR"."EST_FOR"'
-      FixedChar = True
-      Size = 2
-    end
-    object Q_Consulta_codCNPJ_FOR: TIBStringField
-      FieldName = 'CNPJ_FOR'
-      Origin = '"FORNECEDOR"."CNPJ_FOR"'
-      Size = 18
-    end
-    object Q_Consulta_codINSC_FOR: TIBStringField
-      FieldName = 'INSC_FOR'
-      Origin = '"FORNECEDOR"."INSC_FOR"'
-    end
-    object Q_Consulta_codTEL_FOR: TIBStringField
-      FieldName = 'TEL_FOR'
-      Origin = '"FORNECEDOR"."TEL_FOR"'
-      Size = 13
-    end
-    object Q_Consulta_codFAX_FOR: TIBStringField
-      FieldName = 'FAX_FOR'
-      Origin = '"FORNECEDOR"."FAX_FOR"'
-      Size = 13
-    end
-    object Q_Consulta_codCONTATO_FOR: TIBStringField
-      FieldName = 'CONTATO_FOR'
-      Origin = '"FORNECEDOR"."CONTATO_FOR"'
-      Size = 50
-    end
-    object Q_Consulta_codNUM_FOR: TIBStringField
-      FieldName = 'NUM_FOR'
-      Origin = '"FORNECEDOR"."NUM_FOR"'
-      Size = 10
-    end
-    object Q_Consulta_codCODIGO_IBGE: TIntegerField
-      FieldName = 'CODIGO_IBGE'
-      Origin = '"FORNECEDOR"."CODIGO_IBGE"'
-    end
-    object Q_Consulta_codEMAIL_FOR: TIBStringField
-      FieldName = 'EMAIL_FOR'
-      Origin = '"FORNECEDOR"."EMAIL_FOR"'
-      Size = 100
-    end
-  end
-  object Q_Consulta_filtro: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '  *'
-      'FROM'
-      '  FORNECEDOR '
-      'WHERE'
-      '  COD_FOR = :cod')
-    Left = 408
-    Top = 48
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_filtroCOD_FOR: TIntegerField
-      FieldName = 'COD_FOR'
-      Origin = '"FORNECEDOR"."COD_FOR"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_filtroFJ_FOR: TIBStringField
-      FieldName = 'FJ_FOR'
-      Origin = '"FORNECEDOR"."FJ_FOR"'
-      Required = True
-      FixedChar = True
-      Size = 1
-    end
-    object Q_Consulta_filtroRAZAO_FOR: TIBStringField
-      FieldName = 'RAZAO_FOR'
-      Origin = '"FORNECEDOR"."RAZAO_FOR"'
-      Required = True
-      Size = 60
-    end
-    object Q_Consulta_filtroEND_FOR: TIBStringField
-      FieldName = 'END_FOR'
-      Origin = '"FORNECEDOR"."END_FOR"'
-      Size = 50
-    end
-    object Q_Consulta_filtroBAI_FOR: TIBStringField
-      FieldName = 'BAI_FOR'
-      Origin = '"FORNECEDOR"."BAI_FOR"'
-      Size = 30
-    end
-    object Q_Consulta_filtroCID_FOR: TIBStringField
-      FieldName = 'CID_FOR'
-      Origin = '"FORNECEDOR"."CID_FOR"'
-      Size = 30
-    end
-    object Q_Consulta_filtroCEP_FOR: TIBStringField
-      FieldName = 'CEP_FOR'
-      Origin = '"FORNECEDOR"."CEP_FOR"'
-      FixedChar = True
-      Size = 9
-    end
-    object Q_Consulta_filtroEST_FOR: TIBStringField
-      FieldName = 'EST_FOR'
-      Origin = '"FORNECEDOR"."EST_FOR"'
-      FixedChar = True
-      Size = 2
-    end
-    object Q_Consulta_filtroCNPJ_FOR: TIBStringField
-      FieldName = 'CNPJ_FOR'
-      Origin = '"FORNECEDOR"."CNPJ_FOR"'
-      Size = 18
-    end
-    object Q_Consulta_filtroINSC_FOR: TIBStringField
-      FieldName = 'INSC_FOR'
-      Origin = '"FORNECEDOR"."INSC_FOR"'
-    end
-    object Q_Consulta_filtroTEL_FOR: TIBStringField
-      FieldName = 'TEL_FOR'
-      Origin = '"FORNECEDOR"."TEL_FOR"'
-      Size = 13
-    end
-    object Q_Consulta_filtroFAX_FOR: TIBStringField
-      FieldName = 'FAX_FOR'
-      Origin = '"FORNECEDOR"."FAX_FOR"'
-      Size = 13
-    end
-    object Q_Consulta_filtroCONTATO_FOR: TIBStringField
-      FieldName = 'CONTATO_FOR'
-      Origin = '"FORNECEDOR"."CONTATO_FOR"'
-      Size = 50
-    end
-    object Q_Consulta_filtroNUM_FOR: TIBStringField
-      FieldName = 'NUM_FOR'
-      Origin = '"FORNECEDOR"."NUM_FOR"'
-      Size = 10
-    end
-    object Q_Consulta_filtroCODIGO_IBGE: TIntegerField
-      FieldName = 'CODIGO_IBGE'
-      Origin = '"FORNECEDOR"."CODIGO_IBGE"'
-    end
-    object Q_Consulta_filtroEMAIL_FOR: TIBStringField
-      FieldName = 'EMAIL_FOR'
-      Origin = '"FORNECEDOR"."EMAIL_FOR"'
-      Size = 100
-    end
-  end
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_fornecedor
     ScopeMappings = <>
@@ -2596,8 +2384,8 @@ object FrmFornecedor: TFrmFornecedor
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 108
-    Top = 101
+    Left = 452
+    Top = 45
     object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -2688,6 +2476,198 @@ object FrmFornecedor: TFrmFornecedor
       FieldName = 'FAX_FOR'
       Control = EdtFax
       Track = True
+    end
+  end
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  *'
+      'FROM'
+      '  FORNECEDOR'
+      'WHERE'
+      '  RAZAO_FOR = :nm')
+    Left = 384
+    Top = 48
+    object Q_Consulta_codCOD_FOR: TIntegerField
+      FieldName = 'COD_FOR'
+      Origin = 'COD_FOR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_codFJ_FOR: TStringField
+      FieldName = 'FJ_FOR'
+      Origin = 'FJ_FOR'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object Q_Consulta_codRAZAO_FOR: TStringField
+      FieldName = 'RAZAO_FOR'
+      Origin = 'RAZAO_FOR'
+      Required = True
+      Size = 60
+    end
+    object Q_Consulta_codEND_FOR: TStringField
+      FieldName = 'END_FOR'
+      Origin = 'END_FOR'
+      Size = 50
+    end
+    object Q_Consulta_codBAI_FOR: TStringField
+      FieldName = 'BAI_FOR'
+      Origin = 'BAI_FOR'
+      Size = 30
+    end
+    object Q_Consulta_codCID_FOR: TStringField
+      FieldName = 'CID_FOR'
+      Origin = 'CID_FOR'
+      Size = 30
+    end
+    object Q_Consulta_codCEP_FOR: TStringField
+      FieldName = 'CEP_FOR'
+      Origin = 'CEP_FOR'
+      FixedChar = True
+      Size = 9
+    end
+    object Q_Consulta_codEST_FOR: TStringField
+      FieldName = 'EST_FOR'
+      Origin = 'EST_FOR'
+      FixedChar = True
+      Size = 2
+    end
+    object Q_Consulta_codCNPJ_FOR: TStringField
+      FieldName = 'CNPJ_FOR'
+      Origin = 'CNPJ_FOR'
+      Size = 18
+    end
+    object Q_Consulta_codINSC_FOR: TStringField
+      FieldName = 'INSC_FOR'
+      Origin = 'INSC_FOR'
+    end
+    object Q_Consulta_codTEL_FOR: TStringField
+      FieldName = 'TEL_FOR'
+      Origin = 'TEL_FOR'
+      Size = 13
+    end
+    object Q_Consulta_codFAX_FOR: TStringField
+      FieldName = 'FAX_FOR'
+      Origin = 'FAX_FOR'
+      Size = 13
+    end
+    object Q_Consulta_codCONTATO_FOR: TStringField
+      FieldName = 'CONTATO_FOR'
+      Origin = 'CONTATO_FOR'
+      Size = 50
+    end
+    object Q_Consulta_codNUM_FOR: TStringField
+      FieldName = 'NUM_FOR'
+      Origin = 'NUM_FOR'
+      Size = 10
+    end
+    object Q_Consulta_codCODIGO_IBGE: TIntegerField
+      FieldName = 'CODIGO_IBGE'
+      Origin = 'CODIGO_IBGE'
+    end
+    object Q_Consulta_codEMAIL_FOR: TStringField
+      FieldName = 'EMAIL_FOR'
+      Origin = 'EMAIL_FOR'
+      Size = 100
+    end
+  end
+  object Q_Consulta_filtro: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  *'
+      'FROM'
+      '  FORNECEDOR '
+      'WHERE'
+      '  COD_FOR = :cod')
+    Left = 296
+    Top = 48
+    object Q_Consulta_filtroCOD_FOR: TIntegerField
+      FieldName = 'COD_FOR'
+      Origin = 'COD_FOR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_filtroFJ_FOR: TStringField
+      FieldName = 'FJ_FOR'
+      Origin = 'FJ_FOR'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object Q_Consulta_filtroRAZAO_FOR: TStringField
+      FieldName = 'RAZAO_FOR'
+      Origin = 'RAZAO_FOR'
+      Required = True
+      Size = 60
+    end
+    object Q_Consulta_filtroEND_FOR: TStringField
+      FieldName = 'END_FOR'
+      Origin = 'END_FOR'
+      Size = 50
+    end
+    object Q_Consulta_filtroBAI_FOR: TStringField
+      FieldName = 'BAI_FOR'
+      Origin = 'BAI_FOR'
+      Size = 30
+    end
+    object Q_Consulta_filtroCID_FOR: TStringField
+      FieldName = 'CID_FOR'
+      Origin = 'CID_FOR'
+      Size = 30
+    end
+    object Q_Consulta_filtroCEP_FOR: TStringField
+      FieldName = 'CEP_FOR'
+      Origin = 'CEP_FOR'
+      FixedChar = True
+      Size = 9
+    end
+    object Q_Consulta_filtroEST_FOR: TStringField
+      FieldName = 'EST_FOR'
+      Origin = 'EST_FOR'
+      FixedChar = True
+      Size = 2
+    end
+    object Q_Consulta_filtroCNPJ_FOR: TStringField
+      FieldName = 'CNPJ_FOR'
+      Origin = 'CNPJ_FOR'
+      Size = 18
+    end
+    object Q_Consulta_filtroINSC_FOR: TStringField
+      FieldName = 'INSC_FOR'
+      Origin = 'INSC_FOR'
+    end
+    object Q_Consulta_filtroTEL_FOR: TStringField
+      FieldName = 'TEL_FOR'
+      Origin = 'TEL_FOR'
+      Size = 13
+    end
+    object Q_Consulta_filtroFAX_FOR: TStringField
+      FieldName = 'FAX_FOR'
+      Origin = 'FAX_FOR'
+      Size = 13
+    end
+    object Q_Consulta_filtroCONTATO_FOR: TStringField
+      FieldName = 'CONTATO_FOR'
+      Origin = 'CONTATO_FOR'
+      Size = 50
+    end
+    object Q_Consulta_filtroNUM_FOR: TStringField
+      FieldName = 'NUM_FOR'
+      Origin = 'NUM_FOR'
+      Size = 10
+    end
+    object Q_Consulta_filtroCODIGO_IBGE: TIntegerField
+      FieldName = 'CODIGO_IBGE'
+      Origin = 'CODIGO_IBGE'
+    end
+    object Q_Consulta_filtroEMAIL_FOR: TStringField
+      FieldName = 'EMAIL_FOR'
+      Origin = 'EMAIL_FOR'
+      Size = 100
     end
   end
 end

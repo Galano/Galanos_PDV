@@ -28,7 +28,6 @@ object frmMarcas: TfrmMarcas
     Panels = <>
     ParentShowHint = False
     ShowHint = True
-    ExplicitWidth = 387
   end
   object Panel1: TPanel
     Left = 0
@@ -41,7 +40,6 @@ object frmMarcas: TfrmMarcas
     BevelWidth = 2
     Color = 16710131
     TabOrder = 1
-    ExplicitWidth = 387
     object Label1: TLabel
       Left = 8
       Top = 8
@@ -87,7 +85,6 @@ object frmMarcas: TfrmMarcas
     BevelOuter = bvNone
     BevelWidth = 2
     TabOrder = 2
-    ExplicitWidth = 387
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
@@ -103,7 +100,6 @@ object frmMarcas: TfrmMarcas
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      ExplicitWidth = 383
       object BtnNovo: TToolButton
         Left = 0
         Top = 0
@@ -191,10 +187,10 @@ object frmMarcas: TfrmMarcas
   object ImageList: TImageList
     Height = 25
     Width = 25
-    Left = 320
-    Top = 8
+    Left = 211
+    Top = 51
     Bitmap = {
-      494C01010D001000100019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D001000140019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1501,85 +1497,17 @@ object frmMarcas: TfrmMarcas
       FFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000000000000000000
       000000000000}
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '*'
-      'FROM'
-      '  MARCAS'
-      'WHERE'
-      '  DESCRICAO = :nm')
-    Left = 96
-    Top = 53
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_codCODIGO: TIntegerField
-      FieldName = 'CODIGO'
-      Origin = '"MARCAS"."CODIGO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_codDESCRICAO: TIBStringField
-      FieldName = 'DESCRICAO'
-      Origin = '"MARCAS"."DESCRICAO"'
-      Required = True
-      Size = 70
-    end
-  end
-  object Q_Consulta_filtro: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '*'
-      'FROM'
-      '  MARCAS'
-      'WHERE'
-      '  CODIGO = :cod')
-    Left = 280
-    Top = 64
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_filtroCODIGO: TIntegerField
-      FieldName = 'CODIGO'
-      Origin = '"UNIDADE_MEDIDA"."CODIGO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_filtroDESCRICAO: TIBStringField
-      FieldName = 'DESCRICAO'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
-      Required = True
-      Size = 10
-    end
-  end
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_marcas
     ScopeMappings = <>
-    Left = 184
-    Top = 80
+    Left = 148
+    Top = 51
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 180
-    Top = 53
+    Left = 81
+    Top = 51
     object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -1593,6 +1521,54 @@ object frmMarcas: TfrmMarcas
       FieldName = 'DESCRICAO'
       Control = EdtNome
       Track = True
+    end
+  end
+  object Q_Consulta_filtro: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '*'
+      'FROM'
+      '  MARCAS'
+      'WHERE'
+      '  CODIGO = :cod')
+    Left = 281
+    Top = 50
+    object Q_Consulta_filtroCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_filtroDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Required = True
+      Size = 70
+    end
+  end
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '*'
+      'FROM'
+      '  MARCAS'
+      'WHERE'
+      '  DESCRICAO = :nm')
+    Left = 344
+    Top = 50
+    object Q_Consulta_codCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_codDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Required = True
+      Size = 70
     end
   end
 end

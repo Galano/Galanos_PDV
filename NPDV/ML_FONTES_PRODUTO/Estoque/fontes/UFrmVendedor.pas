@@ -8,7 +8,10 @@ uses
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.StdCtrls,
   Vcl.ExtCtrls, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
   Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
-  Data.DB, IBX.IBCustomDataSet, IBX.IBQuery;
+  Data.DB, IBX.IBCustomDataSet, IBX.IBQuery, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmVendedor = class(TForm)
@@ -40,16 +43,16 @@ type
     LinkControlToField2: TLinkControlToField;
     edtCod: TEdit;
     BtnFiltro: TButton;
-    Q_Consulta_cod: TIBQuery;
-    Q_Consulta_filtro: TIBQuery;
+    Q_Consulta_cod: TFDQuery;
     Q_Consulta_codCOD_VEND: TIntegerField;
-    Q_Consulta_codNOME_VEND: TIBStringField;
-    Q_Consulta_codATIVO_VEND: TIBStringField;
-    Q_Consulta_codCOMISSAO_VEND: TIBBCDField;
+    Q_Consulta_codNOME_VEND: TStringField;
+    Q_Consulta_codATIVO_VEND: TStringField;
+    Q_Consulta_codCOMISSAO_VEND: TBCDField;
+    Q_Consulta_filtro: TFDQuery;
     Q_Consulta_filtroCOD_VEND: TIntegerField;
-    Q_Consulta_filtroNOME_VEND: TIBStringField;
-    Q_Consulta_filtroATIVO_VEND: TIBStringField;
-    Q_Consulta_filtroCOMISSAO_VEND: TIBBCDField;
+    Q_Consulta_filtroNOME_VEND: TStringField;
+    Q_Consulta_filtroATIVO_VEND: TStringField;
+    Q_Consulta_filtroCOMISSAO_VEND: TBCDField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botoes(acao : string);

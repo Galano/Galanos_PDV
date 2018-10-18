@@ -8,7 +8,10 @@ uses
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.Mask, Vcl.Imaging.pngimage,
   Vcl.ExtCtrls, Vcl.Buttons, Data.DB, IBX.IBCustomDataSet, IBX.IBQuery,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
-  Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+  Vcl.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmFornecedor = class(TForm)
@@ -57,40 +60,6 @@ type
     ImageList: TImageList;
     Edit1: TEdit;
     edtCod: TEdit;
-    Q_Consulta_cod: TIBQuery;
-    Q_Consulta_filtro: TIBQuery;
-    Q_Consulta_codCOD_FOR: TIntegerField;
-    Q_Consulta_codFJ_FOR: TIBStringField;
-    Q_Consulta_codRAZAO_FOR: TIBStringField;
-    Q_Consulta_codEND_FOR: TIBStringField;
-    Q_Consulta_codBAI_FOR: TIBStringField;
-    Q_Consulta_codCID_FOR: TIBStringField;
-    Q_Consulta_codCEP_FOR: TIBStringField;
-    Q_Consulta_codEST_FOR: TIBStringField;
-    Q_Consulta_codCNPJ_FOR: TIBStringField;
-    Q_Consulta_codINSC_FOR: TIBStringField;
-    Q_Consulta_codTEL_FOR: TIBStringField;
-    Q_Consulta_codFAX_FOR: TIBStringField;
-    Q_Consulta_codCONTATO_FOR: TIBStringField;
-    Q_Consulta_codNUM_FOR: TIBStringField;
-    Q_Consulta_codCODIGO_IBGE: TIntegerField;
-    Q_Consulta_codEMAIL_FOR: TIBStringField;
-    Q_Consulta_filtroCOD_FOR: TIntegerField;
-    Q_Consulta_filtroFJ_FOR: TIBStringField;
-    Q_Consulta_filtroRAZAO_FOR: TIBStringField;
-    Q_Consulta_filtroEND_FOR: TIBStringField;
-    Q_Consulta_filtroBAI_FOR: TIBStringField;
-    Q_Consulta_filtroCID_FOR: TIBStringField;
-    Q_Consulta_filtroCEP_FOR: TIBStringField;
-    Q_Consulta_filtroEST_FOR: TIBStringField;
-    Q_Consulta_filtroCNPJ_FOR: TIBStringField;
-    Q_Consulta_filtroINSC_FOR: TIBStringField;
-    Q_Consulta_filtroTEL_FOR: TIBStringField;
-    Q_Consulta_filtroFAX_FOR: TIBStringField;
-    Q_Consulta_filtroCONTATO_FOR: TIBStringField;
-    Q_Consulta_filtroNUM_FOR: TIBStringField;
-    Q_Consulta_filtroCODIGO_IBGE: TIntegerField;
-    Q_Consulta_filtroEMAIL_FOR: TIBStringField;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkControlToField1: TLinkControlToField;
@@ -107,6 +76,40 @@ type
     LinkControlToField12: TLinkControlToField;
     LinkControlToField13: TLinkControlToField;
     btFiltro: TButton;
+    Q_Consulta_cod: TFDQuery;
+    Q_Consulta_codCOD_FOR: TIntegerField;
+    Q_Consulta_codFJ_FOR: TStringField;
+    Q_Consulta_codRAZAO_FOR: TStringField;
+    Q_Consulta_codEND_FOR: TStringField;
+    Q_Consulta_codBAI_FOR: TStringField;
+    Q_Consulta_codCID_FOR: TStringField;
+    Q_Consulta_codCEP_FOR: TStringField;
+    Q_Consulta_codEST_FOR: TStringField;
+    Q_Consulta_codCNPJ_FOR: TStringField;
+    Q_Consulta_codINSC_FOR: TStringField;
+    Q_Consulta_codTEL_FOR: TStringField;
+    Q_Consulta_codFAX_FOR: TStringField;
+    Q_Consulta_codCONTATO_FOR: TStringField;
+    Q_Consulta_codNUM_FOR: TStringField;
+    Q_Consulta_codCODIGO_IBGE: TIntegerField;
+    Q_Consulta_codEMAIL_FOR: TStringField;
+    Q_Consulta_filtro: TFDQuery;
+    Q_Consulta_filtroCOD_FOR: TIntegerField;
+    Q_Consulta_filtroFJ_FOR: TStringField;
+    Q_Consulta_filtroRAZAO_FOR: TStringField;
+    Q_Consulta_filtroEND_FOR: TStringField;
+    Q_Consulta_filtroBAI_FOR: TStringField;
+    Q_Consulta_filtroCID_FOR: TStringField;
+    Q_Consulta_filtroCEP_FOR: TStringField;
+    Q_Consulta_filtroEST_FOR: TStringField;
+    Q_Consulta_filtroCNPJ_FOR: TStringField;
+    Q_Consulta_filtroINSC_FOR: TStringField;
+    Q_Consulta_filtroTEL_FOR: TStringField;
+    Q_Consulta_filtroFAX_FOR: TStringField;
+    Q_Consulta_filtroCONTATO_FOR: TStringField;
+    Q_Consulta_filtroNUM_FOR: TStringField;
+    Q_Consulta_filtroCODIGO_IBGE: TIntegerField;
+    Q_Consulta_filtroEMAIL_FOR: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botoes(acao : string);

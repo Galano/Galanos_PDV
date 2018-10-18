@@ -227,10 +227,10 @@ object FrmVendedor: TFrmVendedor
   object ImageList: TImageList
     Height = 25
     Width = 25
-    Left = 376
-    Top = 48
+    Left = 197
+    Top = 104
     Bitmap = {
-      494C01010D001800180019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D0018001C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1540,14 +1540,14 @@ object FrmVendedor: TFrmVendedor
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_vendedor
     ScopeMappings = <>
-    Left = 200
-    Top = 80
+    Left = 340
+    Top = 103
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 340
-    Top = 45
+    Left = 268
+    Top = 104
     object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -1570,12 +1570,8 @@ object FrmVendedor: TFrmVendedor
       Track = True
     end
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       ' *'
@@ -1584,45 +1580,35 @@ object FrmVendedor: TFrmVendedor
       'WHERE'
       '  NOME_VEND = :nm')
     Left = 32
-    Top = 48
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
+    Top = 104
     object Q_Consulta_codCOD_VEND: TIntegerField
       FieldName = 'COD_VEND'
-      Origin = '"VENDEDOR"."COD_VEND"'
+      Origin = 'COD_VEND'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_Consulta_codNOME_VEND: TIBStringField
+    object Q_Consulta_codNOME_VEND: TStringField
       FieldName = 'NOME_VEND'
-      Origin = '"VENDEDOR"."NOME_VEND"'
+      Origin = 'NOME_VEND'
       Required = True
       Size = 50
     end
-    object Q_Consulta_codATIVO_VEND: TIBStringField
+    object Q_Consulta_codATIVO_VEND: TStringField
       FieldName = 'ATIVO_VEND'
-      Origin = '"VENDEDOR"."ATIVO_VEND"'
+      Origin = 'ATIVO_VEND'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object Q_Consulta_codCOMISSAO_VEND: TIBBCDField
+    object Q_Consulta_codCOMISSAO_VEND: TBCDField
       FieldName = 'COMISSAO_VEND'
-      Origin = '"VENDEDOR"."COMISSAO_VEND"'
+      Origin = 'COMISSAO_VEND'
       Precision = 18
       Size = 2
     end
   end
-  object Q_Consulta_filtro: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_filtro: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '  *'
@@ -1631,35 +1617,29 @@ object FrmVendedor: TFrmVendedor
       'WHERE'
       '  COD_VEND = :cod')
     Left = 120
-    Top = 48
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
+    Top = 104
     object Q_Consulta_filtroCOD_VEND: TIntegerField
       FieldName = 'COD_VEND'
-      Origin = '"VENDEDOR"."COD_VEND"'
+      Origin = 'COD_VEND'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_Consulta_filtroNOME_VEND: TIBStringField
+    object Q_Consulta_filtroNOME_VEND: TStringField
       FieldName = 'NOME_VEND'
-      Origin = '"VENDEDOR"."NOME_VEND"'
+      Origin = 'NOME_VEND'
       Required = True
       Size = 50
     end
-    object Q_Consulta_filtroATIVO_VEND: TIBStringField
+    object Q_Consulta_filtroATIVO_VEND: TStringField
       FieldName = 'ATIVO_VEND'
-      Origin = '"VENDEDOR"."ATIVO_VEND"'
+      Origin = 'ATIVO_VEND'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object Q_Consulta_filtroCOMISSAO_VEND: TIBBCDField
+    object Q_Consulta_filtroCOMISSAO_VEND: TBCDField
       FieldName = 'COMISSAO_VEND'
-      Origin = '"VENDEDOR"."COMISSAO_VEND"'
+      Origin = 'COMISSAO_VEND'
       Precision = 18
       Size = 2
     end

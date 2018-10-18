@@ -170,31 +170,26 @@ object FrmConsfPagamentos: TFrmConsfPagamentos
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSConsulta: TDataSource
+    Left = 319
+    Top = 184
+  end
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT * FROM FORMAS_PAGAMENTO')
     Left = 248
     Top = 184
     object Q_ConsultaCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"FORMAS_PAGAMENTO"."CODIGO"'
+      Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaDESCRICAO: TIBStringField
+    object Q_ConsultaDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"FORMAS_PAGAMENTO"."DESCRICAO"'
+      Origin = 'DESCRICAO'
       Required = True
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 319
-    Top = 184
   end
 end

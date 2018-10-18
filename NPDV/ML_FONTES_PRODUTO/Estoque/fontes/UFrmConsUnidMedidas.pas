@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, IBX.IBCustomDataSet,
   IBX.IBQuery, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsUnidMedidas = class(TForm)
@@ -22,10 +24,10 @@ type
     Label1: TLabel;
     GroupBox1: TGroupBox;
     ComboCons: TComboBox;
-    Q_Consulta: TIBQuery;
     DSConsulta: TDataSource;
+    Q_Consulta: TFDQuery;
     Q_ConsultaCODIGO: TIntegerField;
-    Q_ConsultaDESCRICAO: TIBStringField;
+    Q_ConsultaDESCRICAO: TStringField;
     procedure BtnOKClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);

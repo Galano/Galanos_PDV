@@ -429,7 +429,7 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
     Left = 320
     Top = 16
     Bitmap = {
-      494C01010D001800180019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D0018001C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1736,76 +1736,6 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       FFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000000000000000000
       000000000000}
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '  SECAO.COD_SEC,'
-      '  SECAO.NOME_SEC'
-      'FROM'
-      '  SECAO'
-      'WHERE'
-      '  SECAO.NOME_SEC = :nm')
-    Left = 192
-    Top = 56
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_codCOD_SEC: TIntegerField
-      FieldName = 'COD_SEC'
-      Origin = '"SECAO"."COD_SEC"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_codNOME_SEC: TIBStringField
-      FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
-      Required = True
-      Size = 50
-    end
-  end
-  object Q_Consulta_filtro: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '  SECAO.COD_SEC,'
-      '  SECAO.NOME_SEC'
-      'FROM'
-      '  SECAO'
-      'WHERE'
-      '  SECAO.COD_SEC = :cod')
-    Left = 280
-    Top = 56
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_filtroCOD_SEC: TIntegerField
-      FieldName = 'COD_SEC'
-      Origin = '"SECAO"."COD_SEC"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_filtroNOME_SEC: TIBStringField
-      FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
-      Required = True
-      Size = 50
-    end
-  end
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_secao
     ScopeMappings = <>
@@ -1832,107 +1762,128 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       Track = True
     end
   end
-  object QOrdem: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    Left = 440
-    Top = 264
-  end
-  object QGrupo: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT *'
-      'FROM SECAO_GRUPO'
-      'WHERE COD_SEC = :CODSEC'
-      'ORDER BY DESCRICAO')
-    Left = 80
-    Top = 280
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CODSEC'
-        ParamType = ptUnknown
-      end>
-    object QGrupoCOD_SEC: TIntegerField
-      FieldName = 'COD_SEC'
-      Origin = 'SECAO_GRUPO.COD_SEC'
-      Required = True
-    end
-    object QGrupoCOD_GRUPO: TIntegerField
-      FieldName = 'COD_GRUPO'
-      Origin = 'SECAO_GRUPO.COD_GRUPO'
-      Required = True
-    end
-    object QGrupoDESCRICAO: TIBStringField
-      FieldName = 'DESCRICAO'
-      Origin = 'SECAO_GRUPO.DESCRICAO'
-      Required = True
-      Size = 80
-    end
-  end
   object DSGrupo: TDataSource
     AutoEdit = False
-    DataSet = QGrupo
     Left = 136
     Top = 280
   end
-  object QSub: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSSub: TDataSource
+    AutoEdit = False
+    Left = 120
+    Top = 520
+  end
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  SECAO.COD_SEC,'
+      '  SECAO.NOME_SEC'
+      'FROM'
+      '  SECAO'
+      'WHERE'
+      '  SECAO.NOME_SEC = :nm')
+    Left = 494
+    Top = 48
+    object Q_Consulta_codCOD_SEC: TIntegerField
+      FieldName = 'COD_SEC'
+      Origin = 'COD_SEC'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_codNOME_SEC: TStringField
+      FieldName = 'NOME_SEC'
+      Origin = 'NOME_SEC'
+      Required = True
+      Size = 50
+    end
+  end
+  object Q_Consulta_filtro: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '  SECAO.COD_SEC,'
+      '  SECAO.NOME_SEC'
+      'FROM'
+      '  SECAO'
+      'WHERE'
+      '  SECAO.COD_SEC = :cod')
+    Left = 411
+    Top = 49
+    object Q_Consulta_filtroCOD_SEC: TIntegerField
+      FieldName = 'COD_SEC'
+      Origin = 'COD_SEC'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_filtroNOME_SEC: TStringField
+      FieldName = 'NOME_SEC'
+      Origin = 'NOME_SEC'
+      Required = True
+      Size = 50
+    end
+  end
+  object QOrdem: TFDQuery
+    Connection = DmDados.Conexao
+    Left = 406
+    Top = 105
+  end
+  object QSub: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT *'
       'FROM SECAO_GRUPO_SUBGRUPO'
       'WHERE COD_SEC = :CODSEC AND COD_GRUPO = :CODGRUPO'
       'ORDER BY DESCRICAO')
-    Left = 72
-    Top = 520
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CODSEC'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CODGRUPO'
-        ParamType = ptUnknown
-      end>
+    Left = 452
+    Top = 105
     object QSubCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
-      Origin = 'SECAO_GRUPO_SUBGRUPO.COD_SEC'
+      Origin = 'COD_SEC'
       Required = True
     end
     object QSubCOD_GRUPO: TIntegerField
       FieldName = 'COD_GRUPO'
-      Origin = 'SECAO_GRUPO_SUBGRUPO.COD_GRUPO'
+      Origin = 'COD_GRUPO'
       Required = True
     end
     object QSubCOD_SUBGRUPO: TIntegerField
       FieldName = 'COD_SUBGRUPO'
-      Origin = 'SECAO_GRUPO_SUBGRUPO.COD_SUBGRUPO'
+      Origin = 'COD_SUBGRUPO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object QSubDESCRICAO: TIBStringField
+    object QSubDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = 'SECAO_GRUPO_SUBGRUPO.DESCRICAO'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 80
     end
   end
-  object DSSub: TDataSource
-    AutoEdit = False
-    DataSet = QSub
-    Left = 120
-    Top = 520
+  object QGrupo: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT *'
+      'FROM SECAO_GRUPO'
+      'WHERE COD_SEC = :CODSEC'
+      'ORDER BY DESCRICAO')
+    Left = 502
+    Top = 105
+    object QGrupoCOD_SEC: TIntegerField
+      FieldName = 'COD_SEC'
+      Origin = 'COD_SEC'
+      Required = True
+    end
+    object QGrupoCOD_GRUPO: TIntegerField
+      FieldName = 'COD_GRUPO'
+      Origin = 'COD_GRUPO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object QGrupoDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Required = True
+      Size = 80
+    end
   end
 end

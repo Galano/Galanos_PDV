@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, IBX.IBCustomDataSet,
   IBX.IBQuery, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsClientes = class(TForm)
@@ -19,39 +21,37 @@ type
     ComboCons: TComboBox;
     GB2: TGroupBox;
     EdtCons: TEdit;
-    QDias: TIBQuery;
-    QDiasVENC: TDateField;
-    QDiasDIAS: TFloatField;
-    QConsCliente: TIBQuery;
-    QConsClienteCOD_CLI: TIntegerField;
-    QConsClienteNOME_CLI: TIBStringField;
-    QConsClienteCOD_CLA: TIntegerField;
-    QConsClienteENDRES_CLI: TIBStringField;
-    QConsClienteBAIRES_CLI: TIBStringField;
-    QConsClienteCIDRES_CLI: TIBStringField;
-    QConsClienteESTRES_CLI: TIBStringField;
-    QConsClienteCEPRES_CLI: TIBStringField;
-    QConsClienteTELRES_CLI: TIBStringField;
-    QConsClienteCPF_CLI: TIBStringField;
-    QConsClienteRG_CLI: TIBStringField;
-    QConsClienteAPELIDO_CLI: TIBStringField;
-    QConsClienteLIMITE_CLI: TIBBCDField;
-    QConsClienteATIVO_CLI: TIBStringField;
-    QConsClienteOBS_CLI: TIBStringField;
-    QConsClienteNASCIMENTO_CLI: TDateField;
-    QConsClienteDATACADASTRO_CLI: TDateField;
-    QConsClienteATRAZO_MAXIMO_CLI: TIntegerField;
-    QConsClienteCELULAR_CLI: TIBStringField;
-    QConsClienteIMP_SALDO_PENDENTE_CLI: TIBStringField;
-    QConsClienteLIMITE_CHEQUE: TIBBCDField;
-    QConsClienteCONTATO_CLI: TIBStringField;
-    QConsClienteCONTROLAR_LIMITE: TIBStringField;
-    QConsClienteEMAIL_CLI: TIBStringField;
-    QConsClienteNOME_CLA: TIBStringField;
     DSQConsCliente: TDataSource;
     Panel2: TPanel;
     BtnSair: TButton;
     DBGrid: TDBGrid;
+    QConsCliente: TFDQuery;
+    QConsClienteCOD_CLI: TIntegerField;
+    QConsClienteNOME_CLI: TStringField;
+    QConsClienteCOD_CLA: TIntegerField;
+    QConsClienteENDRES_CLI: TStringField;
+    QConsClienteBAIRES_CLI: TStringField;
+    QConsClienteCIDRES_CLI: TStringField;
+    QConsClienteESTRES_CLI: TStringField;
+    QConsClienteCEPRES_CLI: TStringField;
+    QConsClienteTELRES_CLI: TStringField;
+    QConsClienteCPF_CLI: TStringField;
+    QConsClienteRG_CLI: TStringField;
+    QConsClienteAPELIDO_CLI: TStringField;
+    QConsClienteLIMITE_CLI: TBCDField;
+    QConsClienteATIVO_CLI: TStringField;
+    QConsClienteOBS_CLI: TStringField;
+    QConsClienteNASCIMENTO_CLI: TDateField;
+    QConsClienteDATACADASTRO_CLI: TDateField;
+    QConsClienteATRAZO_MAXIMO_CLI: TIntegerField;
+    QConsClienteCELULAR_CLI: TStringField;
+    QConsClienteIMP_SALDO_PENDENTE_CLI: TStringField;
+    QConsClienteLIMITE_CHEQUE: TBCDField;
+    QConsClienteCONTATO_CLI: TStringField;
+    QConsClienteCONTROLAR_LIMITE: TStringField;
+    QConsClienteEMAIL_CLI: TStringField;
+    QConsClienteNOME_CLA: TStringField;
+    QDias: TFDQuery;
     procedure BtnOkClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ComboConsChange(Sender: TObject);
@@ -73,8 +73,8 @@ implementation
 
 {$R *.dfm}
 
-Uses Udm, UBibliotecas, UClientes, UFrmOutrasSaidas, UFrmConsOutrasSaidas,
-  UFrmRelVendas, UFrmControleCredito;
+Uses UBibliotecas, UClientes, UFrmOutrasSaidas, UFrmConsOutrasSaidas,
+  UFrmRelVendas, UFrmControleCredito, Udm;
 
 procedure TFrmConsClientes.BtnOkClick(Sender: TObject);
 begin

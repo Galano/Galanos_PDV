@@ -9,7 +9,10 @@ uses
   Vcl.DBGrids, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons, Vcl.ExtCtrls,
   Vcl.Samples.Spin, IBX.IBCustomDataSet, IBX.IBQuery, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors,
-  Data.Bind.Components, Data.Bind.DBScope;
+  Data.Bind.Components, Data.Bind.DBScope, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmProdutosComposicao = class(TForm)
@@ -28,47 +31,47 @@ type
     Button1: TButton;
     Edit1: TEdit;
     spCodProdComp: TSpinEdit;
-    QProd: TIBQuery;
     DSProd: TDataSource;
-    Q_Consulta_filtro: TIBQuery;
+    Label3: TLabel;
+    Label4: TLabel;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    LinkPropertyToFieldCaption: TLinkPropertyToField;
+    Bevel1: TBevel;
+    pnlProduto: TPanel;
+    QProd: TFDQuery;
+    Q_Consulta_filtro: TFDQuery;
+    QPrecoCusto: TFDQuery;
+    QProdCOD_PRO_COMPOSICAO: TIntegerField;
+    QProdCOD_PRO: TIntegerField;
+    QProdNOME_PRO: TStringField;
+    QProdQUANT: TBCDField;
+    QProdDESCRICAO: TStringField;
+    QProdPRECO_PRAZO: TBCDField;
     Q_Consulta_filtroCOD_PRO: TIntegerField;
-    Q_Consulta_filtroCODIGO_BARRA_PRO: TIBStringField;
-    Q_Consulta_filtroTP_PRODUTO: TIBStringField;
-    Q_Consulta_filtroTP_PRODUCAO: TIBStringField;
-    Q_Consulta_filtroESTOQUE_MINIMO: TIBBCDField;
-    Q_Consulta_filtroNOME_PRO: TIBStringField;
-    Q_Consulta_filtroDESC_CUPOM: TIBStringField;
+    Q_Consulta_filtroCODIGO_BARRA_PRO: TStringField;
+    Q_Consulta_filtroTP_PRODUTO: TStringField;
+    Q_Consulta_filtroTP_PRODUCAO: TStringField;
+    Q_Consulta_filtroESTOQUE_MINIMO: TBCDField;
+    Q_Consulta_filtroNOME_PRO: TStringField;
+    Q_Consulta_filtroDESC_CUPOM: TStringField;
     Q_Consulta_filtroCOD_MARC: TIntegerField;
     Q_Consulta_filtroCOD_SEC: TIntegerField;
     Q_Consulta_filtroCOD_GRUP: TIntegerField;
     Q_Consulta_filtroCOD_SGRUP: TIntegerField;
     Q_Consulta_filtroCOD_UNI_ENT: TIntegerField;
     Q_Consulta_filtroCOD_UNI_SAI: TIntegerField;
-    Q_Consulta_filtroPRECO_VAREJO: TIBBCDField;
-    Q_Consulta_filtroPRECO_PROMOCAO: TIBBCDField;
-    Q_Consulta_filtroPRECO_PRAZO: TIBBCDField;
-    Q_Consulta_filtroMARGEM_LUCRO: TIBBCDField;
-    Q_Consulta_filtroQUANT_ESTOQ: TIBBCDField;
+    Q_Consulta_filtroPRECO_VAREJO: TBCDField;
+    Q_Consulta_filtroPRECO_PROMOCAO: TBCDField;
+    Q_Consulta_filtroPRECO_PRAZO: TBCDField;
+    Q_Consulta_filtroMARGEM_LUCRO: TBCDField;
+    Q_Consulta_filtroQUANT_ESTOQ: TBCDField;
     Q_Consulta_filtroDATA_VALIDADE: TDateField;
     Q_Consulta_filtroDIAS_VALIDADE_PRO: TIntegerField;
-    Q_Consulta_filtroCONTROLA_ESTOQUE_PRO: TIBStringField;
-    Q_Consulta_filtroATIVO_PRO: TIBStringField;
+    Q_Consulta_filtroCONTROLA_ESTOQUE_PRO: TStringField;
+    Q_Consulta_filtroATIVO_PRO: TStringField;
     Q_Consulta_filtroCAMINHO_FOTO_PRO: TBlobField;
-    Label3: TLabel;
-    Label4: TLabel;
-    QPrecoCusto: TIBQuery;
-    QPrecoCustoPRECO_CUSTO: TIBBCDField;
-    BindSourceDB1: TBindSourceDB;
-    BindingsList1: TBindingsList;
-    LinkPropertyToFieldCaption: TLinkPropertyToField;
-    QProdCOD_PRO_COMPOSICAO: TIntegerField;
-    QProdCOD_PRO: TIntegerField;
-    QProdNOME_PRO: TIBStringField;
-    QProdQUANT: TIBBCDField;
-    QProdDESCRICAO: TIBStringField;
-    QProdPRECO_PRAZO: TIBBCDField;
-    Bevel1: TBevel;
-    pnlProduto: TPanel;
+    QPrecoCustoPRECO_CUSTO: TBCDField;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);

@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, IBX.IBCustomDataSet,
   IBX.IBQuery, Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsOutrasEntradas = class(TForm)
@@ -27,21 +29,22 @@ type
     DBGrid1: TDBGrid;
     BtnLocalizar: TButton;
     StatusBar1: TStatusBar;
-    QConsOE: TIBQuery;
     DSQConsOE: TDataSource;
     EdtCodFor: TEdit;
+    QFor: TFDQuery;
+    QForCOD_FOR: TIntegerField;
+    QForRAZAO_FOR: TStringField;
+    QConsOE: TFDQuery;
     QConsOECOD_OUTRA: TIntegerField;
     QConsOEDATA_OUTRA: TDateField;
     QConsOECOD_FOR: TIntegerField;
     QConsOECOD_EMP: TIntegerField;
-    QConsOETOTAL_OUTRA: TIBBCDField;
+    QConsOETOTAL_OUTRA: TBCDField;
     QConsOENUMERO_NOTA_FISCAL: TIntegerField;
-    QConsOESERIE_NOTA_FISCAL: TIBStringField;
+    QConsOESERIE_NOTA_FISCAL: TStringField;
     QConsOECANCELADA: TIntegerField;
-    QConsOERAZAO_FOR: TIBStringField;
-    QFor: TIBQuery;
-    QForCOD_FOR: TIntegerField;
-    QForRAZAO_FOR: TIBStringField;
+    QConsOEDATA_VENCTO: TDateField;
+    QConsOERAZAO_FOR: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

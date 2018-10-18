@@ -8,7 +8,9 @@ uses
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB,
   IBX.IBCustomDataSet, IBX.IBQuery, System.Rtti, System.Bindings.Outputs,
   Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
-  Data.Bind.DBScope;
+  Data.Bind.DBScope, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmUnidadesMedidas = class(TForm)
@@ -29,18 +31,21 @@ type
     BtnConsultar: TToolButton;
     BtnSair: TToolButton;
     ImageList: TImageList;
-    Q_Consulta_filtro: TIBQuery;
-    Q_Consulta_filtroCODIGO: TIntegerField;
-    Q_Consulta_filtroDESCRICAO: TIBStringField;
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkControlToField1: TLinkControlToField;
     LinkControlToField2: TLinkControlToField;
     edtCod: TEdit;
     btnFiltro: TButton;
-    Q_Consulta_cod: TIBQuery;
+    Panel3: TPanel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Q_Consulta_cod: TFDQuery;
     Q_Consulta_codCODIGO: TIntegerField;
-    Q_Consulta_codDESCRICAO: TIBStringField;
+    Q_Consulta_codDESCRICAO: TStringField;
+    Q_Consulta_filtro: TFDQuery;
+    Q_Consulta_filtroCODIGO: TIntegerField;
+    Q_Consulta_filtroDESCRICAO: TStringField;
     procedure Botoes(acao: string);
     procedure BtnNovoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

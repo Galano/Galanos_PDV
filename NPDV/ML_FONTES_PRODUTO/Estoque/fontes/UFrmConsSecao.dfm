@@ -169,32 +169,27 @@ object FrmConsSecao: TFrmConsSecao
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object DSConsulta: TDataSource
+    Left = 384
+    Top = 201
+  end
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT * FROM SECAO')
     Left = 312
     Top = 200
     object Q_ConsultaCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
-      Origin = '"SECAO"."COD_SEC"'
+      Origin = 'COD_SEC'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaNOME_SEC: TIBStringField
+    object Q_ConsultaNOME_SEC: TStringField
       FieldName = 'NOME_SEC'
-      Origin = '"SECAO"."NOME_SEC"'
+      Origin = 'NOME_SEC'
       Required = True
       Size = 50
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 384
-    Top = 201
   end
 end

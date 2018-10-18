@@ -71,7 +71,6 @@ object FrmConsVendedor: TFrmConsVendedor
       Height = 287
       Align = alTop
       Color = clSilver
-      DataSource = DSConsulta
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
       TabOrder = 0
@@ -178,45 +177,36 @@ object FrmConsVendedor: TFrmConsVendedor
       end
     end
   end
-  object Q_Consulta: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'select *  from VENDEDOR')
-    Left = 152
-    Top = 224
+    Left = 408
+    Top = 144
     object Q_ConsultaCOD_VEND: TIntegerField
       FieldName = 'COD_VEND'
-      Origin = '"VENDEDOR"."COD_VEND"'
+      Origin = 'COD_VEND'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_ConsultaNOME_VEND: TIBStringField
+    object Q_ConsultaNOME_VEND: TStringField
       FieldName = 'NOME_VEND'
-      Origin = '"VENDEDOR"."NOME_VEND"'
+      Origin = 'NOME_VEND'
       Required = True
       Size = 50
     end
-    object Q_ConsultaATIVO_VEND: TIBStringField
+    object Q_ConsultaATIVO_VEND: TStringField
       FieldName = 'ATIVO_VEND'
-      Origin = '"VENDEDOR"."ATIVO_VEND"'
+      Origin = 'ATIVO_VEND'
       Required = True
       FixedChar = True
       Size = 1
     end
-    object Q_ConsultaCOMISSAO_VEND: TIBBCDField
+    object Q_ConsultaCOMISSAO_VEND: TBCDField
       FieldName = 'COMISSAO_VEND'
-      Origin = '"VENDEDOR"."COMISSAO_VEND"'
+      Origin = 'COMISSAO_VEND'
       Precision = 18
       Size = 2
     end
-  end
-  object DSConsulta: TDataSource
-    DataSet = Q_Consulta
-    Left = 224
-    Top = 225
   end
 end

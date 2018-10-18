@@ -268,10 +268,10 @@ object FrmUsuarios: TFrmUsuarios
   object ImageList: TImageList
     Height = 25
     Width = 25
-    Left = 320
-    Top = 16
+    Left = 32
+    Top = 248
     Bitmap = {
-      494C01010D001800180019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D0018001C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1578,12 +1578,8 @@ object FrmUsuarios: TFrmUsuarios
       FFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000000000000000000
       000000000000}
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '*'
@@ -1591,40 +1587,34 @@ object FrmUsuarios: TFrmUsuarios
       '  USUARIO'
       'WHERE'
       '  NOME_USU = :nm')
-    Left = 96
-    Top = 53
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
+    Left = 32
+    Top = 293
     object Q_Consulta_codCOD_USU: TIntegerField
       FieldName = 'COD_USU'
-      Origin = '"USUARIO"."COD_USU"'
+      Origin = 'COD_USU'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_Consulta_codNOME_USU: TIBStringField
+    object Q_Consulta_codNOME_USU: TStringField
       FieldName = 'NOME_USU'
-      Origin = '"USUARIO"."NOME_USU"'
+      Origin = 'NOME_USU'
       Required = True
       Size = 10
     end
-    object Q_Consulta_codSENHA_USU: TIBStringField
+    object Q_Consulta_codSENHA_USU: TStringField
       FieldName = 'SENHA_USU'
-      Origin = '"USUARIO"."SENHA_USU"'
+      Origin = 'SENHA_USU'
       Required = True
       Size = 6
     end
     object Q_Consulta_codCOD_EMPR: TIntegerField
       FieldName = 'COD_EMPR'
-      Origin = '"USUARIO"."COD_EMPR"'
+      Origin = 'COD_EMPR'
       Required = True
     end
-    object Q_Consulta_codOPERADOR_CAIXA: TIBStringField
+    object Q_Consulta_codOPERADOR_CAIXA: TStringField
       FieldName = 'OPERADOR_CAIXA'
-      Origin = '"USUARIO"."OPERADOR_CAIXA"'
+      Origin = 'OPERADOR_CAIXA'
       Required = True
       FixedChar = True
       Size = 1

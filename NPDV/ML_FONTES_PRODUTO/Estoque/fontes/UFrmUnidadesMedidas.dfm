@@ -3,8 +3,8 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Estoque Master - Cadstro de Unidades de Medidas'
-  ClientHeight = 157
-  ClientWidth = 440
+  ClientHeight = 168
+  ClientWidth = 452
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,25 +21,29 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
   TextHeight = 13
   object SB: TStatusBar
     Left = 0
-    Top = 138
-    Width = 440
+    Top = 149
+    Width = 452
     Height = 19
     AutoHint = True
     Panels = <>
     ParentShowHint = False
     ShowHint = True
+    ExplicitTop = 138
+    ExplicitWidth = 440
   end
   object Panel1: TPanel
     Left = 0
     Top = 37
-    Width = 440
-    Height = 101
+    Width = 452
+    Height = 112
     Align = alClient
     BevelInner = bvLowered
     BevelOuter = bvNone
     BevelWidth = 2
     Color = 16710131
     TabOrder = 1
+    ExplicitWidth = 440
+    ExplicitHeight = 101
     object Label1: TLabel
       Left = 8
       Top = 8
@@ -74,21 +78,55 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
       MaxLength = 7
       TabOrder = 1
     end
+    object Panel3: TPanel
+      Left = 2
+      Top = 2
+      Width = 448
+      Height = 108
+      Align = alClient
+      BevelInner = bvLowered
+      BevelOuter = bvNone
+      BevelWidth = 2
+      Color = 16710131
+      TabOrder = 2
+      ExplicitLeft = -30
+      object Edit2: TEdit
+        Left = 8
+        Top = 64
+        Width = 425
+        Height = 21
+        CharCase = ecUpperCase
+        Color = clSilver
+        MaxLength = 50
+        TabOrder = 0
+      end
+      object Edit3: TEdit
+        Left = 8
+        Top = 23
+        Width = 65
+        Height = 21
+        CharCase = ecUpperCase
+        Color = clYellow
+        MaxLength = 7
+        TabOrder = 1
+      end
+    end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 440
+    Width = 452
     Height = 37
     Align = alTop
     BevelInner = bvLowered
     BevelOuter = bvNone
     BevelWidth = 2
     TabOrder = 2
+    ExplicitWidth = 440
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
-      Width = 436
+      Width = 448
       Height = 33
       Align = alClient
       ButtonHeight = 31
@@ -100,6 +138,7 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      ExplicitWidth = 436
       object BtnNovo: TToolButton
         Left = 0
         Top = 0
@@ -187,10 +226,10 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
   object ImageList: TImageList
     Height = 25
     Width = 25
-    Left = 344
-    Top = 104
+    Left = 240
+    Top = 56
     Bitmap = {
-      494C01010D001000100019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D001000140019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1497,45 +1536,11 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
       FFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000000000000000000
       000000000000}
   end
-  object Q_Consulta_filtro: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    SQL.Strings = (
-      'SELECT '
-      '*'
-      'FROM'
-      '  UNIDADE_MEDIDA'
-      'WHERE'
-      '  CODIGO = :cod')
-    Left = 336
-    Top = 48
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_filtroCODIGO: TIntegerField
-      FieldName = 'CODIGO'
-      Origin = '"UNIDADE_MEDIDA"."CODIGO"'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Q_Consulta_filtroDESCRICAO: TIBStringField
-      FieldName = 'DESCRICAO'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
-      Required = True
-      Size = 10
-    end
-  end
   object BindSourceDB1: TBindSourceDB
     DataSet = DmDados.tb_UnidadesMedidas
     ScopeMappings = <>
-    Left = 208
-    Top = 80
+    Left = 176
+    Top = 56
   end
   object BindingsList1: TBindingsList
     Methods = <>
@@ -1557,12 +1562,8 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
       Track = True
     end
   end
-  object Q_Consulta_cod: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_cod: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '*'
@@ -1570,23 +1571,41 @@ object FrmUnidadesMedidas: TFrmUnidadesMedidas
       '  UNIDADE_MEDIDA'
       'WHERE'
       '  DESCRICAO = :nm')
-    Left = 96
-    Top = 53
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'nm'
-        ParamType = ptUnknown
-      end>
+    Left = 395
+    Top = 56
     object Q_Consulta_codCODIGO: TIntegerField
       FieldName = 'CODIGO'
-      Origin = '"UNIDADE_MEDIDA"."CODIGO"'
+      Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object Q_Consulta_codDESCRICAO: TIBStringField
+    object Q_Consulta_codDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
-      Origin = '"UNIDADE_MEDIDA"."DESCRICAO"'
+      Origin = 'DESCRICAO'
+      Required = True
+      Size = 10
+    end
+  end
+  object Q_Consulta_filtro: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '*'
+      'FROM'
+      '  UNIDADE_MEDIDA'
+      'WHERE'
+      '  CODIGO = :cod')
+    Left = 309
+    Top = 56
+    object Q_Consulta_filtroCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object Q_Consulta_filtroDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
       Required = True
       Size = 10
     end

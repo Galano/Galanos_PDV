@@ -30,7 +30,6 @@ object FrmClientes: TFrmClientes
     Panels = <>
     ParentShowHint = False
     ShowHint = True
-    ExplicitTop = 427
   end
   object Panel1: TPanel
     Left = 0
@@ -43,7 +42,6 @@ object FrmClientes: TFrmClientes
     BevelWidth = 2
     Color = 16710131
     TabOrder = 1
-    ExplicitHeight = 386
     object Label1: TLabel
       Left = 8
       Top = 8
@@ -872,13 +870,8 @@ object FrmClientes: TFrmClientes
       MultiLine = True
       ParentFont = False
       TabOrder = 9
-      ExplicitTop = 172
       object TabSheet1: TTabSheet
         Caption = 'Dados'
-        ExplicitLeft = -2
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label11: TLabel
           Left = 128
           Top = 8
@@ -1081,10 +1074,6 @@ object FrmClientes: TFrmClientes
       object TabSheet5: TTabSheet
         Caption = 'Endere'#231'o'
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label6: TLabel
           Left = 8
           Top = 8
@@ -1324,10 +1313,6 @@ object FrmClientes: TFrmClientes
       object TabSheet4: TTabSheet
         Caption = 'Observa'#231#227'o'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label30: TLabel
           Left = 0
           Top = 0
@@ -1539,10 +1524,10 @@ object FrmClientes: TFrmClientes
   object ImageList: TImageList
     Height = 25
     Width = 25
-    Left = 640
+    Left = 608
     Top = 192
     Bitmap = {
-      494C0101110038003C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111003800400019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000640000007D000000010020000000000050C3
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3177,8 +3162,8 @@ object FrmClientes: TFrmClientes
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 340
-    Top = 5
+    Left = 668
+    Top = 189
     object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB2
@@ -3316,15 +3301,11 @@ object FrmClientes: TFrmClientes
   object BindSourceDB2: TBindSourceDB
     DataSet = DmDados.tb_clientes
     ScopeMappings = <>
-    Left = 344
-    Top = 224
+    Left = 608
+    Top = 240
   end
-  object Q_Consulta_classif: TIBQuery
-    Database = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
+  object Q_Consulta_classif: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'SELECT '
       '  CLASSIF_CLIENTE.NOME_CLA,'
@@ -3333,23 +3314,17 @@ object FrmClientes: TFrmClientes
       '  CLASSIF_CLIENTE'
       'WHERE'
       '  CLASSIF_CLIENTE.COD_CLA = :cod')
-    Left = 288
-    Top = 176
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cod'
-        ParamType = ptUnknown
-      end>
-    object Q_Consulta_classifNOME_CLA: TIBStringField
+    Left = 672
+    Top = 240
+    object Q_Consulta_classifNOME_CLA: TStringField
       FieldName = 'NOME_CLA'
-      Origin = '"CLASSIF_CLIENTE"."NOME_CLA"'
+      Origin = 'NOME_CLA'
       Required = True
       Size = 30
     end
     object Q_Consulta_classifCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
-      Origin = '"CLASSIF_CLIENTE"."COD_CLA"'
+      Origin = 'COD_CLA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
