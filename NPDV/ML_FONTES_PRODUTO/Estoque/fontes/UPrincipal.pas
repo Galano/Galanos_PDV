@@ -71,7 +71,6 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    Image2: TImage;
     ControledeCredirio1: TMenuItem;
     procedure btn5Click(Sender: TObject);
     procedure S002Click(Sender: TObject);
@@ -326,8 +325,8 @@ begin
   Vencidos;
 
   {Centraliza a imagem da LOGO}
-  Image2.Left := (Pprincipal.Width - Image2.Width) div 2;
-  Image2.Top := (Pprincipal.Height - Image2.Height) div 2;
+  //Image2.Left := (Pprincipal.Width - Image2.Width) div 2;
+//  Image2.Top := (Pprincipal.Height - Image2.Height) div 2;
 
 
   Application.CreateForm(TFrrmLogin,FrrmLogin);

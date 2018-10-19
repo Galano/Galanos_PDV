@@ -160,6 +160,8 @@ type
     QProdNOME_PRO: TStringField;
     QProdQUANT_ESTOQ: TBCDField;
     QProdCOD_GRUP: TIntegerField;
+    DSQBuscaItens: TDataSource;
+    QProdCODIGO_BARRA_PRO: TStringField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -222,7 +224,7 @@ begin
     Parambyname('cod').AsInteger     := strtoint(EdtCodigo.Text);
     ExecSQL;
 
-    DmDados.IBTransaction1.CommitRetaining;
+    //DmDados.IBTransaction1.CommitRetaining;
   end;
 end;
 
@@ -298,7 +300,7 @@ begin
         Parambyname('4').Value := valor_;
         ExecSQL;
       end;
-      DmDados.IBTransaction1.CommitRetaining;
+      //DmDados.IBTransaction1.CommitRetaining;
 
 end;
 
@@ -503,9 +505,9 @@ begin
                  end;
                end;
 
-            DmDados.IBTransaction1.CommitRetaining;
+            //DmDados.IBTransaction1.CommitRetaining;
           except
-            DmDados.IBTransaction1.RollbackRetaining;
+            //DmDados.IBTransaction1.RollbackRetaining;
             showmessage('Erro ao Excluir o Item');
           end;
         finally
@@ -562,10 +564,10 @@ begin
              ExecSQL;
           end;
 
-       DmDados.IBTransaction1.CommitRetaining;
+       //DmDados.IBTransaction1.CommitRetaining;
 
      except
-       DmDados.IBTransaction1.RollbackRetaining;
+       //DmDados.IBTransaction1.RollbackRetaining;
      end;
 
     QBuscaItens.Close;
@@ -589,7 +591,7 @@ begin
         ParamByName('cod').Value := StrToInt(EdtCodigo.Text);
         ExecSQL;
       end;
-      DmDados.IBTransaction1.CommitRetaining;
+      //DmDados.IBTransaction1.CommitRetaining;
       btFiltroClick(Self);
       Botoes('G');
       BtnCancelar.Enabled := true;
@@ -597,7 +599,7 @@ begin
     on e:exception do
       begin
         ShowMessage('Erro ao tentar dar baixa na nota: '+e.message);
-        DmDados.IBTransaction1.RollbackRetaining;
+        //DmDados.IBTransaction1.RollbackRetaining;
       end;
     end;
   end;
@@ -701,7 +703,7 @@ begin
                end
                else
                begin
-                 Parambyname('13').AsString := DtVenctoItem.Text;
+                 Parambyname('13').AsString := FormatDateTime('yyyy-mm-dd', DtVenctoItem.Date );
                end;
 
                ExecSQL;
@@ -723,7 +725,7 @@ begin
                  end
                  else
                  begin
-                   Parambyname('validade').AsString := DtVenctoItem.Text;
+                   Parambyname('validade').AsString := FormatDateTime('yyyy-mm-dd', DtVenctoItem.Date ); //DtVenctoItem.Text;
                  end;
                 Parambyname('cod').value  := StrToInt(trim(EdtCodPro.Text));
                 ExecSQL;
@@ -737,7 +739,7 @@ begin
                ExecSQL;
             end;
 
-            DmDados.IBTransaction1.CommitRetaining;
+            //DmDados.IBTransaction1.CommitRetaining;
 
             codigo := StrToInt(trim(EdtCodPro.Text));
             //Atualizo o valor do produto com base no cálculo aplicado
@@ -773,7 +775,7 @@ begin
         except
           on e: exception do
           begin
-            DmDados.IBTransaction1.RollbackRetaining;
+            //DmDados.IBTransaction1.RollbackRetaining;
 
             //panel3.Enabled:= true;
             //panel4.Enabled:= false;
@@ -868,7 +870,7 @@ begin
            ExecSQL;
         end;
 
-        DmDados.IBTransaction1.CommitRetaining;
+        //DmDados.IBTransaction1.CommitRetaining;
         Botoes('G');
 
         with Q_Consulta_cod do
@@ -907,7 +909,7 @@ begin
             ParamByName('cod').Value := StrToInt(EdtCodigo.Text);
             ExecSQL;
           end;
-          DmDados.IBTransaction1.CommitRetaining;
+          //DmDados.IBTransaction1.CommitRetaining;
           btFiltroClick(Self);
           Botoes('G');
           BtnCancelar.Enabled := true;
@@ -915,7 +917,7 @@ begin
         on e:exception do
           begin
             ShowMessage('Erro ao tentar dar baixa na nota: '+e.message);
-            DmDados.IBTransaction1.RollbackRetaining;
+            //DmDados.IBTransaction1.RollbackRetaining;
           end;
         end;
       end;
@@ -935,7 +937,7 @@ begin
     except
       on e: exception do
       begin
-        DmDados.IBTransaction1.RollbackRetaining;
+        //DmDados.IBTransaction1.RollbackRetaining;
 
         panel3.Enabled:= true;
         panel4.Enabled:= false;
@@ -977,6 +979,7 @@ begin
 
   EdtCodPro.Text := QBuscaItensCOD_PRO.AsString;
   EdtNomePro.Text := QBuscaItensNOME_PRO.AsString;
+
   EdtCodProBarrasChange(Self);
   EdtQuant.Value := QBuscaItensQUANT_ITEM.Value;
   EdtValorUnit.Value := QBuscaItensVALOR_ITEM.Value;
@@ -995,7 +998,7 @@ begin
   EdtAliqIPI.Value  := QBuscaItensIPI.Value;
   EdtBCR.Value := QBuscaItensREDUCAO_ICMS.Value;
   EdtTotalProd.Value := QBuscaItensVALOR_TOTAL_ITEM.Value;
-  EdtCodPro.SetFocus;
+  EdtCodProBarras.SetFocus;
 
 end;
 
@@ -1037,18 +1040,28 @@ end;
 
 procedure TFrmOutrasEntradas.EdtCodProBarrasChange(Sender: TObject);
 begin
-  if (EdtCodProBarras.Text <> '') then
+  if (EdtCodProBarras.Text <> '') or (EdtCodPro.Text<>'')then
   begin
     with QProd do
     begin
       Close;
-      ParamByName('cod').Value := EdtCodProBarras.Text;
+      ParamByName('cod').Value := '-999';
+      ParamByName('cod2').Value := '-999';
+
+      if EdtCodProBarras.Text <> '' then
+        ParamByName('cod').Value := EdtCodProBarras.Text
+      else
+        ParamByName('cod2').Value := EdtCodPro.Text;
+
       Open;
       FetchAll;
     end;
 
     if (QProd.RecordCount > 0) then
     begin
+      if EdtCodProBarras.Text='' then
+        EdtCodProBarras.Text := QProdCODIGO_BARRA_PRO.AsString;
+
       EdtCodPro.Text := QProdCOD_PRO.AsString;
       EdtNomePro.Text := QProdNOME_PRO.AsString;
       edtQtdEst.Value := QProdQUANT_ESTOQ.Value;
@@ -1062,6 +1075,8 @@ begin
       EdtCodPro.Text := '0';
     end;
   end;
+
+
 end;
 
 procedure TFrmOutrasEntradas.EdtQuantEnter(Sender: TObject);

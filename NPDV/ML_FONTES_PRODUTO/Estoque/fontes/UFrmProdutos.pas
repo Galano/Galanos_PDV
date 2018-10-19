@@ -6,14 +6,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtDlgs, System.ImageList,
-  Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Mask, Vcl.StdCtrls, RxToolEdit,
-  RxCurrEdit, Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Buttons, Data.DB,
+  Vcl.ImgList, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Mask, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.Buttons, Data.DB,
   IBX.IBCustomDataSet, IBX.IBQuery, System.Rtti, System.Bindings.Outputs,
   Vcl.Bind.Editors, Data.Bind.EngExt, Vcl.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, System.Math, IBX.IBDatabase, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, RxToolEdit, RxCurrEdit;
 
 type
   TFrmProdutos = class(TForm)
@@ -565,7 +565,7 @@ begin
         end
         else
         begin
-          Parambyname('19').AsString := EdtDataValidade.Text;
+          Parambyname('19').AsString := FormatDateTime('yyyy-mm-dd',EdtDataValidade.DATE);
         end;
 
         Parambyname('20').Value := 0;
@@ -592,7 +592,7 @@ begin
 
         ExecSQL;
       end;
-      DmDados.IBTransaction1.CommitRetaining;
+      ////DmDados.IBTransaction1.CommitRetaining;
       Botoes('G');
       EdtDataValidade.Enabled := false;
 
@@ -621,7 +621,7 @@ begin
     except
       on e: exception do
       begin
-        DmDados.IBTransaction1.RollbackRetaining;
+        //DmDados.IBTransaction1.RollbackRetaining;
         Application.MessageBox(Pchar('Erro ao gravar a Cliente!' + #13 + #13 +
           e.Message), 'Informação', mb_OK + MB_ICONERROR);
       end;
@@ -719,13 +719,14 @@ end;
 
 procedure TFrmProdutos.edtCodGrupoChange(Sender: TObject);
 begin
+try
   if (edtCodGrupo.Text <> '') then
   begin
     with Q_Grupos do
     begin
       Close;
-      Parambyname('cod').Value := edtCodGrupo.Text;
-      Parambyname('cod_sec').Value := edtCodSec.Text;
+      Parambyname('cod').Value     := '0'+edtCodGrupo.Text;
+      Parambyname('cod_sec').Value := '0'+edtCodSec.Text;
       Open;
       FetchAll;
     end;
@@ -739,10 +740,17 @@ begin
       EdtNomeGrupo.Text := 'Nada foi encontrado...'
     end;
   end;
+except on e:exception do begin
+  ShowMessage('edtCodGrupoChange =>'+ e.Message);
+end;
+end;
+
+
 end;
 
 procedure TFrmProdutos.EdtCodMarcaChange(Sender: TObject);
 begin
+try
   if (EdtCodMarca.Text <> '') then
   begin
     with Q_Marcas do
@@ -762,10 +770,15 @@ begin
       EdtNomeMarca.Text := 'Nada foi encontrado...'
     end;
   end;
+except on e:exception do begin
+  ShowMessage('EdtCodMarcaChange =>'+ e.Message);
+end;
+end;
 end;
 
 procedure TFrmProdutos.edtCodSecChange(Sender: TObject);
 begin
+try
   if (edtCodSec.Text <> '') then
   begin
     with Q_secao do
@@ -785,10 +798,16 @@ begin
       EdtNomeSec.Text := 'Nada foi encontrado...'
     end;
   end;
+except on e:exception do begin
+  ShowMessage('edtCodSecChange =>'+ e.Message);
+end;
+end;
+
 end;
 
 procedure TFrmProdutos.edtCodUniEntChange(Sender: TObject);
 begin
+try
   if (edtCodUniEnt.Text <> '') then
   begin
     with Q_UnidEnt do
@@ -807,10 +826,16 @@ begin
       EdtNomeUndEntrada.Text := 'Nada foi encontrado...'
     end;
   end;
+
+except on e:exception do begin
+  ShowMessage('edtCodUniEntChange =>'+ e.Message);
+end;
+end;
 end;
 
 procedure TFrmProdutos.edtCodUniSaiChange(Sender: TObject);
 begin
+try
   if (edtCodUniSai.Text <> '') then
   begin
     with Q_UnidSai do
@@ -829,6 +854,10 @@ begin
       EdtNomeUndSaida.Text := 'Nada foi encontrado...'
     end;
   end;
+except on e:exception do begin
+  ShowMessage('edtCodUniSaiChange =>'+ e.Message);
+end;
+end;
 end;
 
 procedure TFrmProdutos.EdtDataValidade1Exit(Sender: TObject);
@@ -918,14 +947,15 @@ end;
 
 procedure TFrmProdutos.edtSubCodGrupoChange(Sender: TObject);
 begin
+try
   if (edtSubCodGrupo.Text <> '') then
   begin
     with Q_SubGrupos do
     begin
       Close;
-      Parambyname('cod_sub').Value := edtSubCodGrupo.Text;
-      Parambyname('cod_sec').Value := edtCodSec.Text;
-      Parambyname('cod_grup').Value := edtCodGrupo.Text;
+      Parambyname('cod_sub').Value  := '0'+edtSubCodGrupo.Text;
+      Parambyname('cod_sec').Value  := '0'+edtCodSec.Text;
+      Parambyname('cod_grup').Value := '0'+edtCodGrupo.Text;
       Open;
       FetchAll;
     end;
@@ -939,6 +969,11 @@ begin
       EdtNomeSubGrupo.Text := 'Nada foi encontrado...'
     end;
   end;
+
+except on e:exception do begin
+  ShowMessage('edtSubCodGrupoChange =>'+ e.Message);
+end;
+end;
 end;
 
 procedure TFrmProdutos.EdtValorChange(Sender: TObject);

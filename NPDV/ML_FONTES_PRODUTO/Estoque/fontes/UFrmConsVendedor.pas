@@ -29,6 +29,7 @@ type
     Q_ConsultaNOME_VEND: TStringField;
     Q_ConsultaATIVO_VEND: TStringField;
     Q_ConsultaCOMISSAO_VEND: TBCDField;
+    DSConsulta: TDataSource;
     procedure BtnOKClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);

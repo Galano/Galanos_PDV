@@ -51,6 +51,7 @@ type
     QConsClienteEMAIL_CLI: TStringField;
     QConsClienteNOME_CLA: TStringField;
     QDias: TFDQuery;
+    DConsCliente: TDataSource;
     procedure ComboConsChange(Sender: TObject);
     procedure btnFormataCPFClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);

@@ -172,6 +172,7 @@ object FrmConsClientes: TFrmConsClientes
           FieldName = 'NOME_CLI'
           Title.Alignment = taCenter
           Title.Caption = 'NOME'
+          Width = 64
           Visible = True
         end
         item
@@ -180,6 +181,7 @@ object FrmConsClientes: TFrmConsClientes
           FieldName = 'CIDRES_CLI'
           Title.Alignment = taCenter
           Title.Caption = 'CIDADE'
+          Width = 64
           Visible = True
         end
         item
@@ -196,6 +198,7 @@ object FrmConsClientes: TFrmConsClientes
           FieldName = 'NASCIMENTO_CLI'
           Title.Alignment = taCenter
           Title.Caption = 'NASCIMENTO'
+          Width = 64
           Visible = True
         end
         item
@@ -220,6 +223,7 @@ object FrmConsClientes: TFrmConsClientes
   end
   object DSQConsCliente: TDataSource
     AutoEdit = False
+    DataSet = QConsCliente
     Left = 432
     Top = 160
   end
@@ -229,7 +233,8 @@ object FrmConsClientes: TFrmConsClientes
       'SELECT C.*, S.NOME_CLA'
       'FROM CLIENTE C'
       'INNER JOIN CLASSIF_CLIENTE S'
-      'ON (C.COD_CLA = S.COD_CLA)')
+      'ON (C.COD_CLA = S.COD_CLA)'
+      ' ')
     Left = 520
     Top = 160
     object QConsClienteCOD_CLI: TIntegerField
@@ -377,8 +382,14 @@ object FrmConsClientes: TFrmConsClientes
       'SELECT MIN(VENCTO_CTR) VENC'
       'FROM CONTAS_RECEBER R'
       'WHERE R.COD_CLI = :CODCLI AND'
-      'R.DTPAGTO_CTR IS NULL')
+      'R.DTPAGTO_CTR IS NULL'
+      ' ')
     Left = 600
     Top = 160
+    ParamData = <
+      item
+        Name = 'CODCLI'
+        ParamType = ptInput
+      end>
   end
 end

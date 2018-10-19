@@ -163,6 +163,7 @@ object FrmConsClientes01: TFrmConsClientes01
       Height = 348
       Align = alClient
       Color = clSilver
+      DataSource = DConsCliente
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
       TabOrder = 0
@@ -248,7 +249,8 @@ object FrmConsClientes01: TFrmConsClientes01
       'SELECT C.*, S.NOME_CLA'
       'FROM CLIENTE C'
       'INNER JOIN CLASSIF_CLIENTE S'
-      'ON (C.COD_CLA = S.COD_CLA)')
+      'ON (C.COD_CLA = S.COD_CLA)'
+      ' ')
     Left = 496
     Top = 144
     object QConsClienteCOD_CLI: TIntegerField
@@ -396,8 +398,19 @@ object FrmConsClientes01: TFrmConsClientes01
       'SELECT MIN(VENCTO_CTR) VENC'
       'FROM CONTAS_RECEBER R'
       'WHERE R.COD_CLI = :CODCLI AND'
-      'R.DTPAGTO_CTR IS NULL')
+      'R.DTPAGTO_CTR IS NULL'
+      ' ')
     Left = 560
     Top = 144
+    ParamData = <
+      item
+        Name = 'CODCLI'
+        ParamType = ptInput
+      end>
+  end
+  object DConsCliente: TDataSource
+    DataSet = QConsCliente
+    Left = 384
+    Top = 225
   end
 end

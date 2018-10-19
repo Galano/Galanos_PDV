@@ -172,6 +172,7 @@ object FrmConsFornecedor: TFrmConsFornecedor
     Panels = <>
   end
   object DSConsulta: TDataSource
+    DataSet = Q_Consulta
     Left = 289
     Top = 137
   end

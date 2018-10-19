@@ -1068,7 +1068,7 @@ object FrmFornecedor: TFrmFornecedor
     Left = 224
     Top = 56
     Bitmap = {
-      494C01010D002000240019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D002000280019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2486,9 +2486,15 @@ object FrmFornecedor: TFrmFornecedor
       'FROM'
       '  FORNECEDOR'
       'WHERE'
-      '  RAZAO_FOR = :nm')
+      '  RAZAO_FOR = :nm'
+      ' ')
     Left = 384
     Top = 48
+    ParamData = <
+      item
+        Name = 'NM'
+        ParamType = ptInput
+      end>
     object Q_Consulta_codCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
       Origin = 'COD_FOR'
@@ -2582,9 +2588,15 @@ object FrmFornecedor: TFrmFornecedor
       'FROM'
       '  FORNECEDOR '
       'WHERE'
-      '  COD_FOR = :cod')
+      '  COD_FOR = :cod'
+      ' ')
     Left = 296
     Top = 48
+    ParamData = <
+      item
+        Name = 'COD'
+        ParamType = ptInput
+      end>
     object Q_Consulta_filtroCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
       Origin = 'COD_FOR'

@@ -171,6 +171,7 @@ object FrmConsfPagamentos: TFrmConsfPagamentos
     end
   end
   object DSConsulta: TDataSource
+    DataSet = Q_Consulta
     Left = 319
     Top = 184
   end

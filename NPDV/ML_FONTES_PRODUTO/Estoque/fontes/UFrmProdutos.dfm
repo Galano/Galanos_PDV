@@ -1186,7 +1186,7 @@ object FrmProdutos: TFrmProdutos
           OnChange = edtCodGrupoChange
         end
         object edtCodUniEnt: TEdit
-          Left = 7
+          Left = 10
           Top = 274
           Width = 48
           Height = 21
@@ -1624,7 +1624,7 @@ object FrmProdutos: TFrmProdutos
     Width = 25
     Left = 552
     Bitmap = {
-      494C01010D007C00840019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D007C00980019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2941,7 +2941,8 @@ object FrmProdutos: TFrmProdutos
       '.bmp|TIFF Images (*.tif)|*.tif|TIFF Images (*.tiff)|*.tiff|Icons' +
       ' (*.ico)|*.ico|Enhanced Metafiles (*.emf)|*.emf|Metafiles (*.wmf' +
       ')|*.wmf'
-    Left = 328
+    Left = 360
+    Top = 72
   end
   object Q_Consulta_filtro: TFDQuery
     Connection = DmDados.Conexao
@@ -3095,8 +3096,8 @@ object FrmProdutos: TFrmProdutos
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 164
-    Top = 29
+    Left = 428
+    Top = 69
     object LinkControlToField1: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -3566,7 +3567,7 @@ object FrmProdutos: TFrmProdutos
       '  AND (P.COD_UNI_ENT = U.CODIGO)'
       'WHERE'
       '  I.COD_PRO_COMPOSICAO = :CODPRO')
-    Left = 208
+    Left = 160
     Top = 304
     ParamData = <
       item

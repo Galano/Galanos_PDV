@@ -170,6 +170,7 @@ object FrmConsSecao: TFrmConsSecao
     end
   end
   object DSConsulta: TDataSource
+    DataSet = Q_Consulta
     Left = 384
     Top = 201
   end

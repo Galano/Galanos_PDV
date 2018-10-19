@@ -292,12 +292,14 @@ object FrmConsProduto: TFrmConsProduto
     end
   end
   object FormStorage1: TFormStorage
+    Active = False
     StoredValues = <>
     Left = 400
     Top = 288
   end
   object DSProd: TDataSource
     AutoEdit = False
+    DataSet = QProd
     Left = 512
     Top = 280
   end

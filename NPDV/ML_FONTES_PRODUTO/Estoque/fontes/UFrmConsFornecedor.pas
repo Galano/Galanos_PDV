@@ -3,7 +3,8 @@ unit UFrmConsFornecedor;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ComCtrls, Vcl.Grids,
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, IBX.IBCustomDataSet, IBX.IBQuery,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
@@ -64,79 +65,89 @@ Uses Udm, Ubibliotecas, UFornecedor, UFrmOutrasEntradas, UFrmConsOutrasEntradas,
 procedure TFrmConsFornecedor.BtnOkClick(Sender: TObject);
 begin
   with Q_Consulta do
-     begin
-        close;
-        sql.Clear;
-        case ComboCons.ItemIndex of
-         -1:begin
-              if EdtCons.Text = '' then
-                 sql.Text:= 'SELECT * FROM FORNECEDOR ORDER BY RAZAO_FOR'
-              else
-                 sql.Text:= 'SELECT * FROM FORNECEDOR WHERE COD_FOR = ' + edtcons.Text;
-              open;
-           end;
-         0:begin
-              if EdtCons.Text = '' then
-                 sql.Text:= 'SELECT * FROM FORNECEDOR ORDER BY COD_FOR'
-              else
-                 sql.Text:= 'SELECT * FROM FORNECEDOR WHERE COD_FOR = ' + edtcons.Text;
-              open;
-           end;
-         1:begin
-              sql.Text:= 'SELECT * FROM FORNECEDOR WHERE RAZAO_FOR LIKE ' + #39 + edtcons.Text + '%' + #39 + ' ORDER BY RAZAO_FOR';
-              open;
-           end;
-         2:begin
-              sql.Text:= 'SELECT * FROM FORNECEDOR WHERE CNPJ_FOR = ' + #39 + FormataCNPJ(trim(edtcons.Text)) + #39;
-              open;
-           end;
-         3:begin
-              sql.Text:= 'SELECT * FROM FORNECEDOR WHERE RAZAO_FOR LIKE ' + #39 + '%' + trim(EdtCons.Text) + '%' + #39 + ' ORDER BY RAZAO_FOR';
-              open;
-           end;
+  begin
+    close;
+    sql.Clear;
+    case ComboCons.ItemIndex of
+      - 1:
+        begin
+          if EdtCons.Text = '' then
+            sql.Text := 'SELECT * FROM FORNECEDOR ORDER BY RAZAO_FOR'
+          else
+            sql.Text := 'SELECT * FROM FORNECEDOR WHERE COD_FOR = ' +
+              EdtCons.Text;
+          open;
         end;
-     end;
-  DmDados.IBTransaction1.CommitRetaining;
-  dbgrid.SetFocus;
+      0:
+        begin
+          if EdtCons.Text = '' then
+            sql.Text := 'SELECT * FROM FORNECEDOR ORDER BY COD_FOR'
+          else
+            sql.Text := 'SELECT * FROM FORNECEDOR WHERE COD_FOR = ' +
+              EdtCons.Text;
+          open;
+        end;
+      1:
+        begin
+          sql.Text := 'SELECT * FROM FORNECEDOR WHERE RAZAO_FOR LIKE ' + #39 +
+            EdtCons.Text + '%' + #39 + ' ORDER BY RAZAO_FOR';
+          open;
+        end;
+      2:
+        begin
+          sql.Text := 'SELECT * FROM FORNECEDOR WHERE CNPJ_FOR = ' + #39 +
+            FormataCNPJ(trim(EdtCons.Text)) + #39;
+          open;
+        end;
+      3:
+        begin
+          sql.Text := 'SELECT * FROM FORNECEDOR WHERE RAZAO_FOR LIKE ' + #39 +
+            '%' + trim(EdtCons.Text) + '%' + #39 + ' ORDER BY RAZAO_FOR';
+          open;
+        end;
+    end;
+  end;
+  // DmDados.IBTransaction1.CommitRetaining;
+  DBGrid.SetFocus;
 end;
 
 procedure TFrmConsFornecedor.BtnSairClick(Sender: TObject);
 begin
-  Close;
+  close;
 end;
 
 procedure TFrmConsFornecedor.DBGridDblClick(Sender: TObject);
 begin
-  //Form de Cadastro
+  // Form de Cadastro
   if (FrmConsFornecedor.Tag = 0) then
   begin
-    FrmFornecedor.edtCod.text := Q_ConsultaCOD_FOR.AsString;
+    FrmFornecedor.edtCod.Text := Q_ConsultaCOD_FOR.AsString;
     FrmFornecedor.btFiltroClick(Self);
     FrmFornecedor.BtnAlterarClick(Self);
   end;
 
-  //Form de Entrada Estoque
+  // Form de Entrada Estoque
   if (FrmConsFornecedor.Tag = 1) then
   begin
-    FrmOutrasEntradas.EdtCodFor.text := Q_ConsultaCOD_FOR.AsString;
-    FrmOutrasEntradas.EdtNomeFor.text := Q_ConsultaRAZAO_FOR.AsString;
+    FrmOutrasEntradas.EdtCodFor.Text := Q_ConsultaCOD_FOR.AsString;
+    FrmOutrasEntradas.EdtNomeFor.Text := Q_ConsultaRAZAO_FOR.AsString;
   end;
 
   // Consulta Entradas
   if (FrmConsFornecedor.Tag = 2) then
   begin
-    FrmConsOutrasEntradas.EdtCodFor.text := Q_ConsultaCOD_FOR.AsString;
-    FrmConsOutrasEntradas.EdtNomeFor.text := Q_ConsultaRAZAO_FOR.AsString;
+    FrmConsOutrasEntradas.EdtCodFor.Text := Q_ConsultaCOD_FOR.AsString;
+    FrmConsOutrasEntradas.EdtNomeFor.Text := Q_ConsultaRAZAO_FOR.AsString;
   end;
 
   // Consulta Entradas
   if (FrmConsFornecedor.Tag = 3) then
   begin
-    FrmRelEntradas.EdtCodFor.text := Q_ConsultaCOD_FOR.AsString;
-    FrmRelEntradas.EdtNomeFor.text := Q_ConsultaRAZAO_FOR.AsString;
+    FrmRelEntradas.EdtCodFor.Text := Q_ConsultaCOD_FOR.AsString;
+    FrmRelEntradas.EdtNomeFor.Text := Q_ConsultaRAZAO_FOR.AsString;
   end;
 
-  Close;
+  close;
 end;
 
 end.

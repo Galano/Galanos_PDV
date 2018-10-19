@@ -835,8 +835,8 @@ object DmDados: TDmDados
     Top = 88
   end
   object Q_executa: TFDQuery
+    AutoCalcFields = False
     Connection = Conexao
-    Transaction = IBTransaction1
     Left = 360
     Top = 96
   end

@@ -429,7 +429,7 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
     Left = 320
     Top = 16
     Bitmap = {
-      494C01010D0018001C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D001800200019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1764,11 +1764,13 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
   end
   object DSGrupo: TDataSource
     AutoEdit = False
+    DataSet = QGrupo
     Left = 136
     Top = 280
   end
   object DSSub: TDataSource
     AutoEdit = False
+    DataSet = QSub
     Left = 120
     Top = 520
   end
@@ -1833,9 +1835,21 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       'SELECT *'
       'FROM SECAO_GRUPO_SUBGRUPO'
       'WHERE COD_SEC = :CODSEC AND COD_GRUPO = :CODGRUPO'
-      'ORDER BY DESCRICAO')
+      'ORDER BY DESCRICAO'
+      ' ')
     Left = 452
     Top = 105
+    ParamData = <
+      item
+        Name = 'CODSEC'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODGRUPO'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
     object QSubCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
       Origin = 'COD_SEC'
@@ -1865,9 +1879,17 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       'SELECT *'
       'FROM SECAO_GRUPO'
       'WHERE COD_SEC = :CODSEC'
-      'ORDER BY DESCRICAO')
+      'ORDER BY DESCRICAO'
+      ' ')
     Left = 502
     Top = 105
+    ParamData = <
+      item
+        Name = 'CODSEC'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = '1'
+      end>
     object QGrupoCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
       Origin = 'COD_SEC'

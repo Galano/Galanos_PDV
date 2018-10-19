@@ -4,7 +4,7 @@ object FrmConsVendedor: TFrmConsVendedor
   BorderIcons = [biSystemMenu]
   Caption = 'Estoque Master - Consulta Vendedor'
   ClientHeight = 469
-  ClientWidth = 458
+  ClientWidth = 461
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object FrmConsVendedor: TFrmConsVendedor
   object Panel1: TPanel
     Left = 0
     Top = 65
-    Width = 458
+    Width = 461
     Height = 56
     Align = alTop
     BevelInner = bvLowered
@@ -27,6 +27,7 @@ object FrmConsVendedor: TFrmConsVendedor
     BevelWidth = 2
     Color = 16710131
     TabOrder = 0
+    ExplicitWidth = 458
     object LTipo: TLabel
       Left = 8
       Top = 8
@@ -56,7 +57,7 @@ object FrmConsVendedor: TFrmConsVendedor
   object Panel2: TPanel
     Left = 0
     Top = 121
-    Width = 458
+    Width = 461
     Height = 329
     Align = alClient
     BevelInner = bvLowered
@@ -64,13 +65,15 @@ object FrmConsVendedor: TFrmConsVendedor
     BevelWidth = 2
     Color = 16710131
     TabOrder = 1
+    ExplicitWidth = 458
     object DBGrid: TDBGrid
       Left = 2
       Top = 2
-      Width = 454
+      Width = 457
       Height = 287
       Align = alTop
       Color = clSilver
+      DataSource = DSConsulta
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
       TabOrder = 0
@@ -122,14 +125,15 @@ object FrmConsVendedor: TFrmConsVendedor
   object StatusBar1: TStatusBar
     Left = 0
     Top = 450
-    Width = 458
+    Width = 461
     Height = 19
     Panels = <>
+    ExplicitWidth = 458
   end
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 458
+    Width = 461
     Height = 65
     Align = alTop
     BevelInner = bvLowered
@@ -137,10 +141,11 @@ object FrmConsVendedor: TFrmConsVendedor
     BevelWidth = 2
     Color = 16710131
     TabOrder = 3
+    ExplicitWidth = 458
     object Label1: TLabel
       Left = 2
       Top = 2
-      Width = 454
+      Width = 457
       Height = 13
       Align = alTop
       Caption = 'Consultar Por'
@@ -157,10 +162,11 @@ object FrmConsVendedor: TFrmConsVendedor
     object GroupBox1: TGroupBox
       Left = 2
       Top = 15
-      Width = 454
+      Width = 457
       Height = 48
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 454
       object ComboCons: TComboBox
         Left = 8
         Top = 16
@@ -181,8 +187,8 @@ object FrmConsVendedor: TFrmConsVendedor
     Connection = DmDados.Conexao
     SQL.Strings = (
       'select *  from VENDEDOR')
-    Left = 408
-    Top = 144
+    Left = 312
+    Top = 192
     object Q_ConsultaCOD_VEND: TIntegerField
       FieldName = 'COD_VEND'
       Origin = 'COD_VEND'
@@ -208,5 +214,10 @@ object FrmConsVendedor: TFrmConsVendedor
       Precision = 18
       Size = 2
     end
+  end
+  object DSConsulta: TDataSource
+    DataSet = Q_Consulta
+    Left = 376
+    Top = 265
   end
 end

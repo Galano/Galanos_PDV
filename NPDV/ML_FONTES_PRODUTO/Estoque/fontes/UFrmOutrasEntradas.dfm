@@ -321,8 +321,8 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       Color = 16710131
       TabOrder = 1
       object Label17: TLabel
-        Left = 8
-        Top = 16
+        Left = 10
+        Top = 13
         Width = 70
         Height = 13
         Caption = 'Cod.Produto *'
@@ -627,6 +627,7 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
         Height = 261
         Align = alBottom
         Color = clSilver
+        DataSource = DSQBuscaItens
         TabOrder = 11
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -737,7 +738,6 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
         Width = 121
         Height = 21
         TabOrder = 14
-        Text = 'EdtCodPro'
         Visible = False
       end
     end
@@ -892,7 +892,7 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
     Left = 171
     Top = 296
     Bitmap = {
-      494C010111005000580019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110050005C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000640000007D000000010020000000000050C3
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2586,9 +2586,16 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       'FROM'
       '  ENTRADAS'
       'WHERE'
-      '  COD_OUTRA = :cod')
+      '  COD_OUTRA = :cod'
+      ' ')
     Left = 101
     Top = 343
+    ParamData = <
+      item
+        Name = 'COD'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
     object Q_Consulta_filtroCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
       Origin = 'COD_OUTRA'
@@ -2641,9 +2648,15 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
     SQL.Strings = (
       'SELECT MAX(ORDEM) AS ORDEM'
       'FROM ITENS_ENTRADAS'
-      'WHERE COD_OUTRA = :CODIGO')
+      'WHERE COD_OUTRA = :CODIGO'
+      ' ')
     Left = 27
     Top = 344
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
     object QOrdemORDEM: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'ORDEM'
@@ -2657,9 +2670,16 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
     SQL.Strings = (
       'SELECT SUM(VALOR_TOTAL_ITEM) AS TOTAL'
       'FROM ITENS_ENTRADAS'
-      'WHERE COD_OUTRA = :CODIGO')
+      'WHERE COD_OUTRA = :CODIGO'
+      ' ')
     Left = 173
     Top = 345
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
     object Q_TOTALTOTAL: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TOTAL'
@@ -2680,9 +2700,15 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       'WHERE I.COD_OUTRA = :COD'
       'ORDER BY I.ORDEM'
       ''
-      '')
+      ' '
+      '  ')
     Left = 29
     Top = 401
+    ParamData = <
+      item
+        Name = 'COD'
+        ParamType = ptInput
+      end>
     object QBuscaItensCOD_ITEM: TIntegerField
       FieldName = 'COD_ITEM'
       Origin = 'COD_ITEM'
@@ -2769,15 +2795,26 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
     end
   end
   object Q_ESTOQUE: TFDQuery
+    Connection = DmDados.Conexao
     SQL.Strings = (
       'UPDATE'
       '  PRODUTO'
       'SET'
       '  QUANT_ESTOQ = :QTD'
       'WHERE'
-      '  PRODUTO.COD_PRO = :COD')
+      '  PRODUTO.COD_PRO = :COD'
+      ' ')
     Left = 102
     Top = 456
+    ParamData = <
+      item
+        Name = 'QTD'
+        ParamType = ptInput
+      end
+      item
+        Name = 'COD'
+        ParamType = ptInput
+      end>
   end
   object QPesqEstoque: TFDQuery
     Connection = DmDados.Conexao
@@ -2789,9 +2826,15 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       'FROM'
       '  PRODUTO'
       'WHERE'
-      '  PRODUTO.COD_PRO = :cod')
+      '  PRODUTO.COD_PRO = :cod'
+      ' ')
     Left = 100
     Top = 400
+    ParamData = <
+      item
+        Name = 'COD'
+        ParamType = ptInput
+      end>
     object QPesqEstoqueCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
       Origin = 'COD_PRO'
@@ -2820,9 +2863,17 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       'FROM'
       '  FORNECEDOR'
       'WHERE'
-      '  FORNECEDOR.COD_FOR = :cod')
+      '  FORNECEDOR.COD_FOR = :cod'
+      ' '
+      ' ')
     Left = 172
     Top = 402
+    ParamData = <
+      item
+        Name = 'COD'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
     object QForCOD_FOR: TIntegerField
       FieldName = 'COD_FOR'
       Origin = 'COD_FOR'
@@ -2843,13 +2894,30 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       ' PRODUTO.COD_PRO, '
       '  PRODUTO.NOME_PRO,'
       '  PRODUTO.QUANT_ESTOQ,'
+      'PRODUTO.CODIGO_BARRA_PRO,'
       ' COD_GRUP'
       'FROM'
       '  PRODUTO'
       'WHERE'
-      '  PRODUTO.CODIGO_BARRA_PRO = :cod')
+      '  PRODUTO.CODIGO_BARRA_PRO = :cod'
+      'or'
+      'PRODUTO.COD_PRO = :cod2'
+      ''
+      ' ')
     Left = 173
     Top = 457
+    ParamData = <
+      item
+        Name = 'COD'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 14
+      end
+      item
+        Name = 'COD2'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
     object QProdCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
       Origin = 'COD_PRO'
@@ -2873,11 +2941,18 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       Origin = 'COD_GRUP'
       Required = True
     end
+    object QProdCODIGO_BARRA_PRO: TStringField
+      FieldName = 'CODIGO_BARRA_PRO'
+      Origin = 'CODIGO_BARRA_PRO'
+      Required = True
+      Size = 14
+    end
   end
   object Q_Consulta_cod: TFDQuery
     Connection = DmDados.Conexao
     SQL.Strings = (
-      'select max(COD_OUTRA) as COD_OUTRA from ENTRADAS')
+      'select max(COD_OUTRA) as COD_OUTRA from ENTRADAS'
+      ' ')
     Left = 31
     Top = 456
     object Q_Consulta_codCOD_OUTRA: TIntegerField
@@ -2896,9 +2971,15 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       'FROM'
       '  PRODUTO'
       'WHERE'
-      '  COD_PRO = :cod')
+      '  COD_PRO = :cod'
+      ' ')
     Left = 243
     Top = 457
+    ParamData = <
+      item
+        Name = 'COD'
+        ParamType = ptInput
+      end>
     object Q_Attualiza_PrecoCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
       Origin = 'COD_PRO'
@@ -3023,5 +3104,11 @@ object FrmOutrasEntradas: TFrmOutrasEntradas
       FieldName = 'CAMINHO_FOTO_PRO'
       Origin = 'CAMINHO_FOTO_PRO'
     end
+  end
+  object DSQBuscaItens: TDataSource
+    AutoEdit = False
+    DataSet = QBuscaItens
+    Left = 280
+    Top = 360
   end
 end

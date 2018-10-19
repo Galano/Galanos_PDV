@@ -267,6 +267,7 @@ object FrmConsOutrasEntradas: TFrmConsOutrasEntradas
   end
   object DSQConsOE: TDataSource
     AutoEdit = False
+    DataSet = QConsOE
     Left = 120
     Top = 176
   end
