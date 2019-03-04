@@ -166,12 +166,12 @@ begin
     sql.Text := sSql;
     sql.Add(' WHERE VENDAS.DATA BETWEEN :DATAINI AND :DATAFIN ');
 
-    if EdtCodCli.Text <> '' then
+   { if EdtCodCli.Text <> '' then
       sql.Add(' AND VENDAS.COD_CLIENTE = ' + EdtCodCli.Text);
 
     if ComboTipoVenda.ItemIndex > -1 then
       sql.Add(' AND VENDAS.COD_FPGTO = ' + lbCodFP.Caption);
-
+                                                                 }
     sql.Add(' ORDER BY VENDAS.DATA, VENDAS.COD_VENDAS');
     Parambyname('dataini').AsDate := EdtDataIni.Date;
     Parambyname('datafin').AsDate := EdtDataFin.Date;

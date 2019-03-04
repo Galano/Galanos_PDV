@@ -10,7 +10,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
   FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, ACBrBase,
+  ACBrPosPrinter, TypInfo, RxDBCurrEdit;
 
 type
     TFrmVendas = class(TForm)
@@ -46,7 +47,6 @@ type
         Label14: TLabel;
         Label15: TLabel;
         EDT_Cliente: TEdit;
-        EDT_CondPagto: TEdit;
         edtRecebido: TCurrencyEdit;
         Q_Clientes: TFDQuery;
         Q_FPGTO: TFDQuery;
@@ -107,8 +107,6 @@ type
     mskQuantidade: TCurrencyEdit;
     Shape5: TShape;
     Shape6: TShape;
-    Shape7: TShape;
-    Shape8: TShape;
     Q_ClientesCOD_CLI: TIntegerField;
     Q_ClientesNOME_CLI: TStringField;
     Q_ClientesLIMITE_CLI: TBCDField;
@@ -140,6 +138,44 @@ type
     QtdEstoqueItemPRECO_PROMOCAO: TBCDField;
     QtdEstoqueItemQUANT_ESTOQ: TBCDField;
     QtdEstoqueItemATIVO_PRO: TStringField;
+    ACBrPosPrinter1: TACBrPosPrinter;
+    bAtivar: TBitBtn;
+    cbxPorta: TComboBox;
+    cbxModelo: TComboBox;
+    SpeedButton5: TSpeedButton;
+    BtnTeste: TBitBtn;
+    pnlAtalho: TPanel;
+    EDT_CondPagto: TRadioGroup;
+    Label18: TLabel;
+    qCaixa: TFDQuery;
+    dsCaixa: TDataSource;
+    qCaixaTOTAL: TBCDField;
+    qCaixaHORA: TTimeField;
+    gridTotais: TDBGrid;
+    qCaixaTOTALDIA: TBCDField;
+    dbTotalX: TDBEdit;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    qCaixaCOD_VENDAS: TIntegerField;
+    btnXerox: TSpeedButton;
+    btnColor: TSpeedButton;
+    btnImpressao: TSpeedButton;
+    btnEstampa: TSpeedButton;
+    btnCBranca: TSpeedButton;
+    btnCpreta: TSpeedButton;
+    btnCaneca: TSpeedButton;
+    btn2viaconta: TSpeedButton;
+    btnAcesso: TSpeedButton;
+    btnDiversos: TSpeedButton;
+    btnPlasti: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    SpeedButton9: TSpeedButton;
+    SpeedButton10: TSpeedButton;
+    SpeedButton11: TSpeedButton;
+    SpeedButton12: TSpeedButton;
+    SpeedButton13: TSpeedButton;
+    btnDel: TSpeedButton;
+    edtIDdel: TCurrencyEdit;
         procedure EDT_ClienteChange(Sender: TObject);
         procedure EDT_CondPagtoChange(Sender: TObject);
         procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -186,16 +222,28 @@ type
     procedure BitBtn3Click(Sender: TObject);
     procedure DateRecebimentoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure bAtivarClick(Sender: TObject);
+    procedure cbxModeloChange(Sender: TObject);
+    procedure cbxPortaChange(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure BtnTesteClick(Sender: TObject);
+    procedure btn01Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure btnDelClick(Sender: TObject);
     private
     { Private declarations }
     public
     { Public declarations }
+        procedure SalvarVenda();
         function PegaCodVenda: Integer;
         function FinnalizaVenda(Cod_Venda: Integer): Boolean;
         function BaixaItemVenda(COD_VENDA, COD_PRO, COD_EMP, ORDEM: Integer; QUANT_ITEM : Currency; VALOR_ITEM: Currency): Boolean;
         procedure AddItemVenda;
         function GeneratorID(aName: string; Connection: TFDConnection; Incrementa: Boolean): integer;
-        
+        Procedure AtivarCaixa;
+        function ImprimeCupomV2(ndeColunas : Integer; sEmpNome, sTel, sEmpCNPJ, sEmpEnde, sCodVenda, sCliente, sFPGTO, subTotal, Desconto, Total, Troco : String) : Boolean;
+        Procedure AtualizarMysql;
     end;
 
 var
@@ -220,7 +268,7 @@ function Excluir(Tabela, campo_tabela, campo_excluir: string): Boolean;
 begin
     try
         try
-            DmDados.IBTransaction1.StartTransaction;
+           // //DmDados.IBTransaction1.StartTransaction;
             with DmDados.Q_executa do
             begin
                 sql.Clear;
@@ -229,10 +277,10 @@ begin
             end;
 
             Result := true;
-            DmDados.IBTransaction1.CommitRetaining;
+          //  //DmDados.IBTransaction1.CommitRetaining;
 
         except
-            DmDados.IBTransaction1.RollbackRetaining;
+          //  DmDados.IBTransaction1.RollbackRetaining;
             Result := false;
         end;
     finally
@@ -245,7 +293,7 @@ function TFrmVendas.FinnalizaVenda(Cod_Venda: Integer): Boolean;
 begin
     try
         try
-            DmDados.IBTransaction1.StartTransaction;
+            ////DmDados.IBTransaction1.StartTransaction;
             with DmDados.Q_executa do
             begin
                 Close;
@@ -254,28 +302,28 @@ begin
                 ParamByName('cod').Value := Cod_Venda;
                 ParamByName('cod_vendedor').Value := 1;
                 ParamByName('cod_cli').Value := EDT_Cliente.Text;
-                ParamByName('cod_fp').Value := EDT_CondPagto.Text;
+                ParamByName('cod_fp').Value := EDT_CondPagto.ItemIndex;
                 ParamByName('tot').Value := EdtTotal.Value;
                 ParamByName('dt').Value := Date;
                 ParamByName('hr').Value := Time;
                 ParamByName('obs').Value := Memo1.Text;
 
-                if (edt_CondPagto.Text = '1') then
+                if (edt_CondPagto.ItemIndex  = 1) then
                 begin
                   ParamByName('dias').Value := 0;
                 end;
 
-                if (edt_CondPagto.Text = '2') then
+                if (edt_CondPagto.ItemIndex = 2) then
                 begin
                   ParamByName('dias').Value := 1;
                 end;
 
-                if (edt_CondPagto.Text = '3') then
+                if (edt_CondPagto.ItemIndex = 3) then
                 begin
                   ParamByName('dias').Value := 14;
                 end;
 
-                if (edt_CondPagto.Text = '4') then
+                if (edt_CondPagto.ItemIndex = 4) then
                 begin
                   ParamByName('dias').Value := DateRecebimento.Date - Date;
                 end;
@@ -283,7 +331,7 @@ begin
                 ExecSQL;
             end;
 
-            DmDados.IBTransaction1.CommitRetaining;
+           // //DmDados.IBTransaction1.CommitRetaining;
 
             cdsitensVendas.First;
 
@@ -295,17 +343,20 @@ begin
             end;
 
             Result := True;
+           qCaixa.Active := False;
+           qCaixa.Active := True;
 
         except
             on e: exception do
             begin
-                DmDados.IBTransaction1.RollbackRetaining;
+               // DmDados.IBTransaction1.RollbackRetaining;
                 Result := False;
             end;
         end;
     finally
         DmDados.Q_executa.Close;
     end;
+
 end;
 
 function TFrmVendas.PegaCodVenda: Integer;
@@ -314,7 +365,7 @@ var
 begin
     try
         try
-            DmDados.IBTransaction1.StartTransaction;
+            ////DmDados.IBTransaction1.StartTransaction;
 
             with DmDados.Q_executa do
             begin
@@ -330,7 +381,7 @@ begin
                 ExecSQL;
             end;
 
-            DmDados.IBTransaction1.CommitRetaining;
+            //DmDados.IBTransaction1.CommitRetaining;
 
             IDVenda := GeneratorID('GEN_VENDAS_ID', DmDados.conexao, False);
 
@@ -345,10 +396,95 @@ begin
     finally
         DmDados.Q_executa.Close;
     end;
+ qCaixa.Active := False;
+ qCaixa.Active := True;
+
+end;
+
+procedure TFrmVendas.SalvarVenda;
+var
+  Total : String;
+begin
+if (edtRecebido.Value < EdtTotal.Value) then
+        begin
+            Application.MessageBox('O valor recebdo é menor que o valor da venda, Por favor corrigir!', 'Erro', mb_ok + MB_ICONERROR);
+            edtRecebido.SetFocus;
+            Exit;
+        end;
+
+        if application.MessageBox('Deseja finaliza a venda?', 'Finalização de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton1) = 6 then
+        begin
+            Total := lbTotal.Caption;
+            if (FinnalizaVenda(spCodVenda.Value)) then
+            begin
+                grdVendas.Color := clBtnFace;
+                grdVendas.Enabled := False;
+
+                mskCodigo.Color := clBtnFace;
+                mskCodigo.Enabled := False;
+
+                mskQuantidade.Color := clBtnFace;
+                mskQuantidade.Enabled := False;
+
+                LBpRODUTO.Caption := '';
+                mskCodigo.Clear;
+                mskQuantidade.Clear;
+                edtValorUni.Clear;
+                edTotalItem.Clear;
+                //EdtTotal.Clear;
+
+                edtRecebido.Clear;
+                EDT_Cliente.Clear;
+                EDT_CondPagto.ItemIndex := 0;
+                edtTroco.Clear;
+                Memo1.Clear;
+
+
+                if (PNL_Fechamento.Visible = true) then
+                begin
+                    PNL_Fechamento.Visible := False;
+                end;
+
+                if application.MessageBox('Deseja finaliza a venda e imprimir o cumpom?', 'Cancelamento de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton2) = 6 then
+                begin
+
+                  if ImprimeCupomV2(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
+                  lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
+                  formatfloat('##,###,##0.00', edtTroco.Value)) then
+                  begin
+                    //ShowMessage('O cupom foi impresso com sucesso!');
+                  end;
+
+
+                end;
+
+                lbCliente.Caption := '';
+                Lbfp.Caption := '';
+
+                EdtTotal.Clear;
+
+                // Só depois de perguntar de quer imprimir o cupom que ele fecha os itens da venda
+                cdsitensVendas.Close;
+
+              // Fecha a Venda
+                VendaAberta := false;
+
+                if ACBrPosPrinter1.Ativo then
+                  ACBrPosPrinter1.ImprimirLinha('</abre_gaveta>');
+
+
+                  ShowMessage('Valor '+lbTotalCom.Caption+' salvo com sucesso');
+            end;
+
+        end;
+        AtualizarMysql;
 end;
 
 procedure TFrmVendas.EDT_ClienteChange(Sender: TObject);
 begin
+    if EDT_Cliente.Text='' then
+      EDT_Cliente.Text := '1';
+
     if (EDT_Cliente.Text <> '') then
     begin
         with Q_Clientes do
@@ -373,12 +509,12 @@ end;
 
 procedure TFrmVendas.EDT_CondPagtoChange(Sender: TObject);
 begin
-    if (EDT_CondPagto.Text <> '') then
+    if (EDT_CondPagto.ItemIndex < 0) then
     begin
         with Q_FPGTO do
         begin
             Close;
-            ParamByName('cod').Value := EDT_CondPagto.Text;
+            ParamByName('cod').Value := EDT_CondPagto.ItemIndex;
             Open;
             FetchAll;
         end;
@@ -393,7 +529,7 @@ begin
         end;
     end;
 
-    if (EDT_CondPagto.Text = '4') then
+    if (EDT_CondPagto.ItemIndex = 4) then
     begin
       edtRecebido.Visible := false;
     end
@@ -426,8 +562,30 @@ begin
 
     if (Key = VK_F5) then
     begin
-      SpeedButton3Click(Self);    
+      SpeedButton3Click(Self);
     end;
+
+    if (Key = VK_F10) then
+    begin
+      SpeedButton5Click(Self);
+    end;
+
+
+    if (Key = VK_F11) and (Shift = [ssCtrl]) then
+    begin
+      gridTotais.Visible := not gridTotais.Visible;
+      dbTotalX.Visible   := not dbTotalX.Visible;
+      bAtivar.Visible    := not bAtivar.Visible;
+      BtnTeste.Visible   := not BtnTeste.Visible;
+      edtIDdel.Visible   := not edtIDdel.Visible;
+      btnDel.Visible     := not btnDel.Visible;
+    end;
+
+
+
+//gridTotais;
+
+
 end;
 
 procedure TFrmVendas.FormKeyPress(Sender: TObject; var Key: Char);
@@ -437,6 +595,9 @@ begin
         Key := #0;
         SelectNext(ActiveControl, True, True);
     end;   }
+
+
+
 end;
 
 procedure TFrmVendas.FormShow(Sender: TObject);
@@ -579,18 +740,48 @@ begin
 end;
 
 procedure TFrmVendas.FormCreate(Sender: TObject);
+var
+  I: TACBrPosPrinterModelo;
+  J: TACBrPosPaginaCodigo;
+  K: Integer;
 begin
     cdsitensVendas.CreateDataSet;
 
     WindowState := wsMaximized;
 
-    
+
 
 
     Application.CreateForm(TFrrmLogin,FrrmLogin);
     FrrmLogin.ShowModal;
     FrrmLogin.Hide;
     FrrmLogin.Free;
+
+
+  cbxModelo.Items.Clear ;
+  For I := Low(TACBrPosPrinterModelo) to High(TACBrPosPrinterModelo) do
+     cbxModelo.Items.Add( GetEnumName(TypeInfo(TACBrPosPrinterModelo), integer(I) ) ) ;
+
+{  cbxPagCodigo.Items.Clear ;
+  For J := Low(TACBrPosPaginaCodigo) to High(TACBrPosPaginaCodigo) do
+     cbxPagCodigo.Items.Add( GetEnumName(TypeInfo(TACBrPosPaginaCodigo), integer(J) ) ) ;
+ }
+
+
+  cbxPorta.Items.Clear;
+  ACBrPosPrinter1.Device.AcharPortasSeriais( cbxPorta.Items );
+  cbxPorta.Items.Add('COM3') ;
+
+
+  cbxModelo.ItemIndex := 2;
+  cbxPorta.ItemIndex := 1;
+
+//   if not (ParamStr(1)='CAIXA_TESTE') then
+  bAtivar.Click;
+
+  qCaixa.Active := False;
+  qCaixa.Active := True;
+
 end;
 
 procedure TFrmVendas.mskQuantidadeKeyDown(Sender: TObject; var Key: Word;
@@ -598,6 +789,7 @@ procedure TFrmVendas.mskQuantidadeKeyDown(Sender: TObject; var Key: Word;
 begin
     if (Key = VK_Return) then
     begin
+     //edtValorUni.Visible := false;
      if (QProd_CodBarra.RecordCount > 0) then
      begin
       if (mskQuantidade.Value > 0) then
@@ -665,77 +857,18 @@ end;
 
 procedure TFrmVendas.edtRecebidoKeyDown(Sender: TObject; var Key: Word;
     Shift: TShiftState);
-var
-  Total : String;
+
 begin
     if (Key = VK_Return) then
     begin
-        if (edtRecebido.Value < EdtTotal.Value) then
-        begin
-            Application.MessageBox('O valor recebdo é menor que o valor da venda, Por favor corrigir!', 'Erro', mb_ok + MB_ICONERROR);
-            edtRecebido.SetFocus;
-            Exit;
-        end;
+       SalvarVenda;
 
-        if application.MessageBox('Deseja finaliza a venda?', 'Finalização de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton1) = 6 then
-        begin
-            Total := lbTotal.Caption;
-            if (FinnalizaVenda(spCodVenda.Value)) then
-            begin
-                grdVendas.Color := clBtnFace;
-                grdVendas.Enabled := False;
-
-                mskCodigo.Color := clBtnFace;
-                mskCodigo.Enabled := False;
-
-                mskQuantidade.Color := clBtnFace;
-                mskQuantidade.Enabled := False;
-
-                LBpRODUTO.Caption := '';
-                mskCodigo.Clear;
-                mskQuantidade.Clear;
-                edtValorUni.Clear;
-                edTotalItem.Clear;
-                //EdtTotal.Clear;
-
-                edtRecebido.Clear;
-                EDT_Cliente.Clear;
-                EDT_CondPagto.Clear;
-                edtTroco.Clear;
-                Memo1.Clear;
-
-
-                if (PNL_Fechamento.Visible = true) then
-                begin
-                    PNL_Fechamento.Visible := False;
-                end;
-
-                if application.MessageBox('Deseja finaliza a venda e imprimir o cumpom?', 'Cancelamento de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton2) = 6 then
-                begin
-
-                  if ImprimeCupom(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
-                  lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
-                  formatfloat('##,###,##0.00', edtTroco.Value)) then
-                  begin
-                    //ShowMessage('O cupom foi impresso com sucesso!');
-                  end;
-
-
-                end;
-
-                lbCliente.Caption := '';
-                Lbfp.Caption := '';
-
-                EdtTotal.Clear;
-
-                // Só depois de perguntar de quer imprimir o cupom que ele fecha os itens da venda
-                cdsitensVendas.Close;
-
-              // Fecha a Venda
-                VendaAberta := false;
-            end;
-        end;
+        
     end;
+
+ qCaixa.Active := False;
+ qCaixa.Active := True;
+
 end;
 
 procedure TFrmVendas.edtRecebidoChange(Sender: TObject);
@@ -758,7 +891,7 @@ end;
 
 procedure TFrmVendas.EDT_CondPagtoExit(Sender: TObject);
 begin
-    if (EDT_CondPagto.Text = '') then
+    if (EDT_CondPagto.ItemIndex < 0) then
     begin
         Application.MessageBox('Por favor informe a forma de pagamento para a venda!', 'Erro', mb_ok + MB_ICONERROR);
         if (PNL_Fechamento.Visible) then
@@ -768,7 +901,7 @@ begin
         Abort;
     end;
 
-    if (EDT_CondPagto.Text = '4') then
+    if (EDT_CondPagto.ItemIndex = 4) then
     begin
       if (EdtTotal.Value > Q_ClientesLIMITE_CLI.Value) then
       begin
@@ -777,7 +910,7 @@ begin
         Abort;
       end;
 
-      if (EDT_CondPagto.Text = '4') then
+      if (EDT_CondPagto.ItemIndex = 4) then
       begin
         if (pnlObs.Visible = false) then
         begin
@@ -789,21 +922,21 @@ begin
       end;
     end;
 
-    if (EDT_CondPagto.Text = '2') then  // Cartão de débito
+    if (EDT_CondPagto.ItemIndex = 2) then  // Cartão de débito
     begin
       DateRecebimento.Visible := true;
       DateRecebimento.Date := Date + 1;
       edtRecebido.Visible := false;
     end;
 
-    if (EDT_CondPagto.Text = '3') then  // Cartão de Crédito
+    if (EDT_CondPagto.ItemIndex = 3) then  // Cartão de Crédito
     begin
       DateRecebimento.Visible := true;
       DateRecebimento.Date := Date + 14;
       edtRecebido.Visible := false;
     end;
 
-    if (EDT_CondPagto.Text = '1') then  // Cartão de Crédito
+    if (EDT_CondPagto.ItemIndex = 1) then  // Cartão de Crédito
     begin
       DateRecebimento.Visible := false;
       edtRecebido.Visible := true;
@@ -838,6 +971,9 @@ begin
         FrmConsCliente.Hide;
         FrmConsCliente.Free;
     end;
+
+ qCaixa.Active := False;
+ qCaixa.Active := True;
 end;
 
 function TFrmVendas.GeneratorID(aName: string; Connection: TFDConnection;
@@ -871,6 +1007,105 @@ begin
   //ShowMessage('O ID da Venda é: '+ IntToStr(IDVenda));
 end;
 
+procedure TFrmVendas.AtivarCaixa;
+begin
+
+  if ACBrPosPrinter1.Ativo then
+  begin
+     ACBrPosPrinter1.Desativar ;
+     bAtivar.Caption := 'Ativar' ;
+     //btSerial.Enabled := True ;
+  end
+  else
+  begin
+    try
+       Self.Enabled := False;
+       ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModelo.ItemIndex );
+       ACBrPosPrinter1.Porta  := cbxPorta.Text;
+       {ACBrPosPrinter1.ArqLOG := edLog.Text;
+       ACBrPosPrinter1.LinhasBuffer := seLinhasBuffer.Value;
+       ACBrPosPrinter1.LinhasEntreCupons := seLinhasPular.Value;
+       ACBrPosPrinter1.EspacoEntreLinhas := seEspLinhas.Value;
+       ACBrPosPrinter1.ColunasFonteNormal := seColunas.Value;
+       ACBrPosPrinter1.CortaPapel := cbCortarPapel.Checked;
+       ACBrPosPrinter1.ControlePorta := cbControlePorta.Checked;
+       ACBrPosPrinter1.TraduzirTags := cbTraduzirTags.Checked;
+       ACBrPosPrinter1.IgnorarTags := cbIgnorarTags.Checked;
+       ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
+       ACBrPosPrinter1.ConfigBarras.MostrarCodigo := cbHRI.Checked;
+       ACBrPosPrinter1.ConfigBarras.LarguraLinha := seBarrasLargura.Value;
+       ACBrPosPrinter1.ConfigBarras.Altura := seBarrasAltura.Value;
+       ACBrPosPrinter1.ConfigQRCode.Tipo := seQRCodeTipo.Value;
+       ACBrPosPrinter1.ConfigQRCode.LarguraModulo := seQRCodeLarguraModulo.Value;
+       ACBrPosPrinter1.ConfigQRCode.ErrorLevel := seQRCodeErrorLevel.Value;
+       ACBrPosPrinter1.ConfigLogo.KeyCode1 := seLogoKC1.Value;
+       ACBrPosPrinter1.ConfigLogo.KeyCode2 := seLogoKC2.Value;
+       ACBrPosPrinter1.ConfigLogo.FatorX := seLogoFatorX.Value;
+       ACBrPosPrinter1.ConfigLogo.FatorY := seLogoFatorY.Value;
+       }
+
+       ACBrPosPrinter1.Ativar ;
+
+       //btSerial.Enabled := False ;
+       bAtivar.Caption := 'Desativar' ;
+
+       //GravarINI ;
+    finally
+       Self.Enabled := True;
+       cbxModelo.ItemIndex   := Integer(ACBrPosPrinter1.Modelo) ;
+       cbxPorta.Text         := ACBrPosPrinter1.Porta ;
+    end ;
+  end;
+
+end;
+
+procedure TFrmVendas.AtualizarMysql;
+begin
+ try
+ qCaixa.Last;
+if DmDados.TesteMysql then
+begin
+   DmDados.sqlVendas_Mysql.close;
+   DmDados.sqlVendas_Mysql.Open;
+   DmDados.sqlVendas_Mysql.Append;
+   DmDados.sqlVendas_Mysqlid_venda.AsInteger := qCaixaCOD_VENDAS.AsInteger;
+   DmDados.sqlVendas_Mysqldt_ref.AsDateTime  := VarToDateTime( FormatDateTime('yyyy-mm-dd',now) + ' ' + qCaixaHORA.AsString );
+   DmDados.sqlVendas_MysqlEMPRESA.AsInteger := 2;
+   DmDados.sqlVendas_Mysqlvalor.AsFloat      := qCaixaTOTAL.AsFloat;
+   DmDados.sqlVendas_Mysql.post;
+   DmDados.sqlVendas_Mysql.Close;
+
+
+
+   DmDados.sqlVendas_Itens_Mysql.close;
+   DmDados.sqlVendas_Itens_Mysql.Open;
+   DmDados.sqlVendas_Itens_Para_Mysql.close;
+   DmDados.sqlVendas_Itens_Para_Mysql.Params[0].AsInteger := qCaixaCOD_VENDAS.AsInteger;
+   DmDados.sqlVendas_Itens_Para_Mysql.Open;
+
+   DmDados.sqlVendas_Itens_Para_Mysql.First;
+   while not DmDados.sqlVendas_Itens_Para_Mysql.Eof do
+   begin
+     DmDados.sqlVendas_Itens_Mysql.Append;
+     DmDados.sqlVendas_Itens_Mysqlcod_item.AsInteger := DmDados.sqlVendas_Itens_Para_MysqlCOD_ITEM.AsInteger;
+     DmDados.sqlVendas_Itens_Mysqlid_venda.AsInteger := DmDados.sqlVendas_Itens_Para_MysqlCOD_VENDA.AsInteger;
+     DmDados.sqlVendas_Itens_Mysqlcod_prod.AsInteger := DmDados.sqlVendas_Itens_Para_MysqlCOD_PRO.AsInteger;
+     DmDados.sqlVendas_Itens_Mysqlquant_item.AsFloat := DmDados.sqlVendas_Itens_Para_MysqlQUANT_ITEM.AsFloat;
+     DmDados.sqlVendas_Itens_Mysqlvalor_item.AsFloat := DmDados.sqlVendas_Itens_Para_MysqlVALOR_ITEM.AsFloat;
+     DmDados.sqlVendas_Itens_Mysql.post;
+
+   DmDados.sqlVendas_Itens_Para_Mysql.Next;
+   end;
+
+
+end;
+
+except
+
+ end;
+
+end;
+
 function TFrmVendas.BaixaItemVenda(COD_VENDA, COD_PRO, COD_EMP, ORDEM: Integer; QUANT_ITEM : Currency; VALOR_ITEM: Currency): Boolean;
 var
   Qtdreal, QtdBaixa : String;
@@ -889,7 +1124,7 @@ begin
         //Qtdreal := StrToCurrDef(QtdEstoqueItemQUANT_ESTOQ.AsString,ffNumber,2);
 
         //valorreal := FormatCurr('#,##0', QtdEstoqueItemQUANT_ESTOQ.Value) - FormatCurr('#,##0', QUANT_ITEM);
-         DmDados.IBTransaction1.StartTransaction;
+         //DmDados.IBTransaction1.StartTransaction;
         //Baixa a Qtd. no Estoque   ERRo AQUI
         with DmDados.Q_executa do
         begin
@@ -907,9 +1142,9 @@ begin
             ExecSQL;
         end;
 
-        DmDados.IBTransaction1.CommitRetaining;
+        //////DmDados.IBTransaction1.CommitRetaining;
 
-        DmDados.IBTransaction1.StartTransaction;
+        //DmDados.IBTransaction1.StartTransaction;
         with Q_BaixaItem do
         begin
             Close;
@@ -922,7 +1157,7 @@ begin
             ExecSQL;
         end;
 
-        DmDados.IBTransaction1.CommitRetaining;
+        ////DmDados.IBTransaction1.CommitRetaining;
 
         Result := True;
     except
@@ -932,6 +1167,11 @@ begin
             Application.MessageBox(PChar('Erro ao tentar inserir o produto na venda!' + #13 + 'Obs: ' + e.Message), 'Erro', mb_ok + MB_ICONERROR);
         end;
     end;
+end;
+
+procedure TFrmVendas.bAtivarClick(Sender: TObject);
+begin
+AtivarCaixa;
 end;
 
 procedure TFrmVendas.spCodVendaChange(Sender: TObject);
@@ -955,6 +1195,146 @@ begin
         Key := #0;
         SelectNext(ActiveControl, True, True);
     end;
+end;
+
+function TFrmVendas.ImprimeCupomV2(ndeColunas : Integer; sEmpNome, sTel, sEmpCNPJ, sEmpEnde, sCodVenda, sCliente, sFPGTO, subTotal, Desconto, Total, Troco : String):boolean;
+var
+  sTextoAux : string;
+  sData     : string;
+  sHoran    : string;
+
+  linhaCupom, linhaRodape, nAux : Integer;
+  Total_Item : Currency;
+
+  Function Replicate( Const cTexto: String; Const nQtd: Integer ):String;
+Var
+   nAux: Integer;
+Begin
+   Result:= '';
+
+   IF nQtd > 0 Then
+   Begin
+      For nAux:= 1 To nQtd Do
+          Result:= Result + cTexto;
+   End;
+End;
+
+begin
+   if not ACBrPosPrinter1.Ativo then  exit;
+
+
+
+    Try
+      //AssignFile(ArqPrn,DmDados.ImpressoraCupom); // padrão 'LPT1'
+      //AssignFile(ArqPrn,'d:\cupom.txt');
+      //ReWrite(ArqPrn);
+
+      //LinhaAtual:=0;
+
+      sData  := DateToStr(Date);
+      sHoran := TimeToStr(Now());
+
+      sTextoAux := sData + ', ' + sHoran + '                  ' + 'DOC.' + StrZero(sCodVenda,6);
+
+      ACBrPosPrinter1.Imprimir(Padc(sEmpNome,ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Padc('Tel: '+sTel,ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Padc('CNPJ: '+FormataCNPJ(sEmpCNPJ),ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Padc(sEmpEnde,ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(sTextoAux);
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(PadC('COMPROVANTE SEM VALOR FISCAL',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir('');
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir('CLIENTE: '+ sCliente          );
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir('FORMA DE PGTO: '+ sFPGTO          );
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir('');
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir('PRODUTO	    QTD  X  VL.UNIT  TOTAL');
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+
+
+      {Carrego os itens da Venda}
+      linhaCupom := 14;
+      FrmVendas.cdsitensVendas.First;
+
+      while not FrmVendas.cdsitensVendas.Eof do
+      begin
+        inc(linhaCupom);
+        ACBrPosPrinter1.Imprimir(Copy(FrmVendas.cdsitensVendasdescricao.AsString,1, ndeColunas));
+        inc(linhaCupom);
+        Total_Item := (FrmVendas.cdsitensVendasqtd.Value) * (FrmVendas.cdsitensVendasvl_item.Value);
+        ACBrPosPrinter1.Imprimir(Padr(FormatFloat('#,###,###,##0.000', FrmVendas.cdsitensVendasqtd.Value) + '  X  ' + FormatFloat('#,###,###,##0.00', FrmVendas.cdsitensVendasvl_item.Value) + '   ' + FormatFloat('#,###,###,##0.00', Total_Item),ndeColunas));
+        ACBrPosPrinter1.PularLinhas(1);
+        FrmVendas.cdsitensVendas.Next;
+      end;
+
+
+      inc(linhaCupom);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      inc(linhaCupom);
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Padr('SUB-TOTAL: R$ ' + FrmVendas.lbTotalCom.Caption,ndeColunas));
+      inc(linhaCupom);
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Padr('DESCONTO: R$ ' + formatfloat('##,###,##0.00', FrmVendas.EdtDesconto.Value),ndeColunas));
+      inc(linhaCupom);
+      ACBrPosPrinter1.PularLinhas(1);
+      ACBrPosPrinter1.Imprimir(Padr('TOTAL CUPOM: R$ ' + FrmVendas.lbTotal.Caption,ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+
+      if (FrmVendas.EDT_CondPagto.ItemIndex = 4) then
+      begin
+        inc(linhaCupom);
+        ACBrPosPrinter1.Imprimir('SALDO (CREDITO): R$ ' + formatfloat('##,###,##0.00', FrmVendas.EdtLimitCli.Value));
+        ACBrPosPrinter1.PularLinhas(1);
+      end;
+
+      inc(linhaCupom);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      inc(linhaCupom);
+      ACBrPosPrinter1.Imprimir(Padc('OBRIGADO PELA PREFERENCIA',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      inc(linhaCupom);
+      ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
+      ACBrPosPrinter1.PularLinhas(1);
+      inc(linhaCupom);
+      ACBrPosPrinter1.PularLinhas(1);
+      inc(linhaCupom);
+      ACBrPosPrinter1.PularLinhas(1);
+      inc(linhaCupom);
+      ACBrPosPrinter1.PularLinhas(1);
+
+      ACBrPosPrinter1.PularLinhas(1);
+
+
+
+      ACBrPosPrinter1.CortarPapel(false);
+      ACBrPosPrinter1.ImprimirLinha('</abre_gaveta>');
+      //CloseFile(ArqPrn);
+
+      // Impresso com sucesso!
+      Result:= True;
+    except
+      Result:= False;
+      MessageDlg('IMPRESSORA NÃO ESTA ATIVA', mtWarning, [mbOk], 0 );
+    end;
+
 end;
 
 procedure TFrmVendas.EDT_ClienteKeyPress(Sender: TObject; var Key: Char);
@@ -1016,6 +1396,37 @@ begin
 
 end;
 
+procedure TFrmVendas.btnDelClick(Sender: TObject);
+begin
+
+try
+DmDados.sqlVendasDeletarMysql.close;
+DmDados.sqlItensVendasDeletarMysql.close;
+
+DmDados.sqlVendasDeletar.close;
+DmDados.sqlItensVendasDeletar.close;
+
+
+
+DmDados.sqlVendasDeletarMysql.Params[0].AsInteger       := edtIDdel.AsInteger;
+DmDados.sqlItensVendasDeletarMysql.Params[0].AsInteger  := edtIDdel.AsInteger;
+DmDados.sqlVendasDeletar.Params[0].AsInteger            := edtIDdel.AsInteger;
+DmDados.sqlItensVendasDeletar.Params[0].AsInteger       := edtIDdel.AsInteger;
+
+
+DmDados.sqlVendasDeletarMysql.ExecSQL;
+DmDados.sqlItensVendasDeletarMysql.ExecSQL;
+DmDados.sqlVendasDeletar.ExecSQL;
+DmDados.sqlItensVendasDeletar.ExecSQL;
+
+except on e:exception do begin
+  showmessage(e.Message);
+end;
+
+end;
+
+end;
+
 procedure TFrmVendas.SpeedButton1Click(Sender: TObject);
 begin
   if not (VendaAberta) then
@@ -1055,8 +1466,11 @@ begin
             PNL_Fechamento.Top := (FrmVendas.Height - PNL_Fechamento.Height) div 2;
 
             lbSubTotal.Caption := formatfloat('##,###,##0.00', EdtTotal.Value);
+            EdtDesconto.Value  := EdtTotal.Value;
             lbTotalCom.Caption := formatfloat('##,###,##0.00', EdtTotal.Value);
 
+
+            edtRecebido.Value  := EdtTotal.Value;
             EDT_Cliente.SetFocus;
         end
         else
@@ -1064,6 +1478,8 @@ begin
             Application.MessageBox('A venda precisa estar aberta para realizar a operação!', 'Informação', mb_ok + MB_ICONEXCLAMATION);
             Exit;
         end;
+
+
 end;
 
 procedure TFrmVendas.SpeedButton3Click(Sender: TObject);
@@ -1093,7 +1509,7 @@ begin
 
                     edtRecebido.Clear;
                     EDT_Cliente.Clear;
-                    EDT_CondPagto.Clear;
+                    EDT_CondPagto.ItemIndex := 0;
                     edtTroco.Clear;
                     spCodVenda.Value := 0;
                     label8.Caption := '';
@@ -1115,6 +1531,21 @@ begin
         end;
 end;
 
+procedure TFrmVendas.SpeedButton5Click(Sender: TObject);
+begin
+  ACBrPosPrinter1.ImprimirLinha('</abre_gaveta>');
+end;
+
+procedure TFrmVendas.SpeedButton6Click(Sender: TObject);
+begin
+SalvarVenda;
+end;
+
+procedure TFrmVendas.SpeedButton7Click(Sender: TObject);
+begin
+AtualizarMysql;
+end;
+
 procedure TFrmVendas.EDT_CondPagtoKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -1130,12 +1561,80 @@ begin
     end;
   end;
 
+  if ACBrPosPrinter1.Ativo then
+      ACBrPosPrinter1.ImprimirLinha('</abre_gaveta>');
 end;
 
 procedure TFrmVendas.BitBtn3Click(Sender: TObject);
 begin
   pnlObs.Visible := false;
   EdtDesconto.SetFocus;
+end;
+
+procedure TFrmVendas.btn01Click(Sender: TObject);
+begin
+if TButton(Sender).Tag = 431  then
+begin
+  if (MessageDlg('Isso é mesmo um item "Diverso"?!',mtWarning ,[mbNo,mbYes ],0) <> mrYes) then
+   EXIT;
+
+  if (MessageDlg('Você tem certeza mesmo?!',mtWarning  ,[mbNo,mbYes ],0) <> mrYes) then
+   EXIT;
+
+  if (MessageDlg('?!!?!?!?Vc tem certeza mesmo?!?!?!!',mtWarning  ,[mbNo,mbYes ],0) <> mrYes) then
+   EXIT;
+end;
+
+
+
+if not (VendaAberta) then
+  SpeedButton1Click(self);
+
+mskCodigo.Text := inttostr( TButton(Sender).Tag);
+mskQuantidade.Value := mskQuantidade.Value+1;
+mskQuantidadeChange(self);
+//edtValorUni.Visible := (TButton(Sender).Tag = 431);
+
+
+if (mskQuantidade.Value > 0) and (TButton(Sender).Tag <> 431) then
+      begin
+        edTotalItem.Value := ({QProd_CodBarraPRECO_VAREJO.Value} edtValorUni.Value * mskQuantidade.Value);
+      //  AddItemVenda;
+        mskQuantidade.SetFocus;
+      end;
+
+mskQuantidade.Value :=  0 ;
+
+if (TButton(Sender).Tag = 431) then
+  edtValorUni.SetFocus;
+
+end;
+
+procedure TFrmVendas.BtnTesteClick(Sender: TObject);
+begin
+ImprimeCupomV2(40,'DmDados.tb_empresaFANTASIA_EMP.AsString','DmDados.tb_empresaTEL_EMP.AsString','DmDados.tb_empresaCNPJ_EMP.Value','DmDados.tb_empresaEND_EMP.AsString', 'Label8.Caption',
+                    'lbCliente.Caption', 'Lbfp.Caption', '0.000', '1.10', '1.10', '1.10')
+end;
+
+procedure TFrmVendas.cbxModeloChange(Sender: TObject);
+begin
+  try
+     ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModelo.ItemIndex ) ;
+  except
+     cbxModelo.ItemIndex := Integer( ACBrPosPrinter1.Modelo ) ;
+     raise ;
+  end ;
+end;
+
+procedure TFrmVendas.cbxPortaChange(Sender: TObject);
+begin
+  try
+    ACBrPosPrinter1.Porta := cbxPorta.Text ;
+  finally
+    cbxPorta.Text := ACBrPosPrinter1.Porta ;
+  end ;
+
+//  btSerial.Visible := ACBrPosPrinter1.Device.IsSerialPort;
 end;
 
 procedure TFrmVendas.DateRecebimentoKeyDown(Sender: TObject; var Key: Word;
@@ -1146,7 +1645,7 @@ var
 begin
   if (Key = VK_Return) then
   begin
-    if (EDT_CondPagto.Text = '4') then
+    if (EDT_CondPagto.ItemIndex = 4) then
     begin
           if (EdtLimitCli.Value < EdtTotal.Value) then
           begin
@@ -1209,19 +1708,22 @@ begin
 
                   if application.MessageBox('Deseja finaliza a venda e imprimir o cumpom?', 'Cancelamento de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton2) = 6 then
                   begin
-                    if ImprimeCupom(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
+                    if ImprimeCupomV2(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.AsString,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
                     lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
+
                     formatfloat('##,###,##0.00', edtTroco.Value)) then
                     begin
                       //ShowMessage('O cupom foi impresso com sucesso!');
                     end;
+
+
                   end;
 
 
-                  EDT_CondPagto.Clear;
+                  EDT_CondPagto.ItemIndex := 0;
                   lbCliente.Caption := '';
                   Lbfp.Caption := '';
-                  
+
                   EdtTotal.Clear;
 
                   // Só depois de perguntar de quer imprimir o cupom que ele fecha os itens da venda
@@ -1236,7 +1738,7 @@ begin
 
 
     // Cartão de Débito
-    if (EDT_CondPagto.Text = '2') then
+    if (EDT_CondPagto.ItemIndex = 2) then
     begin
           if application.MessageBox('Deseja finaliza a venda?', 'Finalização de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton1) = 6 then
           begin
@@ -1261,7 +1763,7 @@ begin
 
                   edtRecebido.Clear;
                   EDT_Cliente.Clear;
-                  EDT_CondPagto.Clear;
+                  EDT_CondPagto.ItemIndex := 0;
                   edtTroco.Clear;
                   Memo1.Clear;
 
@@ -1275,7 +1777,7 @@ begin
 
                   if application.MessageBox('Deseja finaliza a venda e imprimir o cumpom?', 'Cancelamento de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton2) = 6 then
                   begin
-                    if ImprimeCupom(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
+                    if ImprimeCupomV2(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
                     lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
                     formatfloat('##,###,##0.00', edtTroco.Value)) then
                     begin
@@ -1299,7 +1801,7 @@ begin
     end;
 
     // Cartão de Débito
-    if (EDT_CondPagto.Text = '3') then
+    if (EDT_CondPagto.ItemIndex = 3) then
     begin
           if application.MessageBox('Deseja finaliza a venda?', 'Finalização de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton1) = 6 then
           begin
@@ -1324,7 +1826,7 @@ begin
 
                   edtRecebido.Clear;
                   EDT_Cliente.Clear;
-                  EDT_CondPagto.Clear;
+                  EDT_CondPagto.ItemIndex := 0;
                   edtTroco.Clear;
                   Memo1.Clear;
 
@@ -1339,7 +1841,7 @@ begin
                   if application.MessageBox('Deseja finaliza a venda e imprimir o cumpom?', 'Cancelamento de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton2) = 6 then
                   begin
                     // Imprime o cupom
-                    if ImprimeCupom(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
+                    if ImprimeCupomV2(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
                     lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
                     formatfloat('##,###,##0.00', edtTroco.Value)) then
                     begin

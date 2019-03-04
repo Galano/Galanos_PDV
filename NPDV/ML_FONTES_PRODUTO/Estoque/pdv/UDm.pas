@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
   FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Phys.FB,
-  FireDAC.Phys.FBDef;
+  FireDAC.Phys.FBDef, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef;
 
 type
   TDmDados = class(TDataModule)
@@ -78,6 +78,31 @@ type
     tb_empresaCNPJ_EMP: TStringField;
     tb_empresaCAMINHO_VALIDADOR_SINTEGRA: TStringField;
     tb_empresaINSCRICAO_MUNICIPAL: TStringField;
+    conMysql: TFDConnection;
+    driveMysql: TFDPhysMySQLDriverLink;
+    sqlVendas_Mysql: TFDQuery;
+    sqlVendas_Mysqlid_venda: TIntegerField;
+    sqlVendas_Mysqldt_ref: TDateTimeField;
+    sqlVendas_Mysqlvalor: TSingleField;
+    sqlVendas_Itens_Mysql: TFDQuery;
+    sqlVendas_Itens_Mysqlcod_item: TIntegerField;
+    sqlVendas_Itens_Mysqlid_venda: TIntegerField;
+    sqlVendas_Itens_Mysqlcod_prod: TIntegerField;
+    sqlVendas_Itens_Mysqlquant_item: TSingleField;
+    sqlVendas_Itens_Mysqlvalor_item: TSingleField;
+    sqlVendas_Itens_Para_Mysql: TFDQuery;
+    sqlVendas_Itens_Para_MysqlCOD_ITEM: TIntegerField;
+    sqlVendas_Itens_Para_MysqlCOD_VENDA: TIntegerField;
+    sqlVendas_Itens_Para_MysqlCOD_PRO: TIntegerField;
+    sqlVendas_Itens_Para_MysqlCOD_EMP: TIntegerField;
+    sqlVendas_Itens_Para_MysqlORDEM: TIntegerField;
+    sqlVendas_Itens_Para_MysqlQUANT_ITEM: TBCDField;
+    sqlVendas_Itens_Para_MysqlVALOR_ITEM: TBCDField;
+    sqlVendasDeletarMysql: TFDQuery;
+    sqlVendasDeletar: TFDQuery;
+    sqlItensVendasDeletar: TFDQuery;
+    sqlItensVendasDeletarMysql: TFDQuery;
+    sqlVendas_MysqlEMPRESA: TIntegerField;
 
 
     procedure DataModuleCreate(Sender: TObject);
@@ -85,6 +110,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    TesteMysql : Boolean;
     ImpressoraCupom : String;
   end;
 
@@ -101,6 +127,7 @@ implementation
 
 procedure TDmDados.DataModuleCreate(Sender: TObject);
 begin
+    TesteMysql := False;
     ini_arq := Copy(ExtractFileDir(Application.ExeName), 1, LastDelimiter('\', ExtractFileDir(Application.ExeName))) + 'config\' + 'dbconnections.ini';
     iniConf := TIniFile.Create(ini_arq);
 
@@ -139,6 +166,17 @@ begin
                 Application.Terminate;
             end;
         end;
+    end;
+
+
+
+    try
+      conMysql.Connected := true;
+      conMysql.Connected := false;
+      TesteMysql :=  true;
+
+    finally
+
     end;
 end;
 

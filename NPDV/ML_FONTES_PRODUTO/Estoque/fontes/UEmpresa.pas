@@ -211,7 +211,7 @@ begin
      end;
 
   {if DmDados.IBTransaction1.Active then
-     DmDados.IBTransaction1.CommitRetaining;
+     //DmDados.IBTransaction1.CommitRetaining;
   DmDados.IBTransaction1.StartTransaction;}
   try
     try
@@ -298,7 +298,7 @@ begin
 
            ExecSQL;
         end;
-      DmDados.IBTransaction1.CommitRetaining;
+      //DmDados.IBTransaction1.CommitRetaining;
       Botoes('G');
 
       if (FrmEmpresa.tag = 0) then // Grava um novo reristro
@@ -310,7 +310,7 @@ begin
         Application.MessageBox('Alteração no cadastro realizado com sucesso!','Informação', mb_OK+MB_ICONINFORMATION);
       end;
     except
-      DmDados.IBTransaction1.RollbackRetaining;
+      ////DmDados.IBTransaction1.RollbackRetaining;
       showmessage('Erro ao Gravar a Empresa');
     end;
   finally

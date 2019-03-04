@@ -186,7 +186,7 @@ begin
            ExecSQL;
         end;
 
-      DmDados.IBTransaction1.CommitRetaining;
+      //DmDados.IBTransaction1.CommitRetaining;
       DmDados.tb_usuarios.Close;
       DmDados.tb_usuarios.Open;
       Botoes('G');
@@ -215,7 +215,7 @@ begin
     except
       on e: exception do
       begin
-        DmDados.IBTransaction1.RollbackRetaining;
+        //DmDados.IBTransaction1.RollbackRetaining;
         Application.MessageBox(Pchar('Erro ao gravar a Classificação!'+#13+#13+e.Message),'Informação', mb_OK+MB_ICONERROR);
       end;
     end;

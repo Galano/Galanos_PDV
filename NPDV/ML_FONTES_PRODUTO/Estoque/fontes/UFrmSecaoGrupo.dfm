@@ -46,8 +46,8 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       Caption = 'Descri'#231#227'o'
     end
     object Bevel1: TBevel
-      Left = 4
-      Top = 6
+      Left = 5
+      Top = 4
       Width = 545
       Height = 88
     end
@@ -429,7 +429,7 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
     Left = 320
     Top = 16
     Bitmap = {
-      494C01010D001800200019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D001800240019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1782,10 +1782,15 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       '  SECAO.NOME_SEC'
       'FROM'
       '  SECAO'
-      'WHERE'
+      'WHERE '
       '  SECAO.NOME_SEC = :nm')
     Left = 494
     Top = 48
+    ParamData = <
+      item
+        Name = 'NM'
+        ParamType = ptInput
+      end>
     object Q_Consulta_codCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
       Origin = 'COD_SEC'
@@ -1808,9 +1813,14 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       'FROM'
       '  SECAO'
       'WHERE'
-      '  SECAO.COD_SEC = :cod')
+      '  SECAO.COD_SEC = :cod ')
     Left = 411
     Top = 49
+    ParamData = <
+      item
+        Name = 'COD'
+        ParamType = ptInput
+      end>
     object Q_Consulta_filtroCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
       Origin = 'COD_SEC'
@@ -1836,6 +1846,7 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       'FROM SECAO_GRUPO_SUBGRUPO'
       'WHERE COD_SEC = :CODSEC AND COD_GRUPO = :CODGRUPO'
       'ORDER BY DESCRICAO'
+      ' '
       ' ')
     Left = 452
     Top = 105
@@ -1880,6 +1891,7 @@ object FrmSecaoGrupo: TFrmSecaoGrupo
       'FROM SECAO_GRUPO'
       'WHERE COD_SEC = :CODSEC'
       'ORDER BY DESCRICAO'
+      ' '
       ' ')
     Left = 502
     Top = 105

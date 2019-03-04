@@ -62,16 +62,16 @@ Uses Udm, UVendas;
 procedure TFrmCupom.QRBand3BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
-  if (FrmVendas.EDT_CondPagto.Text = '4') then
+{  if (FrmVendas.EDT_CondPagto.Text = '4') then
   begin
     QrlimiteCredito.Visible := True;
     QrlimiteCredito.Caption := 'Saldo (Credito): R$ ' + formatfloat('##,###,##0.00', FrmVendas.EdtLimitCli.Value);
   end
   else
-  begin
+  begin}
     QrlimiteCredito.Visible := False;
     QrlimiteCredito.Caption := '';
-  end;
+//  end;
 
   QRLbSubTotal.Caption := 'Sub-Total: R$ ' + FrmVendas.lbTotalCom.Caption;
   QRLbDesc.Caption := 'Desconto: R$ ' + formatfloat('##,###,##0.00', FrmVendas.EdtDesconto.Value);

@@ -16,7 +16,6 @@ object DmDados: TDmDados
       'User_Name=sysdba'
       'Password=masterkey'
       'DriverID=fB')
-    Connected = True
     LoginPrompt = False
     Left = 48
     Top = 40

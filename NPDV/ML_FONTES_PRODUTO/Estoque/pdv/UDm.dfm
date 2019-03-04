@@ -16,9 +16,20 @@ object DmDados: TDmDados
       'User_Name=sysdba'
       'Password=masterkey'
       'DriverID=fB')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.AutoCommitUpdates = True
     LoginPrompt = False
     Left = 48
-    Top = 40
+    Top = 48
   end
   object tb_fpagamentos: TFDTable
     Connection = conexao
@@ -289,7 +300,10 @@ object DmDados: TDmDados
   end
   object Q_executa: TFDQuery
     Connection = conexao
-    Transaction = IBTransaction1
+    ResourceOptions.AssignedValues = [rvDirectExecute]
+    ResourceOptions.DirectExecute = True
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
     Left = 360
     Top = 96
   end
@@ -330,5 +344,208 @@ object DmDados: TDmDados
       FixedChar = True
       Size = 1
     end
+  end
+  object conMysql: TFDConnection
+    Params.Strings = (
+      'Server=mysql642.umbler.com'
+      'Port=41890'
+      'User_Name=usr_pdv'
+      'Password=comandos123'
+      'Database=pdv_galanos'
+      'DriverID=MySQL')
+    Connected = True
+    LoginPrompt = False
+    Left = 624
+    Top = 64
+  end
+  object driveMysql: TFDPhysMySQLDriverLink
+    VendorLib = 
+      'C:\Fontes\Sistema Frente De Caixa Pdv\NPDV\ML_FONTES_PRODUTO\Est' +
+      'oque\exe\libmySQL.dll'
+    Left = 624
+    Top = 136
+  end
+  object sqlVendas_Mysql: TFDQuery
+    Connection = conMysql
+    ResourceOptions.AssignedValues = [rvDirectExecute]
+    ResourceOptions.DirectExecute = True
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    SQL.Strings = (
+      'SELECT * FROM vendas LIMIT 1,1'
+      '')
+    Left = 616
+    Top = 200
+    object sqlVendas_Mysqlid_venda: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_venda'
+      Origin = 'id_venda'
+    end
+    object sqlVendas_Mysqldt_ref: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'dt_ref'
+      Origin = 'dt_ref'
+    end
+    object sqlVendas_Mysqlvalor: TSingleField
+      AutoGenerateValue = arDefault
+      FieldName = 'valor'
+      Origin = 'valor'
+    end
+    object sqlVendas_MysqlEMPRESA: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPRESA'
+      Origin = 'EMPRESA'
+    end
+  end
+  object sqlVendas_Itens_Mysql: TFDQuery
+    Connection = conMysql
+    ResourceOptions.AssignedValues = [rvDirectExecute]
+    ResourceOptions.DirectExecute = True
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    SQL.Strings = (
+      'select* from vendas_itens')
+    Left = 616
+    Top = 256
+    object sqlVendas_Itens_Mysqlcod_item: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cod_item'
+      Origin = 'cod_item'
+    end
+    object sqlVendas_Itens_Mysqlid_venda: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_venda'
+      Origin = 'id_venda'
+    end
+    object sqlVendas_Itens_Mysqlcod_prod: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cod_prod'
+      Origin = 'cod_prod'
+    end
+    object sqlVendas_Itens_Mysqlquant_item: TSingleField
+      AutoGenerateValue = arDefault
+      FieldName = 'quant_item'
+      Origin = 'quant_item'
+    end
+    object sqlVendas_Itens_Mysqlvalor_item: TSingleField
+      AutoGenerateValue = arDefault
+      FieldName = 'valor_item'
+      Origin = 'valor_item'
+    end
+  end
+  object sqlVendas_Itens_Para_Mysql: TFDQuery
+    Connection = DmDados.Conexao
+    SQL.Strings = (
+      'select*  '
+      'from ITENS_VENDA '
+      'where cod_venda = :cod_venda')
+    Left = 605
+    Top = 319
+    ParamData = <
+      item
+        Name = 'COD_VENDA'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+    object sqlVendas_Itens_Para_MysqlCOD_ITEM: TIntegerField
+      FieldName = 'COD_ITEM'
+      Origin = 'COD_ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sqlVendas_Itens_Para_MysqlCOD_VENDA: TIntegerField
+      FieldName = 'COD_VENDA'
+      Origin = 'COD_VENDA'
+      Required = True
+    end
+    object sqlVendas_Itens_Para_MysqlCOD_PRO: TIntegerField
+      FieldName = 'COD_PRO'
+      Origin = 'COD_PRO'
+      Required = True
+    end
+    object sqlVendas_Itens_Para_MysqlCOD_EMP: TIntegerField
+      FieldName = 'COD_EMP'
+      Origin = 'COD_EMP'
+      Required = True
+    end
+    object sqlVendas_Itens_Para_MysqlORDEM: TIntegerField
+      FieldName = 'ORDEM'
+      Origin = 'ORDEM'
+      Required = True
+    end
+    object sqlVendas_Itens_Para_MysqlQUANT_ITEM: TBCDField
+      FieldName = 'QUANT_ITEM'
+      Origin = 'QUANT_ITEM'
+      Precision = 18
+      Size = 3
+    end
+    object sqlVendas_Itens_Para_MysqlVALOR_ITEM: TBCDField
+      FieldName = 'VALOR_ITEM'
+      Origin = 'VALOR_ITEM'
+      Required = True
+      Precision = 18
+      Size = 3
+    end
+  end
+  object sqlVendasDeletarMysql: TFDQuery
+    Connection = conMysql
+    SQL.Strings = (
+      'delete from vendas where id_venda = :id_venda'
+      ' ')
+    Left = 477
+    Top = 383
+    ParamData = <
+      item
+        Name = 'ID_VENDA'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end>
+  end
+  object sqlVendasDeletar: TFDQuery
+    Connection = conexao
+    Transaction = IBTransaction1
+    SQL.Strings = (
+      'delete from ITENS_VENDA where cod_venda = :cod_venda'
+      ' ')
+    Left = 376
+    Top = 360
+    ParamData = <
+      item
+        Name = 'COD_VENDA'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end>
+  end
+  object sqlItensVendasDeletar: TFDQuery
+    Connection = conexao
+    Transaction = IBTransaction1
+    SQL.Strings = (
+      'delete from ITENS_VENDA where cod_venda = :cod_venda'
+      ' ')
+    Left = 376
+    Top = 320
+    ParamData = <
+      item
+        Name = 'COD_VENDA'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object sqlItensVendasDeletarMysql: TFDQuery
+    Connection = conMysql
+    SQL.Strings = (
+      'delete from vendas_itens where id_venda = :id_venda'
+      ' ')
+    Left = 477
+    Top = 335
+    ParamData = <
+      item
+        Name = 'ID_VENDA'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end>
   end
 end

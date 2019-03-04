@@ -50,8 +50,6 @@ object FrmEmpresa: TFrmEmpresa
       TabOrder = 0
       object TabSheet1: TTabSheet
         Caption = 'Dados'
-        ExplicitLeft = 100
-        ExplicitTop = 80
         object Label1: TLabel
           Left = 8
           Top = 8
@@ -793,7 +791,6 @@ object FrmEmpresa: TFrmEmpresa
       object TabSheet3: TTabSheet
         Caption = 'Imagem'
         ImageIndex = 2
-        ExplicitLeft = 0
         object GroupBox6: TGroupBox
           Left = 3
           Top = 3
@@ -986,7 +983,7 @@ object FrmEmpresa: TFrmEmpresa
     Left = 360
     Top = 8
     Bitmap = {
-      494C01010D001800180019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D0018001C0019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

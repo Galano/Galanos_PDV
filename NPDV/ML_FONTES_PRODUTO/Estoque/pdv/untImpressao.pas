@@ -108,12 +108,12 @@ begin
       inc(linhaCupom);
       Say(linhaCupom,00,LinhaAtual,ArqPrn,Padr('TOTAL CUPOM: R$ ' + FrmVendas.lbTotal.Caption,ndeColunas));
 
-      if (FrmVendas.EDT_CondPagto.Text = '4') then
+{      if (FrmVendas.EDT_CondPagto.Text = '4') then
       begin
         inc(linhaCupom);
         Say(linhaCupom,00,LinhaAtual,ArqPrn,'SALDO (CREDITO): R$ ' + formatfloat('##,###,##0.00', FrmVendas.EdtLimitCli.Value));
       end;
-
+}
       inc(linhaCupom);
       Say(linhaCupom,00,LinhaAtual,ArqPrn,Replicate('-',ndeColunas));
       inc(linhaCupom);
