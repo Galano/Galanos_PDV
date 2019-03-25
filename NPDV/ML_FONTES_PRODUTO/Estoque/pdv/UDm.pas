@@ -126,7 +126,15 @@ implementation
 {$R *.dfm}
 
 procedure TDmDados.DataModuleCreate(Sender: TObject);
+var caminhomysql : String;
 begin
+try
+
+    caminhomysql := ExtractFilePath(Application.ExeName) + 'libmySQL.dll';
+
+    if FileExists(caminhomysql) then
+      driveMysql.VendorLib := caminhomysql;
+
     TesteMysql := False;
     ini_arq := Copy(ExtractFileDir(Application.ExeName), 1, LastDelimiter('\', ExtractFileDir(Application.ExeName))) + 'config\' + 'dbconnections.ini';
     iniConf := TIniFile.Create(ini_arq);
@@ -167,6 +175,11 @@ begin
             end;
         end;
     end;
+except on e:exception do begin
+   ShowMessage(e.message);
+end;
+
+end;
 
 
 
@@ -178,6 +191,8 @@ begin
     finally
 
     end;
+
+//ShowMessage('abriu!');
 end;
 
 end.

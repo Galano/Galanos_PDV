@@ -3,7 +3,7 @@ object FrmVendas: TFrmVendas
   Top = 15
   Caption = 'Estoque Master - Ponto de Vendas '
   ClientHeight = 639
-  ClientWidth = 1244
+  ClientWidth = 1041
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,14 @@ object FrmVendas: TFrmVendas
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   DesignSize = (
-    1244
+    1041
     639)
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
     Left = 0
     Top = 0
-    Width = 1244
+    Width = 1041
     Height = 580
     HelpType = htKeyword
     Align = alClient
@@ -19898,6 +19898,7 @@ object FrmVendas: TFrmVendas
       718C7238FBAB4B90A4B33653F8F2BD7E9CFB1FD7FDA6258356CFFFD9}
     Stretch = True
     ExplicitLeft = 1
+    ExplicitWidth = 1244
   end
   object Label1: TLabel
     Left = 26
@@ -19913,7 +19914,7 @@ object FrmVendas: TFrmVendas
     Transparent = True
   end
   object Label13: TLabel
-    Left = 1001
+    Left = 798
     Top = 70
     Width = 108
     Height = 13
@@ -19929,25 +19930,26 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 556
   end
   object Label2: TLabel
-    Left = 811
+    Left = 718
     Top = 402
-    Width = 113
-    Height = 55
+    Width = 53
+    Height = 25
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = 'Total:'
     Color = clInfoBk
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -48
+    Font.Height = -22
     Font.Name = 'Arno Pro Caption'
     Font.Style = []
     ParentColor = False
     ParentFont = False
     Transparent = True
+    ExplicitLeft = 694
   end
   object lbTotal: TLabel
-    Left = 980
+    Left = 777
     Top = 387
     Width = 226
     Height = 75
@@ -19966,7 +19968,7 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 535
   end
   object Label7: TLabel
-    Left = 114
+    Left = -89
     Top = 491
     Width = 252
     Height = 19
@@ -19979,24 +19981,26 @@ object FrmVendas: TFrmVendas
     Font.Style = [fsBold]
     ParentFont = False
     Transparent = True
+    ExplicitLeft = 114
   end
   object Label11: TLabel
-    Left = 839
+    Left = 705
     Top = 84
-    Width = 151
-    Height = 60
+    Width = 82
+    Height = 33
     Anchors = [akTop, akRight]
     Caption = 'C'#243'digo'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = 60
+    Font.Height = -27
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     Transparent = True
+    ExplicitLeft = 681
   end
   object Label12: TLabel
-    Left = 930
+    Left = 727
     Top = 150
     Width = 58
     Height = 60
@@ -20009,9 +20013,10 @@ object FrmVendas: TFrmVendas
     Font.Style = []
     ParentFont = False
     Transparent = True
+    ExplicitLeft = 930
   end
   object Label16: TLabel
-    Left = 994
+    Left = 791
     Top = 221
     Width = 29
     Height = 60
@@ -20027,8 +20032,8 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 549
   end
   object Label17: TLabel
-    Left = 856
-    Top = 317
+    Left = 742
+    Top = 303
     Width = 145
     Height = 29
     Anchors = [akTop, akRight]
@@ -20040,9 +20045,10 @@ object FrmVendas: TFrmVendas
     Font.Style = []
     ParentFont = False
     Transparent = True
+    ExplicitLeft = 718
   end
   object Shape2: TShape
-    Left = 996
+    Left = 793
     Top = 83
     Width = 205
     Height = 59
@@ -20053,7 +20059,7 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 551
   end
   object Shape1: TShape
-    Left = 1007
+    Left = 804
     Top = 288
     Width = 194
     Height = 65
@@ -20064,7 +20070,7 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 562
   end
   object Shape3: TShape
-    Left = 996
+    Left = 793
     Top = 151
     Width = 205
     Height = 62
@@ -20075,7 +20081,7 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 551
   end
   object Shape4: TShape
-    Left = 1042
+    Left = 839
     Top = 221
     Width = 159
     Height = 57
@@ -20088,7 +20094,7 @@ object FrmVendas: TFrmVendas
   object Shape5: TShape
     Left = 15
     Top = 7
-    Width = 1189
+    Width = 986
     Height = 58
     Anchors = [akLeft, akTop, akRight]
     Brush.Color = 16773070
@@ -20099,7 +20105,7 @@ object FrmVendas: TFrmVendas
   object LBpRODUTO: TLabel
     Left = 8
     Top = 8
-    Width = 1159
+    Width = 956
     Height = 40
     Alignment = taCenter
     Anchors = [akLeft, akTop, akRight]
@@ -20117,7 +20123,7 @@ object FrmVendas: TFrmVendas
     ExplicitWidth = 714
   end
   object lbPrecoUnitario: TLabel
-    Left = 1139
+    Left = 936
     Top = 166
     Width = 53
     Height = 32
@@ -20136,7 +20142,7 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 694
   end
   object lbTotalIem: TLabel
-    Left = 1132
+    Left = 929
     Top = 307
     Width = 53
     Height = 32
@@ -20155,8 +20161,8 @@ object FrmVendas: TFrmVendas
     ExplicitLeft = 687
   end
   object Shape6: TShape
-    Left = 17
-    Top = 524
+    Left = 8
+    Top = 529
     Width = 457
     Height = 65
     Brush.Color = 15790320
@@ -20275,27 +20281,13 @@ object FrmVendas: TFrmVendas
     Transparent = True
   end
   object Image2: TImage
-    Left = 352
+    Left = 149
     Top = 83
     Width = 100
     Height = 74
     Anchors = [akTop, akRight]
     Stretch = True
-  end
-  object Label18: TLabel
-    Left = 854
-    Top = 169
-    Width = 70
-    Height = 35
-    Anchors = [akTop, akRight]
-    Caption = 'Pre'#231'o'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWhite
-    Font.Height = -29
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    Transparent = True
+    ExplicitLeft = 352
   end
   object SpeedButton7: TSpeedButton
     Left = 207
@@ -20914,8 +20906,8 @@ object FrmVendas: TFrmVendas
   object grdVendas: TDBGrid
     Left = 8
     Top = 152
-    Width = 400
-    Height = 328
+    Width = 254
+    Height = 333
     Anchors = [akLeft, akTop, akRight]
     Ctl3D = True
     DataSource = cds_itensVendas
@@ -20962,7 +20954,7 @@ object FrmVendas: TFrmVendas
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 210
+        Width = 60
         Visible = True
       end
       item
@@ -21016,12 +21008,13 @@ object FrmVendas: TFrmVendas
   object Panel1: TPanel
     Left = 0
     Top = 580
-    Width = 1244
+    Width = 1041
     Height = 59
     Align = alBottom
     BorderStyle = bsSingle
     Color = clWhite
     TabOrder = 1
+    ExplicitWidth = 962
     object SpeedButton1: TSpeedButton
       Left = -1
       Top = 4
@@ -22194,7 +22187,7 @@ object FrmVendas: TFrmVendas
     end
   end
   object mskCodigo: TMaskEdit
-    Left = 1001
+    Left = 798
     Top = 89
     Width = 195
     Height = 51
@@ -22214,9 +22207,10 @@ object FrmVendas: TFrmVendas
     OnChange = mskCodigoChange
     OnExit = mskCodigoExit
     OnKeyDown = mskCodigoKeyDown
+    ExplicitLeft = 719
   end
   object spCodVenda: TSpinEdit
-    Left = 1013
+    Left = 810
     Top = 522
     Width = 81
     Height = 33
@@ -22233,9 +22227,10 @@ object FrmVendas: TFrmVendas
     Value = 0
     Visible = False
     OnChange = spCodVendaChange
+    ExplicitLeft = 731
   end
   object EdtTotal: TCurrencyEdit
-    Left = 1082
+    Left = 879
     Top = 461
     Width = 121
     Height = 21
@@ -22244,9 +22239,10 @@ object FrmVendas: TFrmVendas
     TabOrder = 6
     Visible = False
     OnChange = EdtTotalChange
+    ExplicitLeft = 800
   end
   object edTotalItem: TCurrencyEdit
-    Left = 1012
+    Left = 809
     Top = 313
     Width = 121
     Height = 21
@@ -22255,9 +22251,10 @@ object FrmVendas: TFrmVendas
     TabOrder = 3
     Visible = False
     OnChange = edTotalItemChange
+    ExplicitLeft = 730
   end
   object edtValorUni: TCurrencyEdit
-    Left = 1006
+    Left = 803
     Top = 157
     Width = 186
     Height = 47
@@ -22271,9 +22268,10 @@ object FrmVendas: TFrmVendas
     ParentFont = False
     TabOrder = 7
     OnChange = edtValorUniChange
+    ExplicitLeft = 724
   end
   object BitBtn1: TBitBtn
-    Left = 1013
+    Left = 810
     Top = 560
     Width = 177
     Height = 33
@@ -22282,10 +22280,11 @@ object FrmVendas: TFrmVendas
     TabOrder = 8
     Visible = False
     OnClick = BitBtn1Click
+    ExplicitLeft = 731
   end
   object SpCod_Usuario: TSpinEdit
-    Left = 225
-    Top = 135
+    Left = 1
+    Top = 124
     Width = 121
     Height = 22
     MaxValue = 0
@@ -22296,7 +22295,7 @@ object FrmVendas: TFrmVendas
   end
   object mskQuantidade: TCurrencyEdit
     AlignWithMargins = True
-    Left = 1050
+    Left = 847
     Top = 224
     Width = 149
     Height = 51
@@ -22319,6 +22318,7 @@ object FrmVendas: TFrmVendas
     OnEnter = mskQuantidadeEnter
     OnKeyDown = mskQuantidadeKeyDown
     OnKeyPress = mskQuantidadeKeyPress
+    ExplicitLeft = 768
   end
   object bAtivar: TBitBtn
     Left = 1057
@@ -22428,9 +22428,9 @@ object FrmVendas: TFrmVendas
     OnClick = BtnTesteClick
   end
   object pnlAtalho: TPanel
-    Left = 412
-    Top = 67
-    Width = 388
+    Left = 268
+    Top = 71
+    Width = 349
     Height = 513
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
@@ -22441,7 +22441,7 @@ object FrmVendas: TFrmVendas
       Tag = 415
       Left = 2
       Top = 6
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -23636,7 +23636,7 @@ object FrmVendas: TFrmVendas
       Tag = 419
       Left = 2
       Top = 78
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -24831,7 +24831,7 @@ object FrmVendas: TFrmVendas
       Tag = 432
       Left = 2
       Top = 150
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -26026,7 +26026,7 @@ object FrmVendas: TFrmVendas
       Tag = 430
       Left = 2
       Top = 221
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -27221,7 +27221,7 @@ object FrmVendas: TFrmVendas
       Tag = 235
       Left = 2
       Top = 293
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -28416,7 +28416,7 @@ object FrmVendas: TFrmVendas
       Tag = 237
       Left = 2
       Top = 364
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -29611,7 +29611,7 @@ object FrmVendas: TFrmVendas
       Tag = 421
       Left = 2
       Top = 436
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -30804,9 +30804,9 @@ object FrmVendas: TFrmVendas
     end
     object btn2viaconta: TSpeedButton
       Tag = 433
-      Left = 130
+      Left = 117
       Top = 150
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -31999,9 +31999,9 @@ object FrmVendas: TFrmVendas
     end
     object btnAcesso: TSpeedButton
       Tag = 416
-      Left = 130
+      Left = 117
       Top = 78
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -33194,9 +33194,9 @@ object FrmVendas: TFrmVendas
     end
     object btnDiversos: TSpeedButton
       Tag = 431
-      Left = 130
+      Left = 117
       Top = 6
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -34389,9 +34389,9 @@ object FrmVendas: TFrmVendas
     end
     object btnPlasti: TSpeedButton
       Tag = 429
-      Left = 131
-      Top = 222
-      Width = 125
+      Left = 117
+      Top = 221
+      Width = 109
       Height = 70
       Hint = 'R'
       Glyph.Data = {
@@ -35585,9 +35585,9 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton8: TSpeedButton
       Tag = 422
-      Left = 132
+      Left = 119
       Top = 293
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -36780,9 +36780,9 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton9: TSpeedButton
       Tag = 425
-      Left = 132
+      Left = 119
       Top = 365
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -37975,9 +37975,9 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton10: TSpeedButton
       Tag = 424
-      Left = 133
+      Left = 120
       Top = 436
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -39170,9 +39170,9 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton11: TSpeedButton
       Tag = 418
-      Left = 256
+      Left = 231
       Top = 7
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -40365,9 +40365,9 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton12: TSpeedButton
       Tag = 434
-      Left = 257
+      Left = 232
       Top = 79
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -41560,9 +41560,9 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton13: TSpeedButton
       Tag = 435
-      Left = 256
+      Left = 231
       Top = 151
-      Width = 125
+      Width = 109
       Height = 70
       Glyph.Data = {
         36940000424D36940000000000003600000028000000800000004A0000000100
@@ -42755,8 +42755,8 @@ object FrmVendas: TFrmVendas
     end
   end
   object PNL_Fechamento: TPanel
-    Left = 868
-    Top = 125
+    Left = 1020
+    Top = 93
     Width = 436
     Height = 439
     BevelOuter = bvLowered
@@ -46140,6 +46140,7 @@ object FrmVendas: TFrmVendas
         7FF886F742969FC49FB4755066F306BD3C51C78D423ED5A94FFCB29236FC7FB4
         93ED444B153B08EAAE5CFC55E9ECE9FF0069FF0078F6E106983D3278F5DFA747
         F67F57F87F4F75A37A9EBDD7FFD9}
+      ExplicitLeft = 135
       ExplicitTop = 0
     end
     object lbTotalCom: TLabel
@@ -46491,9 +46492,9 @@ object FrmVendas: TFrmVendas
     end
   end
   object gridTotais: TDBGrid
-    Left = 8
-    Top = 71
-    Width = 249
+    Left = 0
+    Top = 74
+    Width = 49
     Height = 411
     Ctl3D = True
     DataSource = dsCaixa
@@ -46571,7 +46572,7 @@ object FrmVendas: TFrmVendas
     Left = 281
     Top = 336
     Bitmap = {
-      494C0101080009005C0014001E00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000900640014001E00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000005A00000001002000000000008070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

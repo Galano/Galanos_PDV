@@ -11,7 +11,7 @@ uses
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
   FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Comp.Client, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, ACBrBase,
-  ACBrPosPrinter, TypInfo, RxDBCurrEdit;
+  ACBrPosPrinter, TypInfo, RxDBCurrEdit, midaslib;
 
 type
     TFrmVendas = class(TForm)
@@ -146,7 +146,6 @@ type
     BtnTeste: TBitBtn;
     pnlAtalho: TPanel;
     EDT_CondPagto: TRadioGroup;
-    Label18: TLabel;
     qCaixa: TFDQuery;
     dsCaixa: TDataSource;
     qCaixaTOTAL: TBCDField;
@@ -745,10 +744,10 @@ var
   J: TACBrPosPaginaCodigo;
   K: Integer;
 begin
-    cdsitensVendas.CreateDataSet;
+
+
 
     WindowState := wsMaximized;
-
 
 
 
@@ -756,6 +755,10 @@ begin
     FrrmLogin.ShowModal;
     FrrmLogin.Hide;
     FrrmLogin.Free;
+
+
+  cdsitensVendas.CreateDataSet;
+
 
 
   cbxModelo.Items.Clear ;
@@ -781,6 +784,9 @@ begin
 
   qCaixa.Active := False;
   qCaixa.Active := True;
+
+
+
 
 end;
 
@@ -1171,7 +1177,7 @@ end;
 
 procedure TFrmVendas.bAtivarClick(Sender: TObject);
 begin
-AtivarCaixa;
+//AtivarCaixa;
 end;
 
 procedure TFrmVendas.spCodVendaChange(Sender: TObject);
@@ -1603,7 +1609,7 @@ if (mskQuantidade.Value > 0) and (TButton(Sender).Tag <> 431) then
         mskQuantidade.SetFocus;
       end;
 
-mskQuantidade.Value :=  0 ;
+mskQuantidade.Value :=  1 ;
 
 if (TButton(Sender).Tag = 431) then
   edtValorUni.SetFocus;

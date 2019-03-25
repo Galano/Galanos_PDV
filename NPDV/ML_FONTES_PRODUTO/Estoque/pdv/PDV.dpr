@@ -17,8 +17,8 @@ begin
   Application.Initialize;
   Application.CreateForm(TDmDados, DmDados);
   Application.CreateForm(TFrmVendas, FrmVendas);
-  Application.CreateForm(TFrmConsCliente, FrmConsCliente);
-  Application.CreateForm(TFrmConsProduto, FrmConsProduto);
-  Application.CreateForm(TFrmCupom, FrmCupom);
+//  Application.CreateForm(TFrmConsCliente, FrmConsCliente);
+//  Application.CreateForm(TFrmConsProduto, FrmConsProduto);
+//  Application.CreateForm(TFrmCupom, FrmCupom);
   Application.Run;
 end.
