@@ -10,11 +10,11 @@ uses
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
   FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, JclPeImage;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, JclPeImage, FireDAC.Phys.MySQLDef,
+  FireDAC.Phys.MySQL;
 
 type
   TDmDados = class(TDataModule)
-    IBTransaction1: TFDTransaction;
     Conexao: TFDConnection;
     tb_empresa: TFDTable;
     tb_empresaCOD_EMP: TIntegerField;
@@ -77,7 +77,6 @@ type
     tb_clientesAPELIDO_CLI: TStringField;
     tb_clientesLIMITE_CLI: TBCDField;
     tb_clientesATIVO_CLI: TStringField;
-    tb_clientesOBS_CLI: TStringField;
     tb_clientesNASCIMENTO_CLI: TDateField;
     tb_clientesDATACADASTRO_CLI: TDateField;
     tb_clientesATRAZO_MAXIMO_CLI: TIntegerField;
@@ -274,6 +273,8 @@ type
     Q_Secao_GrupoNOME_GRUPO: TStringField;
     Q_Secao_GrupoCOD_SUBGRUPO: TIntegerField;
     Q_Secao_GrupoNOME_SUBGRUPO: TStringField;
+    driveMysql: TFDPhysMySQLDriverLink;
+    tb_clientesOBS_CLI: TMemoField;
     
 
     procedure DataModuleCreate(Sender: TObject);
@@ -282,6 +283,7 @@ type
   public
     { Public declarations }
     ImpressoraCupom : String;
+    function GeneratorID(aName: string; Connection: TFDConnection; Incrementa: Boolean): integer;
   end;
 
 var
@@ -298,9 +300,29 @@ implementation
 {$R *.dfm}
 
 procedure TDmDados.DataModuleCreate(Sender: TObject);
-var
+var ini_arq, caminhomysql : String;
   Local_exe : String;
 begin
+  try
+   caminhomysql := ExtractFilePath(Application.ExeName) + 'libmySQL.dll';
+       if FileExists(caminhomysql) then
+        driveMysql.VendorLib := caminhomysql;
+
+   conexao.Open();
+
+   ini_arq := ExtractFileDir(Application.ExeName)+ '\dbconnections.ini';
+   iniConf := TIniFile.Create(ini_arq);
+   //Login_Padrao := Iniconf.ReadString('Base', 'Login_Padrao', '');
+
+
+   except on e:exception do begin
+     ShowMessage(e.message);
+  end;
+
+
+
+end;
+(*
     Local_exe:= ParamStr(0);
 
     ini_arq := Copy(ExtractFileDir(Local_exe), 1, LastDelimiter('\', ExtractFileDir(Local_exe))) + 'config\' + 'dbconnections.ini';
@@ -342,6 +364,29 @@ begin
             end;
         end;
     end;
+*)
+end;
+
+function TDmDados.GeneratorID(aName: string; Connection: TFDConnection;
+  Incrementa: Boolean): integer;
+var
+    Qry: TFDQuery;
+begin
+    Qry := TFDQuery.Create(nil);
+    try
+        Qry.Connection  := Connection;
+        if Incrementa then
+            Qry.SQL.Add('SELECT LAST_INSERT_ID()+1')
+            //Qry.SQL.Add('SELECT GEN_ID(' + aName + ', 1) FROM RDB$DATABASE')
+        else
+            Qry.SQL.Add('SELECT LAST_INSERT_ID()');
+            //Qry.SQL.Add('SELECT GEN_ID(' + aName + ', 0) FROM RDB$DATABASE');
+        Qry.Open;
+        Result := Qry.Fields[0].AsInteger;
+    finally
+        FreeAndNil(Qry);
+    end;
+
 end;
 
 end.

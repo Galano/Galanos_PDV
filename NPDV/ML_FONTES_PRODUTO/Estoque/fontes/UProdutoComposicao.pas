@@ -127,9 +127,9 @@ begin
                          Parambyname('2').AsInteger := StrToInt(Edit1.Text);
                          ExecSQL;
                       end;
-                  DmDados.IBTransaction1.CommitRetaining;
+                  // DmDados.IBTransaction1.CommitRetaining;
                 except
-                  DmDados.IBTransaction1.RollbackRetaining;
+                  // DmDados.IBTransaction1.RollbackRetaining;
                   showmessage('Erro ao excluir o Produto');
                 end;
               finally
@@ -172,9 +172,9 @@ begin
         Parambyname('3').AsCurrency := strtocurr(EdtQuant.Text);
         ExecSQL;
       end;
-      DmDados.IBTransaction1.CommitRetaining;
+      // DmDados.IBTransaction1.CommitRetaining;
     except
-      DmDados.IBTransaction1.RollbackRetaining;
+      // DmDados.IBTransaction1.RollbackRetaining;
       showmessage('Erro ao gravar o Produto ' + #13 +
         'Verifique se está gravado');
       Edit1.Clear;

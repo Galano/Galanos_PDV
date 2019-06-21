@@ -133,7 +133,6 @@ type
     Bevel1: TBevel;
     BitBtn1: TBitBtn;
     QPrecoCusto: TFDQuery;
-    QPrecoCustoPRECO_CUSTO: TIBBCDField;
     Q_Consulta_filtroCOD_PRO: TIntegerField;
     Q_Consulta_filtroCODIGO_BARRA_PRO: TStringField;
     Q_Consulta_filtroTP_PRODUTO: TStringField;
@@ -195,6 +194,7 @@ type
     QConsultaCodCONTROLA_ESTOQUE_PRO: TStringField;
     QConsultaCodATIVO_PRO: TStringField;
     QConsultaCodCAMINHO_FOTO_PRO: TBlobField;
+    QPrecoCustoPRECO_CUSTO: TFMTBCDField;
     procedure BtnSairClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botoes(acao: string);
@@ -592,7 +592,7 @@ begin
 
         ExecSQL;
       end;
-      ////DmDados.IBTransaction1.CommitRetaining;
+      ////// DmDados.IBTransaction1.CommitRetaining;
       Botoes('G');
       EdtDataValidade.Enabled := false;
 
@@ -621,7 +621,7 @@ begin
     except
       on e: exception do
       begin
-        //DmDados.IBTransaction1.RollbackRetaining;
+        //// DmDados.IBTransaction1.RollbackRetaining;
         Application.MessageBox(Pchar('Erro ao gravar a Cliente!' + #13 + #13 +
           e.Message), 'Informação', mb_OK + MB_ICONERROR);
       end;
@@ -641,6 +641,7 @@ begin
   Botoes('N');
   EdtDataValidade.Enabled := True;
   IDProd := GeneratorID('GEN_PRODUTO_ID', DmDados.Conexao, False)+1;
+
   edtCodrecuperado.Text := IntToStr(IDProd);
   EdtCodBarra.SetFocus;
 end;
@@ -665,7 +666,7 @@ begin
     if (QPrecoCusto.RecordCount > 0 ) then
     begin
       //ShowMessage('Tem registros');
-      EdtPrecoPrazo.Value := QPrecoCustoPRECO_CUSTO.Value;
+      EdtPrecoPrazo.Value := QPrecoCustoPRECO_CUSTO.AsFloat ;
     end;
   end;
 end;
@@ -1018,13 +1019,13 @@ var
 begin
     Qry := TFDQuery.Create(nil);
     try
-        Qry.Connection := Connection;
+        Qry.Connection  := Connection;
         if Incrementa then
-            Qry.SQL.Add(
-                'SELECT GEN_ID(' + aName + ', 1) FROM RDB$DATABASE')
+            Qry.SQL.Add('SELECT LAST_INSERT_ID()+1')
+            //Qry.SQL.Add('SELECT GEN_ID(' + aName + ', 1) FROM RDB$DATABASE')
         else
-            Qry.SQL.Add(
-                'SELECT GEN_ID(' + aName + ', 0) FROM RDB$DATABASE');
+            Qry.SQL.Add('SELECT LAST_INSERT_ID()');
+            //Qry.SQL.Add('SELECT GEN_ID(' + aName + ', 0) FROM RDB$DATABASE');
         Qry.Open;
         Result := Qry.Fields[0].AsInteger;
     finally

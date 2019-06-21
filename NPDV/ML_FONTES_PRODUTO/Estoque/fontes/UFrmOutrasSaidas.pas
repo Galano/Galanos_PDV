@@ -177,7 +177,7 @@ begin
     Parambyname('cod').AsInteger     := strtoint(EdtCodigo.Text);
     ExecSQL;
 
-    DmDados.IBTransaction1.CommitRetaining;
+    // DmDados.IBTransaction1.CommitRetaining;
   end;
 end;
 
@@ -362,9 +362,9 @@ begin
                  end;
                end;
 
-            DmDados.IBTransaction1.CommitRetaining;
+            // DmDados.IBTransaction1.CommitRetaining;
           except
-            DmDados.IBTransaction1.RollbackRetaining;
+            // DmDados.IBTransaction1.RollbackRetaining;
             showmessage('Erro ao Excluir o Item');
           end;
         finally
@@ -423,10 +423,10 @@ begin
              ExecSQL;
           end;
 
-       DmDados.IBTransaction1.CommitRetaining;
+       // DmDados.IBTransaction1.CommitRetaining;
 
      except
-       DmDados.IBTransaction1.RollbackRetaining;
+       // DmDados.IBTransaction1.RollbackRetaining;
      end;
 
     panel3.Enabled:= false;
@@ -532,7 +532,7 @@ begin
            ExecSQL;
         end;
 
-        DmDados.IBTransaction1.CommitRetaining;
+        // DmDados.IBTransaction1.CommitRetaining;
         Botoes('G');
         tagn.Text := '0';
         LimpaItens;
@@ -560,7 +560,7 @@ begin
     except
       on e: exception do
       begin
-        DmDados.IBTransaction1.RollbackRetaining;
+        // DmDados.IBTransaction1.RollbackRetaining;
 
         //panel3.Enabled:= true;
         //panel4.Enabled:= false;
@@ -629,7 +629,7 @@ begin
            ExecSQL;
         end;
 
-        DmDados.IBTransaction1.CommitRetaining;
+        // DmDados.IBTransaction1.CommitRetaining;
         Botoes('G');
 
         with Q_Consulta_cod do
@@ -669,7 +669,7 @@ begin
     except
       on e: exception do
       begin
-        DmDados.IBTransaction1.RollbackRetaining;
+        // DmDados.IBTransaction1.RollbackRetaining;
 
         panel3.Enabled:= true;
         panel4.Enabled:= false;

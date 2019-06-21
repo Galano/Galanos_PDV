@@ -390,7 +390,7 @@ begin
         end;
       end;
 
-      DmDados.IBTransaction1.CommitRetaining;
+      // DmDados.IBTransaction1.CommitRetaining;
 
       with Q_Itens_Venda do
       begin
@@ -403,7 +403,7 @@ begin
         MB_OK + MB_ICONINFORMATION);
 
     except
-      DmDados.IBTransaction1.RollbackRetaining;
+      // DmDados.IBTransaction1.RollbackRetaining;
       Application.MessageBox('Erro ao tentar esxluir o produto da venda!',
         'Informação', MB_OK + MB_ICONERROR);
     end;
@@ -451,10 +451,10 @@ begin
           end;
         end;
 
-        DmDados.IBTransaction1.CommitRetaining;
+        // DmDados.IBTransaction1.CommitRetaining;
 
       except
-        DmDados.IBTransaction1.RollbackRetaining;
+        // DmDados.IBTransaction1.RollbackRetaining;
         // Application.MessageBox('Venda excluida com sucesso!','Informação', MB_OK+MB_ICONERROR);
       end;
 

@@ -3,28 +3,33 @@ object DmDados: TDmDados
   OnCreate = DataModuleCreate
   Height = 563
   Width = 1237
-  object IBTransaction1: TFDTransaction
-    Connection = Conexao
-    Left = 128
-    Top = 32
-  end
-  object Conexao: TFDConnection
+  object conexao: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Fontes\Sistema Frente De Caixa Pdv\NPDV\ML_FONTES_PR' +
-        'ODUTO\Estoque\database\ESTOQUE.FDB'
-      'User_Name=sysdba'
-      'Password=masterkey'
-      'DriverID=fB')
+      'Database=pdv_galanos'
+      'Server=mysql642.umbler.com'
+      'Port=41890'
+      'User_Name=usr_pdv'
+      'Password=comandos123'
+      'DriverID=MySQL')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.UpdateChangedFields = False
+    UpdateOptions.LockWait = True
+    UpdateOptions.RefreshMode = rmManual
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.CheckReadOnly = False
+    UpdateOptions.CheckUpdatable = False
+    UpdateOptions.AutoCommitUpdates = True
     Connected = True
     LoginPrompt = False
     Left = 48
-    Top = 40
+    Top = 48
   end
   object tb_empresa: TFDTable
     IndexFieldNames = 'COD_EMP'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'EMPRESA'
     TableName = 'EMPRESA'
     Left = 56
@@ -119,8 +124,7 @@ object DmDados: TDmDados
   end
   object tb_vendedor: TFDTable
     IndexFieldNames = 'COD_VEND'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'VENDEDOR'
     TableName = 'VENDEDOR'
     Left = 56
@@ -153,11 +157,10 @@ object DmDados: TDmDados
   end
   object tb_classifica_cliente: TFDTable
     IndexFieldNames = 'COD_CLA'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'CLASSIF_CLIENTE'
     TableName = 'CLASSIF_CLIENTE'
-    Left = 55
+    Left = 56
     Top = 240
     object tb_classifica_clienteCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
@@ -174,8 +177,7 @@ object DmDados: TDmDados
   end
   object tb_fornecedor: TFDTable
     IndexFieldNames = 'COD_FOR'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'FORNECEDOR'
     TableName = 'FORNECEDOR'
     Left = 472
@@ -267,8 +269,7 @@ object DmDados: TDmDados
   end
   object tb_fpagamentos: TFDTable
     IndexFieldNames = 'CODIGO'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'FORMAS_PAGAMENTO'
     TableName = 'FORMAS_PAGAMENTO'
     Left = 320
@@ -287,12 +288,11 @@ object DmDados: TDmDados
   end
   object tb_clientes: TFDTable
     IndexFieldNames = 'COD_CLI'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'CLIENTE'
     TableName = 'CLIENTE'
-    Left = 48
-    Top = 296
+    Left = 120
+    Top = 472
     object tb_clientesCOD_CLI: TIntegerField
       FieldName = 'COD_CLI'
       Origin = 'COD_CLI'
@@ -370,11 +370,6 @@ object DmDados: TDmDados
       FixedChar = True
       Size = 1
     end
-    object tb_clientesOBS_CLI: TStringField
-      FieldName = 'OBS_CLI'
-      Origin = 'OBS_CLI'
-      Size = 500
-    end
     object tb_clientesNASCIMENTO_CLI: TDateField
       FieldName = 'NASCIMENTO_CLI'
       Origin = 'NASCIMENTO_CLI'
@@ -423,11 +418,14 @@ object DmDados: TDmDados
       Origin = 'EMAIL_CLI'
       Size = 100
     end
+    object tb_clientesOBS_CLI: TMemoField
+      FieldName = 'OBS_CLI'
+      BlobType = ftMemo
+    end
   end
   object tb_secao: TFDTable
     IndexFieldNames = 'COD_SEC'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'SECAO'
     TableName = 'SECAO'
     Left = 320
@@ -447,8 +445,7 @@ object DmDados: TDmDados
   end
   object tb_UnidadesMedidas: TFDTable
     IndexFieldNames = 'CODIGO'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'UNIDADE_MEDIDA'
     TableName = 'UNIDADE_MEDIDA'
     Left = 320
@@ -468,37 +465,37 @@ object DmDados: TDmDados
   end
   object Dts_empresa: TDataSource
     DataSet = tb_empresa
-    Left = 128
+    Left = 152
     Top = 112
   end
   object Dts_vendedor: TDataSource
     DataSet = tb_vendedor
-    Left = 137
+    Left = 152
     Top = 176
   end
   object Dts_classifica_cliente: TDataSource
     DataSet = tb_classifica_cliente
-    Left = 150
+    Left = 152
     Top = 240
   end
   object Dts_clientes: TDataSource
     DataSet = tb_clientes
-    Left = 142
-    Top = 296
+    Left = 216
+    Top = 472
   end
   object Dts_secao: TDataSource
     DataSet = tb_secao
-    Left = 376
+    Left = 424
     Top = 144
   end
   object Dts_fPagamentos: TDataSource
     DataSet = tb_fpagamentos
-    Left = 404
+    Left = 424
     Top = 216
   end
   object Dts_UnidadesMedidades: TDataSource
     DataSet = tb_UnidadesMedidas
-    Left = 416
+    Left = 424
     Top = 288
   end
   object Dts_fornecedor: TDataSource
@@ -508,19 +505,17 @@ object DmDados: TDmDados
   end
   object Dts_Marcas: TDataSource
     DataSet = tb_marcas
-    Left = 672
+    Left = 680
     Top = 128
   end
   object Q_Consulta: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
-    Left = 288
+    Connection = conexao
+    Left = 320
     Top = 88
   end
   object tb_marcas: TFDTable
     IndexFieldNames = 'CODIGO'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'MARCAS'
     TableName = 'MARCAS'
     Left = 600
@@ -540,11 +535,10 @@ object DmDados: TDmDados
   end
   object tb_produtos: TFDTable
     IndexFieldNames = 'COD_PRO'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'PRODUTO'
     TableName = 'PRODUTO'
-    Left = 608
+    Left = 600
     Top = 200
     object tb_produtosCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
@@ -677,8 +671,7 @@ object DmDados: TDmDados
     Top = 200
   end
   object Q_Fornecedor: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       
         'SELECT COD_FOR, RAZAO_FOR, TEL_FOR, FAX_FOR, CONTATO_FOR FROM FO' +
@@ -715,12 +708,11 @@ object DmDados: TDmDados
   end
   object Dts_Q_Fornecedor: TDataSource
     DataSet = Q_Fornecedor
-    Left = 1128
+    Left = 1152
     Top = 16
   end
   object Q_Produtos: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -831,18 +823,17 @@ object DmDados: TDmDados
   end
   object DS_Q_Produtos: TDataSource
     DataSet = Q_Produtos
-    Left = 1136
+    Left = 1152
     Top = 88
   end
   object Q_executa: TFDQuery
     AutoCalcFields = False
-    Connection = Conexao
-    Left = 360
-    Top = 96
+    Connection = conexao
+    Left = 424
+    Top = 88
   end
   object Q_Clientes: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT C.COD_CLI, C.NOME_CLI, C.NASCIMENTO_CLI, C.TELRES_CLI'
       'FROM CLIENTE C')
@@ -873,12 +864,11 @@ object DmDados: TDmDados
   end
   object DS_Q_clientes: TDataSource
     DataSet = Q_Clientes
-    Left = 1136
+    Left = 1152
     Top = 160
   end
   object Q_Vendedores: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT * FROM VENDEDOR ORDER BY COD_VEND')
     Left = 1056
@@ -911,16 +901,15 @@ object DmDados: TDmDados
   end
   object DS_Q_Vendedores: TDataSource
     DataSet = Q_Vendedores
-    Left = 1144
+    Left = 1152
     Top = 240
   end
   object Q_Classifica: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT *'
       'FROM CLASSIF_CLIENTE')
-    Left = 1057
+    Left = 1056
     Top = 320
     object Q_ClassificaCOD_CLA: TIntegerField
       FieldName = 'COD_CLA'
@@ -937,12 +926,11 @@ object DmDados: TDmDados
   end
   object DS_Q_Classifica: TDataSource
     DataSet = Q_Classifica
-    Left = 1144
+    Left = 1152
     Top = 320
   end
   object Q_Secao_Grupo: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       
         'SELECT S.COD_SEC, S.NOME_SEC, G.COD_GRUPO, G.DESCRICAO NOME_GRUP' +
@@ -953,7 +941,7 @@ object DmDados: TDmDados
       'ON (S.COD_SEC = G.COD_SEC)'
       'LEFT JOIN SECAO_GRUPO_SUBGRUPO SUB'
       'ON (G.COD_SEC = SUB.COD_SEC AND G.COD_GRUPO = SUB.COD_GRUPO)')
-    Left = 1063
+    Left = 1056
     Top = 384
     object Q_Secao_GrupoCOD_SEC: TIntegerField
       FieldName = 'COD_SEC'
@@ -1005,16 +993,15 @@ object DmDados: TDmDados
   end
   object DS_Q_Marcas: TDataSource
     DataSet = Q_Marcas
-    Left = 928
-    Top = 392
+    Left = 904
+    Top = 256
   end
   object Q_Marcas: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'select *  from MARCAS')
-    Left = 840
-    Top = 392
+    Left = 800
+    Top = 256
     object Q_MarcasCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
@@ -1030,8 +1017,7 @@ object DmDados: TDmDados
   end
   object tb_entradas: TFDTable
     IndexFieldNames = 'COD_OUTRA'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'ENTRADAS'
     TableName = 'ENTRADAS'
     Left = 600
@@ -1095,11 +1081,10 @@ object DmDados: TDmDados
   end
   object tb_Outras_Saidas: TFDTable
     IndexFieldNames = 'COD_OUTRA'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'OUTRAS_SAIDAS'
     TableName = 'OUTRAS_SAIDAS'
-    Left = 584
+    Left = 600
     Top = 328
     object tb_Outras_SaidasCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
@@ -1140,8 +1125,7 @@ object DmDados: TDmDados
     end
   end
   object Q_Produtos_inventario: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -1261,12 +1245,11 @@ object DmDados: TDmDados
   end
   object DS_Q_Produtos_inventario: TDataSource
     DataSet = Q_Produtos_inventario
-    Left = 899
+    Left = 907
     Top = 40
   end
   object QRelVendas: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT '
       '  VENDAS.COD_VENDAS,'
@@ -1333,7 +1316,7 @@ object DmDados: TDmDados
     end
   end
   object QRelOE: TFDQuery
-    Connection = Conexao
+    Connection = conexao
     SQL.Strings = (
       
         'SELECT SUM(QUANT_ITEM) QUANT, O.COD_ES, I.COD_PRO, P.NOME_PRO,  ' +
@@ -1346,12 +1329,11 @@ object DmDados: TDmDados
       'INNER JOIN TIPO_ES T'
       'ON (O.COD_ES = T.COD_ES)'
       'GROUP BY O.COD_ES, I.COD_PRO, P.NOME_PRO, T.NOME_ES')
-    Left = 896
+    Left = 904
     Top = 120
   end
   object Q_RelEntradas: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT '
       '  ENTRADAS.COD_OUTRA,'
@@ -1424,11 +1406,10 @@ object DmDados: TDmDados
   end
   object tb_usuarios: TFDTable
     IndexFieldNames = 'COD_USU'
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     UpdateOptions.UpdateTableName = 'USUARIO'
     TableName = 'USUARIO'
-    Left = 48
+    Left = 56
     Top = 352
     object tb_usuariosCOD_USU: TIntegerField
       FieldName = 'COD_USU'
@@ -1463,15 +1444,14 @@ object DmDados: TDmDados
   end
   object Dts_Usuarios: TDataSource
     DataSet = tb_usuarios
-    Left = 136
+    Left = 152
     Top = 352
   end
   object QLogin: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'select *  from USUARIO')
-    Left = 312
+    Left = 320
     Top = 352
     object QLoginCOD_USU: TIntegerField
       FieldName = 'COD_USU'
@@ -1505,13 +1485,12 @@ object DmDados: TDmDados
     end
   end
   object QRelOS: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       
         'select c.cod_cli, c.nome_cli, O.* from OUTRAS_SAIDAS O, cliente ' +
         'c where c.cod_cli = o.cod_cli')
-    Left = 896
+    Left = 904
     Top = 184
     object QRelOSCOD_CLI: TIntegerField
       FieldName = 'COD_CLI'
@@ -1563,8 +1542,7 @@ object DmDados: TDmDados
     end
   end
   object Q_RelVencidos: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'SELECT '
       '  ITENS_ENTRADAS.COD_OUTRA,'
@@ -1583,8 +1561,8 @@ object DmDados: TDmDados
       'WHERE'
       '  ITENS_ENTRADAS.DATA_VENCTO between :hj and :hj2'
       'ORDER BY PRODUTO.NOME_PRO,ITENS_ENTRADAS.DATA_VENCTO')
-    Left = 800
-    Top = 256
+    Left = 440
+    Top = 472
     object Q_RelVencidosCOD_OUTRA: TIntegerField
       FieldName = 'COD_OUTRA'
       Origin = 'COD_OUTRA'
@@ -1614,8 +1592,7 @@ object DmDados: TDmDados
     end
   end
   object Q_Qtd_vendida: TFDQuery
-    Connection = Conexao
-    Transaction = IBTransaction1
+    Connection = conexao
     SQL.Strings = (
       'select '
       '    itens_venda.cod_pro,'
@@ -1635,8 +1612,8 @@ object DmDados: TDmDados
       '         vendas.data,'
       '         produto.nome_pro'
       'order by produto.nome_pro')
-    Left = 400
-    Top = 392
+    Left = 424
+    Top = 352
     object Q_Qtd_vendidaCOD_PRO: TIntegerField
       FieldName = 'COD_PRO'
       Origin = 'COD_PRO'
@@ -1658,5 +1635,9 @@ object DmDados: TDmDados
       Required = True
       Size = 80
     end
+  end
+  object driveMysql: TFDPhysMySQLDriverLink
+    Left = 112
+    Top = 32
   end
 end

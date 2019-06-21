@@ -68,20 +68,23 @@ uses
   UFrmSelecionaItensEtiqueta in 'UFrmSelecionaItensEtiqueta.pas' {FrmSelecionaItensEtiqueta},
   URelEiquetas2 in 'URelEiquetas2.pas' {FrmRelEiquetas2},
   UFrmControleCredito in 'UFrmControleCredito.pas' {FrmControleCredito},
-  UFrmQrVendasDia in 'UFrmQrVendasDia.pas' {FrmQrVendasDia};
+  UFrmQrVendasDia in 'UFrmQrVendasDia.pas' {FrmQrVendasDia},
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Carbon');
   Application.CreateForm(TDmDados, DmDados);
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.CreateForm(TFrmQRelCliGeral, FrmQRelCliGeral);
   Application.CreateForm(TFrmQRelEstoque, FrmQRelEstoque);
   Application.CreateForm(TQRelVendedores, QRelVendedores);
   Application.CreateForm(TFrmQRelCadClassif, FrmQRelCadClassif);
-{  Application.CreateForm(TFrmQRelSec, FrmQRelSec);
+  {  Application.CreateForm(TFrmQRelSec, FrmQRelSec);
   Application.CreateForm(TFrmQRelMarcas, FrmQRelMarcas);
   Application.CreateForm(TFrmConsClientes01, FrmConsClientes01);
   Application.CreateForm(TFrmOutrasSaidas, FrmOutrasSaidas);

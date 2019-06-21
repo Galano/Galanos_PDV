@@ -40,7 +40,6 @@ type
     QConsClienteAPELIDO_CLI: TStringField;
     QConsClienteLIMITE_CLI: TBCDField;
     QConsClienteATIVO_CLI: TStringField;
-    QConsClienteOBS_CLI: TStringField;
     QConsClienteNASCIMENTO_CLI: TDateField;
     QConsClienteDATACADASTRO_CLI: TDateField;
     QConsClienteATRAZO_MAXIMO_CLI: TIntegerField;
@@ -52,6 +51,7 @@ type
     QConsClienteEMAIL_CLI: TStringField;
     QConsClienteNOME_CLA: TStringField;
     QDias: TFDQuery;
+    QConsClienteOBS_CLI: TMemoField;
     procedure BtnOkClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ComboConsChange(Sender: TObject);

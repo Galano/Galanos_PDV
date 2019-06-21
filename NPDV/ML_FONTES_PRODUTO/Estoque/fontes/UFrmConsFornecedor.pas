@@ -107,7 +107,7 @@ begin
         end;
     end;
   end;
-  // DmDados.IBTransaction1.CommitRetaining;
+  // // DmDados.IBTransaction1.CommitRetaining;
   DBGrid.SetFocus;
 end;
 

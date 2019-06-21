@@ -172,7 +172,6 @@ object FrmConsClientes: TFrmConsClientes
           FieldName = 'NOME_CLI'
           Title.Alignment = taCenter
           Title.Caption = 'NOME'
-          Width = 64
           Visible = True
         end
         item
@@ -181,7 +180,6 @@ object FrmConsClientes: TFrmConsClientes
           FieldName = 'CIDRES_CLI'
           Title.Alignment = taCenter
           Title.Caption = 'CIDADE'
-          Width = 64
           Visible = True
         end
         item
@@ -198,7 +196,6 @@ object FrmConsClientes: TFrmConsClientes
           FieldName = 'NASCIMENTO_CLI'
           Title.Alignment = taCenter
           Title.Caption = 'NASCIMENTO'
-          Width = 64
           Visible = True
         end
         item
@@ -228,7 +225,7 @@ object FrmConsClientes: TFrmConsClientes
     Top = 160
   end
   object QConsCliente: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT C.*, S.NOME_CLA'
       'FROM CLIENTE C'
@@ -314,11 +311,6 @@ object FrmConsClientes: TFrmConsClientes
       FixedChar = True
       Size = 1
     end
-    object QConsClienteOBS_CLI: TStringField
-      FieldName = 'OBS_CLI'
-      Origin = 'OBS_CLI'
-      Size = 500
-    end
     object QConsClienteNASCIMENTO_CLI: TDateField
       FieldName = 'NASCIMENTO_CLI'
       Origin = 'NASCIMENTO_CLI'
@@ -375,9 +367,13 @@ object FrmConsClientes: TFrmConsClientes
       ReadOnly = True
       Size = 30
     end
+    object QConsClienteOBS_CLI: TMemoField
+      FieldName = 'OBS_CLI'
+      BlobType = ftMemo
+    end
   end
   object QDias: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT MIN(VENCTO_CTR) VENC'
       'FROM CONTAS_RECEBER R'

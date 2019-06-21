@@ -518,10 +518,10 @@ begin
                 end;
 
              Result := true;
-             //DmDados.IBTransaction1.CommitRetaining;
+             //// DmDados.IBTransaction1.CommitRetaining;
 
            except
-             //DmDados.IBTransaction1.RollbackRetaining;
+             //// DmDados.IBTransaction1.RollbackRetaining;
              Result := false;
              //showmessage('Erro ao Excluir');
            end;

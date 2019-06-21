@@ -1624,7 +1624,7 @@ object FrmProdutos: TFrmProdutos
     Width = 25
     Left = 552
     Bitmap = {
-      494C01010D007C00980019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010D007C00A00019001900FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000064000000640000000100200000000000409C
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2945,8 +2945,7 @@ object FrmProdutos: TFrmProdutos
     Top = 72
   end
   object Q_Consulta_filtro: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '*'
@@ -3219,8 +3218,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object Q_Marcas: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select *  from MARCAS where CODIGO = :cod')
     Left = 142
@@ -3245,8 +3243,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object Q_Grupos: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       
         'select *  from SECAO_GRUPO where COD_GRUPO = :cod and COD_SEC = ' +
@@ -3283,8 +3280,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object Q_secao: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select *  from SECAO where COD_SEC = :cod')
     Left = 550
@@ -3309,8 +3305,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object Q_SubGrupos: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select *  from SECAO_GRUPO_SUBGRUPO'
       'where COD_SEC = :cod_sec and '
@@ -3358,8 +3353,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object Q_UnidEnt: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select *  from UNIDADE_MEDIDA where CODIGO = :cod')
     Left = 238
@@ -3384,8 +3378,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object Q_UnidSai: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select *  from UNIDADE_MEDIDA where CODIGO = :cod')
     Left = 542
@@ -3410,8 +3403,7 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object QConsultaCod: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select *  from PRODUTO where NOME_PRO = :nm')
     Left = 438
@@ -3549,14 +3541,12 @@ object FrmProdutos: TFrmProdutos
     end
   end
   object QCodBarras: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     Left = 224
     Top = 120
   end
   object QPrecoCusto: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  SUM(PRECO_PRAZO) AS PRECO_CUSTO'
@@ -3575,11 +3565,9 @@ object FrmProdutos: TFrmProdutos
         DataType = ftInteger
         ParamType = ptInput
       end>
-    object QPrecoCustoPRECO_CUSTO: TIBBCDField
+    object QPrecoCustoPRECO_CUSTO: TFMTBCDField
       FieldName = 'PRECO_CUSTO'
-      ProviderFlags = []
-      DisplayFormat = ',R$ #0.00'
-      Precision = 18
+      Precision = 40
       Size = 4
     end
   end

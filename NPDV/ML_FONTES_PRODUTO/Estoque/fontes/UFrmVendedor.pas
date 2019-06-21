@@ -225,7 +225,7 @@ begin
       begin
         Cod_Altera := StrToInt(Edit1.Text);
       end;
-      DmDados.IBTransaction1.CommitRetaining;
+      // DmDados.IBTransaction1.CommitRetaining;
       DmDados.tb_vendedor.Open;
       DmDados.tb_vendedor.Refresh;
 
@@ -274,7 +274,7 @@ begin
     except
       on e: exception do
       begin
-        DmDados.IBTransaction1.RollbackRetaining;
+        // DmDados.IBTransaction1.RollbackRetaining;
         Application.MessageBox(Pchar('Erro ao gravar a vendedor!'+#13+#13+e.Message),'Informação', mb_OK+MB_ICONERROR);
       end;
     end;

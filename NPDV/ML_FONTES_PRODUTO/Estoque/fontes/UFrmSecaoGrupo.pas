@@ -188,7 +188,7 @@ begin
       begin
          try
            try
-             DmDados.IBTransaction1.StartTransaction;
+             // DmDados.IBTransaction1.StartTransaction;
              with DmDados.Q_executa do
                 begin
                    close;
@@ -199,9 +199,9 @@ begin
                    Parambyname('codgrupo').AsInteger := QGrupoCOD_GRUPO.AsInteger;
                    ExecSQL;
                 end;
-             //DmDados.IBTransaction1.CommitRetaining;
+             //// DmDados.IBTransaction1.CommitRetaining;
            except
-             DmDados.IBTransaction1.Rollback;
+             // DmDados.IBTransaction1.Rollback;
              showmessage('Erro ao excluir o grupo');
            end;
          finally
@@ -287,11 +287,11 @@ begin
         Application.MessageBox('Alteração no cadastro do grupo realizado com sucesso!','Informação', mb_OK+MB_ICONINFORMATION);
       end;
 
-       ////DmDados.IBTransaction1.CommitRetaining;
+       ////// DmDados.IBTransaction1.CommitRetaining;
        bGravaSubGrupo := 0;
 
      except
-       ////DmDados.IBTransaction1.RollbackRetaining;
+       ////// DmDados.IBTransaction1.RollbackRetaining;
        showmessage('Erro ao gravar o grupo');
      end;
    finally
@@ -340,7 +340,7 @@ begin
 
            ExecSQL;
         end;
-      //DmDados.IBTransaction1.CommitRetaining;
+      //// DmDados.IBTransaction1.CommitRetaining;
       Botoes('G');
       edtCod.Enabled := true;
 
@@ -370,7 +370,7 @@ begin
     except
       on e: exception do
       begin
-        ////DmDados.IBTransaction1.RollbackRetaining;
+        ////// DmDados.IBTransaction1.RollbackRetaining;
         Application.MessageBox(Pchar('Erro ao gravar a Classificação!'+#13+#13+e.Message),'Informação', mb_OK+MB_ICONERROR);
       end;
     end;
@@ -450,9 +450,9 @@ begin
              Parambyname('4').AsString := trim(EdtNomeSubGrupo.Text);
              ExecSQL;
           end;
-       //DmDados.IBTransaction1.CommitRetaining;
+       //// DmDados.IBTransaction1.CommitRetaining;
      except
-       //DmDados.IBTransaction1.RollbackRetaining;
+       //// DmDados.IBTransaction1.RollbackRetaining;
        showmessage('Erro ao gravar o SubGrupo');
      end;
    finally
@@ -483,9 +483,9 @@ begin
                    Parambyname('subgrupo').AsInteger := QSubCOD_SUBGRUPO.AsInteger;
                    ExecSQL;
                 end;
-             //DmDados.IBTransaction1.CommitRetaining;
+             //// DmDados.IBTransaction1.CommitRetaining;
            except
-             //DmDados.IBTransaction1.RollbackRetaining;
+             //// DmDados.IBTransaction1.RollbackRetaining;
              showmessage('Erro ao excluir o SubGrupo');
            end;
          finally
@@ -599,7 +599,7 @@ begin
          Open;
          result:= fieldbyname('codigo').AsInteger + 1;
       end;
-   ////DmDados.IBTransaction1.CommitRetaining;
+   ////// DmDados.IBTransaction1.CommitRetaining;
    QOrdem.Close;
 end;
 
@@ -617,7 +617,7 @@ begin
          Open;
          result:= fieldbyname('codigo').AsInteger + 1;
       end;
-   //DmDados.IBTransaction1.CommitRetaining;
+   //// DmDados.IBTransaction1.CommitRetaining;
    QOrdem.Close;
 end;
 
