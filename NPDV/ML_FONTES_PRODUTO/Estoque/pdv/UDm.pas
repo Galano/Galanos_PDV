@@ -49,7 +49,6 @@ type
     tb_vendedorCOD_VEND: TIntegerField;
     tb_vendedorNOME_VEND: TStringField;
     tb_vendedorATIVO_VEND: TStringField;
-    tb_vendedorCOMISSAO_VEND: TFloatField;
     Dts_vendedor: TDataSource;
     tb_empresa: TFDTable;
     Dts_empresa: TDataSource;
@@ -103,15 +102,21 @@ type
     sqlItensVendasDeletar: TFDQuery;
     sqlItensVendasDeletarMysql: TFDQuery;
     sqlVendas_MysqlEMPRESA: TIntegerField;
+    tb_vendedorCOMISSAO_VEND: TBCDField;
+    QLoginEMPRESA: TIntegerField;
 
 
     procedure DataModuleCreate(Sender: TObject);
   private
+    FUsuario_Empresa : integer;
     { Private declarations }
   public
     { Public declarations }
     TesteMysql : Boolean;
-    ImpressoraCupom : String;
+    FLogin_Padrao, ImpressoraCupom : String;
+    property Usuario_Empresa : Integer READ FUsuario_Empresa write FUsuario_Empresa;
+    property Login_Padrao : String READ FLogin_Padrao write FLogin_Padrao;
+    procedure SalvarLogin_Padrao;
   end;
 
 var
@@ -126,8 +131,28 @@ implementation
 {$R *.dfm}
 
 procedure TDmDados.DataModuleCreate(Sender: TObject);
-var caminhomysql : String;
+var ini_arq, caminhomysql : String;
+
 begin
+try
+ caminhomysql := ExtractFilePath(Application.ExeName) + 'libmySQL.dll';
+     if FileExists(caminhomysql) then
+      driveMysql.VendorLib := caminhomysql;
+
+ conexao.Open();
+
+ ini_arq := ExtractFileDir(Application.ExeName)+ '\dbconnections.ini';
+ iniConf := TIniFile.Create(ini_arq);
+ Login_Padrao := Iniconf.ReadString('Base', 'Login_Padrao', '');
+
+
+ except on e:exception do begin
+   ShowMessage(e.message);
+end;
+
+end;
+
+(*
 try
 
     caminhomysql := ExtractFilePath(Application.ExeName) + 'libmySQL.dll';
@@ -191,8 +216,17 @@ end;
     finally
 
     end;
-
+*)
 //ShowMessage('abriu!');
+end;
+
+procedure TDmDados.SalvarLogin_Padrao;
+begin
+try
+  Iniconf.WriteString('Base', 'Login_Padrao', Login_Padrao );
+finally
+
+end;
 end;
 
 end.

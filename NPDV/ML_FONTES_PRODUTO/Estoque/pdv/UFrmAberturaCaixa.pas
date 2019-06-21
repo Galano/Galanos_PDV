@@ -65,6 +65,7 @@ begin
       ParamByName('vl').Value := EdtTotal.Value;
       ParamByName('sd').Value := EdtTotal.Value;
       ParamByName('st').Value := 'A'; // Aberto
+      ParamByName('empresa').Value := DmDados.Usuario_Empresa;
       ExecSQL;
     end;
 

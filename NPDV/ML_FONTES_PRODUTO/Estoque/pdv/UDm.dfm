@@ -5,17 +5,17 @@ object DmDados: TDmDados
   Width = 711
   object IBTransaction1: TFDTransaction
     Connection = conexao
-    Left = 136
+    Left = 144
     Top = 48
   end
   object conexao: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Fontes\Sistema Frente De Caixa Pdv\NPDV\ML_FONTES_PR' +
-        'ODUTO\Estoque\database\ESTOQUE.FDB'
-      'User_Name=sysdba'
-      'Password=masterkey'
-      'DriverID=fB')
+      'Database=pdv_galanos'
+      'Server=mysql642.umbler.com'
+      'Port=41890'
+      'User_Name=usr_pdv'
+      'Password=comandos123'
+      'DriverID=MySQL')
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
@@ -32,6 +32,7 @@ object DmDados: TDmDados
     Top = 48
   end
   object tb_fpagamentos: TFDTable
+    IndexFieldNames = 'CODIGO'
     Connection = conexao
     Transaction = IBTransaction1
     UpdateOptions.UpdateTableName = 'FORMAS_PAGAMENTO'
@@ -53,6 +54,7 @@ object DmDados: TDmDados
     Top = 208
   end
   object tb_clientes: TFDTable
+    IndexFieldNames = 'COD_CLI'
     Connection = conexao
     Transaction = IBTransaction1
     UpdateOptions.UpdateTableName = 'CLIENTE'
@@ -182,8 +184,10 @@ object DmDados: TDmDados
       Required = True
       Size = 1
     end
-    object tb_vendedorCOMISSAO_VEND: TFloatField
+    object tb_vendedorCOMISSAO_VEND: TBCDField
       FieldName = 'COMISSAO_VEND'
+      Precision = 18
+      Size = 2
     end
   end
   object Dts_vendedor: TDataSource
@@ -344,6 +348,11 @@ object DmDados: TDmDados
       FixedChar = True
       Size = 1
     end
+    object QLoginEMPRESA: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPRESA'
+      Origin = 'EMPRESA'
+    end
   end
   object conMysql: TFDConnection
     Params.Strings = (
@@ -353,7 +362,6 @@ object DmDados: TDmDados
       'Password=comandos123'
       'Database=pdv_galanos'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 624
     Top = 64

@@ -96,7 +96,7 @@ object FrrmLogin: TFrrmLogin
       CharCase = ecUpperCase
       Color = clSilver
       TabOrder = 0
-      Text = 'BIEL'
+      Text = 'VILA_RIO'
       OnKeyPress = EdtusuKeyPress
     end
     object Edtsenha: TEdit
@@ -154,7 +154,7 @@ object FrrmLogin: TFrrmLogin
     end
   end
   object Caixa: TFDQuery
-    Connection = DmDados.conexao
+    Connection = DmDados.Conexao
     Transaction = DmDados.IBTransaction1
     SQL.Strings = (
       'select * from CAIXA where cod_usu = :cod and data_abertura = :dt')

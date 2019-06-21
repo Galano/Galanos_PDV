@@ -386,32 +386,42 @@ object FrmAbreCaixa: TFrmAbreCaixa
     OnClick = BitBtn1Click
   end
   object AbreCaixa: TFDQuery
-    Connection = DmDados.conexao
+    Connection = DmDados.Conexao
     SQL.Strings = (
       
         'INSERT INTO CAIXA(COD_USU,DATA_ABERTURA,HORA_ABERTURA,VL_ABERTUR' +
-        'A,SALDO,STATUS)'
-      'VALUES(:cod,:dt,:hr,:vl,:sd,:st)')
+        'A,SALDO,STATUS,EMPRESA)'
+      'VALUES(:cod,:dt,:hr,:vl,:sd,:st,:empresa)')
     Left = 184
     Top = 24
     ParamData = <
       item
         Name = 'cod'
+        ParamType = ptInput
       end
       item
         Name = 'dt'
+        ParamType = ptInput
       end
       item
         Name = 'hr'
+        ParamType = ptInput
       end
       item
         Name = 'vl'
+        ParamType = ptInput
       end
       item
         Name = 'sd'
+        ParamType = ptInput
       end
       item
         Name = 'st'
+        ParamType = ptInput
+      end
+      item
+        Name = 'EMPRESA'
+        ParamType = ptInput
       end>
   end
 end

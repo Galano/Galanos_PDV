@@ -77,12 +77,22 @@ begin
              begin
               if (DmDados.QLoginOPERADOR_CAIXA.Value = 'S') then
               begin
+                DmDados.Usuario_Empresa := DmDados.QLoginEMPRESA.AsInteger;
                 FrrmLogin.Tag := 1;
                 FrmVendas.Label5.Caption := DmDados.QLoginNOME_USU.AsString;
                 FrmVendas.Caption := 'Estoque Master - Ponto de Vendas - '+DmDados.QLoginNOME_USU.AsString;
                 FrmVendas.SpCod_Usuario.Value := DmDados.QLoginCOD_USU.Value;
                 FrrmLogin.Close;
                 VerificaCaixa(FrmVendas.SpCod_Usuario.Value);
+
+
+                if  Edtusu.Text <> DmDados.Login_Padrao then
+                begin
+                  DmDados.Login_Padrao := Edtusu.Text;
+                  DmDados.SalvarLogin_Padrao;
+                end;
+
+
               end
               else
               begin
@@ -142,6 +152,7 @@ end;
 procedure TFrrmLogin.FormShow(Sender: TObject);
 begin
   FrrmLogin.Tag := 0;
+  Edtusu.Text := DmDados.Login_Padrao;
 end;
 
 procedure TFrrmLogin.VerificaCaixa(Cod_usu: Integer);
@@ -151,9 +162,10 @@ begin
   begin
     Close;
     SQL.Clear;
-    SQL.Add('select * from CAIXA where cod_usu = :cod and data_abertura = :dt');
+    SQL.Add('select * from CAIXA where cod_usu = :cod and data_abertura = :dt and empresa = :empresa ');
     ParamByName('cod').Value := Cod_usu;
     ParamByName('dt').Value := Date;
+    ParamByName('empresa').Value :=  DmDados.Usuario_Empresa;
     Open;
     FetchAll;
   end;
