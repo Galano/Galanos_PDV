@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<ActiveMobileDevice>
+		<NoProfile Android=""/>
+	</ActiveMobileDevice>
+	<BT_BuildType>Debug</BT_BuildType>
+	<Transactions>
+    <Transaction>2019/06/20 13:06:26.000.740,C:\Users\BrunoGalanoSilva\Desktop\AppConsulta2\HeaderFooterApplication.dproj=C:\Users\BrunoGalanoSilva\Desktop\AppConsulta2\AppConsultaCaixas.dproj</Transaction>
+    <Transaction>2019/06/20 15:07:12.999,C:\Fontes\AppConsulta\ConsultaCaixas.dproj=C:\Fontes\AppConsulta\AppConsultaCaixas.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
