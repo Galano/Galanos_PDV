@@ -12,12 +12,14 @@ uses
   untImpressao in 'untImpressao.pas',
   Vcl.Themes,
   Vcl.Styles,
-  uFRMDespesas in 'uFRMDespesas.pas' {FrmDespesas};
+  uFRMDespesas in 'uFRMDespesas.pas' {FrmDespesas},
+  UFrmFechamento in 'UFrmFechamento.pas' {frmFechamento};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.Title := 'PDV-Galanos';
   TStyleManager.TrySetStyle('Amakrits');
   Application.CreateForm(TDmDados, DmDados);
   Application.CreateForm(TFrmVendas, FrmVendas);

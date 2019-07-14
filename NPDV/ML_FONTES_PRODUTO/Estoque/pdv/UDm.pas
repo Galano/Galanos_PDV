@@ -104,6 +104,11 @@ type
     sqlVendas_MysqlEMPRESA: TIntegerField;
     tb_vendedorCOMISSAO_VEND: TBCDField;
     QLoginEMPRESA: TIntegerField;
+    qryVerificarVersao: TFDQuery;
+    qryVerificarVersaoVERSAO_SISTEMA: TFDAutoIncField;
+    qryVerificarVersaoVERSAO: TStringField;
+    qryBaixarVersao: TFDQuery;
+    qryBaixarVersaoEXECUTAVEL: TBlobField;
 
 
     procedure DataModuleCreate(Sender: TObject);
@@ -114,9 +119,12 @@ type
     { Public declarations }
     TesteMysql : Boolean;
     FLogin_Padrao, ImpressoraCupom : String;
+    FLogin_DataAbertura : TDateTime;
     property Usuario_Empresa : Integer READ FUsuario_Empresa write FUsuario_Empresa;
     property Login_Padrao : String READ FLogin_Padrao write FLogin_Padrao;
+    property Login_DataAbertura : TDateTime READ FLogin_DataAbertura write FLogin_DataAbertura;
     procedure SalvarLogin_Padrao;
+    Function VersaoExe: String;
   end;
 
 var
@@ -132,8 +140,8 @@ implementation
 
 procedure TDmDados.DataModuleCreate(Sender: TObject);
 var ini_arq, caminhomysql : String;
-
 begin
+Login_DataAbertura := now();
 try
  caminhomysql := ExtractFilePath(Application.ExeName) + 'libmySQL.dll';
      if FileExists(caminhomysql) then
@@ -152,72 +160,8 @@ end;
 
 end;
 
-(*
-try
-
-    caminhomysql := ExtractFilePath(Application.ExeName) + 'libmySQL.dll';
-
-    if FileExists(caminhomysql) then
-      driveMysql.VendorLib := caminhomysql;
-
-    TesteMysql := False;
-    ini_arq := Copy(ExtractFileDir(Application.ExeName), 1, LastDelimiter('\', ExtractFileDir(Application.ExeName))) + 'config\' + 'dbconnections.ini';
-    iniConf := TIniFile.Create(ini_arq);
-
-    arq := ExtractFilePath(Application.ExeName) + 'dbconnections.ini';
-
-    Conexao.Connected := False;
-    if (FileExists(ini_arq)) then
-    begin
-        try
-            ImpressoraCupom := Iniconf.ReadString('Impressora', 'porta', '');
-
-            if (Iniconf.ReadString('Base', 'host', '') = '') then
-            begin
-                Conexao.Connected := False;
-                Conexao.Params.Database := '';
-                Conexao.Params.Database := 'localhost' + ':' + Iniconf.ReadString('Base', 'Caminho', '');
-            end
-            else
-            begin
-                Conexao.Connected := False;
-                Conexao.Params.Database := '';
-                Conexao.Params.Database := {Iniconf.ReadString('Base', 'host', '') + ':' +} Iniconf.ReadString('Base', 'Caminho', '');
-            end;
-
-            //Conexao.Params.Values['user_name = SYSDBA'];
-            //Conexao.Params.Values['password = masterkey'];
-            Conexao.Connected := True;
-            tb_empresa.Open;
 
 
-          //doSaveLog('Conectou ao banco de dados!');
-        except on e:exception do
-            begin
-                //Application.MessageBox('ERRO #015' + #13 + #13 + 'Não foi possível se conectar ao banco de dados!'+e.Message+'', 'Erro de Conexão', MB_OK + MB_ICONERROR);
-                ShowMessage(e.Message);
-                Application.Terminate;
-            end;
-        end;
-    end;
-except on e:exception do begin
-   ShowMessage(e.message);
-end;
-
-end;
-
-
-
-    try
-      conMysql.Connected := true;
-      conMysql.Connected := false;
-      TesteMysql :=  true;
-
-    finally
-
-    end;
-*)
-//ShowMessage('abriu!');
 end;
 
 procedure TDmDados.SalvarLogin_Padrao;
@@ -228,5 +172,45 @@ finally
 
 end;
 end;
+
+
+
+Function TDmDados.VersaoExe: String;
+type
+   PFFI = ^vs_FixedFileInfo;
+var
+   F       : PFFI;
+   Handle  : Dword;
+   Len     : Longint;
+   Data    : Pchar;
+   Buffer  : Pointer;
+   Tamanho : Dword;
+   Parquivo: Pchar;
+   Arquivo : String;
+begin
+   Arquivo  := Application.ExeName;
+   Parquivo := StrAlloc(Length(Arquivo) + 1);
+   StrPcopy(Parquivo, Arquivo);
+   Len := GetFileVersionInfoSize(Parquivo, Handle);
+   Result := '';
+   if Len > 0 then
+   begin
+      Data:=StrAlloc(Len+1);
+      if GetFileVersionInfo(Parquivo,Handle,Len,Data) then
+      begin
+         VerQueryValue(Data, '',Buffer,Tamanho);
+         F := PFFI(Buffer);
+         Result := Format('%d.%d.%d.%d',
+                          [HiWord(F^.dwFileVersionMs),
+                           LoWord(F^.dwFileVersionMs),
+                           HiWord(F^.dwFileVersionLs),
+                           Loword(F^.dwFileVersionLs)]
+                         );
+      end;
+      StrDispose(Data);
+   end;
+   StrDispose(Parquivo);
+end;
+
 
 end.

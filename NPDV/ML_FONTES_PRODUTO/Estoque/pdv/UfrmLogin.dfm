@@ -15,6 +15,7 @@ object FrrmLogin: TFrrmLogin
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -138,11 +139,12 @@ object FrrmLogin: TFrrmLogin
     BevelOuter = bvLowered
     Color = clActiveCaption
     TabOrder = 2
-    object Label4: TLabel
-      Left = 265
-      Top = 4
+    object lblVersao: TLabel
+      Left = 271
+      Top = 6
       Width = 29
       Height = 13
+      Alignment = taRightJustify
       Caption = 'v. 1.0'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -154,8 +156,7 @@ object FrrmLogin: TFrrmLogin
     end
   end
   object Caixa: TFDQuery
-    Connection = DmDados.Conexao
-    Transaction = DmDados.IBTransaction1
+    Connection = DmDados.conexao
     SQL.Strings = (
       'select * from CAIXA where cod_usu = :cod and data_abertura = :dt')
     Left = 48

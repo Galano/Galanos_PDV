@@ -11,7 +11,10 @@ uses
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
   FireDAC.Phys, FireDAC.VCLUI.Wait, FireDAC.Comp.Client, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, ACBrBase,
-  ACBrPosPrinter, TypInfo, RxDBCurrEdit, midaslib, uFRMDespesas;
+  ACBrPosPrinter, TypInfo, RxDBCurrEdit, midaslib, uFRMDespesas, Vcl.Menus,
+  ppComm, ppRelatv, ppProd, ppClass, ppReport, ppBands, ppVar, ppCtrls,
+  ppPrnabl, ppCache, ppDesignLayer, ppParameter, ppDB, ppDBPipe, Vcl.ComCtrls,
+  ppModule, raCodMod,  DateUtils ;
 
 type
     TFrmVendas = class(TForm)
@@ -108,7 +111,6 @@ type
     pnlAtalho: TPanel;
     EDT_CondPagto: TRadioGroup;
     qCaixa: TFDQuery;
-    dsCaixa: TDataSource;
     SpeedButton6: TSpeedButton;
     Panel3: TPanel;
     grdVendas: TDBGrid;
@@ -162,8 +164,6 @@ type
     Shape1: TShape;
     Shape2: TShape;
     Label17: TLabel;
-    Label16: TLabel;
-    Label12: TLabel;
     Label11: TLabel;
     Label13: TLabel;
     BitBtn1: TBitBtn;
@@ -218,6 +218,82 @@ type
     btnDespesa: TSpeedButton;
     SpeedButton10: TSpeedButton;
     SpeedButton11: TSpeedButton;
+    pnlExtrato: TPanel;
+    Splitter5: TSplitter;
+    qCaixaFPGTO: TStringField;
+    dsRel: TDataSource;
+    qRel: TFDQuery;
+    qRelFANTASIA_EMP: TStringField;
+    qRelRAZAO_EMP: TStringField;
+    qRelCNPJ_EMP: TStringField;
+    qRelINSC_EMP: TStringField;
+    qRelINSCRICAO_MUNICIPAL: TStringField;
+    qRelEND_EMP: TStringField;
+    qRelBAI_EMP: TStringField;
+    qRelCEP_EMP: TStringField;
+    qRelCID_EMP: TStringField;
+    qRelEST_EMP: TStringField;
+    qRelNUMERO_EMP: TStringField;
+    qRelCOD_VENDAS: TFDAutoIncField;
+    qRelDATA: TDateField;
+    qRelHORA: TTimeField;
+    qRelTOTAL: TBCDField;
+    qRelFORMAS_PAGAMENTO: TStringField;
+    qRelDESC_CUPOM: TStringField;
+    qRelQUANT_ITEM: TBCDField;
+    qRelVALOR_ITEM: TFMTBCDField;
+    PopupMenu1: TPopupMenu;
+    btnCupom: TMenuItem;
+    qRelTEL_EMP: TStringField;
+    pnlImp: TPanel;
+    mmImp: TMemo;
+    Panel9: TPanel;
+    btnCancelar: TButton;
+    btnImprimir: TButton;
+    Label16: TLabel;
+    qCaixaEMPRESA: TIntegerField;
+    FDQuery1: TFDQuery;
+    BCDField1: TBCDField;
+    TimeField1: TTimeField;
+    IntegerField1: TIntegerField;
+    FMTBCDField1: TFMTBCDField;
+    StringField1: TStringField;
+    IntegerField2: TIntegerField;
+    qCaixaTOTALDIN: TFMTBCDField;
+    qCaixaTOTALDEB: TFMTBCDField;
+    qCaixaTOTALCRED: TFMTBCDField;
+    dsFuncionario: TDataSource;
+    sqlFuncionario: TFDQuery;
+    sqlFuncionarioCOD_FUNCIONARIO: TFDAutoIncField;
+    sqlFuncionarioNOME: TStringField;
+    sqlFuncionarioEMPRESA: TIntegerField;
+    sqlFuncionarioSITUACAO: TIntegerField;
+    pnlRetirada: TPanel;
+    Label12: TLabel;
+    Label20: TLabel;
+    Label25: TLabel;
+    lblMotivoRetirada: TLabel;
+    edtQuem: TDBLookupComboBox;
+    edtMotivo: TEdit;
+    btnSalvarRetirada: TButton;
+    edtValor: TCurrencyEdit;
+    btnCancelarRetirada: TButton;
+    qCaixaTOTALRETIRADA: TFMTBCDField;
+    relGenerico: TppReport;
+    ppHeaderBand2: TppHeaderBand;
+    ppDetailBand2: TppDetailBand;
+    ppPageSummaryBand2: TppPageSummaryBand;
+    ppFooterBand2: TppFooterBand;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppParameterList2: TppParameterList;
+    cdsRelGenerico: TClientDataSet;
+    cdsRelGenericoLinha: TStringField;
+    ppdsRelGenerico: TppDBPipeline;
+    dsRelGenerico: TDataSource;
+    ppDBText11: TppDBText;
+    dsCaixa: TDataSource;
+    radioMotivoRetirada: TRadioGroup;
         procedure EDT_ClienteChange(Sender: TObject);
         procedure EDT_CondPagtoChange(Sender: TObject);
         procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -277,6 +353,15 @@ type
     procedure SpeedButton9Click(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnDespesaClick(Sender: TObject);
+    procedure btnCupomClick(Sender: TObject);
+    procedure btnSalvarRetiradaClick(Sender: TObject);
+    procedure btnCancelarRetiradaClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure radioMotivoRetiradaClick(Sender: TObject);
+    procedure edtValorUniKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
     private
     procedure AtalhoIncluirItemVenda;
     { Private declarations }
@@ -291,6 +376,7 @@ type
         Procedure AtivarCaixa;
         function ImprimeCupomV2(ndeColunas : Integer; sEmpNome, sTel, sEmpCNPJ, sEmpEnde, sCodVenda, sCliente, sFPGTO, subTotal, Desconto, Total, Troco : String) : Boolean;
         Procedure AtualizarMysql;
+        Procedure AtualizarCaixa;
     end;
 
 var
@@ -303,7 +389,7 @@ implementation
 
 {$R *.dfm}
 
-uses Udm, UFrmConsCliente, UFrmConsProduto, UFrmCupom, UfrmLogin, untImpressao;
+uses Udm, UFrmConsCliente, UFrmConsProduto, UFrmCupom, UfrmLogin, untImpressao, UFrmFechamento;
 
 { TFrmVendas }
 
@@ -391,8 +477,7 @@ begin
             end;
 
             Result := True;
-           qCaixa.Active := False;
-           qCaixa.Active := True;
+            AtualizarCaixa;
 
         except
             on e: exception do
@@ -445,14 +530,23 @@ begin
         except
             on e: exception do
             begin
-                Result := 0;
+                ShowMessage( e.Message );
+                Abort;
+                //Result := 0;
             end;
         end;
     finally
         DmDados.Q_executa.Close;
     end;
- qCaixa.Active := False;
- qCaixa.Active := True;
+
+    AtualizarCaixa;
+
+end;
+
+procedure TFrmVendas.radioMotivoRetiradaClick(Sender: TObject);
+begin
+   edtMotivo.Visible         := radioMotivoRetirada.ItemIndex = 2;
+   lblMotivoRetirada.Visible := radioMotivoRetirada.ItemIndex = 2;
 
 end;
 
@@ -460,7 +554,7 @@ procedure TFrmVendas.SalvarVenda;
 var
   Total : String;
 begin
-if (edtRecebido.Value < EdtTotal.Value) then
+        if (edtRecebido.Value < EdtTotal.Value) then
         begin
             Application.MessageBox('O valor recebdo é menor que o valor da venda, Por favor corrigir!', 'Erro', mb_ok + MB_ICONERROR);
             edtRecebido.SetFocus;
@@ -502,6 +596,10 @@ if (edtRecebido.Value < EdtTotal.Value) then
 
                 if application.MessageBox('Deseja finaliza a venda e imprimir o cumpom?', 'Cancelamento de Venda', mb_applmodal + mb_iconquestion + mb_yesno + mb_defbutton2) = 6 then
                 begin
+                   DmDados.tb_empresa.Close;
+                   DmDados.tb_empresa.Open();
+                   DmDados.tb_empresa.Locate('COD_EMP',DmDados.Usuario_Empresa, []);
+
 
                   if ImprimeCupomV2(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
                   lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
@@ -628,7 +726,8 @@ begin
 
     if (Key = VK_F11) and (Shift = [ssCtrl]) then
     begin
-      gridTotais.Visible := not gridTotais.Visible;
+      //gridTotais.Visible := not gridTotais.Visible;
+      pnlExtrato.Visible   := not pnlExtrato.Visible;
       dbTotalX.Visible   := not dbTotalX.Visible;
       bAtivar.Visible    := not bAtivar.Visible;
       BtnTeste.Visible   := not BtnTeste.Visible;
@@ -751,7 +850,7 @@ end;
 
 procedure TFrmVendas.mskQuantidadeChange(Sender: TObject);
 begin
-    edTotalItem.Value := (QProd_CodBarraPRECO_VAREJO.Value * mskQuantidade.Value);
+    edTotalItem.Value := (edtValorUni.Value * mskQuantidade.Value);
 end;
 
 procedure TFrmVendas.edTotalItemChange(Sender: TObject);
@@ -762,6 +861,19 @@ end;
 procedure TFrmVendas.edtValorUniChange(Sender: TObject);
 begin
     lbPrecoUnitario.Caption := formatfloat('##,###,##0.00', edtValorUni.Value);
+    edTotalItem.Value := (edtValorUni.Value * mskQuantidade.Value);
+
+end;
+
+procedure TFrmVendas.edtValorUniKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+
+    if (Key = VK_Return) then
+    begin
+      AtalhoIncluirItemVenda;
+    end;
+
 end;
 
 procedure TFrmVendas.edtTrocoChange(Sender: TObject);
@@ -843,16 +955,20 @@ begin
   cbxModelo.ItemIndex := 2;
   cbxPorta.ItemIndex := 1;
 
-//   if not (ParamStr(1)='CAIXA_TESTE') then
-//  bAtivar.Click;
+   if not (ParamStr(1)='CAIXA_TESTE') then
+      bAtivar.Click;
 
-  qCaixa.Active := False;
-  qCaixa.Active := True;
+  AtualizarCaixa;
 
 
    DmDados.tb_empresa.Close;
    DmDados.tb_empresa.Open();
    DmDados.tb_empresa.Locate('COD_EMP',DmDados.Usuario_Empresa, []);
+
+
+   sqlFuncionario.Close;
+   sqlFuncionario.ParamByName('EMPRESA').AsInteger := DmDados.Usuario_Empresa;
+   sqlFuncionario.Open;
 
 
 
@@ -913,8 +1029,7 @@ begin
 
     end;
 
- qCaixa.Active := False;
- qCaixa.Active := True;
+AtualizarCaixa;
 
 end;
 
@@ -1019,8 +1134,7 @@ begin
         FrmConsCliente.Free;
     end;
 
- qCaixa.Active := False;
- qCaixa.Active := True;
+AtualizarCaixa;
 end;
 
 function TFrmVendas.GeneratorID(aName: string; Connection: TFDConnection;
@@ -1032,9 +1146,11 @@ begin
     try
         Qry.Connection  := Connection;
         if Incrementa then
+            //Qry.SQL.Add('SELECT (AUTO_INCREMENT+1) AS ID FROM information_schema.tables WHERE table_name = "'+aName+'"')
             Qry.SQL.Add('SELECT LAST_INSERT_ID()+1')
             //Qry.SQL.Add('SELECT GEN_ID(' + aName + ', 1) FROM RDB$DATABASE')
         else
+            //Qry.SQL.Add('SELECT (AUTO_INCREMENT) AS ID FROM information_schema.tables WHERE table_name = "'+aName+'"');
             Qry.SQL.Add('SELECT LAST_INSERT_ID()');
             //Qry.SQL.Add('SELECT GEN_ID(' + aName + ', 0) FROM RDB$DATABASE');
         Qry.Open;
@@ -1056,54 +1172,69 @@ end;
 
 procedure TFrmVendas.AtivarCaixa;
 begin
+  try
 
-  if ACBrPosPrinter1.Ativo then
-  begin
-     ACBrPosPrinter1.Desativar ;
-     bAtivar.Caption := 'Ativar' ;
-     //btSerial.Enabled := True ;
-  end
-  else
-  begin
-    try
-       Self.Enabled := False;
-       ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModelo.ItemIndex );
-       ACBrPosPrinter1.Porta  := cbxPorta.Text;
-       {ACBrPosPrinter1.ArqLOG := edLog.Text;
-       ACBrPosPrinter1.LinhasBuffer := seLinhasBuffer.Value;
-       ACBrPosPrinter1.LinhasEntreCupons := seLinhasPular.Value;
-       ACBrPosPrinter1.EspacoEntreLinhas := seEspLinhas.Value;
-       ACBrPosPrinter1.ColunasFonteNormal := seColunas.Value;
-       ACBrPosPrinter1.CortaPapel := cbCortarPapel.Checked;
-       ACBrPosPrinter1.ControlePorta := cbControlePorta.Checked;
-       ACBrPosPrinter1.TraduzirTags := cbTraduzirTags.Checked;
-       ACBrPosPrinter1.IgnorarTags := cbIgnorarTags.Checked;
-       ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
-       ACBrPosPrinter1.ConfigBarras.MostrarCodigo := cbHRI.Checked;
-       ACBrPosPrinter1.ConfigBarras.LarguraLinha := seBarrasLargura.Value;
-       ACBrPosPrinter1.ConfigBarras.Altura := seBarrasAltura.Value;
-       ACBrPosPrinter1.ConfigQRCode.Tipo := seQRCodeTipo.Value;
-       ACBrPosPrinter1.ConfigQRCode.LarguraModulo := seQRCodeLarguraModulo.Value;
-       ACBrPosPrinter1.ConfigQRCode.ErrorLevel := seQRCodeErrorLevel.Value;
-       ACBrPosPrinter1.ConfigLogo.KeyCode1 := seLogoKC1.Value;
-       ACBrPosPrinter1.ConfigLogo.KeyCode2 := seLogoKC2.Value;
-       ACBrPosPrinter1.ConfigLogo.FatorX := seLogoFatorX.Value;
-       ACBrPosPrinter1.ConfigLogo.FatorY := seLogoFatorY.Value;
-       }
+      if ACBrPosPrinter1.Ativo then
+      begin
+         ACBrPosPrinter1.Desativar ;
+         bAtivar.Caption := 'Ativar' ;
+         //btSerial.Enabled := True ;
+      end
+      else
+      begin
+           Self.Enabled := False;
+           ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModelo.ItemIndex );
+           ACBrPosPrinter1.Porta  := cbxPorta.Text;
+           {ACBrPosPrinter1.ArqLOG := edLog.Text;
+           ACBrPosPrinter1.LinhasBuffer := seLinhasBuffer.Value;
+           ACBrPosPrinter1.LinhasEntreCupons := seLinhasPular.Value;
+           ACBrPosPrinter1.EspacoEntreLinhas := seEspLinhas.Value;
+           ACBrPosPrinter1.ColunasFonteNormal := seColunas.Value;
+           ACBrPosPrinter1.CortaPapel := cbCortarPapel.Checked;
+           ACBrPosPrinter1.ControlePorta := cbControlePorta.Checked;
+           ACBrPosPrinter1.TraduzirTags := cbTraduzirTags.Checked;
+           ACBrPosPrinter1.IgnorarTags := cbIgnorarTags.Checked;
+           ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
+           ACBrPosPrinter1.ConfigBarras.MostrarCodigo := cbHRI.Checked;
+           ACBrPosPrinter1.ConfigBarras.LarguraLinha := seBarrasLargura.Value;
+           ACBrPosPrinter1.ConfigBarras.Altura := seBarrasAltura.Value;
+           ACBrPosPrinter1.ConfigQRCode.Tipo := seQRCodeTipo.Value;
+           ACBrPosPrinter1.ConfigQRCode.LarguraModulo := seQRCodeLarguraModulo.Value;
+           ACBrPosPrinter1.ConfigQRCode.ErrorLevel := seQRCodeErrorLevel.Value;
+           ACBrPosPrinter1.ConfigLogo.KeyCode1 := seLogoKC1.Value;
+           ACBrPosPrinter1.ConfigLogo.KeyCode2 := seLogoKC2.Value;
+           ACBrPosPrinter1.ConfigLogo.FatorX := seLogoFatorX.Value;
+           ACBrPosPrinter1.ConfigLogo.FatorY := seLogoFatorY.Value;
+           }
 
-       ACBrPosPrinter1.Ativar ;
+           ACBrPosPrinter1.Ativar ;
 
-       //btSerial.Enabled := False ;
-       bAtivar.Caption := 'Desativar' ;
+           //btSerial.Enabled := False ;
+           bAtivar.Caption := 'Desativar' ;
 
-       //GravarINI ;
-    finally
-       Self.Enabled := True;
-       cbxModelo.ItemIndex   := Integer(ACBrPosPrinter1.Modelo) ;
-       cbxPorta.Text         := ACBrPosPrinter1.Porta ;
-    end ;
+           //GravarINI ;
+      end;
+
+
+  except on e:exception do begin
+    showmessage(e.Message);
   end;
 
+  end ;
+
+ Self.Enabled := True;
+ cbxModelo.ItemIndex   := Integer(ACBrPosPrinter1.Modelo) ;
+ cbxPorta.Text         := ACBrPosPrinter1.Porta ;
+
+end;
+
+procedure TFrmVendas.AtualizarCaixa;
+begin
+    qCaixa.Active := False;
+    qCaixa.Filtered := False;
+    qCaixa.Filter := 'EMPRESA='+IntToStr( DmDados.Usuario_Empresa)  ;
+    qCaixa.Filtered := True;
+    qCaixa.Active := True;
 end;
 
 procedure TFrmVendas.AtualizarMysql;
@@ -1290,8 +1421,6 @@ End;
 begin
    if not ACBrPosPrinter1.Ativo then  exit;
 
-
-
     Try
       //AssignFile(ArqPrn,DmDados.ImpressoraCupom); // padrão 'LPT1'
       //AssignFile(ArqPrn,'d:\cupom.txt');
@@ -1303,7 +1432,6 @@ begin
       sHoran := TimeToStr(Now());
 
       sTextoAux := sData + ', ' + sHoran + '                  ' + 'DOC.' + StrZero(sCodVenda,6);
-
       ACBrPosPrinter1.Imprimir(Padc(sEmpNome,ndeColunas));
       ACBrPosPrinter1.PularLinhas(1);
       ACBrPosPrinter1.Imprimir(Padc('Tel: '+sTel,ndeColunas));
@@ -1402,6 +1530,8 @@ begin
       Result:= False;
       MessageDlg('IMPRESSORA NÃO ESTA ATIVA', mtWarning, [mbOk], 0 );
     end;
+
+
 
 end;
 
@@ -1508,40 +1638,157 @@ end;
 
 procedure TFrmVendas.btnFP_DinheiroClick(Sender: TObject);
 begin
-    btnFP_Dinheiro.Font.Color := clGray;
-    btnFP_Debito.Font.Color   := clGray;
-    btnFP_Credito.Font.Color  := clGray;
+    btnFP_Dinheiro.Font.Color := clLime;
+    btnFP_Debito.Font.Color   := clLime;
+    btnFP_Credito.Font.Color  := clLime;
 
 
 
   if  sender = btnFP_Dinheiro then
   begin
-    btnFP_Dinheiro.Font.Color := clGreen;
+    btnFP_Dinheiro.Font.Color := clWhite;
     EDT_CondPagto.ItemIndex := 0;
     btnFP_Dinheiro.Enabled := False;
     btnFP_Debito.Enabled   := True;
     btnFP_Credito.Enabled  := True;
+    SpeedButton6.Caption  := 'Finalizar como: ' + btnFP_Dinheiro.Caption;
   end;
 
 
   if  sender = btnFP_Debito then
   begin
-    btnFP_Debito.Font.Color   := clGreen;
+    btnFP_Debito.Font.Color   := clWhite;
     EDT_CondPagto.ItemIndex := 1;
     btnFP_Dinheiro.Enabled := True;
     btnFP_Debito.Enabled   := False;
     btnFP_Credito.Enabled  := True;
+    SpeedButton6.Caption  := 'Finalizar como: ' + btnFP_Debito.Caption;
   end;
 
   if  sender = btnFP_Credito then
   begin
-    btnFP_Credito.Font.Color  := clGreen;
+    btnFP_Credito.Font.Color  := clWhite;
     EDT_CondPagto.ItemIndex := 2;
     btnFP_Dinheiro.Enabled := True;
     btnFP_Debito.Enabled   := True;
     btnFP_Credito.Enabled  := False;
+    SpeedButton6.Caption  := 'Finalizar como: ' + btnFP_Credito.Caption;
   end;
 
+end;
+
+procedure TFrmVendas.btnImprimirClick(Sender: TObject);
+var
+  I: Integer;
+begin
+  cdsRelGenerico.Close;
+  cdsRelGenerico.Open;
+  cdsRelGenerico.EmptyDataSet;
+
+  for I := 0 to mmImp.Lines.Count do
+  begin
+    cdsRelGenerico.Append;
+    cdsRelGenericoLinha.AsString := mmImp.Lines.Strings[i];
+    cdsRelGenerico.Post;
+  end;
+
+  relGenerico.Print;
+
+end;
+
+procedure TFrmVendas.btnCupomClick(Sender: TObject);
+VAR slLista : TStringList;
+  sTextoAux : string;
+  sData     : string;
+  sHoran, sCodVenda    : string;
+
+  linhaCupom, linhaRodape, nAux , ndeColunas: Integer;
+  Total_Item : Currency;
+ Function Replicate( Const cTexto: String; Const nQtd: Integer ):String;
+Var
+   nAux: Integer;
+Begin
+   Result:= '';
+
+   IF nQtd > 0 Then
+   Begin
+      For nAux:= 1 To nQtd Do
+          Result:= Result + cTexto;
+   End;
+End;
+
+begin
+  sCodVenda := qCaixaCOD_VENDAS.AsString;
+  qRel.Close;
+  qRel.ParamByName('COD_VENDAS').AsInteger := StrToInt(sCodVenda);
+  qRel.Open();
+  ndeColunas := 50;
+
+
+  slLista := TStringList.Create;
+
+    sData  := DateToStr(Date);
+    sHoran := TimeToStr(Now());
+
+    sTextoAux := sData + ', ' + sHoran + '  ' + 'DOC.' + StrZero(sCodVenda,6);
+
+
+    slLista.Add(Padc(qRelFANTASIA_EMP.AsString ,ndeColunas));
+    slLista.Add(Padc('Tel: '+qRelTEL_EMP.AsString ,ndeColunas));
+    slLista.Add(Padc('CNPJ: '+FormataCNPJ(qRelCNPJ_EMP.AsString),ndeColunas));
+    slLista.Add(Padc(qRelEND_EMP.AsString + ' - ' + qRelBAI_EMP.AsString  ,ndeColunas));
+    slLista.Add(sTextoAux);
+    slLista.Add(Replicate('-',ndeColunas));
+    slLista.Add(PadC('COMPROVANTE SEM VALOR FISCAL',ndeColunas));
+    slLista.Add(Replicate('-',ndeColunas));
+    slLista.Add('FORMA DE PGTO: '+ qRelFORMAS_PAGAMENTO.AsString );
+    slLista.Add('');
+    slLista.Add('PRODUTO	        QTD  X  VL.UNIT  TOTAL');
+    slLista.Add(Replicate('-',ndeColunas));
+  while not qRel.Eof do
+  begin
+        inc(linhaCupom);
+        slLista.Add(Copy(qRelDESC_CUPOM.AsString,1, ndeColunas));
+        inc(linhaCupom);
+        Total_Item := qRelTOTAL.AsFloat;
+        slLista.Add(Padr(FormatFloat('#,###,###,##0.000', qRelQUANT_ITEM.AsFloat ) + '  X  ' + FormatFloat('#,###,###,##0.00', FrmVendas.cdsitensVendasvl_item.Value) + '   ' + FormatFloat('#,###,###,##0.00', Total_Item),ndeColunas));
+  qRel.Next;
+  end;
+      slLista.Add(Replicate('-',ndeColunas));
+      slLista.Add('');
+      //slLista.Add(Padr('SUB-TOTAL: R$ ' + qRelTOTAL.AsFloat ,ndeColunas));
+      //slLista.Add('');
+      //slLista.Add(Padr('DESCONTO: R$ ' + formatfloat('##,###,##0.00', FrmVendas.EdtDesconto.Value),ndeColunas));
+      slLista.Add(Padr('TOTAL CUPOM: R$ ' + qRelTOTAL.AsString  ,ndeColunas));
+
+
+      slLista.Add(Replicate('-',ndeColunas));
+      slLista.Add('');
+      slLista.Add(Padc('OBRIGADO PELA PREFERENCIA',ndeColunas));
+      slLista.Add('');
+      slLista.Add(Replicate('-',ndeColunas));
+
+      mmImp.Lines.SetStrings(slLista);
+      //slLista.SaveToFile('C:\temp\x.txt');
+
+      mmImp.Align := alClient;
+      pnlImp.Left := (FrmVendas.Width - pnlImp.Width) div 2;
+      pnlImp.Top := (FrmVendas.Height - pnlImp.Height) div 2;
+      pnlImp.Visible := true;
+
+end;
+
+procedure TFrmVendas.btnCancelarClick(Sender: TObject);
+begin
+pnlImp.Visible := False;
+end;
+
+procedure TFrmVendas.btnCancelarRetiradaClick(Sender: TObject);
+begin
+  pnlRetirada.Visible := False;
+  edtQuem.KeyValue := -1;
+  edtMotivo.Text   := '';
+  edtValor.Value   := 0;
 end;
 
 procedure TFrmVendas.btnSairClick(Sender: TObject);
@@ -1549,10 +1796,70 @@ begin
 Application.Terminate;
 end;
 
+procedure TFrmVendas.btnSalvarRetiradaClick(Sender: TObject);
+begin
+
+
+  if (edtQuem.Text='')  then
+  begin
+    ShowMessage('Informe quem!!!');
+    exit;
+  end;
+
+
+
+  if (radioMotivoRetirada.ItemIndex=2) and (edtMotivo.Text = '') then
+  begin
+    ShowMessage('Informe um motivo para retirada!');
+    exit;
+  end;
+
+try
+  if MessageDlg('Deseja realizar a retirada de '+FormatFloat('R$,0.00',ABS(edtValor.Value))+'?' ,mtWarning,[mbYes,mbNo],1) = mrYes then
+  begin
+    DmDados.Q_executa.Close;
+    DmDados.Q_executa.SQL.Clear;
+    DmDados.Q_executa.SQL.Add('INSERT INTO VENDAS(COD_VENDEDOR,COD_CLIENTE,COD_FPGTO,TOTAL,DATA,HORA,EMPRESA,OBS,TIPO) VALUES(:cod_vendedor,:cod_cli,:cod_fp,:tot,:dt,:hr, :empresa, :OBS, :TIPO)');
+    DmDados.Q_executa.ParamByName('cod_vendedor').Value := edtQuem.KeyValue;
+    DmDados.Q_executa.ParamByName('cod_cli').Value := -1;
+    DmDados.Q_executa.ParamByName('cod_fp').Value := 0;
+    DmDados.Q_executa.ParamByName('tot').Value := ABS(edtValor.Value)*-1;
+    DmDados.Q_executa.ParamByName('dt').Value := Date;
+    DmDados.Q_executa.ParamByName('hr').Value := Time;
+    DmDados.Q_executa.ParamByName('empresa').Value := DmDados.Usuario_Empresa;
+    DmDados.Q_executa.ParamByName('OBS').AsString := edtMotivo.Text;
+    DmDados.Q_executa.ParamByName('TIPO').Value := radioMotivoRetirada.ItemIndex;
+    DmDados.Q_executa.ExecSQL;
+  end;
+
+except on e:exception do begin
+  showmessage(e.message);
+end;
+end;
+
+
+  edtQuem.KeyValue := -1;
+  edtMotivo.Text   := '';
+  edtValor.Value   := 0;
+  pnlRetirada.Visible := False;
+  AtualizarCaixa;
+
+
+
+end;
+
 procedure TFrmVendas.SpeedButton1Click(Sender: TObject);
 begin
+
+  if DaysBetween(DmDados.Login_DataAbertura,now())<>0 then
+    Application.Terminate;
+
+
+
   if not (VendaAberta) then
         begin
+            DmDados.conexao.ExecSQL('DELETE FROM VENDAS WHERE TOTAL = 0 AND DATA = CURRENT_DATE AND EMPRESA = '+ IntToStr( DmDados.Usuario_Empresa)  );
+
             VendaAberta := True;
 
             // Prepara a tabela de Venda
@@ -1590,7 +1897,7 @@ begin
             lbSubTotal.Caption := formatfloat('##,###,##0.00', EdtTotal.Value);
             EdtDesconto.Value  := EdtTotal.Value;
             lbTotalCom.Caption := formatfloat('##,###,##0.00', EdtTotal.Value);
-
+            btnFP_DinheiroClick( btnFP_Dinheiro );
 
             edtRecebido.Value  := EdtTotal.Value;
             //EDT_Cliente.SetFocus;
@@ -1643,7 +1950,12 @@ begin
                         PNL_Fechamento.Visible := False;
                     end;
                     VendaAberta := false;
+
+                    AtualizarCaixa;
+
+
                 end;
+
             end;
         end
         else
@@ -1651,6 +1963,14 @@ begin
             Application.MessageBox('A venda precisa estar aberta para realizar a operação!', 'Informação', mb_ok + MB_ICONEXCLAMATION);
             Exit;
         end;
+end;
+
+procedure TFrmVendas.SpeedButton4Click(Sender: TObject);
+begin
+Application.CreateForm(TFrmFechamento, FrmFechamento);
+FrmFechamento.ShowModal;
+FreeAndNil(FrmFechamento);
+
 end;
 
 procedure TFrmVendas.SpeedButton5Click(Sender: TObject);
@@ -1712,6 +2032,25 @@ end;
 
 procedure TFrmVendas.btn01Click(Sender: TObject);
 begin
+
+if TButton(Sender).Tag = StrToInt('0'+mskCodigo.Text) then
+begin
+    AtalhoIncluirItemVenda;
+    exit;
+end;
+
+
+
+
+if TButton(Sender).Tag = 437  then
+begin
+  pnlRetirada.Left := (FrmVendas.Width - pnlRetirada.Width) div 2;
+  pnlRetirada.Top := (FrmVendas.Height - pnlRetirada.Height) div 2;
+  pnlRetirada.Visible := True;
+  exit;
+end;
+
+
 if TButton(Sender).Tag = 431  then
 begin
   if (MessageDlg('Isso é mesmo um item "Diverso"?!',mtWarning ,[mbNo,mbYes ],0) <> mrYes) then
@@ -1743,6 +2082,7 @@ if (mskQuantidade.Value > 0) and (TButton(Sender).Tag <> 431) then
       end;
 
 mskQuantidade.Value :=  1 ;
+
 
 if (TButton(Sender).Tag = 431) then
   edtValorUni.SetFocus;
@@ -1797,8 +2137,7 @@ begin
 
 //  btSerial.Visible := ACBrPosPrinter1.Device.IsSerialPort;
 end;
-
-procedure TFrmVendas.DateRecebimentoKeyDown(Sender: TObject; var Key: Word;
+    procedure TFrmVendas.DateRecebimentoKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
  Total_ : String;

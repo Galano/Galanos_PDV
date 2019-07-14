@@ -2,8 +2,8 @@ object FrmVendas: TFrmVendas
   Left = 268
   Top = 15
   Caption = 'Estoque Master - Ponto de Vendas '
-  ClientHeight = 642
-  ClientWidth = 1114
+  ClientHeight = 650
+  ClientWidth = 1337
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,14 @@ object FrmVendas: TFrmVendas
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   DesignSize = (
-    1114
-    642)
+    1337
+    650)
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
-    Left = 498
+    Left = 898
     Top = 63
-    Height = 520
+    Height = 528
     Align = alRight
     Color = 4227327
     ParentColor = False
@@ -34,20 +34,19 @@ object FrmVendas: TFrmVendas
     ExplicitHeight = 519
   end
   object Splitter2: TSplitter
-    Left = 365
+    Left = 201
     Top = 63
-    Height = 520
-    Align = alRight
+    Height = 528
     Color = 4227327
     ParentColor = False
-    ExplicitLeft = 282
-    ExplicitTop = 64
-    ExplicitHeight = 519
+    ExplicitLeft = 99
+    ExplicitTop = 36
+    ExplicitHeight = 520
   end
   object Splitter4: TSplitter
-    Left = 769
+    Left = 1104
     Top = 63
-    Height = 520
+    Height = 528
     Align = alRight
     Color = 4227327
     ParentColor = False
@@ -56,9 +55,9 @@ object FrmVendas: TFrmVendas
     ExplicitHeight = 519
   end
   object Splitter3: TSplitter
-    Left = 633
+    Left = 1001
     Top = 63
-    Height = 520
+    Height = 528
     Align = alRight
     Color = 4227327
     ParentColor = False
@@ -66,15 +65,27 @@ object FrmVendas: TFrmVendas
     ExplicitTop = 61
     ExplicitHeight = 519
   end
+  object Splitter5: TSplitter
+    Left = 795
+    Top = 63
+    Height = 528
+    Align = alRight
+    Color = 4227327
+    ParentColor = False
+    ExplicitLeft = 190
+    ExplicitTop = 57
+    ExplicitHeight = 520
+  end
   object Panel1: TPanel
     Left = 0
-    Top = 583
-    Width = 1114
+    Top = 591
+    Width = 1337
     Height = 59
     Align = alBottom
     BorderStyle = bsSingle
     Color = clWhite
     TabOrder = 0
+    ExplicitTop = 583
     object SpeedButton1: TSpeedButton
       Left = -1
       Top = 4
@@ -1009,7 +1020,7 @@ object FrmVendas: TFrmVendas
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       ParentFont = False
-      OnClick = SpeedButton3Click
+      OnClick = SpeedButton4Click
     end
     object SpeedButton5: TSpeedButton
       Left = 797
@@ -1553,7 +1564,7 @@ object FrmVendas: TFrmVendas
     end
   end
   object spCodVenda: TSpinEdit
-    Left = 883
+    Left = 1106
     Top = 522
     Width = 81
     Height = 33
@@ -1617,10 +1628,10 @@ object FrmVendas: TFrmVendas
     OnClick = BtnTesteClick
   end
   object pnlAtalho: TPanel
-    Left = 368
+    Left = 798
     Top = 63
-    Width = 130
-    Height = 520
+    Width = 100
+    Height = 528
     Align = alRight
     BevelOuter = bvNone
     Color = clDefault
@@ -1632,143 +1643,152 @@ object FrmVendas: TFrmVendas
     ParentBackground = False
     ParentFont = False
     TabOrder = 4
+    ExplicitHeight = 520
     DesignSize = (
-      130
-      520)
+      100
+      528)
     object btnCaneca: TSpeedButton
       Tag = 421
       Left = 2
       Top = 440
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'CANECA'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
     object btnCpreta: TSpeedButton
       Tag = 237
       Left = 2
       Top = 366
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'C.PRETA'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
     object btnCBranca: TSpeedButton
       Tag = 235
       Left = 2
       Top = 294
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'C.BRANCA'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
     object btnEstampa: TSpeedButton
       Tag = 430
       Left = 2
       Top = 222
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'ESTAMPA'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
     object btnImpressao: TSpeedButton
       Tag = 432
       Left = 2
       Top = 149
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'IMPRESS'#195'O'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
     object btnColor: TSpeedButton
       Tag = 419
       Left = 2
       Top = 76
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'COLOR'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
     object btnXerox: TSpeedButton
       Tag = 415
       Left = 2
       Top = 3
-      Width = 124
+      Width = 94
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'XEROX'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 124
     end
   end
   object Panel3: TPanel
-    Left = 0
+    Left = 204
     Top = 63
-    Width = 365
-    Height = 520
+    Width = 591
+    Height = 528
     Align = alClient
     Color = -1
     ParentBackground = False
     TabOrder = 5
+    ExplicitHeight = 520
     DesignSize = (
-      365
-      520)
+      591
+      528)
     object Image2: TImage
-      Left = 249
+      Left = 475
       Top = 2
       Width = 100
       Height = 63
@@ -1777,11 +1797,12 @@ object FrmVendas: TFrmVendas
       ExplicitLeft = 149
     end
     object Label7: TLabel
-      Left = 107
-      Top = 499
-      Width = 252
+      Left = 1
+      Top = 508
+      Width = 589
       Height = 19
-      Anchors = [akRight, akBottom]
+      Align = alBottom
+      Alignment = taRightJustify
       Caption = 'F6 - CANCELAR ITEM NA VENDA'
       Font.Charset = ANSI_CHARSET
       Font.Color = 12615680
@@ -1790,15 +1811,17 @@ object FrmVendas: TFrmVendas
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 41
+      ExplicitLeft = 338
+      ExplicitTop = 500
+      ExplicitWidth = 252
     end
     object lbTotal: TLabel
-      Left = 133
-      Top = 418
-      Width = 226
+      Left = 1
+      Top = 383
+      Width = 589
       Height = 75
+      Align = alTop
       Alignment = taRightJustify
-      Anchors = [akTop, akRight]
       Caption = 'R$ 0,00'
       Color = clInfoBk
       Font.Charset = ANSI_CHARSET
@@ -1809,15 +1832,16 @@ object FrmVendas: TFrmVendas
       ParentColor = False
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 43
+      ExplicitLeft = 364
+      ExplicitWidth = 226
     end
     object Label2: TLabel
-      Left = 306
-      Top = 407
-      Width = 53
+      Left = 1
+      Top = 358
+      Width = 589
       Height = 25
+      Align = alTop
       Alignment = taRightJustify
-      Anchors = [akTop, akRight]
       Caption = 'Total:'
       Color = clInfoBk
       Font.Charset = ANSI_CHARSET
@@ -1828,14 +1852,15 @@ object FrmVendas: TFrmVendas
       ParentColor = False
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 234
+      ExplicitLeft = 537
+      ExplicitWidth = 53
     end
     object grdVendas: TDBGrid
-      Left = 5
-      Top = 49
-      Width = 354
+      Left = 1
+      Top = 1
+      Width = 589
       Height = 357
-      Anchors = [akLeft, akTop, akRight]
+      Align = alTop
       Ctl3D = True
       DataSource = cds_itensVendas
       FixedColor = clWindow
@@ -1898,11 +1923,10 @@ object FrmVendas: TFrmVendas
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 51
+          Width = 34
           Visible = True
         end
         item
-          Alignment = taCenter
           Color = clMenu
           Expanded = False
           FieldName = 'vl_item'
@@ -1918,7 +1942,6 @@ object FrmVendas: TFrmVendas
           Visible = True
         end
         item
-          Alignment = taCenter
           Expanded = False
           FieldName = 'Total_Item'
           Title.Caption = 'TOTAL R$'
@@ -1945,7 +1968,7 @@ object FrmVendas: TFrmVendas
     end
     object Panel2: TPanel
       Left = 22
-      Top = 78
+      Top = 79
       Width = 227
       Height = 116
       TabOrder = 2
@@ -2084,82 +2107,21 @@ object FrmVendas: TFrmVendas
         Transparent = True
       end
     end
-    object gridTotais: TDBGrid
-      Left = 41
-      Top = 100
-      Width = 300
-      Height = 245
-      Anchors = [akLeft, akTop, akRight]
-      Ctl3D = True
-      DataSource = dsCaixa
-      FixedColor = clWindow
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      Options = [dgTitles, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      ParentCtl3D = False
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 3
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clBlack
-      TitleFont.Height = -13
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = [fsBold]
-      Visible = False
-      OnKeyDown = grdVendasKeyDown
-      OnKeyPress = grdVendasKeyPress
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'COD_VENDAS'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'HORA'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TOTAL'
-          Width = 70
-          Visible = True
-        end>
-    end
-    object dbTotalX: TDBEdit
-      Left = 75
-      Top = 351
-      Width = 194
-      Height = 36
-      DataField = 'TOTALDIA'
-      DataSource = dsCaixa
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -23
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-      Visible = False
-    end
   end
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 1114
+    Width = 1337
     Height = 63
     Align = alTop
     TabOrder = 6
     DesignSize = (
-      1114
+      1337
       63)
     object Shape5: TShape
       Left = 1
       Top = 1
-      Width = 1112
+      Width = 1335
       Height = 61
       Align = alClient
       Brush.Color = 6570752
@@ -2173,7 +2135,7 @@ object FrmVendas: TFrmVendas
     object LBpRODUTO: TLabel
       Left = 1
       Top = 1
-      Width = 1112
+      Width = 1335
       Height = 61
       Align = alClient
       Alignment = taCenter
@@ -2849,7 +2811,7 @@ object FrmVendas: TFrmVendas
       Visible = False
     end
     object bAtivar: TBitBtn
-      Left = 1032
+      Left = 1255
       Top = 14
       Width = 67
       Height = 43
@@ -2896,10 +2858,10 @@ object FrmVendas: TFrmVendas
     end
   end
   object Panel5: TPanel
-    Left = 501
+    Left = 901
     Top = 63
-    Width = 132
-    Height = 520
+    Width = 100
+    Height = 528
     Align = alRight
     BevelOuter = bvNone
     Color = clDefault
@@ -2911,123 +2873,130 @@ object FrmVendas: TFrmVendas
     ParentBackground = False
     ParentFont = False
     TabOrder = 7
+    ExplicitHeight = 520
     DesignSize = (
-      132
-      520)
+      100
+      528)
     object btn2viaconta: TSpeedButton
       Tag = 433
       Left = 5
       Top = 149
-      Width = 120
+      Width = 88
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = '2'#176' Via Conta'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 120
     end
     object btnAcesso: TSpeedButton
       Tag = 416
       Left = 5
       Top = 76
-      Width = 120
+      Width = 88
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Acesso'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 120
     end
     object btnDiversos: TSpeedButton
       Tag = 431
       Left = 5
       Top = 3
-      Width = 120
+      Width = 88
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Diversos'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 120
     end
     object btnPlasti: TSpeedButton
       Tag = 429
       Left = 5
       Top = 221
-      Width = 120
+      Width = 88
       Height = 70
       Hint = 'R'
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Plastifica'#231#227'o'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 120
     end
     object SpeedButton16: TSpeedButton
       Tag = 425
       Left = 5
       Top = 365
-      Width = 120
+      Width = 88
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Foto 3x4'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 120
     end
     object SpeedButton17: TSpeedButton
       Tag = 424
       Left = 5
       Top = 438
-      Width = 120
+      Width = 88
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Foto 10x15'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 120
     end
     object SpeedButton15: TSpeedButton
       Tag = 422
-      Left = 5
-      Top = 292
-      Width = 120
+      Left = 3
+      Top = 289
+      Width = 88
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Encaderna'#231#227'o'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
@@ -3036,10 +3005,10 @@ object FrmVendas: TFrmVendas
     end
   end
   object Panel6: TPanel
-    Left = 636
+    Left = 1004
     Top = 63
-    Width = 133
-    Height = 520
+    Width = 100
+    Height = 528
     Align = alRight
     BevelOuter = bvNone
     Color = clDefault
@@ -3051,87 +3020,92 @@ object FrmVendas: TFrmVendas
     ParentBackground = False
     ParentFont = False
     TabOrder = 8
+    ExplicitHeight = 520
     DesignSize = (
-      133
-      520)
+      100
+      528)
     object SpeedButton18: TSpeedButton
       Tag = 418
       Left = 3
       Top = 3
-      Width = 122
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Banner'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 122
     end
     object SpeedButton19: TSpeedButton
       Tag = 434
       Left = 4
       Top = 76
-      Width = 122
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Cart'#227'o Visita'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 122
     end
     object SpeedButton20: TSpeedButton
       Tag = 435
       Left = 4
       Top = 149
-      Width = 122
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Folheto'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 122
     end
     object SpeedButton8: TSpeedButton
       Left = 3
       Top = 439
-      Width = 122
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Lista'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = SpeedButton8Click
+      ExplicitWidth = 122
     end
     object btnDespesa: TSpeedButton
       Tag = 435
       Left = 3
-      Top = 364
-      Width = 122
+      Top = 368
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Despesa'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
@@ -3143,42 +3117,44 @@ object FrmVendas: TFrmVendas
       Tag = 436
       Left = 4
       Top = 221
-      Width = 122
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Bordado'
       Font.Charset = ANSI_CHARSET
       Font.Color = clGray
-      Font.Height = -19
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 122
     end
     object SpeedButton11: TSpeedButton
       Tag = 437
       Left = 4
       Top = 292
-      Width = 122
+      Width = 89
       Height = 70
       Anchors = [akLeft, akTop, akRight]
-      Caption = 'VALE'
+      Caption = 'RETIRAR'
       Font.Charset = ANSI_CHARSET
-      Font.Color = clGray
-      Font.Height = -19
+      Font.Color = clRed
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = False
       OnClick = btn01Click
+      ExplicitWidth = 122
     end
   end
   object Panel7: TPanel
-    Left = 772
+    Left = 1107
     Top = 63
-    Width = 342
-    Height = 520
+    Width = 230
+    Height = 528
     Align = alRight
     Color = -1
     Font.Charset = ANSI_CHARSET
@@ -3189,23 +3165,24 @@ object FrmVendas: TFrmVendas
     ParentBackground = False
     ParentFont = False
     TabOrder = 9
+    ExplicitHeight = 520
     DesignSize = (
-      342
-      520)
+      230
+      528)
     object Shape1: TShape
-      Left = 112
-      Top = 202
-      Width = 194
+      Left = 63
+      Top = 204
+      Width = 155
       Height = 51
       Anchors = [akTop, akRight]
       Brush.Color = clDefault
       Pen.Color = 15455958
       Shape = stRoundRect
-      ExplicitLeft = 118
+      ExplicitLeft = 123
     end
     object lbTotalIem: TLabel
-      Left = 251
-      Top = 212
+      Left = 155
+      Top = 216
       Width = 53
       Height = 32
       Alignment = taRightJustify
@@ -3220,11 +3197,11 @@ object FrmVendas: TFrmVendas
       ParentColor = False
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 257
+      ExplicitLeft = 215
     end
     object lbPrecoUnitario: TLabel
-      Left = 244
-      Top = 95
+      Left = -25
+      Top = 4
       Width = 53
       Height = 32
       Alignment = taRightJustify
@@ -3239,98 +3216,68 @@ object FrmVendas: TFrmVendas
       ParentColor = False
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 250
+      Visible = False
+      ExplicitLeft = 35
     end
     object Shape3: TShape
-      Left = 101
-      Top = 80
-      Width = 205
+      Left = 63
+      Top = 87
+      Width = 155
       Height = 54
       Anchors = [akTop, akRight]
       Brush.Color = clDefault
       Pen.Color = 15455958
       Shape = stRoundRect
-      ExplicitLeft = 107
+      ExplicitLeft = 123
     end
     object Shape2: TShape
-      Left = 101
-      Top = 28
-      Width = 205
+      Left = 63
+      Top = 42
+      Width = 155
       Height = 43
       Anchors = [akTop, akRight]
       Brush.Color = clDefault
       Pen.Color = 15455958
       Shape = stRoundRect
-      ExplicitLeft = 107
+      ExplicitLeft = 123
     end
     object Label17: TLabel
-      Left = 6
+      Left = 16
       Top = 201
-      Width = 95
-      Height = 58
+      Width = 41
+      Height = 60
+      Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Total do Item'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -24
+      Font.Height = 20
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
       Transparent = True
       WordWrap = True
-      ExplicitLeft = 12
-    end
-    object Label16: TLabel
-      Left = 99
-      Top = 141
-      Width = 29
-      Height = 60
-      Anchors = [akTop, akRight]
-      Caption = 'X'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = 60
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-      ExplicitLeft = 105
-    end
-    object Label12: TLabel
-      Left = 35
-      Top = 75
-      Width = 58
-      Height = 60
-      Anchors = [akTop, akRight]
-      Caption = 'R$'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = 60
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-      ExplicitLeft = 41
+      ExplicitLeft = 76
     end
     object Label11: TLabel
-      Left = 13
-      Top = 29
-      Width = 82
-      Height = 33
+      Left = 67
+      Top = 30
+      Width = 33
+      Height = 12
       Anchors = [akTop, akRight]
       Caption = 'C'#243'digo'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -27
+      Font.Height = -10
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 17
+      ExplicitLeft = 127
     end
     object Label13: TLabel
-      Left = 106
-      Top = 15
+      Left = 60
+      Top = 11
       Width = 108
       Height = 13
       Anchors = [akTop, akRight]
@@ -3342,22 +3289,39 @@ object FrmVendas: TFrmVendas
       Font.Style = [fsBold]
       ParentFont = False
       Transparent = True
-      ExplicitLeft = 110
+      ExplicitLeft = 120
     end
     object Shape4: TShape
-      Left = 129
+      Left = 63
       Top = 144
-      Width = 176
+      Width = 155
       Height = 54
       Anchors = [akTop, akRight]
       Brush.Color = clDefault
       Pen.Color = 15455958
       Shape = stRoundRect
+      ExplicitLeft = 123
+    end
+    object Label16: TLabel
+      Left = 42
+      Top = 167
+      Width = 15
+      Height = 30
+      Anchors = [akTop, akRight]
+      Caption = 'X'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = 30
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+      ExplicitLeft = 102
     end
     object mskCodigo: TMaskEdit
-      Left = 105
-      Top = 33
-      Width = 192
+      Left = 67
+      Top = 48
+      Width = 142
       Height = 31
       Anchors = [akTop, akRight]
       AutoSize = False
@@ -3371,15 +3335,15 @@ object FrmVendas: TFrmVendas
       MaxLength = 13
       ParentFont = False
       TabOrder = 0
-      Text = 'xxx'
+      Text = '0'
       OnChange = mskCodigoChange
       OnExit = mskCodigoExit
       OnKeyDown = mskCodigoKeyDown
     end
     object edtValorUni: TCurrencyEdit
-      Left = 115
-      Top = 84
-      Width = 186
+      Left = 74
+      Top = 89
+      Width = 137
       Height = 47
       AutoSize = False
       BorderStyle = bsNone
@@ -3393,10 +3357,11 @@ object FrmVendas: TFrmVendas
       ParentFont = False
       TabOrder = 2
       OnChange = edtValorUniChange
+      OnKeyDown = edtValorUniKeyDown
     end
     object edTotalItem: TCurrencyEdit
-      Left = 130
-      Top = 205
+      Left = 136
+      Top = 216
       Width = 76
       Height = 21
       AutoSize = False
@@ -3413,8 +3378,8 @@ object FrmVendas: TFrmVendas
       OnChange = edTotalItemChange
     end
     object EdtTotal: TCurrencyEdit
-      Left = 131
-      Top = 232
+      Left = 137
+      Top = 231
       Width = 80
       Height = 21
       AutoSize = False
@@ -3424,8 +3389,8 @@ object FrmVendas: TFrmVendas
       OnChange = EdtTotalChange
     end
     object BitBtn1: TBitBtn
-      Left = 220
-      Top = 5
+      Left = 164
+      Top = 6
       Width = 113
       Height = 22
       Anchors = [akTop, akRight]
@@ -3435,10 +3400,10 @@ object FrmVendas: TFrmVendas
       OnClick = BitBtn1Click
     end
     object Panel8: TPanel
-      Left = 119
-      Top = 259
-      Width = 187
-      Height = 238
+      Left = 33
+      Top = 267
+      Width = 184
+      Height = 203
       Anchors = [akTop, akRight]
       TabOrder = 6
       object btnCalc7: TSpeedButton
@@ -3446,7 +3411,7 @@ object FrmVendas: TFrmVendas
         Left = 10
         Top = 5
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '7'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3462,7 +3427,7 @@ object FrmVendas: TFrmVendas
         Left = 66
         Top = 5
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '8'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3478,7 +3443,7 @@ object FrmVendas: TFrmVendas
         Left = 122
         Top = 5
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '9'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3492,9 +3457,9 @@ object FrmVendas: TFrmVendas
       object btnCalc6: TSpeedButton
         Tag = 435
         Left = 122
-        Top = 62
+        Top = 54
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '6'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3508,9 +3473,9 @@ object FrmVendas: TFrmVendas
       object btnCalc5: TSpeedButton
         Tag = 435
         Left = 66
-        Top = 62
+        Top = 54
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '5'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3524,9 +3489,9 @@ object FrmVendas: TFrmVendas
       object btnCalc4: TSpeedButton
         Tag = 435
         Left = 10
-        Top = 62
+        Top = 54
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '4'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3540,9 +3505,9 @@ object FrmVendas: TFrmVendas
       object btnCalc3: TSpeedButton
         Tag = 435
         Left = 122
-        Top = 118
+        Top = 102
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '3'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3556,9 +3521,9 @@ object FrmVendas: TFrmVendas
       object btnCalc2: TSpeedButton
         Tag = 435
         Left = 66
-        Top = 118
+        Top = 102
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '2'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3572,9 +3537,9 @@ object FrmVendas: TFrmVendas
       object btnCalc1: TSpeedButton
         Tag = 435
         Left = 10
-        Top = 118
+        Top = 102
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '1'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3588,9 +3553,9 @@ object FrmVendas: TFrmVendas
       object btnCalcTemp: TSpeedButton
         Tag = 435
         Left = 11
-        Top = 175
+        Top = 151
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '-'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3604,9 +3569,9 @@ object FrmVendas: TFrmVendas
       object btnCalc0: TSpeedButton
         Tag = 435
         Left = 67
-        Top = 175
+        Top = 151
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '0'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3620,9 +3585,9 @@ object FrmVendas: TFrmVendas
       object btnCalcMult: TSpeedButton
         Tag = 435
         Left = 123
-        Top = 175
+        Top = 151
         Width = 53
-        Height = 55
+        Height = 46
         Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
@@ -3635,9 +3600,9 @@ object FrmVendas: TFrmVendas
       end
     end
     object mskQuantidade: TCurrencyEdit
-      Left = 176
-      Top = 148
-      Width = 128
+      Left = 85
+      Top = 149
+      Width = 124
       Height = 47
       AutoSize = False
       BorderStyle = bsNone
@@ -3656,10 +3621,10 @@ object FrmVendas: TFrmVendas
     end
   end
   object PNL_Fechamento: TPanel
-    Left = 255
-    Top = 86
+    Left = 419
+    Top = 100
     Width = 458
-    Height = 473
+    Height = 513
     BevelOuter = bvLowered
     Color = clDefault
     Font.Charset = ANSI_CHARSET
@@ -3673,7 +3638,7 @@ object FrmVendas: TFrmVendas
     Visible = False
     object Shape10: TShape
       Left = 218
-      Top = 314
+      Top = 242
       Width = 213
       Height = 54
       Brush.Color = clDefault
@@ -3691,7 +3656,7 @@ object FrmVendas: TFrmVendas
     end
     object Shape9: TShape
       Left = 225
-      Top = 88
+      Top = 16
       Width = 198
       Height = 67
       Brush.Color = clDefault
@@ -3700,7 +3665,7 @@ object FrmVendas: TFrmVendas
     end
     object Shape12: TShape
       Left = 153
-      Top = 161
+      Top = 89
       Width = 285
       Height = 67
       Brush.Color = clDefault
@@ -3709,7 +3674,7 @@ object FrmVendas: TFrmVendas
     end
     object Shape11: TShape
       Left = 233
-      Top = 234
+      Top = 162
       Width = 198
       Height = 67
       Brush.Color = clDefault
@@ -3718,7 +3683,7 @@ object FrmVendas: TFrmVendas
     end
     object Shape8: TShape
       Left = 156
-      Top = 24
+      Top = 320
       Width = 275
       Height = 56
       Pen.Color = 1446363
@@ -3726,7 +3691,7 @@ object FrmVendas: TFrmVendas
     end
     object lbTotalCom: TLabel
       Left = 370
-      Top = 175
+      Top = 103
       Width = 53
       Height = 32
       Alignment = taRightJustify
@@ -3743,7 +3708,7 @@ object FrmVendas: TFrmVendas
     end
     object fldTroco: TLabel
       Left = 299
-      Top = 320
+      Top = 248
       Width = 121
       Height = 41
       Alignment = taRightJustify
@@ -3758,7 +3723,7 @@ object FrmVendas: TFrmVendas
     end
     object lbSubTotal: TLabel
       Left = 368
-      Top = 102
+      Top = 30
       Width = 53
       Height = 32
       Alignment = taRightJustify
@@ -3775,7 +3740,7 @@ object FrmVendas: TFrmVendas
     end
     object lblTotalSem: TLabel
       Left = 231
-      Top = 88
+      Top = 16
       Width = 142
       Height = 19
       AutoSize = False
@@ -3792,7 +3757,7 @@ object FrmVendas: TFrmVendas
     end
     object lblTotalCom: TLabel
       Left = 164
-      Top = 161
+      Top = 89
       Width = 135
       Height = 16
       Caption = 'Total c/ desconto de: '
@@ -3808,7 +3773,7 @@ object FrmVendas: TFrmVendas
     end
     object fldDesconto: TLabel
       Left = 314
-      Top = 162
+      Top = 90
       Width = 7
       Height = 15
       Alignment = taRightJustify
@@ -3823,7 +3788,7 @@ object FrmVendas: TFrmVendas
     end
     object lblDesconto: TLabel
       Left = 328
-      Top = 161
+      Top = 89
       Width = 17
       Height = 15
       Alignment = taRightJustify
@@ -3853,7 +3818,7 @@ object FrmVendas: TFrmVendas
     end
     object Label15: TLabel
       Left = 157
-      Top = 11
+      Top = 307
       Width = 186
       Height = 13
       Caption = 'F3 - Buscar Forma de Pagamento'
@@ -3868,7 +3833,7 @@ object FrmVendas: TFrmVendas
     end
     object Lbfp: TLabel
       Left = 168
-      Top = 46
+      Top = 342
       Width = 255
       Height = 25
       AutoSize = False
@@ -3899,7 +3864,7 @@ object FrmVendas: TFrmVendas
     end
     object Label4: TLabel
       Left = 12
-      Top = 60
+      Top = 356
       Width = 139
       Height = 13
       Caption = 'F8 - Mostrar Observa'#231#227'o'
@@ -3913,7 +3878,7 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton6: TSpeedButton
       Left = 17
-      Top = 374
+      Top = 390
       Width = 424
       Height = 47
       Caption = 'Finalizar'
@@ -3941,8 +3906,8 @@ object FrmVendas: TFrmVendas
       Visible = False
     end
     object Label19: TLabel
-      Left = 17
-      Top = 29
+      Left = 14
+      Top = 319
       Width = 132
       Height = 33
       Caption = 'For.Pagto'
@@ -3956,7 +3921,7 @@ object FrmVendas: TFrmVendas
     end
     object Label21: TLabel
       Left = 94
-      Top = 106
+      Top = 34
       Width = 128
       Height = 33
       Caption = 'Sub.Total'
@@ -3970,7 +3935,7 @@ object FrmVendas: TFrmVendas
     end
     object Label22: TLabel
       Left = 78
-      Top = 176
+      Top = 104
       Width = 69
       Height = 33
       Caption = 'Total'
@@ -3984,7 +3949,7 @@ object FrmVendas: TFrmVendas
     end
     object Label23: TLabel
       Left = 87
-      Top = 248
+      Top = 176
       Width = 125
       Height = 33
       Caption = 'Recebido'
@@ -3998,7 +3963,7 @@ object FrmVendas: TFrmVendas
     end
     object Label24: TLabel
       Left = 122
-      Top = 325
+      Top = 253
       Width = 76
       Height = 33
       Caption = 'Troca'
@@ -4012,8 +3977,8 @@ object FrmVendas: TFrmVendas
     end
     object btnFP_Dinheiro: TSpeedButton
       Tag = 435
-      Left = 161
-      Top = 27
+      Left = 165
+      Top = 323
       Width = 83
       Height = 48
       Caption = 'Dinheiro'
@@ -4030,8 +3995,8 @@ object FrmVendas: TFrmVendas
     end
     object btnFP_Debito: TSpeedButton
       Tag = 435
-      Left = 249
-      Top = 27
+      Left = 252
+      Top = 322
       Width = 83
       Height = 48
       Caption = 'Debito'
@@ -4047,8 +4012,8 @@ object FrmVendas: TFrmVendas
     end
     object btnFP_Credito: TSpeedButton
       Tag = 435
-      Left = 334
-      Top = 27
+      Left = 339
+      Top = 323
       Width = 83
       Height = 48
       Caption = 'Credito'
@@ -4064,7 +4029,7 @@ object FrmVendas: TFrmVendas
     end
     object SpeedButton9: TSpeedButton
       Left = 17
-      Top = 423
+      Top = 439
       Width = 424
       Height = 47
       Caption = 'Cancelar'
@@ -4101,7 +4066,7 @@ object FrmVendas: TFrmVendas
     end
     object edtRecebido: TCurrencyEdit
       Left = 252
-      Top = 244
+      Top = 172
       Width = 170
       Height = 48
       AutoSize = False
@@ -4120,7 +4085,7 @@ object FrmVendas: TFrmVendas
     end
     object edtTroco: TCurrencyEdit
       Left = 308
-      Top = 307
+      Top = 235
       Width = 121
       Height = 21
       AutoSize = False
@@ -4130,7 +4095,7 @@ object FrmVendas: TFrmVendas
     end
     object EdtDesconto: TCurrencyEdit
       Left = 235
-      Top = 105
+      Top = 33
       Width = 87
       Height = 37
       AutoSize = False
@@ -4236,13 +4201,326 @@ object FrmVendas: TFrmVendas
       Visible = False
     end
   end
+  object pnlExtrato: TPanel
+    Left = 0
+    Top = 63
+    Width = 201
+    Height = 528
+    Align = alLeft
+    TabOrder = 10
+    ExplicitHeight = 520
+    object gridTotais: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 199
+      Height = 490
+      Align = alClient
+      Ctl3D = True
+      DataSource = dsCaixa
+      FixedColor = clWindow
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ParentCtl3D = False
+      ParentFont = False
+      PopupMenu = PopupMenu1
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clBlack
+      TitleFont.Height = -13
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = [fsBold]
+      OnKeyDown = grdVendasKeyDown
+      OnKeyPress = grdVendasKeyPress
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'HORA'
+          Title.Caption = 'Hora'
+          Width = 65
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FPGTO'
+          Title.Caption = 'F.Pagto'
+          Width = 47
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTAL'
+          Title.Caption = 'Total'
+          Width = 50
+          Visible = True
+        end>
+    end
+    object dbTotalX: TDBEdit
+      Left = 1
+      Top = 491
+      Width = 199
+      Height = 36
+      Align = alBottom
+      DataField = 'TOTALDIA'
+      DataSource = dsCaixa
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -23
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      ExplicitTop = 483
+    end
+  end
+  object pnlImp: TPanel
+    Left = 1061
+    Top = 306
+    Width = 472
+    Height = 362
+    Caption = 'pnlImp'
+    TabOrder = 11
+    Visible = False
+    object mmImp: TMemo
+      Left = 57
+      Top = 41
+      Width = 241
+      Height = 205
+      Lines.Strings = (
+        'mmImp')
+      ScrollBars = ssBoth
+      TabOrder = 0
+      WordWrap = False
+    end
+    object Panel9: TPanel
+      Left = 1
+      Top = 320
+      Width = 470
+      Height = 41
+      Align = alBottom
+      Caption = 'Panel9'
+      TabOrder = 1
+      object btnCancelar: TButton
+        Left = 225
+        Top = 1
+        Width = 244
+        Height = 39
+        Align = alClient
+        Caption = 'Cancelar'
+        TabOrder = 0
+        OnClick = btnCancelarClick
+      end
+      object btnImprimir: TButton
+        Left = 1
+        Top = 1
+        Width = 224
+        Height = 39
+        Align = alLeft
+        Caption = 'Imprimir'
+        TabOrder = 1
+        OnClick = btnImprimirClick
+      end
+    end
+  end
+  object pnlRetirada: TPanel
+    Left = 1081
+    Top = 165
+    Width = 500
+    Height = 324
+    Color = clRed
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 12
+    Visible = False
+    DesignSize = (
+      500
+      324)
+    object Label12: TLabel
+      Left = 1
+      Top = 110
+      Width = 498
+      Height = 14
+      Align = alTop
+      Caption = 'Valor:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitWidth = 35
+    end
+    object Label20: TLabel
+      Left = 1
+      Top = 1
+      Width = 498
+      Height = 60
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'RETIRADA'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -50
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = -39
+      ExplicitTop = -12
+    end
+    object Label25: TLabel
+      Left = 1
+      Top = 61
+      Width = 498
+      Height = 14
+      Align = alTop
+      Caption = 'Quem:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitWidth = 39
+    end
+    object lblMotivoRetirada: TLabel
+      Left = 1
+      Top = 200
+      Width = 498
+      Height = 14
+      Align = alTop
+      Caption = 'Detalhe o Motivo:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+      ExplicitWidth = 110
+    end
+    object edtQuem: TDBLookupComboBox
+      Left = 1
+      Top = 75
+      Width = 498
+      Height = 35
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 27
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      KeyField = 'COD_FUNCIONARIO'
+      ListField = 'NOME'
+      ListSource = dsFuncionario
+      ParentFont = False
+      TabOrder = 0
+    end
+    object edtMotivo: TEdit
+      Left = 1
+      Top = 214
+      Width = 498
+      Height = 35
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 27
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      Visible = False
+    end
+    object btnSalvarRetirada: TButton
+      Left = 109
+      Top = 267
+      Width = 126
+      Height = 39
+      Anchors = [akTop, akRight]
+      Caption = 'Salvar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btnSalvarRetiradaClick
+    end
+    object edtValor: TCurrencyEdit
+      Left = 1
+      Top = 124
+      Width = 498
+      Height = 32
+      Align = alTop
+      AutoSize = False
+      BorderStyle = bsNone
+      Ctl3D = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = 27
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 3
+      OnChange = edtRecebidoChange
+      OnKeyDown = edtRecebidoKeyDown
+    end
+    object btnCancelarRetirada: TButton
+      Left = 252
+      Top = 267
+      Width = 126
+      Height = 39
+      Anchors = [akTop, akRight]
+      Caption = 'Cancelar'
+      Default = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      OnClick = btnCancelarRetiradaClick
+    end
+    object radioMotivoRetirada: TRadioGroup
+      Left = 1
+      Top = 156
+      Width = 498
+      Height = 44
+      Align = alTop
+      Caption = 'Motivo'
+      Columns = 3
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Items.Strings = (
+        'Transporte'
+        'Almo'#231'o'
+        'Vale')
+      ParentFont = False
+      TabOrder = 5
+      OnClick = radioMotivoRetiradaClick
+    end
+  end
   object ImageList1: TImageList
     Height = 30
     Width = 20
-    Left = 281
-    Top = 336
+    Left = 233
+    Top = 352
     Bitmap = {
-      494C010108000900940014001E00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000900CC0014001E00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000005A00000001002000000000008070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5189,7 +5467,7 @@ object FrmVendas: TFrmVendas
   end
   object Q_Clientes: TFDQuery
     Filtered = True
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  CLIENTE.COD_CLI,'
@@ -5201,8 +5479,8 @@ object FrmVendas: TFrmVendas
       'WHERE '
       'CLIENTE.COD_CLI = :COD'
       '')
-    Left = 399
-    Top = 199
+    Left = 463
+    Top = 183
     ParamData = <
       item
         Name = 'cod'
@@ -5235,7 +5513,7 @@ object FrmVendas: TFrmVendas
     end
   end
   object Q_FPGTO: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  FORMAS_PAGAMENTO.CODIGO,'
@@ -5266,7 +5544,7 @@ object FrmVendas: TFrmVendas
     end
   end
   object QProd_CodBarra: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -5346,7 +5624,7 @@ object FrmVendas: TFrmVendas
     end
   end
   object Q_ProdCod: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -5425,7 +5703,7 @@ object FrmVendas: TFrmVendas
     end
   end
   object Q_Items_Vendas: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       
         'INSERT INTO TENS_VENDA(COD_VENDA,COD_PRO,COD_EMP,ORDEM,QUANT_ITE' +
@@ -5461,7 +5739,7 @@ object FrmVendas: TFrmVendas
       end>
   end
   object Q_PegaUltmoCodVenda: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  MAX(VENDAS.COD_VENDAS) AS COD_VENDA,'
@@ -5544,7 +5822,7 @@ object FrmVendas: TFrmVendas
     Top = 16
   end
   object Q_BaixaItem: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       
         'INSERT INTO ITENS_VENDA(COD_VENDA,COD_PRO,COD_EMP,ORDEM,QUANT_IT' +
@@ -5588,7 +5866,7 @@ object FrmVendas: TFrmVendas
       end>
   end
   object QtdEstoqueItem: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = DmDados.conexao
     SQL.Strings = (
       'SELECT '
       '  PRODUTO.COD_PRO,'
@@ -5681,22 +5959,56 @@ object FrmVendas: TFrmVendas
     Top = 16
   end
   object qCaixa: TFDQuery
-    Connection = DmDados.Conexao
+    Filtered = True
+    Connection = DmDados.conexao
     SQL.Strings = (
-      'SELECT TOTAL, HORA'
+      ''
+      'SELECT '
+      ' VENDAS.TOTAL'
+      ',VENDAS.HORA'
+      ''
+      ',VENDAS.COD_VENDAS'
+      ',CASE WHEN (VENDAS.COD_FPGTO = 0) THEN '#39'DIN'#39
+      #9'  WHEN (VENDAS.COD_FPGTO = 1) THEN '#39'DEB'#39
+      #9'  WHEN (VENDAS.COD_FPGTO = 2) THEN '#39'CRD'#39
+      '      ELSE '
+      #9#9#39'???'#39' END as FPGTO              '
+      ',VENDAS.EMPRESA       '
+      ''
+      ''
       
-        ',cast( (SELECT SUM( TOTAL) T  FROM VENDAS WHERE DATA = CURRENT_D' +
-        'ATE )  as DECIMAL(10,6) ) TOTALDIA'
-      ',COD_VENDAS'
-      ' FROM VENDAS'
+        ',IFNULL( cast( (SELECT SUM( TOTAL) T  FROM VENDAS VS   WHERE VS.' +
+        'TOTAL>0 AND VS.DATA = VENDAS.DATA  AND VS.EMPRESA=VENDAS.EMPRESA' +
+        ')  as DECIMAL(10,6) ) ,0) as TOTALDIA'
+      
+        ',IFNULL( cast( (SELECT SUM( TOTAL) T  FROM VENDAS VS1  WHERE VS1' +
+        '.TOTAL>0 AND VS1.COD_FPGTO = 0 AND VS1.DATA = VENDAS.DATA AND VS' +
+        '1.EMPRESA=VENDAS.EMPRESA and VS1.COD_CLIENTE>=0)  as DECIMAL(10,' +
+        '6) ),0) as TOTALDIN'
+      
+        ',IFNULL( cast( (SELECT SUM( TOTAL) T  FROM VENDAS VS2  WHERE VS2' +
+        '.TOTAL>0 AND VS2.COD_FPGTO = 1 AND VS2.DATA = VENDAS.DATA AND VS' +
+        '2.EMPRESA=VENDAS.EMPRESA and VS2.COD_CLIENTE>=0)  as DECIMAL(10,' +
+        '6) ),0) as TOTALDEB'
+      
+        ',IFNULL( cast( (SELECT SUM( TOTAL) T  FROM VENDAS VS3  WHERE VS3' +
+        '.TOTAL>0 AND VS3.COD_FPGTO = 2 AND VS3.DATA = VENDAS.DATA AND VS' +
+        '3.EMPRESA=VENDAS.EMPRESA and VS3.COD_CLIENTE>=0)  as DECIMAL(10,' +
+        '6) ),0) as TOTALCRED'
+      
+        ',IFNULL( cast( (SELECT SUM( TOTAL) T  FROM VENDAS VS4  WHERE VS4' +
+        '.DATA = VENDAS.DATA AND VS4.EMPRESA=VENDAS.EMPRESA and VS4.COD_C' +
+        'LIENTE<0)  as DECIMAL(10,6) ),0) as TOTALRETIRADA'
+      'FROM VENDAS'
       'WHERE DATA = CURRENT_DATE '
-      'ORDER BY HORA'
-      '')
-    Left = 149
-    Top = 223
+      ''
+      'ORDER BY VENDAS.HORA')
+    Left = 117
+    Top = 255
     object qCaixaTOTAL: TBCDField
       FieldName = 'TOTAL'
       Origin = 'TOTAL'
+      currency = True
       Precision = 18
       Size = 3
     end
@@ -5716,13 +6028,489 @@ object FrmVendas: TFrmVendas
       Origin = 'TOTALDIA'
       ProviderFlags = []
       ReadOnly = True
+      currency = True
       Precision = 18
       Size = 6
     end
+    object qCaixaFPGTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FPGTO'
+      Origin = 'FPGTO'
+      ProviderFlags = []
+      Size = 3
+    end
+    object qCaixaEMPRESA: TIntegerField
+      FieldName = 'EMPRESA'
+      Origin = 'EMPRESA'
+      Required = True
+    end
+    object qCaixaTOTALDIN: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALDIN'
+      Origin = 'TOTALDIN'
+      ProviderFlags = []
+      Precision = 10
+      Size = 6
+    end
+    object qCaixaTOTALDEB: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALDEB'
+      Origin = 'TOTALDEB'
+      ProviderFlags = []
+      Precision = 10
+      Size = 6
+    end
+    object qCaixaTOTALCRED: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALCRED'
+      Origin = 'TOTALCRED'
+      ProviderFlags = []
+      Precision = 10
+      Size = 6
+    end
+    object qCaixaTOTALRETIRADA: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALRETIRADA'
+      Origin = 'TOTALRETIRADA'
+      ProviderFlags = []
+      Precision = 10
+      Size = 6
+    end
+  end
+  object dsRel: TDataSource
+    DataSet = qRel
+    Left = 80
+    Top = 440
+  end
+  object qRel: TFDQuery
+    Connection = DmDados.conexao
+    SQL.Strings = (
+      'SELECT '
+      '    EMPRESA.FANTASIA_EMP'
+      '   ,EMPRESA.RAZAO_EMP'
+      '   ,EMPRESA.CNPJ_EMP'
+      '   ,EMPRESA.INSC_EMP'
+      '   ,EMPRESA.INSCRICAO_MUNICIPAL'
+      '   ,EMPRESA.END_EMP'
+      '   ,EMPRESA.BAI_EMP'
+      '   ,EMPRESA.CEP_EMP'
+      '   ,EMPRESA.CID_EMP'
+      '   ,EMPRESA.EST_EMP'
+      ',EMPRESA.TEL_EMP'
+      '   ,EMPRESA.NUMERO_EMP'
+      '   ,VENDAS.COD_VENDAS'
+      '   ,VENDAS.DATA'
+      '   ,VENDAS.HORA'
+      '   ,VENDAS.TOTAL'
+      '   ,FORMAS_PAGAMENTO.DESCRICAO AS FORMAS_PAGAMENTO'
+      '   ,PRODUTO.DESC_CUPOM'
+      '   ,ITENS_VENDA.QUANT_ITEM'
+      '   ,ITENS_VENDA.VALOR_ITEM/ITENS_VENDA.QUANT_ITEM AS VALOR_ITEM'
+      'FROM VENDAS'
+      'INNER JOIN EMPRESA ON EMPRESA.COD_EMP=VENDAS.EMPRESA'
+      
+        'INNER JOIN FORMAS_PAGAMENTO ON FORMAS_PAGAMENTO.CODIGO = VENDAS.' +
+        'COD_FPGTO'
+      
+        'INNER JOIN ITENS_VENDA ON ITENS_VENDA.COD_VENDA = VENDAS.COD_VEN' +
+        'DAS'
+      'INNER JOIN PRODUTO ON ITENS_VENDA.COD_PRO = PRODUTO.COD_PRO'
+      'WHERE VENDAS.COD_VENDAS = :COD_VENDAS')
+    Left = 109
+    Top = 439
+    ParamData = <
+      item
+        Name = 'COD_VENDAS'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '255'
+      end>
+    object qRelFANTASIA_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FANTASIA_EMP'
+      Origin = 'FANTASIA_EMP'
+      Size = 50
+    end
+    object qRelRAZAO_EMP: TStringField
+      FieldName = 'RAZAO_EMP'
+      Origin = 'RAZAO_EMP'
+      Required = True
+      Size = 50
+    end
+    object qRelCNPJ_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CNPJ_EMP'
+      Origin = 'CNPJ_EMP'
+      Size = 14
+    end
+    object qRelINSC_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'INSC_EMP'
+      Origin = 'INSC_EMP'
+    end
+    object qRelINSCRICAO_MUNICIPAL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'INSCRICAO_MUNICIPAL'
+      Origin = 'INSCRICAO_MUNICIPAL'
+    end
+    object qRelEND_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'END_EMP'
+      Origin = 'END_EMP'
+      Size = 50
+    end
+    object qRelBAI_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'BAI_EMP'
+      Origin = 'BAI_EMP'
+      Size = 30
+    end
+    object qRelCEP_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CEP_EMP'
+      Origin = 'CEP_EMP'
+      FixedChar = True
+      Size = 9
+    end
+    object qRelCID_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CID_EMP'
+      Origin = 'CID_EMP'
+      Size = 30
+    end
+    object qRelEST_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EST_EMP'
+      Origin = 'EST_EMP'
+      FixedChar = True
+      Size = 2
+    end
+    object qRelNUMERO_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NUMERO_EMP'
+      Origin = 'NUMERO_EMP'
+      Size = 10
+    end
+    object qRelCOD_VENDAS: TFDAutoIncField
+      FieldName = 'COD_VENDAS'
+      Origin = 'COD_VENDAS'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qRelDATA: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATA'
+      Origin = '`DATA`'
+    end
+    object qRelHORA: TTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'HORA'
+      Origin = 'HORA'
+    end
+    object qRelTOTAL: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL'
+      Origin = 'TOTAL'
+      Precision = 18
+      Size = 3
+    end
+    object qRelFORMAS_PAGAMENTO: TStringField
+      FieldName = 'FORMAS_PAGAMENTO'
+      Origin = 'FORMAS_PAGAMENTO'
+      Required = True
+    end
+    object qRelDESC_CUPOM: TStringField
+      FieldName = 'DESC_CUPOM'
+      Origin = 'DESC_CUPOM'
+      Required = True
+      Size = 80
+    end
+    object qRelQUANT_ITEM: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'QUANT_ITEM'
+      Origin = 'QUANT_ITEM'
+      Precision = 18
+      Size = 3
+    end
+    object qRelVALOR_ITEM: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VALOR_ITEM'
+      Origin = 'VALOR_ITEM'
+      Precision = 25
+      Size = 7
+    end
+    object qRelTEL_EMP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TEL_EMP'
+      Origin = 'TEL_EMP'
+      Size = 13
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 88
+    Top = 343
+    object btnCupom: TMenuItem
+      Caption = 'Cupom'
+      OnClick = btnCupomClick
+    end
+  end
+  object FDQuery1: TFDQuery
+    Filtered = True
+    Connection = DmDados.conexao
+    SQL.Strings = (
+      ''
+      'SELECT '
+      ' VENDAS.TOTAL'
+      ',VENDAS.HORA'
+      
+        ',cast( (SELECT SUM( TOTAL) T  FROM VENDAS VS  WHERE DATA = CURRE' +
+        'NT_DATE AND VS.EMPRESA=VENDAS.EMPRESA )  as DECIMAL(10,6) ) TOTA' +
+        'LDIA'
+      ',VENDAS.COD_VENDAS'
+      ',CASE WHEN (VENDAS.COD_FPGTO = 0) THEN '#39'DIN'#39
+      #9'  WHEN (VENDAS.COD_FPGTO = 1) THEN '#39'DEB'#39
+      #9'  WHEN (VENDAS.COD_FPGTO = 2) THEN '#39'CRD'#39
+      '      ELSE '
+      #9#9#39'???'#39' END as FPGTO              '
+      ',VENDAS.EMPRESA        '
+      'FROM VENDAS'
+      'WHERE DATA = CURRENT_DATE '
+      ''
+      'ORDER BY VENDAS.HORA')
+    Left = 325
+    Top = 407
+    object BCDField1: TBCDField
+      FieldName = 'TOTAL'
+      Origin = 'TOTAL'
+      currency = True
+      Precision = 18
+      Size = 3
+    end
+    object TimeField1: TTimeField
+      FieldName = 'HORA'
+      Origin = 'HORA'
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'COD_VENDAS'
+      Origin = 'COD_VENDAS'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FMTBCDField1: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALDIA'
+      Origin = 'TOTALDIA'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 6
+    end
+    object StringField1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FPGTO'
+      Origin = 'FPGTO'
+      ProviderFlags = []
+      Size = 3
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'EMPRESA'
+      Origin = 'EMPRESA'
+      Required = True
+    end
+  end
+  object dsFuncionario: TDataSource
+    DataSet = sqlFuncionario
+    Left = 112
+    Top = 496
+  end
+  object sqlFuncionario: TFDQuery
+    Connection = DmDados.conexao
+    SQL.Strings = (
+      'SELECT * FROM FUNCIONARIO '
+      'WHERE SITUACAO = 1'
+      'AND ((EMPRESA = :EMPRESA) OR (EMPRESA<=0))'
+      '')
+    Left = 149
+    Top = 495
+    ParamData = <
+      item
+        Name = 'EMPRESA'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end>
+    object sqlFuncionarioCOD_FUNCIONARIO: TFDAutoIncField
+      FieldName = 'COD_FUNCIONARIO'
+      Origin = 'COD_FUNCIONARIO'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object sqlFuncionarioNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
+      Size = 150
+    end
+    object sqlFuncionarioEMPRESA: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMPRESA'
+      Origin = 'EMPRESA'
+    end
+    object sqlFuncionarioSITUACAO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'SITUACAO'
+      Origin = 'SITUACAO'
+    end
+  end
+  object relGenerico: TppReport
+    AutoStop = False
+    DataPipeline = ppdsRelGenerico
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 690
+    Top = 183
+    Version = '18.02'
+    mmColumnWidth = 0
+    DataPipelineName = 'ppdsRelGenerico'
+    object ppHeaderBand2: TppHeaderBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppDetailBand2: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 4763
+      mmPrintPosition = 0
+      object ppDBText11: TppDBText
+        DesignLayer = ppDesignLayer2
+        UserName = 'DBText11'
+        DataField = 'Linha'
+        DataPipeline = ppdsRelGenerico
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Consolas'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppdsRelGenerico'
+        mmHeight = 4763
+        mmLeft = 4233
+        mmTop = 0
+        mmWidth = 89959
+        BandType = 4
+        LayerName = Foreground1
+      end
+    end
+    object ppPageSummaryBand2: TppPageSummaryBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppFooterBand2: TppFooterBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppDesignLayers2: TppDesignLayers
+      object ppDesignLayer2: TppDesignLayer
+        UserName = 'Foreground1'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList2: TppParameterList
+    end
+  end
+  object cdsRelGenerico: TClientDataSet
+    PersistDataPacket.Data = {
+      340000009619E0BD0100000018000000010000000000030000003400054C696E
+      6861010049000000010005574944544802000200C8000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 616
+    Top = 167
+    object cdsRelGenericoLinha: TStringField
+      FieldName = 'Linha'
+      Size = 200
+    end
+  end
+  object ppdsRelGenerico: TppDBPipeline
+    DataSource = dsRelGenerico
+    UserName = 'dsRelGenerico'
+    Left = 488
+    Top = 295
+    object ppdsRelGenericoppField1: TppField
+      FieldAlias = 'Linha'
+      FieldName = 'Linha'
+      FieldLength = 200
+      DisplayWidth = 200
+      Position = 0
+    end
+  end
+  object dsRelGenerico: TDataSource
+    DataSet = cdsRelGenerico
+    Left = 552
+    Top = 160
   end
   object dsCaixa: TDataSource
     DataSet = qCaixa
-    Left = 144
+    Left = 88
     Top = 184
   end
 end

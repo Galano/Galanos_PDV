@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, ExtCtrls, pngimage,  DB, IBCustomDataSet, IBQuery, Udm,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, ShellAPI;
 
 type
   TFrrmLogin = class(TForm)
@@ -22,7 +22,7 @@ type
     BtnOK1: TButton;
     BtnCancelar1: TButton;
     Panel3: TPanel;
-    Label4: TLabel;
+    lblVersao: TLabel;
     Caixa: TFDQuery;
     CaixaCOD_CAIXA: TIntegerField;
     CaixaCOD_USU: TIntegerField;
@@ -44,6 +44,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure VerificaCaixa(Cod_usu : Integer);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -147,6 +148,61 @@ begin
   begin
     Abort;
   end;
+end;
+
+procedure TFrrmLogin.FormCreate(Sender: TObject);
+var
+    Executavel_Original,Executavel_Atualizado: String;
+begin
+
+Try
+  DmDados.qryVerificarVersao.Close;
+  DmDados.qryVerificarVersao.Open;
+  Executavel_Original   := ExtractFilePath(ParamStr(0))+'PDV.exe';
+  Executavel_Atualizado := ExtractFilePath(ParamStr(0))+'PDV2.exe';
+
+  if  (DmDados.qryVerificarVersao.RecordCount >0 ) AND (DmDados.VersaoExe <> DmDados.qryVerificarVersaoVERSAO.AsString) then
+  begin
+    ShowMessage('Aguarde, sistema será atualizado!');
+    DmDados.qryBaixarVersao.Close;
+    DmDados.qryBaixarVersao.Params.ParamByName('VERSAO_SISTEMA').AsInteger := DmDados.qryVerificarVersaoVERSAO_SISTEMA.AsInteger;
+    DmDados.qryBaixarVersao.Open;
+    DmDados.qryBaixarVersaoEXECUTAVEL.SaveToFile( Executavel_Atualizado  );
+
+    ShellExecute(handle,'open',Pchar( Executavel_Atualizado) , '','',SW_SHOWNORMAL);
+    Application.Terminate;
+  end;
+  DmDados.qryVerificarVersao.Close;
+except on e:exception do begin
+   ShowMessage(e.message);
+end;
+
+end;
+
+
+try
+   if ExtractFileName(ParamStr(0))='PDV2.exe' then
+   begin
+     Sleep(2000);
+     ShellExecute(Self.Handle,'open',PChar('cmd.exe taskkill /IM pdv.exe /F /T'),nil,nil,SW_SHOWNORMAL);
+     Sleep(2000);
+
+     ShellExecute(Self.Handle,'open',PChar('cmd.exe taskkill /IM pdv.exe /F /T'),nil,nil,SW_SHOWNORMAL);
+     CopyFile( PChar( Executavel_Atualizado ) , PChar( Executavel_Original ) , false);
+     ShowMessage('Sistema Atualizado!');
+     Application.Terminate;
+   end;
+except on e:exception do
+begin
+     ShowMessage('Sistema não foi Atualizado!!! Ligue para o Bruno!');
+     Application.Terminate;
+end;
+
+end;
+
+
+lblVersao.Caption := DmDados.VersaoExe ;
+
 end;
 
 procedure TFrrmLogin.FormShow(Sender: TObject);

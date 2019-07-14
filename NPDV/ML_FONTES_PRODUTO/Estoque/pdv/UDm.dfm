@@ -442,7 +442,7 @@ object DmDados: TDmDados
     end
   end
   object sqlVendas_Itens_Para_Mysql: TFDQuery
-    Connection = DmDados.Conexao
+    Connection = conexao
     SQL.Strings = (
       'select*  '
       'from ITENS_VENDA '
@@ -555,5 +555,51 @@ object DmDados: TDmDados
         ParamType = ptInput
         Value = '1'
       end>
+  end
+  object qryVerificarVersao: TFDQuery
+    Connection = conexao
+    ResourceOptions.AssignedValues = [rvDirectExecute]
+    ResourceOptions.DirectExecute = True
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    SQL.Strings = (
+      
+        'SELECT VERSAO_SISTEMA,VERSAO FROM VERSAO_SISTEMA WHERE SITUACAO ' +
+        '= 1 ORDER BY DATA_VERSAO DESC LIMIT 1')
+    Left = 488
+    Top = 40
+    object qryVerificarVersaoVERSAO_SISTEMA: TFDAutoIncField
+      FieldName = 'VERSAO_SISTEMA'
+      ReadOnly = True
+    end
+    object qryVerificarVersaoVERSAO: TStringField
+      FieldName = 'VERSAO'
+      Size = 10
+    end
+  end
+  object qryBaixarVersao: TFDQuery
+    Connection = conexao
+    ResourceOptions.AssignedValues = [rvDirectExecute]
+    ResourceOptions.DirectExecute = True
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    SQL.Strings = (
+      'SELECT EXECUTAVEL '
+      'FROM VERSAO_SISTEMA '
+      'WHERE VERSAO_SISTEMA = :VERSAO_SISTEMA')
+    Left = 488
+    Top = 88
+    ParamData = <
+      item
+        Name = 'VERSAO_SISTEMA'
+        DataType = ftWideString
+        ParamType = ptInput
+        Value = '1'
+      end>
+    object qryBaixarVersaoEXECUTAVEL: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'EXECUTAVEL'
+      Origin = 'EXECUTAVEL'
+    end
   end
 end

@@ -22,7 +22,6 @@ object DmDados: TDmDados
     UpdateOptions.CheckReadOnly = False
     UpdateOptions.CheckUpdatable = False
     UpdateOptions.AutoCommitUpdates = True
-    Connected = True
     LoginPrompt = False
     Left = 48
     Top = 48
