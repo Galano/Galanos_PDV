@@ -3,7 +3,7 @@
         <ProjectGuid>{248AD81A-C962-42E3-A2D9-233CEABAACE6}</ProjectGuid>
         <MainSource>PDV.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>1025</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
@@ -101,7 +101,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <DCC_ExeOutput>C:\Fontes\Sistema Frente De Caixa Pdv\NPDV\ML_FONTES_PRODUTO\Estoque\exe</DCC_ExeOutput>
+        <DCC_ExeOutput>..\exe</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <BT_BuildType>Debug</BT_BuildType>
         <Icon_MainIcon>PDV_Icon2.ico</Icon_MainIcon>

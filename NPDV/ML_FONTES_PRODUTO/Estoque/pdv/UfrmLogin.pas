@@ -82,6 +82,8 @@ begin
                 FrrmLogin.Tag := 1;
                 FrmVendas.Label5.Caption := DmDados.QLoginNOME_USU.AsString;
                 FrmVendas.Caption := 'Estoque Master - Ponto de Vendas - '+DmDados.QLoginNOME_USU.AsString;
+                FrmVendas.Caption := FrmVendas.Caption + ' => '+ DmDados.conexao.Params[0];
+
                 FrmVendas.SpCod_Usuario.Value := DmDados.QLoginCOD_USU.Value;
                 FrrmLogin.Close;
                 VerificaCaixa(FrmVendas.SpCod_Usuario.Value);

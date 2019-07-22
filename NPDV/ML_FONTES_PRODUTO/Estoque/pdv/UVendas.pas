@@ -22,17 +22,8 @@ type
         ImageList1: TImageList;
         Timer1: TTimer;
         PNL_Fechamento: TPanel;
-        lbTotalCom: TLabel;
-        fldTroco: TLabel;
-        lbSubTotal: TLabel;
-        lblTotalSem: TLabel;
-        lblTotalCom: TLabel;
-        fldDesconto: TLabel;
-        lblDesconto: TLabel;
         Label14: TLabel;
-        Label15: TLabel;
         EDT_Cliente: TEdit;
-        edtRecebido: TCurrencyEdit;
         Q_Clientes: TFDQuery;
         Q_FPGTO: TFDQuery;
         Q_FPGTOCODIGO: TIntegerField;
@@ -48,7 +39,6 @@ type
         spCodVenda: TSpinEdit;
         Lbfp: TLabel;
         lbCliente: TLabel;
-        edtTroco: TCurrencyEdit;
         cdsitensVendas: TClientDataSet;
         cds_itensVendas: TDataSource;
         cdsitensVendascod: TIntegerField;
@@ -63,12 +53,10 @@ type
     pnlObs: TPanel;
     Memo1: TMemo;
     BitBtn2: TBitBtn;
-    EdtDesconto: TCurrencyEdit;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
-    Label4: TLabel;
     BitBtn3: TBitBtn;
     DateRecebimento: TDateEdit;
     EdtLimitCli: TCurrencyEdit;
@@ -173,17 +161,7 @@ type
     lbTotal: TLabel;
     Label2: TLabel;
     Label18: TLabel;
-    Label19: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
     Shape7: TShape;
-    Shape8: TShape;
-    Shape9: TShape;
-    Shape10: TShape;
-    Shape11: TShape;
-    Shape12: TShape;
     SpeedButton15: TSpeedButton;
     btnCaneca: TSpeedButton;
     btnCpreta: TSpeedButton;
@@ -206,9 +184,6 @@ type
     btnCalc0: TSpeedButton;
     btnCalcMult: TSpeedButton;
     Shape4: TShape;
-    btnFP_Dinheiro: TSpeedButton;
-    btnFP_Debito: TSpeedButton;
-    btnFP_Credito: TSpeedButton;
     SpeedButton9: TSpeedButton;
     qCaixaTOTAL: TBCDField;
     qCaixaHORA: TTimeField;
@@ -294,6 +269,36 @@ type
     ppDBText11: TppDBText;
     dsCaixa: TDataSource;
     radioMotivoRetirada: TRadioGroup;
+    QProd_CodBarraPRECO_VAREJO_EMP: TBCDField;
+    Panel10: TPanel;
+    lblTotalSem: TLabel;
+    Label21: TLabel;
+    lbSubTotal: TLabel;
+    Panel11: TPanel;
+    lbTotalCom: TLabel;
+    lblTotalCom: TLabel;
+    fldDesconto: TLabel;
+    lblDesconto: TLabel;
+    Label22: TLabel;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    Label23: TLabel;
+    Panel14: TPanel;
+    fldTroco: TLabel;
+    Label24: TLabel;
+    edtTroco: TCurrencyEdit;
+    Label4: TLabel;
+    Label15: TLabel;
+    btnFP_Dinheiro: TSpeedButton;
+    btnFP_Debito: TSpeedButton;
+    btnFP_Credito: TSpeedButton;
+    Label19: TLabel;
+    edtRecebido: TCurrencyEdit;
+    EdtDesconto: TCurrencyEdit;
+    Label26: TLabel;
+    Panel15: TPanel;
+    cbFaltaPagar: TCheckBox;
+    edtFaltaPagar: TCurrencyEdit;
         procedure EDT_ClienteChange(Sender: TObject);
         procedure EDT_CondPagtoChange(Sender: TObject);
         procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -601,7 +606,7 @@ begin
                    DmDados.tb_empresa.Locate('COD_EMP',DmDados.Usuario_Empresa, []);
 
 
-                  if ImprimeCupomV2(40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
+                  if ImprimeCupomV2( 40,DmDados.tb_empresaFANTASIA_EMP.AsString,DmDados.tb_empresaTEL_EMP.AsString,DmDados.tb_empresaCNPJ_EMP.Value,DmDados.tb_empresaEND_EMP.AsString, Label8.Caption,
                   lbCliente.Caption, Lbfp.Caption, formatfloat('##,###,##0.00', StrToFloat(lbTotalCom.Caption)), formatfloat('##,###,##0.00', EdtDesconto.Value), formatfloat('##,###,##0.00', EdtTotal.Value),
                   formatfloat('##,###,##0.00', edtTroco.Value)) then
                   begin
@@ -784,6 +789,7 @@ begin
         begin
             Close;
             ParamByName('cod').Value := mskCodigo.Text;
+            ParamByName('EMP').Value := DmDados.Usuario_Empresa;
             Open;
             FetchAll;
         end;
@@ -798,7 +804,11 @@ begin
             end
             else
             begin
-              edtValorUni.Value := QProd_CodBarraPRECO_VAREJO.Value;
+
+                if QProd_CodBarraPRECO_VAREJO_EMP.Value>0 then
+                  edtValorUni.Value := QProd_CodBarraPRECO_VAREJO_EMP.Value
+                else
+                  edtValorUni.Value := QProd_CodBarraPRECO_VAREJO.Value;
             end;
         end
         else
@@ -1448,9 +1458,9 @@ begin
       ACBrPosPrinter1.PularLinhas(1);
       ACBrPosPrinter1.Imprimir(Replicate('-',ndeColunas));
       ACBrPosPrinter1.PularLinhas(1);
-      ACBrPosPrinter1.Imprimir('');
-      ACBrPosPrinter1.PularLinhas(1);
-      ACBrPosPrinter1.Imprimir('CLIENTE: '+ sCliente          );
+//      ACBrPosPrinter1.Imprimir('');
+//      ACBrPosPrinter1.PularLinhas(1);
+//      ACBrPosPrinter1.Imprimir('CLIENTE: '+ sCliente          );
       ACBrPosPrinter1.PularLinhas(1);
       ACBrPosPrinter1.Imprimir('FORMA DE PGTO: '+ sFPGTO          );
       ACBrPosPrinter1.PularLinhas(1);
@@ -1492,6 +1502,14 @@ begin
       ACBrPosPrinter1.PularLinhas(1);
       ACBrPosPrinter1.Imprimir(Padr('TOTAL CUPOM: R$ ' + FrmVendas.lbTotal.Caption,ndeColunas));
       ACBrPosPrinter1.PularLinhas(1);
+
+      if cbFaltaPagar.Checked then
+      begin
+        inc(linhaCupom);
+        ACBrPosPrinter1.PularLinhas(1);
+        ACBrPosPrinter1.Imprimir(Padr('Falta Pagar: R$ ' + formatfloat('##,###,##0.00', FrmVendas.edtFaltaPagar.Value),ndeColunas));
+        ACBrPosPrinter1.PularLinhas(1);
+      end;
 
       if (FrmVendas.EDT_CondPagto.ItemIndex = 4) then
       begin
@@ -1646,6 +1664,7 @@ begin
 
   if  sender = btnFP_Dinheiro then
   begin
+    Lbfp.Caption := btnFP_Dinheiro.Caption;
     btnFP_Dinheiro.Font.Color := clWhite;
     EDT_CondPagto.ItemIndex := 0;
     btnFP_Dinheiro.Enabled := False;
@@ -1657,6 +1676,7 @@ begin
 
   if  sender = btnFP_Debito then
   begin
+    Lbfp.Caption := btnFP_Debito.Caption;
     btnFP_Debito.Font.Color   := clWhite;
     EDT_CondPagto.ItemIndex := 1;
     btnFP_Dinheiro.Enabled := True;
@@ -1667,6 +1687,7 @@ begin
 
   if  sender = btnFP_Credito then
   begin
+    Lbfp.Caption := btnFP_Credito.Caption;
     btnFP_Credito.Font.Color  := clWhite;
     EDT_CondPagto.ItemIndex := 2;
     btnFP_Dinheiro.Enabled := True;

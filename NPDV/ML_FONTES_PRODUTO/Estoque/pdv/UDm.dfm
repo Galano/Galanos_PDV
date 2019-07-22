@@ -10,11 +10,11 @@ object DmDados: TDmDados
   end
   object conexao: TFDConnection
     Params.Strings = (
-      'Database=pdv_galanos'
-      'Server=mysql642.umbler.com'
+      'Database=pdv_hml1'
+      'Server=mysql873.umbler.com'
       'Port=41890'
-      'User_Name=usr_pdv'
-      'Password=comandos123'
+      'User_Name=pdv_hml1'
+      'Password=comandos13'
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
